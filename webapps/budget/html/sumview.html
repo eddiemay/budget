@@ -1,0 +1,25 @@
+<div>
+	<table class="table sortable no-margin" cellspacing="0" width="100%" data-ng-repeat="cat in accountSummaryList | orderBy:'sortValue'"x>
+		<thead><tr>
+				<th class="black-cell"><span class="loading"></span></th>
+				<th>{{cat.name}}</th><th>JAN</th><th>FEB</th><th>MAR</th><th>APR</th><th>MAY</th><th>JUN</th>
+				<th>JUL</th><th>AUG</th><th>SEP</th><th>OCT</th><th>NOV</th><th>DEC</th><th>Total</th>
+		</tr></thead>
+		<tbody>
+			<tr>
+				<th class="th table-check-cell">
+					<input type="checkbox" data-ng-model="cat.selected">
+				</th>
+				<th>+Total</th>
+				<th data-ng-repeat="monthTotal in cat.monthTotals">{{monthTotal.total | currency}}</th>
+			</tr>
+			<tr data-ng-repeat="account in cat.accounts | orderBy:'sortValue'">
+				<td class="th table-check-cell">
+					<input type="checkbox" data-ng-model="account.selected">
+				</td>
+				<td> -{{account.name}}</td>
+				<td data-ng-repeat="monthTotal in account.monthTotals"> {{monthTotal.total | currency}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

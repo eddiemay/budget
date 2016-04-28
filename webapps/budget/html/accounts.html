@@ -1,0 +1,47 @@
+<div>
+	<table class="table sortable no-margin" cellspacing="0" width="100%">
+		<thead><tr>
+				<th class="black-cell"><span class="loading"></span></th>
+				<th>Name</th><th>Parent Account</th><th>Payment Account</th><th>Action</th>
+		</tr></thead>
+		<tbody>
+			<tr data-ng-repeat="account in accounts | orderBy:'sortValue'">
+				<td class="th table-check-cell">
+					<input type="checkbox" data-ng-model="account.selected">
+				</td>
+				<td><input type="text" data-ng-model="account.name" data-on-change="updateAccount(account, 'name')"></td>
+				<td>
+					<select data-ng-model="account.parentAccountId" data-ng-change="updateAccount(account, 'parentAccountId')"
+						data-ng-options="parent.id as parent.name for parent in accounts">
+					</select>
+				</td>
+				<td class="th table-check-cell">
+					<input type="checkbox" data-ng-model="account.paymentAccount"
+						data-ng-change="updateAccount(account, 'paymentAccount')">
+				</td>
+			</tr>
+			<tr>
+				<td class="th">
+					<button data-ng-click="addAccount()">+</button>
+					<div class="error-block" data-ng-show="addError">
+						<p class="message error no-margin">{{addError}}</p>
+					</div>
+				</td>
+				<td><input type="text" data-ng-model="newAccount.name"></td>
+				<td>
+					<select data-ng-model="newAccount.parentAccountId" data-ng-options="parent.id as parent.name for parent in accounts">
+					</select>
+				</td>
+				<td class="th table-check-cell">
+					<input type="checkbox" data-ng-model="newAccount.paymentAccount">
+				</td>
+				<td class="th">
+					<button data-ng-click="addAccount()">+</button>
+					<div class="error-block" data-ng-show="addError">
+						<p class="message error no-margin">{{addError}}</p>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

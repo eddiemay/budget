@@ -1,0 +1,63 @@
+<div>
+	<table class="table sortable no-margin" cellspacing="0" width="100%">
+		<thead><tr>
+				<th class="black-cell"><span class="loading"></span></th>
+				<th>Date</th><th>Transaction</th><th>Amount</th><th>Credit Account</th><th>Debit Account</th><th>Action</th>
+		</tr></thead>
+		<tbody>
+			<tr data-ng-repeat="trans in transactions">
+				<td class="th table-check-cell">
+					<input type="checkbox" data-ng-model="trans.selected">
+				</td>
+				<td>
+					<input class="datepicker" type="text" data-ng-model="trans.date" data-on-change="updateTransaction(trans, 'date_d')">
+					<img src="images/icons/fugue/calendar-month.png" width="16" height="16">
+				</td>
+				<td><input type="text" data-ng-model="trans.name" data-on-change="updateTransaction(trans, 'name_d')"></td>
+				<td><input type="text" data-ng-model="trans.amount" data-on-change="updateTransaction(trans, 'amount')"/></td>
+				<td>
+					<select data-ng-model="trans.creditAccountId" data-ng-change="updateTransaction(trans, 'creditAccountId')"
+						data-ng-options="account.id as account.name for account in accounts">
+					</select>
+					{{trans.creditAcctBalPost}}
+				</td>
+				<td>
+					<select data-ng-model="trans.debitAccountId" data-ng-change="updateTransaction(trans, 'debitAccountId')"
+						data-ng-options="account.id as account.name for account in bankAccounts">
+					</select>
+					{{trans.debitAcctBalPost}}
+				</td>
+			</tr>
+			<tr>
+				<td class="th">
+					<button data-ng-click="addTransaction()">+</button>
+					<div class="error-block" data-ng-show="transAddError">
+						<p class="message error no-margin">{{transAddError}}</p>
+					</div>
+				</td>
+				<td>
+					<input class="datepicker" type="text" data-ng-model="newtrans.date">
+					<img src="images/icons/fugue/calendar-month.png" width="16" height="16">
+				</td>
+				<td><input type="text" data-ng-model="newtrans.name"></td>
+				<td><input type="text" data-ng-model="newtrans.amount"/></td>
+				<td>
+					<select data-ng-model="newtrans.creditAccountId"
+						data-ng-options="account.id as account.name for account in accounts">
+					</select>
+				</td>
+				<td>
+					<select data-ng-model="newtrans.debitAccountId"
+						data-ng-options="account.id as account.name for account in bankAccounts">
+					</select>
+				</td>
+				<td class="th">
+					<button data-ng-click="addTransaction()">+</button>
+					<div class="error-block" data-ng-show="transAddError">
+						<p class="message error no-margin">{{transAddError}}</p>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

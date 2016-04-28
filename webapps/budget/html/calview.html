@@ -1,0 +1,133 @@
+<section class="grid_8">
+	<div class="block-border"><div class="block-content">
+		<h1>Large calendar</h1>
+		
+		<div class="block-controls">
+			<ul class="controls-buttons">
+				<li><a data-ng-click="calCtrl.sharedData.prevMonth()" title="Previous month"><img src="images/icons/fugue/navigation-180.png" width="16" height="16"></a></li>
+				<li class="sep"></li>
+				<li class="controls-block"><strong>{{calCtrl.sharedData.getMonth() | date:'MMM yyyy'}}</strong></li>
+				<li class="sep"></li>
+				<li><a data-ng-click="calCtrl.sharedData.nextMonth()" title="Next month"><img src="images/icons/fugue/navigation.png" width="16" height="16"></a></li>
+			</ul>
+		</div>
+		
+		<div class="no-margin">
+			<table cellspacing="0" class="calendar">
+				<thead>
+					<tr>
+						<th scope="col" class="black-cell"><span class="success"></span></th>
+						<th scope="col" class="week-end">Sunday</th>
+						<th scope="col">Monday</th>
+						<th scope="col">Tuesday</th>
+						<th scope="col">Wednesday</th>
+						<th scope="col">Thursday</th>
+						<th scope="col">Friday</th>
+						<th scope="col" class="week-end">Saturday</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="week in calCtrl.weeks">
+						<th scope="row">{{week.weekOfYear}}</th>
+						<td data-ng-repeat="day in week.days" data-ng-class="{'week-end': day.weekend, 'other-month': day.otherMonth}">
+							<a href="#" class="day">{{day.date.getDate()}}</a>
+							<ul class="dot-events with-children-tip">
+								<li data-ng-repeat="notification in day.notifications"><a href="#">{{notification.title}}</a></li>
+							</ul>
+							<a data-ng-click="calCtrl.showAddBillDialog(day.date)" class="add-event">Add</a>
+							<ul class="events">
+								<li data-ng-repeat="bill in day.bills"><a data-ng-click="calCtrl.editBill(bill)"><b>{{bill.amountDue}}</b> {{bill.name}}</a></li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<ul class="message no-margin">
+			<li>{{calCtrl.bills.length}} transactions found</li>
+		</ul>
+	</div></div>
+	<div data-ng-show="calCtrl.addDialogShown" id="modal" style="display: block;">
+		<div class="modal-window block-border" style="display: block; left: 388px; top: 250px;">
+			<ul class="action-tabs right">
+				<li><a data-ng-click="calCtrl.closeAddBillDialog()" title="Close window"><img src="images/icons/fugue/cross-circle.png" width="16" height="16"></a></li>
+			</ul>
+			<div class="block-content form">
+				<h1>Add Bill</h1>
+				<div class="modal-content modal-scroll" style="min-width:200px; min-height:40px; height:150px; width:450px; max-width:500px;">
+					<fieldset class="white-bg">
+						<div class="error-block" data-ng-show="calCtrl.billAddError">
+							<p class="message error no-margin">{{calCtrl.billAddError}}</p>
+						</div>
+						<div class="columns">
+							<div class="colx2-left">
+								<label>Date</label><input class="datepicker" type="text" data-ng-model="calCtrl.newBill.dueDate"><img src="images/icons/fugue/calendar-month.png" width="16" height="16">
+							</div>
+							<div class="colx2-right">
+								<label>Account</label><select data-ng-model="calCtrl.newBill.accountId" data-ng-options="account.id as account.name for account in calCtrl.accounts"></select>
+							</div>
+						</div>
+						<div class="columns">
+							<div class="colx2-left">
+								<label>Name</label><input type="text" data-ng-model="calCtrl.newBill.name">
+							</div>
+							<div class="colx2-right">
+								<label>Amount Due</label><input type="text" data-ng-model="calCtrl.newBill.amountDue">
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="block-footer align-right">
+					<button type="button" data-ng-click="calCtrl.addBill()">Ok</button>&nbsp;<button type="button" data-ng-click="calCtrl.closeAddBillDialog()">Cancel</button>
+				</div>
+			</div>
+			<div class="modal-resize-tl"></div>
+			<div class="modal-resize-t"></div>
+			<div class="modal-resize-tr"></div>
+			<div class="modal-resize-r"></div>
+			<div class="modal-resize-br"></div>
+			<div class="modal-resize-b"></div>
+			<div class="modal-resize-bl"></div>
+			<div class="modal-resize-l"></div>
+		</div>
+	</div>
+	<div data-ng-show="calCtrl.editDialogShown" id="modal" style="display: block;">
+		<div class="modal-window block-border" style="display: block; left: 388px; top: 250px;">
+			<ul class="action-tabs right">
+				<li><a data-ng-click="calCtrl.closeAddBillDialog()" title="Close window"><img src="images/icons/fugue/cross-circle.png" width="16" height="16"></a></li>
+			</ul>
+			<div class="block-content form">
+				<h1>Add Bill</h1>
+				<div class="modal-content modal-scroll" style="min-width:200px; min-height:40px; height:150px; width:450px; max-width:500px;">
+					<fieldset class="white-bg">
+						<div class="error-block" data-ng-show="calCtrl.billUpdateError">
+							<p class="message error no-margin">{{calCtrl.billUpdateError}}</p>
+						</div>
+						<div class="columns">
+							<div class="colx2-left">
+								<label>Date</label><input class="datepicker" type="text" data-ng-model="calCtrl.eBill.dueDate" data-on-change="calCtrl.updateBill('dueDate')"><img src="images/icons/fugue/calendar-month.png" width="16" height="16">
+							</div>
+							<div class="colx2-right">
+								<label>Account</label>
+								<select data-ng-model="calCtrl.eBill.accountId" data-ng-change="calCtrl.updateBill('accountId')"
+									data-ng-options="account.id as account.name for account in calCtrl.accounts"></select>
+							</div>
+						</div>
+						<div class="columns">
+							<div class="colx2-left">
+								<label>Name</label><input type="text" data-ng-model="calCtrl.eBill.name" data-on-change="calCtrl.updateBill('name')">
+							</div>
+							<div class="colx2-right">
+								<label>Amount Due</label><input type="text" data-ng-model="calCtrl.eBill.amountDue" data-on-change="calCtrl.updateBill('amountDue')">
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="block-footer align-right">
+					<button type="button" data-ng-click="calCtrl.closeEditBillDialog()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
