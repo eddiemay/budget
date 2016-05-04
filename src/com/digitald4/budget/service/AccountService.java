@@ -40,7 +40,7 @@ public class AccountService {
 	public JSONObject getPortfolios(HttpServletRequest request) throws JSONException, Exception {
 		JSONArray json = new JSONArray();
 		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("user");
+		User user = (User) session.getAttribute("user");
 		Portfolio activePortfolio = getActivePortfolio(request);
 		for (UserPortfolio userPortfolio : user.getCollection(UserPortfolio.class, new String[]{"USER_ID"}, user.getId())) {
 			json.put(userPortfolio.getPortfolio().toJSON());

@@ -8,6 +8,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="/common/lib/joda-time-2.1.jar" sourcepath="/common/lib/sources/joda-time-2.1-sources.jar"/>
 	<classpathentry kind="lib" path="/common/tomcat-7/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="/common/lib/easymock-3.3.1.jar"/>
+	<classpathentry kind="lib" path="/common/lib/mockito-all-2.0.2-beta.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
