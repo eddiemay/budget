@@ -1,3 +1,5 @@
 *.swp
+
 /bin
-webapps/budget/WEB-INF/
+
+webapps/budget/WEB-INF
