@@ -101,9 +101,6 @@
 			<fileset dir="webapps/${app.name}/WEB-INF/lib">
 				<include name="*.jar" />
 			</fileset>
-			<fileset dir="webapps/${app.name}/WEB-INF/tld">
-				<include name="*.tld" />
-			</fileset>
 		</delete>
 		<delete file="webapps/${app.name}/WEB-INF/web.xml"/>
     </target>
