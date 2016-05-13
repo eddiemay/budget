@@ -126,14 +126,6 @@
 				<include name="javax.mail.jar" />
 			</fileset>
 		</copy>
-		<copy todir="webapps/${app.name}/WEB-INF/tld">
-			<fileset dir="../common/tld">
-			    <include name="*.tld" />
-			</fileset>
-			<fileset dir="tld">
-			    <include name="*.tld" />
-			</fileset>
-		</copy>
 		<concat destfile="webapps/${app.name}/WEB-INF/web.xml">
 			<filelist dir="src/conf" files="web.xml,dev_web.xml"/>
 		</concat>
