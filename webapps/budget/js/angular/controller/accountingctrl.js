@@ -1,9 +1,9 @@
-com.digitald4.budget.AccountingCtrl = function($scope, SharedData, BillService, AccountService) {
+com.digitald4.budget.AccountingCtrl = function($scope, sharedData, billService, accountService) {
 	this.scope = $scope;
 	this.sharedData = SharedData;
 	this.sharedData.refresh = this.refresh.bind(this);
-	this.billService = BillService;
-	this.accountService = AccountService;
+	this.billService = billService;
+	this.accountService = accountService;
 	this.scope.addTransaction = this.addTransaction.bind(this);
 	this.scope.updateTransaction = this.updateTransaction.bind(this);
 	this.refresh();

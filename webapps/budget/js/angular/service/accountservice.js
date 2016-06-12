@@ -1,8 +1,10 @@
-com.digitald4.budget.AccountService = function(RestService) {
-	this.restService = RestService;
+com.digitald4.budget.AccountService = function(restService, connector) {
+	this.restService = restService;
+	this.connector = connector;
 };
 
 com.digitald4.budget.AccountService.prototype.restService;
+com.digitald4.budget.AccountService.prototype.connector;
 
 com.digitald4.budget.AccountService.prototype.getAccounts = function(portfolioId, successCallback,
 		errorCallback) {
@@ -41,17 +43,16 @@ com.digitald4.budget.AccountService.prototype.getSummaryData = function(portfoli
 			successCallback, errorCallback);
 };
 
-com.digitald4.budget.AccountService.prototype.getTemplates = function(portfolioId, successCallback,
-		errorCallback) {
-	this.restService.performRequest({action: 'getTemplates', portfolioId: portfolioId},
+com.digitald4.budget.AccountService.prototype.getTemplates = function(portfolioId,
+		successCallback, errorCallback) {
+	this.connector.performRequest('templates', {portfolio_id: portfolioId},
 			successCallback, errorCallback);
 };
 
 com.digitald4.budget.AccountService.prototype.addTemplate = function(newTemplate, portfolioId,
 		successCallback, errorCallback) {
-	newTemplate.action = 'addTemplate';
-	newTemplate.portfolioId = portfolioId;
-	this.restService.performRequest(newTemplate, successCallback, errorCallback);
+	newTemplate.portfolio_id = portfolioId;
+	this.connector.performRequest('create_template', newTemplate, successCallback, errorCallback);
 };
 
 // 2504 W Cypress St Compton, CA 90220

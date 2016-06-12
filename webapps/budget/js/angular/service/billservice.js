@@ -6,8 +6,8 @@ com.digitald4.budget.DisplayWindow = {
   YEAR: 5
 };
 
-com.digitald4.budget.BillService = function(RestService) {
-	this.restService = RestService;
+com.digitald4.budget.BillService = function(restService) {
+	this.restService = restService;
 };
 
 com.digitald4.budget.BillService.prototype.restService;

@@ -1,13 +1,13 @@
 var ONE_HOUR = 1000 * 60 * 60;
 var ONE_DAY = ONE_HOUR * 24;
 
-com.digitald4.budget.CalCtrl = function($scope, $filter, SharedData, BillService, AccountService) {
+com.digitald4.budget.CalCtrl = function($scope, $filter, sharedData, billService, accountService) {
 	this.scope = $scope;
 	this.dateFilter = $filter('date');
-	this.sharedData = SharedData;
+	this.sharedData = sharedData;
 	this.sharedData.refresh = this.refresh.bind(this);
-	this.billService = BillService;
-	this.accountService = AccountService;
+	this.billService = billService;
+	this.accountService = accountService;
 	this.refresh();
 };
 

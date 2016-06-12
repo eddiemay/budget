@@ -1,5 +1,6 @@
 var com = {
   digitald4: {
+  	common: {},
 	  budget: {}
   }
 };
@@ -14,6 +15,7 @@ com.digitald4.budget.router = function($routeProvider) {
 				templateUrl: 'html/accounts.html'
 		}).when('/list', {
 				controller: 'ListCtrl',
+				controllerAs: 'listCtrl',
 				templateUrl: 'html/listview.html'
 		}).when('/cal', {
 				controller: 'CalCtrl',

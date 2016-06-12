@@ -1,9 +1,9 @@
-com.digitald4.budget.TemplatesCtrl = function($scope, SharedData, BillService, AccountService) {
+com.digitald4.budget.TemplatesCtrl = function($scope, sharedData, billService, accountService) {
 	this.scope = $scope;
-	this.sharedData = SharedData;
+	this.sharedData = sharedData;
 	this.sharedData.refresh = this.refresh.bind(this);
-	this.billService = BillService;
-	this.accountService = AccountService;
+	this.billService = billService;
+	this.accountService = accountService;
 	this.newTemplate = {};
 	this.refresh();
 };

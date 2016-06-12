@@ -1,5 +1,5 @@
-com.digitald4.budget.PortfolioService = function(RestService) {
-	this.restService = RestService;
+com.digitald4.budget.PortfolioService = function(restService) {
+	this.restService = restService;
 };
 
 com.digitald4.budget.PortfolioService.prototype.restService;

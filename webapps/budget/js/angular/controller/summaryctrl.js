@@ -1,8 +1,8 @@
-com.digitald4.budget.SummaryCtrl = function($scope, SharedData, AccountService) {
+com.digitald4.budget.SummaryCtrl = function($scope, sharedData, accountService) {
 	this.scope = $scope;
-	this.sharedData = SharedData;
+	this.sharedData = sharedData;
 	this.sharedData.refresh = this.refresh.bind(this);
-	this.accountService = AccountService;
+	this.accountService = accountService;
 	this.refresh();
 };
 

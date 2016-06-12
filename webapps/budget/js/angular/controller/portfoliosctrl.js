@@ -1,7 +1,7 @@
-com.digitald4.budget.PortfoliosCtrl = function($scope, SharedData, PortfolioService) {
+com.digitald4.budget.PortfoliosCtrl = function($scope, sharedData, portfolioService) {
 	this.scope = $scope;
-	this.scope.sharedData = SharedData;
-	this.portfolioService = PortfolioService;
+	this.scope.sharedData = sharedData;
+	this.portfolioService = portfolioService;
 	this.scope.addPortfolio = this.addPortfolio.bind(this);
 	this.scope.updatePortfolio = this.updatePortfolio.bind(this);
 	this.refresh();

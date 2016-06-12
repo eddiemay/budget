@@ -1,0 +1,31 @@
+syntax = "proto2";
+
+package budget;
+
+// import "common_ui.proto";
+
+option java_package = "com.digitald4.budget.proto";
+option java_outer_classname = "BudgetUIProtos";
+
+message TemplateUI {
+  optional int32 id = 1;
+  optional int32 portfolio_id = 2;
+  optional string name = 3;
+  optional string description = 4;
+}
+
+message TemplateListRequest {
+	optional int32 portfolio_id = 1;
+};
+
+message TemplateGetRequest {
+	optional int32 template_id = 1;
+};
+
+message TemplateCreateRequest {
+	optional TemplateUI template = 1;
+};
+
+message TemplateDeleteRequest {
+	optional int32 template_id = 1;
+};

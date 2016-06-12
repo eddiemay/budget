@@ -32,28 +32,28 @@
 	Next, add the catalina ant tasks to your build.xml. The first thing to do is to create a classpath for your project which contains all the Tomcat JAR files inside common/lib and /bin, as well as the catalina-ant.jar which contains all the ant tasks.
 	-->
 	<path id="tomcat.classpath">
-	    	<fileset dir="../common/tomcat-7/lib">
-	            <include name="*.jar" />
-	        </fileset>
-	        <fileset dir="../common/tomcat-7/bin">
-	            <include name="*.jar" />
-	        </fileset>
-	   	</path>
-    <path id="project.classpath">
-        <fileset dir="webapps/${app.name}/WEB-INF/lib">
-        	<include name="*.jar" />
-        </fileset>
-   	</path>
+  	<fileset dir="../common/tomcat-7/lib">
+        <include name="*.jar" />
+    </fileset>
+    <fileset dir="../common/tomcat-7/bin">
+        <include name="*.jar" />
+    </fileset>
+ 	</path>
+  <path id="project.classpath">
+	  <fileset dir="webapps/${app.name}/WEB-INF/lib">
+	  	<include name="*.jar" />
+	  </fileset>
+ 	</path>
 	<!--Once you have set up the classpath, you can add the task: -->
 	<taskdef resource="org/apache/catalina/ant/catalina.tasks" classpathref="tomcat.classpath" />
 	<!-- Finally, you need to create the build targets to control ant. You can copy and paste this into your build.xml, although you will have to change the ‘war’ property to match the one from your servlet:
 	-->
    <target name="deploy" description="Install application in Tomcat">
-        <deploy url="${tomcat.manager.url}"
-            username="${tomcat.username}"
-            password="${tomcat.password}"
-            path="/${app.name}"
-            war="${basedir}/${app.name}.war" />
+   	 <deploy url="${tomcat.manager.url}"
+   			username="${tomcat.username}"
+        password="${tomcat.password}"
+        path="/${app.name}"
+   			war="${basedir}/${app.name}.war" />
     </target>
     <target name="remove" description="Remove application from Tomcat">
         <undeploy url="${tomcat.manager.url}"
@@ -113,7 +113,7 @@
 		<!-- Compile the source files into the buid directory -->
 		<copy todir="webapps/${app.name}/WEB-INF/lib">
 			<fileset dir="../common/lib">
-			    <include name="javax.persistence*.jar" />
+			  <include name="javax.persistence*.jar" />
 				<include name="joda-time*.jar" />
 				<include name="commons-dbcp*.jar" />
 				<include name="commons-pool*.jar" />
@@ -121,6 +121,13 @@
 				<include name="javax.servlet.jsp.jstl*.jar" />
 				<include name="itextpdf-5.5.1.jar" />
 				<include name="javax.mail.jar" />
+				<include name="protobuf-java-3.0.0-beta-2.jar" />
+				<include name="protobuf-java-format-1.2.jar" />
+			</fileset>
+		</copy>
+		<copy todir="webapps/${app.name}/js/common" flatten="true">
+			<fileset dir="../common/src/js">
+				<include name="**/*.js"/>
 			</fileset>
 		</copy>
 		<concat destfile="webapps/${app.name}/WEB-INF/web.xml">
@@ -129,12 +136,14 @@
 		<javac destdir="webapps/${app.name}/WEB-INF/classes" 
 				includes="com/digitald4/${app.name}/servlet/*,com/digitald4/common/servlet/*,com/digitald4/common/tld/*,com/digitald4/${app.name}/tld/*
 					com/digitald4/common/jpa/DD4EntityManagerFactory.java" 
-				target="1.6" source="1.6" optimize="yes">
+				target="1.7" source="1.7" optimize="yes">
 			<src path="../common/src" />
+			<src path="../common/src-gen" />
 			<src path="src" />
+			<src path="src-gen" />
 			<classpath refid="tomcat.classpath"/>
-            <classpath refid="project.classpath"/>
-        </javac>
+      <classpath refid="project.classpath"/>
+    </javac>
 		<tstamp>
 			<format property="BUILDTIME" pattern="yyyy-MM-dd HH:mm" />
 		</tstamp>

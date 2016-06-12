@@ -1,8 +1,8 @@
-com.digitald4.budget.AccountsCtrl = function($scope, SharedData, AccountService) {
+com.digitald4.budget.AccountsCtrl = function($scope, sharedData, accountService) {
 	this.scope = $scope;
-	this.sharedData = SharedData;
+	this.sharedData = sharedData;
 	this.sharedData.refresh = this.refresh.bind(this);
-	this.accountService = AccountService;
+	this.accountService = accountService;
 	this.scope.showAddDialog = this.showAddDialog.bind(this);
 	this.scope.addAccount = this.addAccount.bind(this);
 	this.scope.updateAccount = this.updateAccount.bind(this);
