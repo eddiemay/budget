@@ -32,17 +32,16 @@ com.digitald4.budget.ListCtrl.prototype.makeNew = function() {
 };
 
 com.digitald4.budget.ListCtrl.prototype.refresh = function() {
-	this.accountService.getBankAccounts(this.sharedData.getSelectedPortfolioId(),
-			function(bankAccounts) {
-				this.bankAccounts = bankAccounts;
-				this.makeNew();
-				// this.scope.apply();
-			}.bind(this), function(error) {
-				notify(error);
-	});
-	
 	this.accountService.getAccounts(this.sharedData.getSelectedPortfolioId(), function(accounts) {
 		this.accounts = accounts;
+		this.bankAccounts = [];
+		for (var a = 0; a < accounts.length; a++) {
+			var account = accounts[a];
+			if (account.payment_account) {
+				this.bankAccounts.push(account);
+			}
+		}
+		this.makeNew();
 		//this.scope.apply();
 	}.bind(this), function(error) {
 		notify(error);

@@ -7,11 +7,91 @@ package budget;
 option java_package = "com.digitald4.budget.proto";
 option java_outer_classname = "BudgetUIProtos";
 
+enum UserRoleUI {
+	UR_UNKNOWN = 0;
+	UR_OWNER = 12;
+	UR_READONLY = 13;
+}
+
+message PortfolioUI {
+	optional int32 id = 1;
+	optional string name = 2;
+	optional string description = 3;
+
+	message PortfolioUserUI {
+		optional int32 portfolio_id = 2;
+		optional int32 user_id = 3;
+		optional UserRoleUI role = 4;
+	}
+	repeated PortfolioUserUI portfolio_user = 4;
+}
+
+message PortfolioListRequest {
+};
+
+message PortfolioGetRequest {
+	optional int32 portfolio_id = 1;
+};
+
+message PortfolioCreateRequest {
+	optional PortfolioUI portfolio = 1;
+};
+
+message PortfolioDeleteRequest {
+	optional int32 portfolio_id = 1;
+};
+
+message AccountUI {
+  optional int32 id = 1;
+  optional int32 portfolio_id = 2;
+  optional string name = 3;
+  optional string description = 4;
+  optional bool payment_account = 5;
+  optional int32 parent_account_id = 6;
+}
+
+message AccountListRequest {
+	optional int32 portfolio_id = 1;
+};
+
+message AccountGetRequest {
+	optional int32 account_id = 1;
+};
+
+message AccountCreateRequest {
+	optional AccountUI account = 1;
+};
+
+message AccountDeleteRequest {
+	optional int32 account_id = 1;
+};
+
 message TemplateUI {
   optional int32 id = 1;
   optional int32 portfolio_id = 2;
   optional string name = 3;
   optional string description = 4;
+
+	message TemplateBillUI {
+		optional int32 id = 1;
+		optional int32 template_id = 2;
+		optional int32 account_id = 3;
+		optional int32 due_day = 4;
+		optional string name_d = 5;
+		optional double amount_due = 6;
+		optional bool active = 7 [default = true];
+		optional string description = 8;
+		optional int32 rank = 9;
+
+		message TemplateTransactionUI {
+			optional int32 id = 1;
+			optional int32 template_bill_id = 2;
+			optional int32 debit_account_id = 3;
+			optional double amount = 4;
+		}
+		repeated TemplateTransactionUI transaction = 10;
+	}
+  repeated TemplateBillUI bill = 5;
 }
 
 message TemplateListRequest {
@@ -28,4 +108,10 @@ message TemplateCreateRequest {
 
 message TemplateDeleteRequest {
 	optional int32 template_id = 1;
+};
+
+message ApplyTemplateRequest {
+	optional int32 portfolio_id = 1;
+	optional int32 template_id = 2;
+	optional int64 ref_date = 3;
 };

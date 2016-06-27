@@ -14,7 +14,7 @@ public class TemplateStore extends GenericDAOStore<Template> {
 		super(dao);
 	}
 	
-	public List<Template> getTemplatesByPortfolio(int portfolioId) throws DD4StorageException {
+	public List<Template> getByPortfolio(int portfolioId) throws DD4StorageException {
 		return query(new QueryParam("portfolio_id", "=", portfolioId));
 	}
 }

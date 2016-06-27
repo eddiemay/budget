@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.digitald4.budget.service.AccountService;
+import com.digitald4.budget.service.BudgetService;
 import com.digitald4.common.servlet.ParentServlet;
 
 
@@ -18,16 +18,13 @@ import com.digitald4.common.servlet.ParentServlet;
  */
 @WebServlet(name = "Service Servlet", urlPatterns = {"/bs"})
 public class JPAServiceServlet extends ParentServlet {
-	public enum ACTIONS {getPortfolios, addPortfolio, updatePortfolio, getSummaryData,
-			getAccounts, addAccount, updateAccount, getPaymentAccounts,
-			getTransactions, addTransaction, updateTransaction, getBills, addBill, updateBill, updateBillTrans,
-			getTemplates, addTemplate, updateTemplate, applyTemplate,
-			getTemplateBills, addTemplateBill, updateTemplateBill, updateTemplateBillTrans};
-	private AccountService accountService;
+	public enum ACTIONS {getBills, addBill, updateBill, updateBillTrans,
+			getTransactions, addTransaction, updateTransaction, getSummaryData};
+	private BudgetService budgetService;
 	
 	public void init() throws ServletException {
 		super.init();
-		accountService = new AccountService(getEntityManager());
+		budgetService = new BudgetService(getEntityManager());
 	}
 	
 	@Override
@@ -38,29 +35,14 @@ public class JPAServiceServlet extends ParentServlet {
 				if (!checkLoginAutoRedirect(request, response)) return;
 				String action = request.getParameter("action");
 				switch (ACTIONS.valueOf(action)) {
-					case getPortfolios: json.put("data", accountService.getPortfolios(request)); break;
-					case addPortfolio: json.put("data", accountService.addPortfolio(request)); break;
-					case updatePortfolio: json.put("data", accountService.updatePortfolio(request)); break;
-					case getAccounts: json.put("data", accountService.getAccounts(request)); break;
-					case addAccount: json.put("data", accountService.addAccount(request)); break;
-					case updateAccount: json.put("data", accountService.updateAccount(request)); break;
-					case getPaymentAccounts: json.put("data", accountService.getPaymentAccounts(request)); break;
-					case getTransactions: json.put("data", accountService.getTransactions(request)); break;
-					case addTransaction: json.put("data", accountService.addTransaction(request)); break;
-					case updateTransaction: json.put("data", accountService.updateTransaction(request)); break;
-					case getBills: json.put("data", accountService.getBills(request)); break;
-					case addBill: json.put("data", accountService.addBill(request)); break;
-					case updateBill: json.put("data", accountService.updateBill(request)); break;
-					case updateBillTrans: json.put("data", accountService.updateBillTrans(request)); break;
-					case getSummaryData: json.put("data", accountService.getSummaryData(request)); break;
-					case getTemplates: json.put("data", accountService.getTemplates(request)); break;
-					case addTemplate: json.put("data", accountService.addTemplate(request)); break;
-					case updateTemplate: json.put("data", accountService.updateTemplate(request)); break;
-					case getTemplateBills: json.put("data", accountService.getTemplateBills(request)); break;
-					case addTemplateBill: json.put("data", accountService.addTemplateBill(request)); break;
-					case updateTemplateBill: json.put("data", accountService.updateTemplateBill(request)); break;
-					case updateTemplateBillTrans: json.put("data", accountService.updateTemplateBillTrans(request)); break;
-					case applyTemplate: json.put("data", accountService.applyTemplate(request)); break;
+					case getTransactions: json.put("data", budgetService.getTransactions(request)); break;
+					case addTransaction: json.put("data", budgetService.addTransaction(request)); break;
+					case updateTransaction: json.put("data", budgetService.updateTransaction(request)); break;
+					case getBills: json.put("data", budgetService.getBills(request)); break;
+					case addBill: json.put("data", budgetService.addBill(request)); break;
+					case updateBill: json.put("data", budgetService.updateBill(request)); break;
+					case updateBillTrans: json.put("data", budgetService.updateBillTrans(request)); break;
+					case getSummaryData: json.put("data", budgetService.getSummaryData(request)); break;
 				}
 				json.put("valid", true);
 			} catch (Exception e) {

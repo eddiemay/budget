@@ -39,12 +39,6 @@ public class Transaction extends TransactionDAO {
 	public Transaction(EntityManager entityManager, Transaction orig) {
 		super(entityManager, orig);
 	}
-	
-	public Transaction(TemplateTransaction templateTransaction) throws Exception {
-		super(templateTransaction.getEntityManager());
-		setDebitAccountId(templateTransaction.getDebitAccountId());
-		setAmount(templateTransaction.getAmount());
-	}
 
 	public Date getPaymentDate() {
 		Date date = getDate();

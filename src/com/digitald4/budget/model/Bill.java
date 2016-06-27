@@ -42,27 +42,6 @@ public class Bill extends BillDAO implements CalEvent {
 		super(entityManager, orig);
 	}
 
-	public Bill(TemplateBill templateBill, DateTime refDate) throws Exception {
-		super(templateBill.getEntityManager());
-		setAccountId(templateBill.getAccountId());
-		setDueDate(refDate.plusDays(templateBill.getDueDay() - refDate.getDayOfMonth()).toDate());
-		setNameD(templateBill.getNameD());
-		setAmountDue(templateBill.getAmountDue());
-		for (TemplateTransaction templateTransaction : templateBill.getTemplateTransactions()) {
-			addTransaction(new Transaction(templateTransaction));
-		}
-		
-		/*this.accountId = orig.getAccountId();
-		this.templateId = orig.getTemplateId();
-		this.dueDate = orig.getDueDate();
-		this.nameD = orig.getNameD();
-		this.paymentDateD = orig.getPaymentDateD();
-		this.amountDue = orig.getAmountDue();
-		this.statusId = orig.getStatusId();
-		this.active = orig.isActive();
-		this.description = orig.getDescription();*/
-	}
-
 	public double getPaid() {
 		double paid = 0;
 		for (Transaction trans : getTransactions()) {

@@ -2,8 +2,6 @@ package com.digitald4.budget.dao;
 
 import com.digitald4.budget.model.Account;
 import com.digitald4.budget.model.Portfolio;
-import com.digitald4.budget.model.Template;
-import com.digitald4.budget.model.UserPortfolio;
 import com.digitald4.common.dao.DataAccessObject;
 import com.digitald4.common.jpa.PrimaryKey;
 import com.digitald4.common.util.SortedList;
@@ -24,8 +22,6 @@ public abstract class PortfolioDAO extends DataAccessObject{
 	private Integer id;
 	private String name;
 	private List<Account> accounts;
-	private List<Template> templates;
-	private List<UserPortfolio> userPortfolios;
 	public PortfolioDAO(EntityManager entityManager) {
 		super(entityManager);
 	}
@@ -101,54 +97,6 @@ public abstract class PortfolioDAO extends DataAccessObject{
 			account.delete();
 		return (Portfolio)this;
 	}
-	public List<Template> getTemplates() {
-		if (isNewInstance() || templates != null) {
-			if (templates == null) {
-				templates = new SortedList<Template>();
-			}
-			return templates;
-		}
-		return getNamedCollection(Template.class, "findByPortfolio", getId());
-	}
-	public Portfolio addTemplate(Template template) throws Exception {
-		template.setPortfolio((Portfolio)this);
-		if(isNewInstance() || templates != null)
-			getTemplates().add(template);
-		else
-			template.insert();
-		return (Portfolio)this;
-	}
-	public Portfolio removeTemplate(Template template) throws Exception {
-		if(isNewInstance() || templates != null)
-			getTemplates().remove(template);
-		else
-			template.delete();
-		return (Portfolio)this;
-	}
-	public List<UserPortfolio> getUserPortfolios() {
-		if (isNewInstance() || userPortfolios != null) {
-			if (userPortfolios == null) {
-				userPortfolios = new SortedList<UserPortfolio>();
-			}
-			return userPortfolios;
-		}
-		return getNamedCollection(UserPortfolio.class, "findByPortfolio", getId());
-	}
-	public Portfolio addUserPortfolio(UserPortfolio userPortfolio) throws Exception {
-		userPortfolio.setPortfolio((Portfolio)this);
-		if(isNewInstance() || userPortfolios != null)
-			getUserPortfolios().add(userPortfolio);
-		else
-			userPortfolio.insert();
-		return (Portfolio)this;
-	}
-	public Portfolio removeUserPortfolio(UserPortfolio userPortfolio) throws Exception {
-		if(isNewInstance() || userPortfolios != null)
-			getUserPortfolios().remove(userPortfolio);
-		else
-			userPortfolio.delete();
-		return (Portfolio)this;
-	}
 	public Map<String,Object> getPropertyValues() {
 		Hashtable<String,Object> values = new Hashtable<String,Object>();
 		for(PROPERTY prop:PROPERTY.values()) {
@@ -200,10 +148,6 @@ public abstract class PortfolioDAO extends DataAccessObject{
 		super.copyChildrenTo(cp);
 		for(Account child:getAccounts())
 			cp.addAccount(child.copy());
-		for(Template child:getTemplates())
-			cp.addTemplate(child.copy());
-		for(UserPortfolio child:getUserPortfolios())
-			cp.addUserPortfolio(child.copy());
 	}
 	public Vector<String> getDifference(PortfolioDAO o){
 		Vector<String> diffs = super.getDifference(o);
@@ -226,33 +170,11 @@ public abstract class PortfolioDAO extends DataAccessObject{
 				account.setPortfolio((Portfolio)this);
 			}
 		}
-		if (templates != null) {
-			for (Template template : getTemplates()) {
-				template.setPortfolio((Portfolio)this);
-			}
-		}
-		if (userPortfolios != null) {
-			for (UserPortfolio userPortfolio : getUserPortfolios()) {
-				userPortfolio.setPortfolio((Portfolio)this);
-			}
-		}
 		if (accounts != null) {
 			for (Account account : getAccounts()) {
 				account.insert();
 			}
 			accounts = null;
-		}
-		if (templates != null) {
-			for (Template template : getTemplates()) {
-				template.insert();
-			}
-			templates = null;
-		}
-		if (userPortfolios != null) {
-			for (UserPortfolio userPortfolio : getUserPortfolios()) {
-				userPortfolio.insert();
-			}
-			userPortfolios = null;
 		}
 	}
 }

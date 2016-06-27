@@ -17,13 +17,13 @@ com.digitald4.budget.AccountingCtrl.prototype.refresh = function() {
 	var scope = this.scope;
 	this.accountService.getAccounts(this.sharedData.getSelectedPortfolioId(), function(accounts) {
 		scope.accounts = accounts;
-		scope.$apply();
-	}, function(error) {
-		notify(error);
-	});
-	
-	this.accountService.getBankAccounts(this.sharedData.getSelectedPortfolioId(), function(bankAccounts) {
-		scope.bankAccounts = bankAccounts;
+		scope.bankAccounts = [];
+		for (var a = 0; a < accounts.length; a++) {
+			var account = accounts[a];
+			if (account.paymentAccount) {
+				scope.bankAccounts.push(account);
+			}
+		}
 		scope.$apply();
 	}, function(error) {
 		notify(error);

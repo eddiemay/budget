@@ -11,13 +11,13 @@
 				</td>
 				<td><input type="text" data-ng-model="account.name" data-on-change="updateAccount(account, 'name')"></td>
 				<td>
-					<select data-ng-model="account.parentAccountId" data-ng-change="updateAccount(account, 'parentAccountId')"
+					<select data-ng-model="account.parent_account_id" data-ng-change="updateAccount(account, 'parent_account_id')"
 						data-ng-options="parent.id as parent.name for parent in accounts">
 					</select>
 				</td>
 				<td class="th table-check-cell">
-					<input type="checkbox" data-ng-model="account.paymentAccount"
-						data-ng-change="updateAccount(account, 'paymentAccount')">
+					<input type="checkbox" data-ng-model="account.payment_account"
+						data-ng-change="updateAccount(account, 'payment_account')">
 				</td>
 			</tr>
 			<tr>
@@ -29,11 +29,11 @@
 				</td>
 				<td><input type="text" data-ng-model="newAccount.name"></td>
 				<td>
-					<select data-ng-model="newAccount.parentAccountId" data-ng-options="parent.id as parent.name for parent in accounts">
+					<select data-ng-model="newAccount.parent_account_id" data-ng-options="parent.id as parent.name for parent in accounts">
 					</select>
 				</td>
 				<td class="th table-check-cell">
-					<input type="checkbox" data-ng-model="newAccount.paymentAccount">
+					<input type="checkbox" data-ng-model="newAccount.payment_account">
 				</td>
 				<td class="th">
 					<button data-ng-click="addAccount()">+</button>

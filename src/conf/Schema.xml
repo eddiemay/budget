@@ -6,15 +6,14 @@
     <ATTRIBUTE name="Name" type="string" size="32" nullable="false" />
   </CLASS>
   <CLASS name="User Portfolio">
-  	<ATTRIBUTE name="Id" type="id" nullable="false" id="true" generated="true" />
-  	<ATTRIBUTE name="User Id" type="id" nullable="false" />
-  	<ATTRIBUTE name="Portfolio Id" type="id" nullable="false" />
+  	<ATTRIBUTE name="Portfolio Id" type="id" nullable="false" id="true" />
+  	<ATTRIBUTE name="User Id" type="id" nullable="false" id="true" />
     <ATTRIBUTE name="Role Id" type="id" nullable="false" />
-    <REFERENCE refclass="User" indexed="false">
-      <CONNECTOR attribute="User Id" refattr="Id" />
-    </REFERENCE>
     <REFERENCE refclass="Portfolio" indexed="true">
       <CONNECTOR attribute="Portfolio Id" refattr="Id" />
+    </REFERENCE>
+    <REFERENCE refclass="User" indexed="false">
+      <CONNECTOR attribute="User Id" refattr="Id" />
     </REFERENCE>
     <REFERENCE refclass="General Data" indexed="false" name="Role" >
       <CONNECTOR attribute="Role Id" refattr="Id" />

@@ -3,7 +3,6 @@ package com.digitald4.budget.dao;
 import com.digitald4.budget.model.Account;
 import com.digitald4.budget.model.Bill;
 import com.digitald4.common.model.GeneralData;
-import com.digitald4.budget.model.Template;
 import com.digitald4.budget.model.Transaction;
 import com.digitald4.common.dao.DataAccessObject;
 import com.digitald4.common.jpa.PrimaryKey;
@@ -37,7 +36,6 @@ public abstract class BillDAO extends DataAccessObject{
 	private List<Transaction> transactions;
 	private Account account;
 	private GeneralData status;
-	private Template template;
 	public BillDAO(EntityManager entityManager) {
 		super(entityManager);
 	}
@@ -107,7 +105,6 @@ public abstract class BillDAO extends DataAccessObject{
 		if (!isSame(templateId, oldValue)) {
 			this.templateId = templateId;
 			setProperty("TEMPLATE_ID", templateId, oldValue);
-			template=null;
 		}
 		return (Bill)this;
 	}
@@ -216,17 +213,6 @@ public abstract class BillDAO extends DataAccessObject{
 	public Bill setStatus(GeneralData status) throws Exception {
 		setStatusId(status==null?null:status.getId());
 		this.status=status;
-		return (Bill)this;
-	}
-	public Template getTemplate() {
-		if (template == null) {
-			return getEntityManager().find(Template.class, getTemplateId());
-		}
-		return template;
-	}
-	public Bill setTemplate(Template template) throws Exception {
-		setTemplateId(template==null?null:template.getId());
-		this.template=template;
 		return (Bill)this;
 	}
 	public List<Transaction> getTransactions() {

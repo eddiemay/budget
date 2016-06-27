@@ -1,7 +1,7 @@
 <div>
 	Template
-	<select data-ng-model="templatesCtrl.selectedTemplate" data-ng-change="templatesCtrl.refreshBills()"
-		data-ng-options="template as template.name for template in templatesCtrl.templates">
+	<select data-ng-model="templatesCtrl.selectedTemplate" data-ng-change="templatesCtrl.setBills(templatesCtrl.selectedTemplate.bill)"
+			data-ng-options="template as template.name for template in templatesCtrl.templates">
 	</select>
 	<a data-ng-click="templatesCtrl.showTemplateAdd=true"><button>New Template</button></a>
 	<div data-ng-show="templatesCtrl.showTemplateAdd">
@@ -13,28 +13,35 @@
 		<thead><tr>
 				<th class="black-cell"><span class="loading"></span></th>
 				<th>Due Day</th><th>Bill</th><th>Name</th><th>Amount Due</th>
-				<th data-ng-repeat="bankAccount in templatesCtrl.bankAccounts">
-					{{bankAccount.name}}
+				<th data-ng-repeat="paymentAccount in templatesCtrl.paymentAccounts">
+					{{paymentAccount.name}}
 				</th>
 		</tr></thead>
 		<tbody>
-			<tr data-ng-repeat="bill in templatesCtrl.bills">
+			<tr data-ng-repeat="bill in templatesCtrl.selectedTemplate.bill">
 				<td class="th table-check-cell">
 					<input type="checkbox" data-ng-model="bill.selected">
 					<a data-ng-show="bill.selected" data-ng-click="templatesCtrl.deleteSelected()"><button>Delete</button></a>
 				</td>
 				<td>
-					<input type="text" data-ng-model="bill.dueDay" size="3" data-on-change="templatesCtrl.updateBill(bill, 'dueDay')">
+					<input type="text" data-ng-model="bill.due_day" size="3" data-on-change="templatesCtrl.updateBill(bill, 'due_day')">
 				</td>
 				<td>
-					<select data-ng-model="bill.accountId" data-ng-change="templatesCtrl.updateBill(bill, 'accountId')"
-						data-ng-options="account.id as account.name for account in templatesCtrl.accounts">
+					<select data-ng-model="bill.account_id" data-ng-change="templatesCtrl.updateBill(bill, 'accountId')"
+							data-ng-options="account.id as account.name for account in templatesCtrl.accounts">
 					</select>
 				</td>
-				<td><input type="text" data-ng-model="bill.name" data-on-change="templatesCtrl.updateBill(bill, 'name')"></td>
-				<td><input type="text" data-ng-model="bill.amountDue" size="8" data-on-change="templatesCtrl.updateBill(bill, 'amountDue')"> {{bill.acctBalPost}}</td>
+				<td>
+					<input type="text" data-ng-model="bill.name_d" data-on-change="templatesCtrl.updateBill(bill, 'name_d')">
+				</td>
+				<td>
+					<input type="text" data-ng-model="bill.amount_due" size="8" data-on-change="templatesCtrl.updateBill(bill, 'amountDue')">
+					{{bill.balance_post | currency}}
+				</td>
 				<td data-ng-repeat="account in bill.accounts">
-					<input type="text" data-ng-model="account.amount" size="8" data-on-change="templatesCtrl.updateBillTrans(account, 'amount')"> {{account.postBal}}
+					<input type="text" data-ng-model="account.amount" size="8"
+							data-on-change="templatesCtrl.updateBillTrans(account, 'amount')">
+					{{account.balance_post | currency}}
 				</td>
 			</tr>
 			<tr>

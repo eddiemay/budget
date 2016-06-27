@@ -29,14 +29,14 @@ import org.json.JSONObject;
 @NamedNativeQueries({
 	@NamedNativeQuery(name = "refresh", query="SELECT o.* FROM account o WHERE o.ID=?"),//AUTO-GENERATED
 })
-public class Account extends AccountDAO{
-	public Account(EntityManager entityManager){
+public class Account extends AccountDAO {
+	public Account(EntityManager entityManager) {
 		super(entityManager);
 	}
-	public Account(EntityManager entityManager, Integer id){
+	public Account(EntityManager entityManager, Integer id) {
 		super(entityManager, id);
 	}
-	public Account(EntityManager entityManager, Account orig){
+	public Account(EntityManager entityManager, Account orig) {
 		super(entityManager, orig);
 	}
 	
@@ -93,25 +93,6 @@ public class Account extends AccountDAO{
 				}
 				if (trans.getDebitAccount() == this) {
 					bal -= trans.getAmount();
-				}
-			}
-		}
-		return bal;
-	}
-	
-	public double getBalancePre(TemplateTransaction asOf) {
-		double bal = 0;
-		TemplateBill bill = asOf.getTemplateBill();
-		Template template = bill.getTemplate();
-		for (TemplateBill templateBill : template.getTemplateBills()) {
-			for (TemplateTransaction trans : templateBill.getTemplateTransactions()) {
-				if (trans.getTemplateBill().compareTo(bill) < 0) {
-					if (templateBill.getAccount() == this) {
-						bal += trans.getAmount();
-					}
-					if (trans.getDebitAccount() == this) {
-						bal -= trans.getAmount();
-					}
 				}
 			}
 		}

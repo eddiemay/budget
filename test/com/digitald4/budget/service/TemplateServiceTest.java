@@ -4,39 +4,27 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.digitald4.budget.proto.BudgetProtos.Template;
+import com.digitald4.budget.dao.TemplateSQLDao;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateListRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateUI;
 import com.digitald4.budget.store.TemplateStore;
-import com.digitald4.common.dao.sql.DAOProtoSQLImpl;
+import com.digitald4.budget.test.TestCase;
 import com.digitald4.common.exception.DD4StorageException;
-import com.digitald4.common.jdbc.DBConnector;
-import com.digitald4.common.jdbc.DBConnectorThreadPoolImpl;
 
-public class TemplateServiceTest {
-	
-	private static DBConnector dbConnector = null;
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		dbConnector = new DBConnectorThreadPoolImpl(
-				"org.gjt.mm.mysql.Driver",
-				"jdbc:mysql://localhost/budget?autoReconnect=true",
-				"dd4_user", "getSchooled85");
-	}
+public class TemplateServiceTest extends TestCase {
 
 	@Test
 	public void testGetTemplates() throws DD4StorageException {
-		TemplateStore sessionStore = new TemplateStore(
-				new DAOProtoSQLImpl<>(Template.getDefaultInstance(), dbConnector));
-		TemplateService templateService = new TemplateService(sessionStore);
+		TemplateStore store = new TemplateStore(new TemplateSQLDao(dbConnector));
+		TemplateService service = new TemplateService(store);
 		
-		List<TemplateUI> templates = templateService.list(TemplateListRequest.newBuilder()
-				.setPortfolioId(3)
+		List<TemplateUI> templates = service.list(TemplateListRequest.newBuilder()
+				.setPortfolioId(8)
 				.build());
 		assertTrue(templates.size() > 0);
+		assertTrue(templates.get(0).getBillCount() > 3);
+		assertTrue(templates.get(0).getBill(0).getTransactionCount() > 0);
 	}
 }

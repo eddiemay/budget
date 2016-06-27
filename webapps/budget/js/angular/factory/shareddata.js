@@ -7,11 +7,9 @@ com.digitald4.budget.SharedData.prototype.refresh = function() {
 	console.log('warning refresh not bound');
 };
 
-com.digitald4.budget.SharedData.prototype.setPortfolioData =
-		function(portfolioData) {
-	this.user = portfolioData.user;
-	this.portfolios = portfolioData.portfolios;
-	this.activePortfolioId = portfolioData.activePortfolio.id;
+com.digitald4.budget.SharedData.prototype.setPortfolioData = function(portfolios) {
+	this.portfolios = portfolios;
+	this.activePortfolioId = portfolios[0].id;
 };
 
 com.digitald4.budget.SharedData.prototype.getSelectedPortfolioId = function() {
