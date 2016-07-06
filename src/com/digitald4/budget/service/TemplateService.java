@@ -36,15 +36,13 @@ public class TemplateService {
 						.setTemplateId(bill.getTemplateId())
 						.setAccountId(bill.getAccountId())
 						.setDueDay(bill.getDueDay())
-						.setNameD(bill.getNameD())
+						.setName(bill.getName())
 						.setAmountDue(bill.getAmountDue())
 						.setRank(bill.getRank())
 						.setActive(bill.getActive())
 						.setDescription(bill.getDescription());
 				for (TemplateTransaction transaction : bill.getTransactionList()) {
 					billUI.addTransaction(TemplateTransactionUI.newBuilder()
-							.setId(transaction.getId())
-							.setTemplateBillId(transaction.getTemplateBillId())
 							.setDebitAccountId(transaction.getDebitAccountId())
 							.setAmount(transaction.getAmount()));
 				}
@@ -75,7 +73,7 @@ public class TemplateService {
 	}
 	
 	public TemplateUI get(TemplateGetRequest request) throws DD4StorageException {
-		return converter.execute(store.read(request.getTemplateId()));
+		return converter.execute(store.get(request.getTemplateId()));
 	}
 	
 	public TemplateUI create(TemplateCreateRequest request) throws DD4StorageException {

@@ -10,7 +10,7 @@
 					<input type="checkbox" data-ng-model="portfolio.selected">
 				</td>
 				<td><input type="text" data-ng-model="portfolio.name" data-on-change="updatePortfolio(portfolio, 'name')"></td>
-				<td>{{portfolio.role}}</td>
+				<td>{{getUserRoleName(portfolio.portfolio_user[0].role)}}</td>
 			</tr>
 			<tr>
 				<td class="th">

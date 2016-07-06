@@ -4,6 +4,14 @@ com.digitald4.budget.PortfoliosCtrl = function($scope, sharedData, portfolioServ
 	this.portfolioService = portfolioService;
 	this.scope.addPortfolio = this.addPortfolio.bind(this);
 	this.scope.updatePortfolio = this.updatePortfolio.bind(this);
+	var UserRoleUI = proto.budget.UserRoleUI;
+	this.scope.getUserRoleName = function(userRole) {
+		switch (userRole) {
+			case UserRoleUI.UR_OWNER: return 'Owner';
+			case UserRoleUI.UR_READONLY: return 'Read Only';
+		}
+		return 'Unknown';
+	};
 	this.refresh();
 };
 
@@ -14,7 +22,7 @@ com.digitald4.budget.PortfoliosCtrl.prototype.refresh = function() {
 	var scope = this.scope;
 	this.portfolioService.getPortfolios(scope.sharedData.getSelectedPortfolioId(), function(portfolioData) {
 		scope.sharedData.setPortfolioData(portfolioData);
-		scope.$apply();
+		// scope.$apply();
 	}, function(error) {
 		notify(error);
 	});

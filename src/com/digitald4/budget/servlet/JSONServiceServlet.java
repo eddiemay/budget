@@ -12,8 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.digitald4.budget.dao.PortfolioSQLDao;
-import com.digitald4.budget.dao.TemplateSQLDao;
 import com.digitald4.budget.proto.BudgetProtos.Account;
+import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountCreateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountGetRequest;
@@ -59,7 +59,8 @@ public class JSONServiceServlet extends ServiceServlet {
 				new DAOProtoSQLImpl<Account>(Account.getDefaultInstance(), dbConnector));
 		accountService = new AccountService(accountStore);
 		
-		TemplateStore templateStore = new TemplateStore(new TemplateSQLDao(dbConnector));
+		TemplateStore templateStore = new TemplateStore(
+				new DAOProtoSQLImpl<Template>(Template.getDefaultInstance(), dbConnector));
 		templateService = new TemplateService(templateStore);
 	}
 

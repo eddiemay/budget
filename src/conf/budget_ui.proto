@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package budget;
 
-// import "common_ui.proto";
+import "common_ui.proto";
 
 option java_package = "com.digitald4.budget.proto";
 option java_outer_classname = "BudgetUIProtos";
@@ -19,9 +19,8 @@ message PortfolioUI {
 	optional string description = 3;
 
 	message PortfolioUserUI {
-		optional int32 portfolio_id = 2;
-		optional int32 user_id = 3;
-		optional UserRoleUI role = 4;
+		optional int32 user_id = 1;
+		optional UserRoleUI role = 2;
 	}
 	repeated PortfolioUserUI portfolio_user = 4;
 }
@@ -41,13 +40,20 @@ message PortfolioDeleteRequest {
 	optional int32 portfolio_id = 1;
 };
 
+message BalanceUI {
+	optional int64 date = 1;
+	optional double balance = 2;
+	optional double balance_year_to_date = 3;
+}
+
 message AccountUI {
   optional int32 id = 1;
-  optional int32 portfolio_id = 2;
+	optional int32 portfolio_id = 2;
   optional string name = 3;
   optional string description = 4;
   optional bool payment_account = 5;
   optional int32 parent_account_id = 6;
+  optional BalanceUI balance = 7;
 }
 
 message AccountListRequest {
@@ -66,9 +72,59 @@ message AccountDeleteRequest {
 	optional int32 account_id = 1;
 };
 
+message BillUI {
+	optional int32 id = 1;
+	optional int32 portfolio_id = 2;
+	optional int32 account_id = 3;
+	optional int32 template_id = 4;
+	optional int64 due_date = 5;
+	optional string name = 6;
+	optional int64 payment_date = 7;
+	optional double amount_due = 8;
+
+	enum PaymentStatusUI {
+		PS_UNKNOWN = 0;
+		PS_NOT_SCHEDULED = 1;
+		PS_SCHEDULED = 2;
+		PS_PENDING = 3;
+		PS_PAID = 4;
+	}
+	optional PaymentStatusUI status = 9;
+	optional bool active = 10;
+	optional string description = 11;
+
+	message TransactionUI {
+		optional int32 id = 1;
+		optional int32 debit_account_id = 2;
+		optional double amount = 3;
+		optional int64 payment_date = 4;
+		optional PaymentStatusUI status = 5;
+		optional bool active = 6;
+	}
+	repeated TransactionUI transaction = 12;
+}
+
+message BillListRequest {
+	optional int32 portfolio_id = 1;
+	optional int64 ref_date = 2;
+	optional common.DateRangeType date_range = 3;
+};
+
+message BillGetRequest {
+	optional int32 bill_id = 1;
+};
+
+message BillCreateRequest {
+	optional BillUI bill = 1;
+};
+
+message BillDeleteRequest {
+	optional int32 bill_id = 1;
+};
+
 message TemplateUI {
   optional int32 id = 1;
-  optional int32 portfolio_id = 2;
+	optional int32 portfolio_id = 2;
   optional string name = 3;
   optional string description = 4;
 
@@ -77,17 +133,15 @@ message TemplateUI {
 		optional int32 template_id = 2;
 		optional int32 account_id = 3;
 		optional int32 due_day = 4;
-		optional string name_d = 5;
+		optional string name = 5;
 		optional double amount_due = 6;
 		optional bool active = 7 [default = true];
 		optional string description = 8;
 		optional int32 rank = 9;
 
 		message TemplateTransactionUI {
-			optional int32 id = 1;
-			optional int32 template_bill_id = 2;
-			optional int32 debit_account_id = 3;
-			optional double amount = 4;
+			optional int32 debit_account_id = 1;
+			optional double amount = 2;
 		}
 		repeated TemplateTransactionUI transaction = 10;
 	}
@@ -111,7 +165,7 @@ message TemplateDeleteRequest {
 };
 
 message ApplyTemplateRequest {
-	optional int32 portfolio_id = 1;
-	optional int32 template_id = 2;
-	optional int64 ref_date = 3;
+	optional int32 template_id = 1;
+	optional int64 ref_date = 2;
+	optional common.DateRangeType date_range = 3;
 };

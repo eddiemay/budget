@@ -52,17 +52,16 @@ public class TemplateSQLDao extends DAOProtoSQLImpl<Template> {
 						.setTemplateId(templateId)
 						.setAccountId(rs.getInt("account_id"))
 						.setDueDay(rs.getInt("due_day"))
-						.setNameD(rs.getString("name_d") != null ? rs.getString("name_d")
-								: rs.getString("account_name"))
 						.setAmountDue(rs.getDouble("amount_due"))
 						.setActive(rs.getBoolean("active"))
 						.setRank(rs.getInt("rank") != 0 ? rs.getInt("rank") : templateBillId);
+				if (rs.getString("name_d") != null) {
+					templateBill.setName(rs.getString("name_d"));
+				}
 				bills.add(templateBill);
 				templateBills.put(templateBillId, templateBill);
 			}
 			templateBill.addTransaction(TemplateTransaction.newBuilder()
-					.setId(rs.getInt("template_transaction_id"))
-					.setTemplateBillId(templateBillId)
 					.setDebitAccountId(rs.getInt("debit_account_id"))
 					.setAmount(rs.getDouble("amount")));
 		}

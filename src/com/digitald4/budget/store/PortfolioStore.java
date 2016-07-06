@@ -15,6 +15,6 @@ public class PortfolioStore extends GenericDAOStore<Portfolio> {
 	}
 	
 	public List<Portfolio> getByUser(int userId) throws DD4StorageException {
-		return query(new QueryParam("user_id", "=", userId));
+		return get(new QueryParam("user_id", "=", userId));
 	}
 }

@@ -6,13 +6,6 @@ com.digitald4.budget.AccountsCtrl = function($scope, sharedData, accountService)
 	this.scope.showAddDialog = this.showAddDialog.bind(this);
 	this.scope.addAccount = this.addAccount.bind(this);
 	this.scope.updateAccount = this.updateAccount.bind(this);
-	this,scope.getUserRoleName = function(userRole) {
-		switch (userRole) {
-			case UserRoleUI.UR_UNKNOWN: return 'Unknown';
-			case UserRoleUI.UR_OWNER: return 'Owner';
-			case UserRoleUI.UR_READONLY: return 'Read Only';
-		}
-	};
 	this.refresh();
 };
 

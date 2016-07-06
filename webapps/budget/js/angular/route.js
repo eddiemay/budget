@@ -1,8 +1,19 @@
-var com = {
-  digitald4: {
-  	common: {},
-	  budget: {}
-  }
+var com = com || {
+};
+
+com.digitald4 = com.digitald4 || {
+	common: {},
+	budget: {}
+}
+
+var proto = proto || { 
+};
+
+proto.budget = proto.budget || {
+};
+
+var goog = goog || {
+	provide: function(provides) {}
 };
 
 com.digitald4.budget.router = function($routeProvider) {

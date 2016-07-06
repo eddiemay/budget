@@ -15,6 +15,6 @@ public class AccountStore extends GenericDAOStore<Account> {
 	}
 	
 	public List<Account> getByPortfolio(int portfolioId) throws DD4StorageException {
-		return query(new QueryParam("portfolio_id", "=", portfolioId));
+		return get(new QueryParam("portfolio_id", "=", portfolioId));
 	}
 }

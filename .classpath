@@ -11,6 +11,5 @@
 	<classpathentry kind="lib" path="/common/tomcat-7/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="/common/lib/mockito-all-2.0.2-beta.jar"/>
 	<classpathentry kind="lib" path="/common/lib/protobuf-java-3.0.0-beta-2.jar"/>
-	<classpathentry kind="lib" path="/common/lib/protobuf-java-format-1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

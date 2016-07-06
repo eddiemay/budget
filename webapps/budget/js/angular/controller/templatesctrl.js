@@ -67,6 +67,9 @@ com.digitald4.budget.TemplatesCtrl.prototype.setBills = function(bills) {
 		}
 		var account = this.accountHash['' + bill.account_id]; 
 		if (account) {
+			if (!bill.name) {
+				bill.name = account.name;
+			}
 			account.balance += bill.amount_due; 
 			bill.balance_post = account.balance;
 		} else {

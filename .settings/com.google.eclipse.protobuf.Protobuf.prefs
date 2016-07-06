@@ -1,0 +1,6 @@
+compiler.descriptorFilePath=/usr/local/include/google/protobuf/descriptor.proto
+compiler.protocFilePath=/usr/local/bin/protoc
+eclipse.preferences.version=1
+paths.directoryPaths=${workspace_loc\:/common/src/conf},${workspace_loc\:/${project}/src/conf}
+paths.filesInMultipleDirectories=true
+paths.filesInOneDirectoryOnly=false

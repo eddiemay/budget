@@ -28,7 +28,6 @@ public class PortfolioService {
 					.setDescription(portfolio.getDescription());
 			for (PortfolioUser portUser : portfolio.getPortfolioUserList()) {
 				result.addPortfolioUser(PortfolioUserUI.newBuilder()
-						.setPortfolioId(portfolio.getId())
 						.setUserId(portUser.getUserId())
 						.setRole(UserRoleUI.valueOf(portUser.getRole().getNumber()))
 						.build());
@@ -63,7 +62,7 @@ public class PortfolioService {
 	}
 	
 	public PortfolioUI get(PortfolioGetRequest request) throws DD4StorageException {
-		return converter.execute(store.read(request.getPortfolioId()));
+		return converter.execute(store.get(request.getPortfolioId()));
 	}
 	
 	public PortfolioUI create(PortfolioCreateRequest request) throws DD4StorageException {

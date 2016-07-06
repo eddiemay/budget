@@ -3,3 +3,5 @@
 /bin
 
 webapps/budget/WEB-INF
+webapps/budget/js/common
+webapps/budget/js/gen

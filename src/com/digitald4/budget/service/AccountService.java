@@ -55,7 +55,7 @@ public class AccountService {
 	}
 	
 	public AccountUI get(AccountGetRequest request) throws DD4StorageException {
-		return converter.execute(store.read(request.getAccountId()));
+		return converter.execute(store.get(request.getAccountId()));
 	}
 	
 	public AccountUI create(AccountCreateRequest request) throws DD4StorageException {

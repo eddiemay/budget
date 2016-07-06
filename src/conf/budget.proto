@@ -26,6 +26,13 @@ message Portfolio {
 	repeated PortfolioUser portfolio_user = 4;
 }
 
+message Balance {
+	optional int32 account_id = 1;
+	optional int64 date = 2;
+	optional double balance = 3;
+	optional double balance_year_to_date = 4;
+}
+
 message Account {
   optional int32 id = 1;
   optional int32 portfolio_id = 2;
@@ -36,7 +43,35 @@ message Account {
 }
 
 message Bill {
+	optional int32 id = 1;
+  optional int32 portfolio_id = 2;
+	optional int32 account_id = 3;
+	optional int32 template_id = 4;
+	optional int64 due_date = 5;
+	optional double amount_due = 6;
+	optional string name = 7;
+	optional int64 payment_date = 8;
 
+	enum PaymentStatus {
+		PS_UNKNOWN = 0;
+		PS_NOT_SCHEDULED = 1;
+		PS_SCHEDULED = 2;
+		PS_PENDING = 3;
+		PS_PAID = 4;
+	}
+	optional PaymentStatus status = 9;
+	optional bool active = 10;
+	optional string description = 11;
+
+	message Transaction {
+		optional int32 id = 1;
+		optional int32 debit_account_id = 2;
+		optional double amount = 3;
+		optional int64 payment_date = 4;
+		optional PaymentStatus status = 5;
+		optional bool active = 6;
+	}
+	repeated Transaction transaction = 12;
 }
 
 message Template {
@@ -50,15 +85,13 @@ message Template {
 		optional int32 template_id = 2;
 		optional int32 account_id = 3;
 		optional int32 due_day = 4;
-		optional string name_d = 5;
+		optional string name = 5;
 		optional double amount_due = 6;
 		optional bool active = 7 [default = true];
 		optional string description = 8;
 		optional int32 rank = 9;
 
 		message TemplateTransaction {
-			optional int32 id = 1;
-			optional int32 template_bill_id = 2;
 			optional int32 debit_account_id = 3;
 			optional double amount = 4;
 		}

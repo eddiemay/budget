@@ -122,11 +122,15 @@
 				<include name="itextpdf-5.5.1.jar" />
 				<include name="javax.mail.jar" />
 				<include name="protobuf-java-3.0.0-beta-2.jar" />
-				<include name="protobuf-java-format-1.2.jar" />
 			</fileset>
 		</copy>
 		<copy todir="webapps/${app.name}/js/common" flatten="true">
 			<fileset dir="../common/src/js">
+				<include name="**/*.js"/>
+			</fileset>
+		</copy>
+		<copy todir="webapps/${app.name}/js/gen" flatten="true">
+			<fileset dir="src-gen/js">
 				<include name="**/*.js"/>
 			</fileset>
 		</copy>
