@@ -20,7 +20,7 @@ public class PortfolioSQLDao extends DAOProtoSQLImpl<Portfolio> {
 	}
 	
 	@Override
-	public String getTable() {
+	public String getView() {
 		return "V_PORTFOLIO";
 	}
 	

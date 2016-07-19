@@ -5,27 +5,25 @@ import com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser;
 import com.digitald4.budget.proto.BudgetUIProtos.PortfolioListRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI;
 import com.digitald4.budget.proto.BudgetUIProtos.PortfolioCreateRequest;
-import com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest;
-import com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI;
 import com.digitald4.budget.proto.BudgetUIProtos.UserRoleUI;
 import com.digitald4.budget.store.PortfolioStore;
 import com.digitald4.common.distributed.Function;
 import com.digitald4.common.distributed.MultiCoreThreader;
 import com.digitald4.common.exception.DD4StorageException;
+import com.digitald4.common.server.DualProtoService;
 import com.digitald4.common.util.UserProvider;
 
 import java.util.List;
 
-public class PortfolioService {
+public class PortfolioService extends DualProtoService<PortfolioUI, Portfolio> {
 	
 	private static Function<PortfolioUI, Portfolio> converter = new Function<PortfolioUI, Portfolio>() {
 		@Override
 		public PortfolioUI execute(Portfolio portfolio) {
 			PortfolioUI.Builder result = PortfolioUI.newBuilder()
 					.setId(portfolio.getId())
-					.setName(portfolio.getName())
-					.setDescription(portfolio.getDescription());
+					.setName(portfolio.getName());
 			for (PortfolioUser portUser : portfolio.getPortfolioUserList()) {
 				result.addPortfolioUser(PortfolioUserUI.newBuilder()
 						.setUserId(portUser.getUserId())
@@ -42,7 +40,6 @@ public class PortfolioService {
 			return Portfolio.newBuilder()
 					.setId(template.getId())
 					.setName(template.getName())
-					.setDescription(template.getDescription())
 					.build();
 		}
 	};
@@ -53,24 +50,26 @@ public class PortfolioService {
 	private final UserProvider userProvider;
 	
 	public PortfolioService(PortfolioStore store, UserProvider userProvider) {
+		super(store);
 		this.store = store;
 		this.userProvider = userProvider;
 	}
 	
-	public List<PortfolioUI> list(PortfolioListRequest request) throws DD4StorageException {
-		return threader.parDo(store.getByUser(userProvider.get().getId()), converter);
+	@Override
+	public Function<PortfolioUI, Portfolio> getConverter() {
+		return converter;
 	}
 	
-	public PortfolioUI get(PortfolioGetRequest request) throws DD4StorageException {
-		return converter.execute(store.get(request.getPortfolioId()));
+	@Override
+	public Function<Portfolio, PortfolioUI> getReverseConverter() {
+		return reverse;
+	}
+	
+	public List<PortfolioUI> list(PortfolioListRequest request) throws DD4StorageException {
+		return threader.parDo(store.getByUser(userProvider.get().getId()), getConverter());
 	}
 	
 	public PortfolioUI create(PortfolioCreateRequest request) throws DD4StorageException {
-		return converter.execute(store.create(reverse.execute(request.getPortfolio())));
-	}
-	
-	public boolean delete(PortfolioDeleteRequest request) throws DD4StorageException {
-		store.delete(request.getPortfolioId());
-		return true;
+		return getConverter().execute(store.create(reverse.execute(request.getPortfolio())));
 	}
 }

@@ -16,7 +16,6 @@ enum UserRole {
 message Portfolio {
 	optional int32 id = 1;
 	optional string name = 2;
-	optional string description = 3;
 
 	message PortfolioUser {
 		optional int32 portfolio_id = 2;
@@ -26,20 +25,19 @@ message Portfolio {
 	repeated PortfolioUser portfolio_user = 4;
 }
 
-message Balance {
-	optional int32 account_id = 1;
-	optional int64 date = 2;
-	optional double balance = 3;
-	optional double balance_year_to_date = 4;
-}
-
 message Account {
   optional int32 id = 1;
   optional int32 portfolio_id = 2;
   optional string name = 3;
-  optional string description = 4;
-  optional bool payment_account = 5;
-  optional int32 parent_account_id = 6;
+  optional bool payment_account = 4;
+  optional int32 parent_account_id = 5;
+
+	message Balance {
+		optional string date = 1;
+		optional double balance = 2;
+		optional double balance_year_to_date = 3;
+	}
+	repeated Balance balance = 6;
 }
 
 message Bill {
@@ -54,48 +52,43 @@ message Bill {
 
 	enum PaymentStatus {
 		PS_UNKNOWN = 0;
-		PS_NOT_SCHEDULED = 1;
-		PS_SCHEDULED = 2;
-		PS_PENDING = 3;
-		PS_PAID = 4;
+		PS_ESTIMATED_AMOUNT = 1;
+		PS_BILLED_AMOUNT = 2;
+		PS_SCHEDULED = 3;
+		PS_PENDING = 4;
+		PS_PAID = 5;
 	}
 	optional PaymentStatus status = 9;
-	optional bool active = 10;
-	optional string description = 11;
+	optional int32 rank = 10;
+	optional bool active = 11;
+	optional string description = 12;
 
 	message Transaction {
-		optional int32 id = 1;
-		optional int32 debit_account_id = 2;
-		optional double amount = 3;
-		optional int64 payment_date = 4;
-		optional PaymentStatus status = 5;
-		optional bool active = 6;
+		optional int32 debit_account_id = 1;
+		optional double amount = 2;
+		optional int64 payment_date = 3;
+		optional PaymentStatus status = 4;
+		optional bool active = 5;
 	}
-	repeated Transaction transaction = 12;
+	repeated Transaction transaction = 13;
 }
 
 message Template {
   optional int32 id = 1;
   optional int32 portfolio_id = 2;
   optional string name = 3;
-  optional string description = 4;
 
 	message TemplateBill {
-		optional int32 id = 1;
-		optional int32 template_id = 2;
-		optional int32 account_id = 3;
-		optional int32 due_day = 4;
-		optional string name = 5;
-		optional double amount_due = 6;
-		optional bool active = 7 [default = true];
-		optional string description = 8;
-		optional int32 rank = 9;
+		optional int32 account_id = 1;
+		optional int32 due_day = 2;
+		optional string name = 3;
+		optional double amount_due = 4;
 
 		message TemplateTransaction {
-			optional int32 debit_account_id = 3;
-			optional double amount = 4;
+			optional int32 debit_account_id = 1;
+			optional double amount = 2;
 		}
-		repeated TemplateTransaction transaction = 10;
+		repeated TemplateTransaction transaction = 5;
 	}
-  repeated TemplateBill bill = 5;
+  repeated TemplateBill bill = 4;
 }

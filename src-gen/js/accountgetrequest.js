@@ -55,7 +55,8 @@ proto.budget.AccountGetRequest.prototype.toObject = function(opt_includeInstance
  */
 proto.budget.AccountGetRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accountId: jspb.Message.getField(msg, 1)
+    accountId: jspb.Message.getField(msg, 1),
+    refDate: jspb.Message.getField(msg, 2)
   };
 
   if (includeInstance) {
@@ -92,6 +93,26 @@ proto.budget.AccountGetRequest.prototype.setAccountId = function(value) {
 
 proto.budget.AccountGetRequest.prototype.clearAccountId = function() {
   jspb.Message.setField(this, 1, undefined);
+};
+
+
+/**
+ * optional int64 ref_date = 2;
+ * @return {number?}
+ */
+proto.budget.AccountGetRequest.prototype.getRefDate = function() {
+  return /** @type {number?} */ (jspb.Message.getField(this, 2));
+};
+
+
+/** @param {number?|undefined} value  */
+proto.budget.AccountGetRequest.prototype.setRefDate = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+proto.budget.AccountGetRequest.prototype.clearRefDate = function() {
+  jspb.Message.setField(this, 2, undefined);
 };
 
 

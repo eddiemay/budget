@@ -13,39 +13,45 @@ import org.json.JSONObject;
 
 import com.digitald4.budget.dao.PortfolioSQLDao;
 import com.digitald4.budget.proto.BudgetProtos.Account;
+import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountCreateRequest;
-import com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountGetRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountListRequest;
+import com.digitald4.budget.proto.BudgetUIProtos.BillCreateRequest;
+import com.digitald4.budget.proto.BudgetUIProtos.BillListRequest;
+import com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.PortfolioCreateRequest;
-import com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest;
-import com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.PortfolioListRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateCreateRequest;
-import com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest;
-import com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateListRequest;
 import com.digitald4.budget.service.AccountService;
+import com.digitald4.budget.service.BillService;
 import com.digitald4.budget.service.PortfolioService;
 import com.digitald4.budget.service.TemplateService;
 import com.digitald4.budget.store.AccountStore;
+import com.digitald4.budget.store.BillStore;
 import com.digitald4.budget.store.PortfolioStore;
 import com.digitald4.budget.store.TemplateStore;
 import com.digitald4.common.dao.sql.DAOProtoSQLImpl;
 import com.digitald4.common.jdbc.DBConnector;
+import com.digitald4.common.proto.DD4UIProtos.DeleteRequest;
+import com.digitald4.common.proto.DD4UIProtos.GetRequest;
+import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.server.ServiceServlet;
 import com.google.protobuf.Message;
 import com.googlecode.protobuf.format.JsonFormat;
 
 @WebServlet(name = "JSON Service Servlet", urlPatterns = {"/json/*"}) 
 public class JSONServiceServlet extends ServiceServlet {
-	public enum ACTIONS {PORTFOLIO, PORTFOLIOS, CREATE_PORTFOLIO, DELETE_PORTFOLIO,
-			ACCOUNT, ACCOUNTS, CREATE_ACCOUNT, DELETE_ACCOUNT,
-			TEMPLATE, TEMPLATES, CREATE_TEMPLATE, DELETE_TEMPLATE};
+	public enum ACTIONS {PORTFOLIO, PORTFOLIOS, CREATE_PORTFOLIO, UPDATE_PORTFOLIO, DELETE_PORTFOLIO,
+			ACCOUNT, ACCOUNTS, CREATE_ACCOUNT, UPDATE_ACCOUNT, DELETE_ACCOUNT,
+			BILL, BILLS, CREATE_BILL, UPDATE_BILL, UPDATE_BILL_TRANS, DELETE_BILL,
+			TEMPLATE, TEMPLATES, CREATE_TEMPLATE, UPDATE_TEMPLATE, DELETE_TEMPLATE};
 	
 	private PortfolioService portfolioService;
 	private AccountService accountService;
+	private BillService billService;
 	private TemplateService templateService;
 
 	public void init() throws ServletException {
@@ -62,6 +68,10 @@ public class JSONServiceServlet extends ServiceServlet {
 		TemplateStore templateStore = new TemplateStore(
 				new DAOProtoSQLImpl<Template>(Template.getDefaultInstance(), dbConnector));
 		templateService = new TemplateService(templateStore);
+		
+		BillStore billStore = new BillStore(
+				new DAOProtoSQLImpl<Bill>(Bill.getDefaultInstance(), dbConnector), accountStore);
+		billService = new BillService(billStore, templateStore);
 	}
 
 	protected void process(HttpServletRequest request, HttpServletResponse response)
@@ -74,7 +84,7 @@ public class JSONServiceServlet extends ServiceServlet {
 				action = action.substring(action.lastIndexOf("/") + 1).toUpperCase();
 				switch (ACTIONS.valueOf(action)) {
 					case PORTFOLIO: json.put("data", convertToJSON(portfolioService.get(
-							transformJSONRequest(PortfolioGetRequest.getDefaultInstance(), request))));
+							transformJSONRequest(GetRequest.getDefaultInstance(), request))));
 					break;
 					case PORTFOLIOS: json.put("data", convertToJSON(portfolioService.list(
 							transformJSONRequest(PortfolioListRequest.getDefaultInstance(), request))));
@@ -82,8 +92,11 @@ public class JSONServiceServlet extends ServiceServlet {
 					case CREATE_PORTFOLIO: json.put("data", convertToJSON(portfolioService.create(
 							transformJSONRequest(PortfolioCreateRequest.getDefaultInstance(), request))));
 					break;
+					case UPDATE_PORTFOLIO: json.put("data", convertToJSON(portfolioService.update(
+							transformJSONRequest(UpdateRequest.getDefaultInstance(), request))));
+					break;
 					case DELETE_PORTFOLIO: json.put("data", convertToJSON(portfolioService.delete(
-							transformJSONRequest(PortfolioDeleteRequest.getDefaultInstance(), request))));
+							transformJSONRequest(DeleteRequest.getDefaultInstance(), request))));
 					break;
 					case ACCOUNT: json.put("data", convertToJSON(accountService.get(
 							transformJSONRequest(AccountGetRequest.getDefaultInstance(), request))));
@@ -94,11 +107,32 @@ public class JSONServiceServlet extends ServiceServlet {
 					case CREATE_ACCOUNT: json.put("data", convertToJSON(accountService.create(
 							transformJSONRequest(AccountCreateRequest.getDefaultInstance(), request))));
 					break;
+					case UPDATE_ACCOUNT: json.put("data", convertToJSON(accountService.update(
+							transformJSONRequest(UpdateRequest.getDefaultInstance(), request))));
+					break;
 					case DELETE_ACCOUNT: json.put("data", convertToJSON(accountService.delete(
-							transformJSONRequest(AccountDeleteRequest.getDefaultInstance(), request))));
+							transformJSONRequest(DeleteRequest.getDefaultInstance(), request))));
+					break;
+					case BILL: json.put("data", convertToJSON(billService.get(
+							transformJSONRequest(GetRequest.getDefaultInstance(), request))));
+					break;
+					case BILLS: json.put("data", convertToJSON(billService.list(
+							transformJSONRequest(BillListRequest.getDefaultInstance(), request))));
+					break;
+					case CREATE_BILL: json.put("data", convertToJSON(billService.create(
+							transformJSONRequest(BillCreateRequest.getDefaultInstance(), request))));
+					break;
+					case UPDATE_BILL: json.put("data", convertToJSON(billService.update(
+							transformJSONRequest(UpdateRequest.getDefaultInstance(), request))));
+					break;
+					case UPDATE_BILL_TRANS: json.put("data", convertToJSON(billService.updateTransaction(
+							transformJSONRequest(BillTransUpdateRequest.getDefaultInstance(), request))));
+					break;
+					case DELETE_BILL: json.put("data", convertToJSON(billService.delete(
+							transformJSONRequest(DeleteRequest.getDefaultInstance(), request))));
 					break;
 					case TEMPLATE: json.put("data", convertToJSON(templateService.get(
-							transformJSONRequest(TemplateGetRequest.getDefaultInstance(), request))));
+							transformJSONRequest(GetRequest.getDefaultInstance(), request))));
 					break;
 					case TEMPLATES: json.put("data", convertToJSON(templateService.list(
 							transformJSONRequest(TemplateListRequest.getDefaultInstance(), request))));
@@ -106,8 +140,11 @@ public class JSONServiceServlet extends ServiceServlet {
 					case CREATE_TEMPLATE: json.put("data", convertToJSON(templateService.create(
 							transformJSONRequest(TemplateCreateRequest.getDefaultInstance(), request))));
 					break;
+					case UPDATE_TEMPLATE: json.put("data", convertToJSON(templateService.update(
+							transformJSONRequest(UpdateRequest.getDefaultInstance(), request))));
+					break;
 					case DELETE_TEMPLATE: json.put("data", convertToJSON(templateService.delete(
-							transformJSONRequest(TemplateDeleteRequest.getDefaultInstance(), request))));
+							transformJSONRequest(DeleteRequest.getDefaultInstance(), request))));
 					break;
 				}
 				json.put("valid", true);

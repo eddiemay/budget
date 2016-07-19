@@ -129,20 +129,6 @@ public final class BudgetUIProtos {
         getNameBytes();
 
     /**
-     * <code>optional string description = 3;</code>
-     */
-    boolean hasDescription();
-    /**
-     * <code>optional string description = 3;</code>
-     */
-    java.lang.String getDescription();
-    /**
-     * <code>optional string description = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getDescriptionBytes();
-
-    /**
      * <code>repeated .budget.PortfolioUI.PortfolioUserUI portfolio_user = 4;</code>
      */
     java.util.List<com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI> 
@@ -180,7 +166,6 @@ public final class BudgetUIProtos {
     private PortfolioUI() {
       id_ = 0;
       name_ = "";
-      description_ = "";
       portfolioUser_ = java.util.Collections.emptyList();
     }
 
@@ -222,16 +207,10 @@ public final class BudgetUIProtos {
               name_ = bs;
               break;
             }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
-              description_ = bs;
-              break;
-            }
             case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 portfolioUser_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000004;
               }
               portfolioUser_.add(input.readMessage(com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI.parser(), extensionRegistry));
               break;
@@ -245,7 +224,7 @@ public final class BudgetUIProtos {
             new com.google.protobuf.InvalidProtocolBufferException(
                 e.getMessage()).setUnfinishedMessage(this));
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           portfolioUser_ = java.util.Collections.unmodifiableList(portfolioUser_);
         }
         this.unknownFields = unknownFields.build();
@@ -807,48 +786,6 @@ public final class BudgetUIProtos {
       }
     }
 
-    public static final int DESCRIPTION_FIELD_NUMBER = 3;
-    private volatile java.lang.Object description_;
-    /**
-     * <code>optional string description = 3;</code>
-     */
-    public boolean hasDescription() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional string description = 3;</code>
-     */
-    public java.lang.String getDescription() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          description_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string description = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDescriptionBytes() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        description_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     public static final int PORTFOLIO_USER_FIELD_NUMBER = 4;
     private java.util.List<com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI> portfolioUser_;
     /**
@@ -902,9 +839,6 @@ public final class BudgetUIProtos {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         com.google.protobuf.GeneratedMessage.writeString(output, 2, name_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 3, description_);
-      }
       for (int i = 0; i < portfolioUser_.size(); i++) {
         output.writeMessage(4, portfolioUser_.get(i));
       }
@@ -922,9 +856,6 @@ public final class BudgetUIProtos {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(2, name_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(3, description_);
       }
       for (int i = 0; i < portfolioUser_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -1047,11 +978,9 @@ public final class BudgetUIProtos {
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        description_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
         if (portfolioUserBuilder_ == null) {
           portfolioUser_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           portfolioUserBuilder_.clear();
         }
@@ -1087,14 +1016,10 @@ public final class BudgetUIProtos {
           to_bitField0_ |= 0x00000002;
         }
         result.name_ = name_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.description_ = description_;
         if (portfolioUserBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
             portfolioUser_ = java.util.Collections.unmodifiableList(portfolioUser_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.portfolioUser_ = portfolioUser_;
         } else {
@@ -1124,16 +1049,11 @@ public final class BudgetUIProtos {
           name_ = other.name_;
           onChanged();
         }
-        if (other.hasDescription()) {
-          bitField0_ |= 0x00000004;
-          description_ = other.description_;
-          onChanged();
-        }
         if (portfolioUserBuilder_ == null) {
           if (!other.portfolioUser_.isEmpty()) {
             if (portfolioUser_.isEmpty()) {
               portfolioUser_ = other.portfolioUser_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensurePortfolioUserIsMutable();
               portfolioUser_.addAll(other.portfolioUser_);
@@ -1146,7 +1066,7 @@ public final class BudgetUIProtos {
               portfolioUserBuilder_.dispose();
               portfolioUserBuilder_ = null;
               portfolioUser_ = other.portfolioUser_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000004);
               portfolioUserBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPortfolioUserFieldBuilder() : null;
@@ -1291,88 +1211,12 @@ public final class BudgetUIProtos {
         return this;
       }
 
-      private java.lang.Object description_ = "";
-      /**
-       * <code>optional string description = 3;</code>
-       */
-      public boolean hasDescription() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional string description = 3;</code>
-       */
-      public java.lang.String getDescription() {
-        java.lang.Object ref = description_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string description = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDescriptionBytes() {
-        java.lang.Object ref = description_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          description_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string description = 3;</code>
-       */
-      public Builder setDescription(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        description_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string description = 3;</code>
-       */
-      public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        description_ = getDefaultInstance().getDescription();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string description = 3;</code>
-       */
-      public Builder setDescriptionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        description_ = value;
-        onChanged();
-        return this;
-      }
-
       private java.util.List<com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI> portfolioUser_ =
         java.util.Collections.emptyList();
       private void ensurePortfolioUserIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           portfolioUser_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI>(portfolioUser_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
          }
       }
 
@@ -1522,7 +1366,7 @@ public final class BudgetUIProtos {
       public Builder clearPortfolioUser() {
         if (portfolioUserBuilder_ == null) {
           portfolioUser_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           portfolioUserBuilder_.clear();
@@ -1599,7 +1443,7 @@ public final class BudgetUIProtos {
           portfolioUserBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI, com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUIOrBuilder>(
                   portfolioUser_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           portfolioUser_ = null;
@@ -1961,402 +1805,6 @@ public final class BudgetUIProtos {
     }
 
     public com.digitald4.budget.proto.BudgetUIProtos.PortfolioListRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface PortfolioGetRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:budget.PortfolioGetRequest)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 portfolio_id = 1;</code>
-     */
-    boolean hasPortfolioId();
-    /**
-     * <code>optional int32 portfolio_id = 1;</code>
-     */
-    int getPortfolioId();
-  }
-  /**
-   * Protobuf type {@code budget.PortfolioGetRequest}
-   */
-  public  static final class PortfolioGetRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:budget.PortfolioGetRequest)
-      PortfolioGetRequestOrBuilder {
-    // Use PortfolioGetRequest.newBuilder() to construct.
-    private PortfolioGetRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private PortfolioGetRequest() {
-      portfolioId_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private PortfolioGetRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
-      this();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              portfolioId_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
-      } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_PortfolioGetRequest_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_PortfolioGetRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest.class, com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int PORTFOLIO_ID_FIELD_NUMBER = 1;
-    private int portfolioId_;
-    /**
-     * <code>optional int32 portfolio_id = 1;</code>
-     */
-    public boolean hasPortfolioId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 portfolio_id = 1;</code>
-     */
-    public int getPortfolioId() {
-      return portfolioId_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, portfolioId_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, portfolioId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code budget.PortfolioGetRequest}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:budget.PortfolioGetRequest)
-        com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_PortfolioGetRequest_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_PortfolioGetRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest.class, com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest.Builder.class);
-      }
-
-      // Construct using com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        portfolioId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_PortfolioGetRequest_descriptor;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest getDefaultInstanceForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest.getDefaultInstance();
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest build() {
-        com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest buildPartial() {
-        com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest result = new com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.portfolioId_ = portfolioId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest) {
-          return mergeFrom((com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest other) {
-        if (other == com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest.getDefaultInstance()) return this;
-        if (other.hasPortfolioId()) {
-          setPortfolioId(other.getPortfolioId());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int portfolioId_ ;
-      /**
-       * <code>optional int32 portfolio_id = 1;</code>
-       */
-      public boolean hasPortfolioId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 portfolio_id = 1;</code>
-       */
-      public int getPortfolioId() {
-        return portfolioId_;
-      }
-      /**
-       * <code>optional int32 portfolio_id = 1;</code>
-       */
-      public Builder setPortfolioId(int value) {
-        bitField0_ |= 0x00000001;
-        portfolioId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 portfolio_id = 1;</code>
-       */
-      public Builder clearPortfolioId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        portfolioId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:budget.PortfolioGetRequest)
-    }
-
-    // @@protoc_insertion_point(class_scope:budget.PortfolioGetRequest)
-    private static final com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest();
-    }
-
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<PortfolioGetRequest>
-        PARSER = new com.google.protobuf.AbstractParser<PortfolioGetRequest>() {
-      public PortfolioGetRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
-          return new PortfolioGetRequest(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
-      }
-    };
-
-    public static com.google.protobuf.Parser<PortfolioGetRequest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<PortfolioGetRequest> getParserForType() {
-      return PARSER;
-    }
-
-    public com.digitald4.budget.proto.BudgetUIProtos.PortfolioGetRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2870,954 +2318,6 @@ public final class BudgetUIProtos {
 
   }
 
-  public interface PortfolioDeleteRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:budget.PortfolioDeleteRequest)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 portfolio_id = 1;</code>
-     */
-    boolean hasPortfolioId();
-    /**
-     * <code>optional int32 portfolio_id = 1;</code>
-     */
-    int getPortfolioId();
-  }
-  /**
-   * Protobuf type {@code budget.PortfolioDeleteRequest}
-   */
-  public  static final class PortfolioDeleteRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:budget.PortfolioDeleteRequest)
-      PortfolioDeleteRequestOrBuilder {
-    // Use PortfolioDeleteRequest.newBuilder() to construct.
-    private PortfolioDeleteRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private PortfolioDeleteRequest() {
-      portfolioId_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private PortfolioDeleteRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
-      this();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              portfolioId_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
-      } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_PortfolioDeleteRequest_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_PortfolioDeleteRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest.class, com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int PORTFOLIO_ID_FIELD_NUMBER = 1;
-    private int portfolioId_;
-    /**
-     * <code>optional int32 portfolio_id = 1;</code>
-     */
-    public boolean hasPortfolioId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 portfolio_id = 1;</code>
-     */
-    public int getPortfolioId() {
-      return portfolioId_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, portfolioId_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, portfolioId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code budget.PortfolioDeleteRequest}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:budget.PortfolioDeleteRequest)
-        com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_PortfolioDeleteRequest_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_PortfolioDeleteRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest.class, com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest.Builder.class);
-      }
-
-      // Construct using com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        portfolioId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_PortfolioDeleteRequest_descriptor;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest getDefaultInstanceForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest.getDefaultInstance();
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest build() {
-        com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest buildPartial() {
-        com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest result = new com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.portfolioId_ = portfolioId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest) {
-          return mergeFrom((com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest other) {
-        if (other == com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest.getDefaultInstance()) return this;
-        if (other.hasPortfolioId()) {
-          setPortfolioId(other.getPortfolioId());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int portfolioId_ ;
-      /**
-       * <code>optional int32 portfolio_id = 1;</code>
-       */
-      public boolean hasPortfolioId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 portfolio_id = 1;</code>
-       */
-      public int getPortfolioId() {
-        return portfolioId_;
-      }
-      /**
-       * <code>optional int32 portfolio_id = 1;</code>
-       */
-      public Builder setPortfolioId(int value) {
-        bitField0_ |= 0x00000001;
-        portfolioId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 portfolio_id = 1;</code>
-       */
-      public Builder clearPortfolioId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        portfolioId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:budget.PortfolioDeleteRequest)
-    }
-
-    // @@protoc_insertion_point(class_scope:budget.PortfolioDeleteRequest)
-    private static final com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest();
-    }
-
-    public static com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<PortfolioDeleteRequest>
-        PARSER = new com.google.protobuf.AbstractParser<PortfolioDeleteRequest>() {
-      public PortfolioDeleteRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
-          return new PortfolioDeleteRequest(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
-      }
-    };
-
-    public static com.google.protobuf.Parser<PortfolioDeleteRequest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<PortfolioDeleteRequest> getParserForType() {
-      return PARSER;
-    }
-
-    public com.digitald4.budget.proto.BudgetUIProtos.PortfolioDeleteRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface BalanceUIOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:budget.BalanceUI)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int64 date = 1;</code>
-     */
-    boolean hasDate();
-    /**
-     * <code>optional int64 date = 1;</code>
-     */
-    long getDate();
-
-    /**
-     * <code>optional double balance = 2;</code>
-     */
-    boolean hasBalance();
-    /**
-     * <code>optional double balance = 2;</code>
-     */
-    double getBalance();
-
-    /**
-     * <code>optional double balance_year_to_date = 3;</code>
-     */
-    boolean hasBalanceYearToDate();
-    /**
-     * <code>optional double balance_year_to_date = 3;</code>
-     */
-    double getBalanceYearToDate();
-  }
-  /**
-   * Protobuf type {@code budget.BalanceUI}
-   */
-  public  static final class BalanceUI extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:budget.BalanceUI)
-      BalanceUIOrBuilder {
-    // Use BalanceUI.newBuilder() to construct.
-    private BalanceUI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private BalanceUI() {
-      date_ = 0L;
-      balance_ = 0D;
-      balanceYearToDate_ = 0D;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private BalanceUI(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
-      this();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              date_ = input.readInt64();
-              break;
-            }
-            case 17: {
-              bitField0_ |= 0x00000002;
-              balance_ = input.readDouble();
-              break;
-            }
-            case 25: {
-              bitField0_ |= 0x00000004;
-              balanceYearToDate_ = input.readDouble();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
-      } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BalanceUI_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BalanceUI_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.class, com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int DATE_FIELD_NUMBER = 1;
-    private long date_;
-    /**
-     * <code>optional int64 date = 1;</code>
-     */
-    public boolean hasDate() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int64 date = 1;</code>
-     */
-    public long getDate() {
-      return date_;
-    }
-
-    public static final int BALANCE_FIELD_NUMBER = 2;
-    private double balance_;
-    /**
-     * <code>optional double balance = 2;</code>
-     */
-    public boolean hasBalance() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional double balance = 2;</code>
-     */
-    public double getBalance() {
-      return balance_;
-    }
-
-    public static final int BALANCE_YEAR_TO_DATE_FIELD_NUMBER = 3;
-    private double balanceYearToDate_;
-    /**
-     * <code>optional double balance_year_to_date = 3;</code>
-     */
-    public boolean hasBalanceYearToDate() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional double balance_year_to_date = 3;</code>
-     */
-    public double getBalanceYearToDate() {
-      return balanceYearToDate_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, date_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeDouble(2, balance_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeDouble(3, balanceYearToDate_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, date_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, balance_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(3, balanceYearToDate_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    public static com.digitald4.budget.proto.BudgetUIProtos.BalanceUI parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BalanceUI parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BalanceUI parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BalanceUI parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BalanceUI parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BalanceUI parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BalanceUI parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BalanceUI parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BalanceUI parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BalanceUI parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.digitald4.budget.proto.BudgetUIProtos.BalanceUI prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code budget.BalanceUI}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:budget.BalanceUI)
-        com.digitald4.budget.proto.BudgetUIProtos.BalanceUIOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BalanceUI_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BalanceUI_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.class, com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.Builder.class);
-      }
-
-      // Construct using com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        date_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        balance_ = 0D;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        balanceYearToDate_ = 0D;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BalanceUI_descriptor;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.BalanceUI getDefaultInstanceForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.getDefaultInstance();
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.BalanceUI build() {
-        com.digitald4.budget.proto.BudgetUIProtos.BalanceUI result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.BalanceUI buildPartial() {
-        com.digitald4.budget.proto.BudgetUIProtos.BalanceUI result = new com.digitald4.budget.proto.BudgetUIProtos.BalanceUI(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.date_ = date_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.balance_ = balance_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.balanceYearToDate_ = balanceYearToDate_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.digitald4.budget.proto.BudgetUIProtos.BalanceUI) {
-          return mergeFrom((com.digitald4.budget.proto.BudgetUIProtos.BalanceUI)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.BalanceUI other) {
-        if (other == com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.getDefaultInstance()) return this;
-        if (other.hasDate()) {
-          setDate(other.getDate());
-        }
-        if (other.hasBalance()) {
-          setBalance(other.getBalance());
-        }
-        if (other.hasBalanceYearToDate()) {
-          setBalanceYearToDate(other.getBalanceYearToDate());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.digitald4.budget.proto.BudgetUIProtos.BalanceUI parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.digitald4.budget.proto.BudgetUIProtos.BalanceUI) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private long date_ ;
-      /**
-       * <code>optional int64 date = 1;</code>
-       */
-      public boolean hasDate() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int64 date = 1;</code>
-       */
-      public long getDate() {
-        return date_;
-      }
-      /**
-       * <code>optional int64 date = 1;</code>
-       */
-      public Builder setDate(long value) {
-        bitField0_ |= 0x00000001;
-        date_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 date = 1;</code>
-       */
-      public Builder clearDate() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        date_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private double balance_ ;
-      /**
-       * <code>optional double balance = 2;</code>
-       */
-      public boolean hasBalance() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional double balance = 2;</code>
-       */
-      public double getBalance() {
-        return balance_;
-      }
-      /**
-       * <code>optional double balance = 2;</code>
-       */
-      public Builder setBalance(double value) {
-        bitField0_ |= 0x00000002;
-        balance_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional double balance = 2;</code>
-       */
-      public Builder clearBalance() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        balance_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private double balanceYearToDate_ ;
-      /**
-       * <code>optional double balance_year_to_date = 3;</code>
-       */
-      public boolean hasBalanceYearToDate() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional double balance_year_to_date = 3;</code>
-       */
-      public double getBalanceYearToDate() {
-        return balanceYearToDate_;
-      }
-      /**
-       * <code>optional double balance_year_to_date = 3;</code>
-       */
-      public Builder setBalanceYearToDate(double value) {
-        bitField0_ |= 0x00000004;
-        balanceYearToDate_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional double balance_year_to_date = 3;</code>
-       */
-      public Builder clearBalanceYearToDate() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        balanceYearToDate_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:budget.BalanceUI)
-    }
-
-    // @@protoc_insertion_point(class_scope:budget.BalanceUI)
-    private static final com.digitald4.budget.proto.BudgetUIProtos.BalanceUI DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetUIProtos.BalanceUI();
-    }
-
-    public static com.digitald4.budget.proto.BudgetUIProtos.BalanceUI getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<BalanceUI>
-        PARSER = new com.google.protobuf.AbstractParser<BalanceUI>() {
-      public BalanceUI parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
-          return new BalanceUI(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
-      }
-    };
-
-    public static com.google.protobuf.Parser<BalanceUI> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<BalanceUI> getParserForType() {
-      return PARSER;
-    }
-
-    public com.digitald4.budget.proto.BudgetUIProtos.BalanceUI getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface AccountUIOrBuilder extends
       // @@protoc_insertion_point(interface_extends:budget.AccountUI)
       com.google.protobuf.MessageOrBuilder {
@@ -3855,49 +2355,35 @@ public final class BudgetUIProtos {
         getNameBytes();
 
     /**
-     * <code>optional string description = 4;</code>
-     */
-    boolean hasDescription();
-    /**
-     * <code>optional string description = 4;</code>
-     */
-    java.lang.String getDescription();
-    /**
-     * <code>optional string description = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getDescriptionBytes();
-
-    /**
-     * <code>optional bool payment_account = 5;</code>
+     * <code>optional bool payment_account = 4;</code>
      */
     boolean hasPaymentAccount();
     /**
-     * <code>optional bool payment_account = 5;</code>
+     * <code>optional bool payment_account = 4;</code>
      */
     boolean getPaymentAccount();
 
     /**
-     * <code>optional int32 parent_account_id = 6;</code>
+     * <code>optional int32 parent_account_id = 5;</code>
      */
     boolean hasParentAccountId();
     /**
-     * <code>optional int32 parent_account_id = 6;</code>
+     * <code>optional int32 parent_account_id = 5;</code>
      */
     int getParentAccountId();
 
     /**
-     * <code>optional .budget.BalanceUI balance = 7;</code>
+     * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
      */
     boolean hasBalance();
     /**
-     * <code>optional .budget.BalanceUI balance = 7;</code>
+     * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
      */
-    com.digitald4.budget.proto.BudgetUIProtos.BalanceUI getBalance();
+    com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI getBalance();
     /**
-     * <code>optional .budget.BalanceUI balance = 7;</code>
+     * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
      */
-    com.digitald4.budget.proto.BudgetUIProtos.BalanceUIOrBuilder getBalanceOrBuilder();
+    com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUIOrBuilder getBalanceOrBuilder();
   }
   /**
    * Protobuf type {@code budget.AccountUI}
@@ -3914,7 +2400,6 @@ public final class BudgetUIProtos {
       id_ = 0;
       portfolioId_ = 0;
       name_ = "";
-      description_ = "";
       paymentAccount_ = false;
       parentAccountId_ = 0;
     }
@@ -3962,33 +2447,27 @@ public final class BudgetUIProtos {
               name_ = bs;
               break;
             }
-            case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 32: {
               bitField0_ |= 0x00000008;
-              description_ = bs;
+              paymentAccount_ = input.readBool();
               break;
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              paymentAccount_ = input.readBool();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
               parentAccountId_ = input.readInt32();
               break;
             }
-            case 58: {
-              com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            case 50: {
+              com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
                 subBuilder = balance_.toBuilder();
               }
-              balance_ = input.readMessage(com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.parser(), extensionRegistry);
+              balance_ = input.readMessage(com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(balance_);
                 balance_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000020;
               break;
             }
           }
@@ -4014,6 +2493,636 @@ public final class BudgetUIProtos {
       return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_AccountUI_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.digitald4.budget.proto.BudgetUIProtos.AccountUI.class, com.digitald4.budget.proto.BudgetUIProtos.AccountUI.Builder.class);
+    }
+
+    public interface BalanceUIOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:budget.AccountUI.BalanceUI)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>optional string date = 1;</code>
+       */
+      boolean hasDate();
+      /**
+       * <code>optional string date = 1;</code>
+       */
+      java.lang.String getDate();
+      /**
+       * <code>optional string date = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getDateBytes();
+
+      /**
+       * <code>optional double balance = 2;</code>
+       */
+      boolean hasBalance();
+      /**
+       * <code>optional double balance = 2;</code>
+       */
+      double getBalance();
+
+      /**
+       * <code>optional double balance_year_to_date = 3;</code>
+       */
+      boolean hasBalanceYearToDate();
+      /**
+       * <code>optional double balance_year_to_date = 3;</code>
+       */
+      double getBalanceYearToDate();
+    }
+    /**
+     * Protobuf type {@code budget.AccountUI.BalanceUI}
+     */
+    public  static final class BalanceUI extends
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:budget.AccountUI.BalanceUI)
+        BalanceUIOrBuilder {
+      // Use BalanceUI.newBuilder() to construct.
+      private BalanceUI(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+      }
+      private BalanceUI() {
+        date_ = "";
+        balance_ = 0D;
+        balanceYearToDate_ = 0D;
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return this.unknownFields;
+      }
+      private BalanceUI(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        this();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                com.google.protobuf.ByteString bs = input.readBytes();
+                bitField0_ |= 0x00000001;
+                date_ = bs;
+                break;
+              }
+              case 17: {
+                bitField0_ |= 0x00000002;
+                balance_ = input.readDouble();
+                break;
+              }
+              case 25: {
+                bitField0_ |= 0x00000004;
+                balanceYearToDate_ = input.readDouble();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw new RuntimeException(e.setUnfinishedMessage(this));
+        } catch (java.io.IOException e) {
+          throw new RuntimeException(
+              new com.google.protobuf.InvalidProtocolBufferException(
+                  e.getMessage()).setUnfinishedMessage(this));
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_AccountUI_BalanceUI_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_AccountUI_BalanceUI_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.class, com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.Builder.class);
+      }
+
+      private int bitField0_;
+      public static final int DATE_FIELD_NUMBER = 1;
+      private volatile java.lang.Object date_;
+      /**
+       * <code>optional string date = 1;</code>
+       */
+      public boolean hasDate() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string date = 1;</code>
+       */
+      public java.lang.String getDate() {
+        java.lang.Object ref = date_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            date_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>optional string date = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDateBytes() {
+        java.lang.Object ref = date_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          date_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int BALANCE_FIELD_NUMBER = 2;
+      private double balance_;
+      /**
+       * <code>optional double balance = 2;</code>
+       */
+      public boolean hasBalance() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional double balance = 2;</code>
+       */
+      public double getBalance() {
+        return balance_;
+      }
+
+      public static final int BALANCE_YEAR_TO_DATE_FIELD_NUMBER = 3;
+      private double balanceYearToDate_;
+      /**
+       * <code>optional double balance_year_to_date = 3;</code>
+       */
+      public boolean hasBalanceYearToDate() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional double balance_year_to_date = 3;</code>
+       */
+      public double getBalanceYearToDate() {
+        return balanceYearToDate_;
+      }
+
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          com.google.protobuf.GeneratedMessage.writeString(output, 1, date_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeDouble(2, balance_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeDouble(3, balanceYearToDate_);
+        }
+        unknownFields.writeTo(output);
+      }
+
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.GeneratedMessage.computeStringSize(1, date_);
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeDoubleSize(2, balance_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeDoubleSize(3, balanceYearToDate_);
+        }
+        size += unknownFields.getSerializedSize();
+        memoizedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      public static com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code budget.AccountUI.BalanceUI}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:budget.AccountUI.BalanceUI)
+          com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUIOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_AccountUI_BalanceUI_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_AccountUI_BalanceUI_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.class, com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.Builder.class);
+        }
+
+        // Construct using com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        public Builder clear() {
+          super.clear();
+          date_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          balance_ = 0D;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          balanceYearToDate_ = 0D;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          return this;
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_AccountUI_BalanceUI_descriptor;
+        }
+
+        public com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI getDefaultInstanceForType() {
+          return com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.getDefaultInstance();
+        }
+
+        public com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI build() {
+          com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI buildPartial() {
+          com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI result = new com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.date_ = date_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.balance_ = balance_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.balanceYearToDate_ = balanceYearToDate_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI) {
+            return mergeFrom((com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI other) {
+          if (other == com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.getDefaultInstance()) return this;
+          if (other.hasDate()) {
+            bitField0_ |= 0x00000001;
+            date_ = other.date_;
+            onChanged();
+          }
+          if (other.hasBalance()) {
+            setBalance(other.getBalance());
+          }
+          if (other.hasBalanceYearToDate()) {
+            setBalanceYearToDate(other.getBalanceYearToDate());
+          }
+          this.mergeUnknownFields(other.unknownFields);
+          onChanged();
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private java.lang.Object date_ = "";
+        /**
+         * <code>optional string date = 1;</code>
+         */
+        public boolean hasDate() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional string date = 1;</code>
+         */
+        public java.lang.String getDate() {
+          java.lang.Object ref = date_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              date_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string date = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getDateBytes() {
+          java.lang.Object ref = date_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            date_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string date = 1;</code>
+         */
+        public Builder setDate(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          date_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string date = 1;</code>
+         */
+        public Builder clearDate() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          date_ = getDefaultInstance().getDate();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string date = 1;</code>
+         */
+        public Builder setDateBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          date_ = value;
+          onChanged();
+          return this;
+        }
+
+        private double balance_ ;
+        /**
+         * <code>optional double balance = 2;</code>
+         */
+        public boolean hasBalance() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>optional double balance = 2;</code>
+         */
+        public double getBalance() {
+          return balance_;
+        }
+        /**
+         * <code>optional double balance = 2;</code>
+         */
+        public Builder setBalance(double value) {
+          bitField0_ |= 0x00000002;
+          balance_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional double balance = 2;</code>
+         */
+        public Builder clearBalance() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          balance_ = 0D;
+          onChanged();
+          return this;
+        }
+
+        private double balanceYearToDate_ ;
+        /**
+         * <code>optional double balance_year_to_date = 3;</code>
+         */
+        public boolean hasBalanceYearToDate() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>optional double balance_year_to_date = 3;</code>
+         */
+        public double getBalanceYearToDate() {
+          return balanceYearToDate_;
+        }
+        /**
+         * <code>optional double balance_year_to_date = 3;</code>
+         */
+        public Builder setBalanceYearToDate(double value) {
+          bitField0_ |= 0x00000004;
+          balanceYearToDate_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional double balance_year_to_date = 3;</code>
+         */
+        public Builder clearBalanceYearToDate() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          balanceYearToDate_ = 0D;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:budget.AccountUI.BalanceUI)
+      }
+
+      // @@protoc_insertion_point(class_scope:budget.AccountUI.BalanceUI)
+      private static final com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI();
+      }
+
+      public static com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      @java.lang.Deprecated public static final com.google.protobuf.Parser<BalanceUI>
+          PARSER = new com.google.protobuf.AbstractParser<BalanceUI>() {
+        public BalanceUI parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          try {
+            return new BalanceUI(input, extensionRegistry);
+          } catch (RuntimeException e) {
+            if (e.getCause() instanceof
+                com.google.protobuf.InvalidProtocolBufferException) {
+              throw (com.google.protobuf.InvalidProtocolBufferException)
+                  e.getCause();
+            }
+            throw e;
+          }
+        }
+      };
+
+      public static com.google.protobuf.Parser<BalanceUI> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<BalanceUI> getParserForType() {
+        return PARSER;
+      }
+
+      public com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
     }
 
     private int bitField0_;
@@ -4089,97 +3198,55 @@ public final class BudgetUIProtos {
       }
     }
 
-    public static final int DESCRIPTION_FIELD_NUMBER = 4;
-    private volatile java.lang.Object description_;
+    public static final int PAYMENT_ACCOUNT_FIELD_NUMBER = 4;
+    private boolean paymentAccount_;
     /**
-     * <code>optional string description = 4;</code>
+     * <code>optional bool payment_account = 4;</code>
      */
-    public boolean hasDescription() {
+    public boolean hasPaymentAccount() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional string description = 4;</code>
-     */
-    public java.lang.String getDescription() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          description_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string description = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDescriptionBytes() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        description_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int PAYMENT_ACCOUNT_FIELD_NUMBER = 5;
-    private boolean paymentAccount_;
-    /**
-     * <code>optional bool payment_account = 5;</code>
-     */
-    public boolean hasPaymentAccount() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional bool payment_account = 5;</code>
+     * <code>optional bool payment_account = 4;</code>
      */
     public boolean getPaymentAccount() {
       return paymentAccount_;
     }
 
-    public static final int PARENT_ACCOUNT_ID_FIELD_NUMBER = 6;
+    public static final int PARENT_ACCOUNT_ID_FIELD_NUMBER = 5;
     private int parentAccountId_;
     /**
-     * <code>optional int32 parent_account_id = 6;</code>
+     * <code>optional int32 parent_account_id = 5;</code>
      */
     public boolean hasParentAccountId() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int32 parent_account_id = 6;</code>
+     * <code>optional int32 parent_account_id = 5;</code>
      */
     public int getParentAccountId() {
       return parentAccountId_;
     }
 
-    public static final int BALANCE_FIELD_NUMBER = 7;
-    private com.digitald4.budget.proto.BudgetUIProtos.BalanceUI balance_;
+    public static final int BALANCE_FIELD_NUMBER = 6;
+    private com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI balance_;
     /**
-     * <code>optional .budget.BalanceUI balance = 7;</code>
+     * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
      */
     public boolean hasBalance() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional .budget.BalanceUI balance = 7;</code>
+     * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
      */
-    public com.digitald4.budget.proto.BudgetUIProtos.BalanceUI getBalance() {
-      return balance_ == null ? com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.getDefaultInstance() : balance_;
+    public com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI getBalance() {
+      return balance_ == null ? com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.getDefaultInstance() : balance_;
     }
     /**
-     * <code>optional .budget.BalanceUI balance = 7;</code>
+     * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
      */
-    public com.digitald4.budget.proto.BudgetUIProtos.BalanceUIOrBuilder getBalanceOrBuilder() {
-      return balance_ == null ? com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.getDefaultInstance() : balance_;
+    public com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUIOrBuilder getBalanceOrBuilder() {
+      return balance_ == null ? com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.getDefaultInstance() : balance_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -4204,16 +3271,13 @@ public final class BudgetUIProtos {
         com.google.protobuf.GeneratedMessage.writeString(output, 3, name_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 4, description_);
+        output.writeBool(4, paymentAccount_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBool(5, paymentAccount_);
+        output.writeInt32(5, parentAccountId_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, parentAccountId_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeMessage(7, getBalance());
+        output.writeMessage(6, getBalance());
       }
       unknownFields.writeTo(output);
     }
@@ -4235,19 +3299,16 @@ public final class BudgetUIProtos {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(3, name_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(4, description_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, paymentAccount_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, paymentAccount_);
+          .computeInt32Size(5, parentAccountId_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, parentAccountId_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, getBalance());
+          .computeMessageSize(6, getBalance());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4368,18 +3429,16 @@ public final class BudgetUIProtos {
         bitField0_ = (bitField0_ & ~0x00000002);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        description_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
         paymentAccount_ = false;
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         parentAccountId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         if (balanceBuilder_ == null) {
           balance_ = null;
         } else {
           balanceBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -4419,17 +3478,13 @@ public final class BudgetUIProtos {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.description_ = description_;
+        result.paymentAccount_ = paymentAccount_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.paymentAccount_ = paymentAccount_;
+        result.parentAccountId_ = parentAccountId_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
-        }
-        result.parentAccountId_ = parentAccountId_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
         }
         if (balanceBuilder_ == null) {
           result.balance_ = balance_;
@@ -4461,11 +3516,6 @@ public final class BudgetUIProtos {
         if (other.hasName()) {
           bitField0_ |= 0x00000004;
           name_ = other.name_;
-          onChanged();
-        }
-        if (other.hasDescription()) {
-          bitField0_ |= 0x00000008;
-          description_ = other.description_;
           onChanged();
         }
         if (other.hasPaymentAccount()) {
@@ -4645,109 +3695,33 @@ public final class BudgetUIProtos {
         return this;
       }
 
-      private java.lang.Object description_ = "";
+      private boolean paymentAccount_ ;
       /**
-       * <code>optional string description = 4;</code>
+       * <code>optional bool payment_account = 4;</code>
        */
-      public boolean hasDescription() {
+      public boolean hasPaymentAccount() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional string description = 4;</code>
-       */
-      public java.lang.String getDescription() {
-        java.lang.Object ref = description_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string description = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDescriptionBytes() {
-        java.lang.Object ref = description_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          description_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string description = 4;</code>
-       */
-      public Builder setDescription(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        description_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string description = 4;</code>
-       */
-      public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        description_ = getDefaultInstance().getDescription();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string description = 4;</code>
-       */
-      public Builder setDescriptionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        description_ = value;
-        onChanged();
-        return this;
-      }
-
-      private boolean paymentAccount_ ;
-      /**
-       * <code>optional bool payment_account = 5;</code>
-       */
-      public boolean hasPaymentAccount() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional bool payment_account = 5;</code>
+       * <code>optional bool payment_account = 4;</code>
        */
       public boolean getPaymentAccount() {
         return paymentAccount_;
       }
       /**
-       * <code>optional bool payment_account = 5;</code>
+       * <code>optional bool payment_account = 4;</code>
        */
       public Builder setPaymentAccount(boolean value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
         paymentAccount_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool payment_account = 5;</code>
+       * <code>optional bool payment_account = 4;</code>
        */
       public Builder clearPaymentAccount() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         paymentAccount_ = false;
         onChanged();
         return this;
@@ -4755,59 +3729,59 @@ public final class BudgetUIProtos {
 
       private int parentAccountId_ ;
       /**
-       * <code>optional int32 parent_account_id = 6;</code>
+       * <code>optional int32 parent_account_id = 5;</code>
        */
       public boolean hasParentAccountId() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int32 parent_account_id = 6;</code>
+       * <code>optional int32 parent_account_id = 5;</code>
        */
       public int getParentAccountId() {
         return parentAccountId_;
       }
       /**
-       * <code>optional int32 parent_account_id = 6;</code>
+       * <code>optional int32 parent_account_id = 5;</code>
        */
       public Builder setParentAccountId(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         parentAccountId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 parent_account_id = 6;</code>
+       * <code>optional int32 parent_account_id = 5;</code>
        */
       public Builder clearParentAccountId() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         parentAccountId_ = 0;
         onChanged();
         return this;
       }
 
-      private com.digitald4.budget.proto.BudgetUIProtos.BalanceUI balance_ = null;
+      private com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI balance_ = null;
       private com.google.protobuf.SingleFieldBuilder<
-          com.digitald4.budget.proto.BudgetUIProtos.BalanceUI, com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.BalanceUIOrBuilder> balanceBuilder_;
+          com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI, com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUIOrBuilder> balanceBuilder_;
       /**
-       * <code>optional .budget.BalanceUI balance = 7;</code>
+       * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
        */
       public boolean hasBalance() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional .budget.BalanceUI balance = 7;</code>
+       * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
        */
-      public com.digitald4.budget.proto.BudgetUIProtos.BalanceUI getBalance() {
+      public com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI getBalance() {
         if (balanceBuilder_ == null) {
-          return balance_ == null ? com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.getDefaultInstance() : balance_;
+          return balance_ == null ? com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.getDefaultInstance() : balance_;
         } else {
           return balanceBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .budget.BalanceUI balance = 7;</code>
+       * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
        */
-      public Builder setBalance(com.digitald4.budget.proto.BudgetUIProtos.BalanceUI value) {
+      public Builder setBalance(com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI value) {
         if (balanceBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4817,33 +3791,33 @@ public final class BudgetUIProtos {
         } else {
           balanceBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .budget.BalanceUI balance = 7;</code>
+       * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
        */
       public Builder setBalance(
-          com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.Builder builderForValue) {
+          com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.Builder builderForValue) {
         if (balanceBuilder_ == null) {
           balance_ = builderForValue.build();
           onChanged();
         } else {
           balanceBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .budget.BalanceUI balance = 7;</code>
+       * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
        */
-      public Builder mergeBalance(com.digitald4.budget.proto.BudgetUIProtos.BalanceUI value) {
+      public Builder mergeBalance(com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI value) {
         if (balanceBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
               balance_ != null &&
-              balance_ != com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.getDefaultInstance()) {
+              balance_ != com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.getDefaultInstance()) {
             balance_ =
-              com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.newBuilder(balance_).mergeFrom(value).buildPartial();
+              com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.newBuilder(balance_).mergeFrom(value).buildPartial();
           } else {
             balance_ = value;
           }
@@ -4851,11 +3825,11 @@ public final class BudgetUIProtos {
         } else {
           balanceBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .budget.BalanceUI balance = 7;</code>
+       * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
        */
       public Builder clearBalance() {
         if (balanceBuilder_ == null) {
@@ -4864,37 +3838,37 @@ public final class BudgetUIProtos {
         } else {
           balanceBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       /**
-       * <code>optional .budget.BalanceUI balance = 7;</code>
+       * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
        */
-      public com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.Builder getBalanceBuilder() {
-        bitField0_ |= 0x00000040;
+      public com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.Builder getBalanceBuilder() {
+        bitField0_ |= 0x00000020;
         onChanged();
         return getBalanceFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .budget.BalanceUI balance = 7;</code>
+       * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
        */
-      public com.digitald4.budget.proto.BudgetUIProtos.BalanceUIOrBuilder getBalanceOrBuilder() {
+      public com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUIOrBuilder getBalanceOrBuilder() {
         if (balanceBuilder_ != null) {
           return balanceBuilder_.getMessageOrBuilder();
         } else {
           return balance_ == null ?
-              com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.getDefaultInstance() : balance_;
+              com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.getDefaultInstance() : balance_;
         }
       }
       /**
-       * <code>optional .budget.BalanceUI balance = 7;</code>
+       * <code>optional .budget.AccountUI.BalanceUI balance = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.digitald4.budget.proto.BudgetUIProtos.BalanceUI, com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.BalanceUIOrBuilder> 
+          com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI, com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUIOrBuilder> 
           getBalanceFieldBuilder() {
         if (balanceBuilder_ == null) {
           balanceBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.digitald4.budget.proto.BudgetUIProtos.BalanceUI, com.digitald4.budget.proto.BudgetUIProtos.BalanceUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.BalanceUIOrBuilder>(
+              com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI, com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUIOrBuilder>(
                   getBalance(),
                   getParentForChildren(),
                   isClean());
@@ -4962,6 +3936,23 @@ public final class BudgetUIProtos {
      * <code>optional int32 portfolio_id = 1;</code>
      */
     int getPortfolioId();
+
+    /**
+     * <code>optional int64 ref_date = 2;</code>
+     *
+     * <pre>
+     * Reference date needed for balance information.
+     * </pre>
+     */
+    boolean hasRefDate();
+    /**
+     * <code>optional int64 ref_date = 2;</code>
+     *
+     * <pre>
+     * Reference date needed for balance information.
+     * </pre>
+     */
+    long getRefDate();
   }
   /**
    * Protobuf type {@code budget.AccountListRequest}
@@ -4976,6 +3967,7 @@ public final class BudgetUIProtos {
     }
     private AccountListRequest() {
       portfolioId_ = 0;
+      refDate_ = 0L;
     }
 
     @java.lang.Override
@@ -5008,6 +4000,11 @@ public final class BudgetUIProtos {
             case 8: {
               bitField0_ |= 0x00000001;
               portfolioId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              refDate_ = input.readInt64();
               break;
             }
           }
@@ -5051,6 +4048,29 @@ public final class BudgetUIProtos {
       return portfolioId_;
     }
 
+    public static final int REF_DATE_FIELD_NUMBER = 2;
+    private long refDate_;
+    /**
+     * <code>optional int64 ref_date = 2;</code>
+     *
+     * <pre>
+     * Reference date needed for balance information.
+     * </pre>
+     */
+    public boolean hasRefDate() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 ref_date = 2;</code>
+     *
+     * <pre>
+     * Reference date needed for balance information.
+     * </pre>
+     */
+    public long getRefDate() {
+      return refDate_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -5066,6 +4086,9 @@ public final class BudgetUIProtos {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, portfolioId_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, refDate_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -5077,6 +4100,10 @@ public final class BudgetUIProtos {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, portfolioId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, refDate_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5192,6 +4219,8 @@ public final class BudgetUIProtos {
         super.clear();
         portfolioId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        refDate_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -5220,6 +4249,10 @@ public final class BudgetUIProtos {
           to_bitField0_ |= 0x00000001;
         }
         result.portfolioId_ = portfolioId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.refDate_ = refDate_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5238,6 +4271,9 @@ public final class BudgetUIProtos {
         if (other == com.digitald4.budget.proto.BudgetUIProtos.AccountListRequest.getDefaultInstance()) return this;
         if (other.hasPortfolioId()) {
           setPortfolioId(other.getPortfolioId());
+        }
+        if (other.hasRefDate()) {
+          setRefDate(other.getRefDate());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5295,6 +4331,54 @@ public final class BudgetUIProtos {
       public Builder clearPortfolioId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         portfolioId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long refDate_ ;
+      /**
+       * <code>optional int64 ref_date = 2;</code>
+       *
+       * <pre>
+       * Reference date needed for balance information.
+       * </pre>
+       */
+      public boolean hasRefDate() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 ref_date = 2;</code>
+       *
+       * <pre>
+       * Reference date needed for balance information.
+       * </pre>
+       */
+      public long getRefDate() {
+        return refDate_;
+      }
+      /**
+       * <code>optional int64 ref_date = 2;</code>
+       *
+       * <pre>
+       * Reference date needed for balance information.
+       * </pre>
+       */
+      public Builder setRefDate(long value) {
+        bitField0_ |= 0x00000002;
+        refDate_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 ref_date = 2;</code>
+       *
+       * <pre>
+       * Reference date needed for balance information.
+       * </pre>
+       */
+      public Builder clearRefDate() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        refDate_ = 0L;
         onChanged();
         return this;
       }
@@ -5358,6 +4442,23 @@ public final class BudgetUIProtos {
      * <code>optional int32 account_id = 1;</code>
      */
     int getAccountId();
+
+    /**
+     * <code>optional int64 ref_date = 2;</code>
+     *
+     * <pre>
+     * Reference date needed for balance information.
+     * </pre>
+     */
+    boolean hasRefDate();
+    /**
+     * <code>optional int64 ref_date = 2;</code>
+     *
+     * <pre>
+     * Reference date needed for balance information.
+     * </pre>
+     */
+    long getRefDate();
   }
   /**
    * Protobuf type {@code budget.AccountGetRequest}
@@ -5372,6 +4473,7 @@ public final class BudgetUIProtos {
     }
     private AccountGetRequest() {
       accountId_ = 0;
+      refDate_ = 0L;
     }
 
     @java.lang.Override
@@ -5404,6 +4506,11 @@ public final class BudgetUIProtos {
             case 8: {
               bitField0_ |= 0x00000001;
               accountId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              refDate_ = input.readInt64();
               break;
             }
           }
@@ -5447,6 +4554,29 @@ public final class BudgetUIProtos {
       return accountId_;
     }
 
+    public static final int REF_DATE_FIELD_NUMBER = 2;
+    private long refDate_;
+    /**
+     * <code>optional int64 ref_date = 2;</code>
+     *
+     * <pre>
+     * Reference date needed for balance information.
+     * </pre>
+     */
+    public boolean hasRefDate() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 ref_date = 2;</code>
+     *
+     * <pre>
+     * Reference date needed for balance information.
+     * </pre>
+     */
+    public long getRefDate() {
+      return refDate_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -5462,6 +4592,9 @@ public final class BudgetUIProtos {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, accountId_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, refDate_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -5473,6 +4606,10 @@ public final class BudgetUIProtos {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, accountId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, refDate_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5588,6 +4725,8 @@ public final class BudgetUIProtos {
         super.clear();
         accountId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        refDate_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -5616,6 +4755,10 @@ public final class BudgetUIProtos {
           to_bitField0_ |= 0x00000001;
         }
         result.accountId_ = accountId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.refDate_ = refDate_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5634,6 +4777,9 @@ public final class BudgetUIProtos {
         if (other == com.digitald4.budget.proto.BudgetUIProtos.AccountGetRequest.getDefaultInstance()) return this;
         if (other.hasAccountId()) {
           setAccountId(other.getAccountId());
+        }
+        if (other.hasRefDate()) {
+          setRefDate(other.getRefDate());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5691,6 +4837,54 @@ public final class BudgetUIProtos {
       public Builder clearAccountId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         accountId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long refDate_ ;
+      /**
+       * <code>optional int64 ref_date = 2;</code>
+       *
+       * <pre>
+       * Reference date needed for balance information.
+       * </pre>
+       */
+      public boolean hasRefDate() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 ref_date = 2;</code>
+       *
+       * <pre>
+       * Reference date needed for balance information.
+       * </pre>
+       */
+      public long getRefDate() {
+        return refDate_;
+      }
+      /**
+       * <code>optional int64 ref_date = 2;</code>
+       *
+       * <pre>
+       * Reference date needed for balance information.
+       * </pre>
+       */
+      public Builder setRefDate(long value) {
+        bitField0_ |= 0x00000002;
+        refDate_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 ref_date = 2;</code>
+       *
+       * <pre>
+       * Reference date needed for balance information.
+       * </pre>
+       */
+      public Builder clearRefDate() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        refDate_ = 0L;
         onChanged();
         return this;
       }
@@ -6250,402 +5444,6 @@ public final class BudgetUIProtos {
 
   }
 
-  public interface AccountDeleteRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:budget.AccountDeleteRequest)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 account_id = 1;</code>
-     */
-    boolean hasAccountId();
-    /**
-     * <code>optional int32 account_id = 1;</code>
-     */
-    int getAccountId();
-  }
-  /**
-   * Protobuf type {@code budget.AccountDeleteRequest}
-   */
-  public  static final class AccountDeleteRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:budget.AccountDeleteRequest)
-      AccountDeleteRequestOrBuilder {
-    // Use AccountDeleteRequest.newBuilder() to construct.
-    private AccountDeleteRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private AccountDeleteRequest() {
-      accountId_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private AccountDeleteRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
-      this();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              accountId_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
-      } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_AccountDeleteRequest_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_AccountDeleteRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest.class, com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int ACCOUNT_ID_FIELD_NUMBER = 1;
-    private int accountId_;
-    /**
-     * <code>optional int32 account_id = 1;</code>
-     */
-    public boolean hasAccountId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 account_id = 1;</code>
-     */
-    public int getAccountId() {
-      return accountId_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, accountId_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, accountId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    public static com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code budget.AccountDeleteRequest}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:budget.AccountDeleteRequest)
-        com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_AccountDeleteRequest_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_AccountDeleteRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest.class, com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest.Builder.class);
-      }
-
-      // Construct using com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        accountId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_AccountDeleteRequest_descriptor;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest getDefaultInstanceForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest.getDefaultInstance();
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest build() {
-        com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest buildPartial() {
-        com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest result = new com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.accountId_ = accountId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest) {
-          return mergeFrom((com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest other) {
-        if (other == com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest.getDefaultInstance()) return this;
-        if (other.hasAccountId()) {
-          setAccountId(other.getAccountId());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int accountId_ ;
-      /**
-       * <code>optional int32 account_id = 1;</code>
-       */
-      public boolean hasAccountId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 account_id = 1;</code>
-       */
-      public int getAccountId() {
-        return accountId_;
-      }
-      /**
-       * <code>optional int32 account_id = 1;</code>
-       */
-      public Builder setAccountId(int value) {
-        bitField0_ |= 0x00000001;
-        accountId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 account_id = 1;</code>
-       */
-      public Builder clearAccountId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        accountId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:budget.AccountDeleteRequest)
-    }
-
-    // @@protoc_insertion_point(class_scope:budget.AccountDeleteRequest)
-    private static final com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest();
-    }
-
-    public static com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<AccountDeleteRequest>
-        PARSER = new com.google.protobuf.AbstractParser<AccountDeleteRequest>() {
-      public AccountDeleteRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
-          return new AccountDeleteRequest(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
-      }
-    };
-
-    public static com.google.protobuf.Parser<AccountDeleteRequest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<AccountDeleteRequest> getParserForType() {
-      return PARSER;
-    }
-
-    public com.digitald4.budget.proto.BudgetUIProtos.AccountDeleteRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface BillUIOrBuilder extends
       // @@protoc_insertion_point(interface_extends:budget.BillUI)
       com.google.protobuf.MessageOrBuilder {
@@ -6737,48 +5535,34 @@ public final class BudgetUIProtos {
     com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI getStatus();
 
     /**
-     * <code>optional bool active = 10;</code>
+     * <code>optional int32 rank = 10;</code>
      */
-    boolean hasActive();
+    boolean hasRank();
     /**
-     * <code>optional bool active = 10;</code>
+     * <code>optional int32 rank = 10;</code>
      */
-    boolean getActive();
+    int getRank();
 
     /**
-     * <code>optional string description = 11;</code>
-     */
-    boolean hasDescription();
-    /**
-     * <code>optional string description = 11;</code>
-     */
-    java.lang.String getDescription();
-    /**
-     * <code>optional string description = 11;</code>
-     */
-    com.google.protobuf.ByteString
-        getDescriptionBytes();
-
-    /**
-     * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
      */
     java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> 
         getTransactionList();
     /**
-     * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
      */
     com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI getTransaction(int index);
     /**
-     * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
      */
     int getTransactionCount();
     /**
-     * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
      */
     java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder> 
         getTransactionOrBuilderList();
     /**
-     * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
      */
     com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder getTransactionOrBuilder(
         int index);
@@ -6804,8 +5588,7 @@ public final class BudgetUIProtos {
       paymentDate_ = 0L;
       amountDue_ = 0D;
       status_ = 0;
-      active_ = false;
-      description_ = "";
+      rank_ = 0;
       transaction_ = java.util.Collections.emptyList();
     }
 
@@ -6890,19 +5673,13 @@ public final class BudgetUIProtos {
             }
             case 80: {
               bitField0_ |= 0x00000200;
-              active_ = input.readBool();
+              rank_ = input.readInt32();
               break;
             }
-            case 90: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000400;
-              description_ = bs;
-              break;
-            }
-            case 98: {
-              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+            case 106: {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
                 transaction_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI>();
-                mutable_bitField0_ |= 0x00000800;
+                mutable_bitField0_ |= 0x00000400;
               }
               transaction_.add(input.readMessage(com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.parser(), extensionRegistry));
               break;
@@ -6916,7 +5693,7 @@ public final class BudgetUIProtos {
             new com.google.protobuf.InvalidProtocolBufferException(
                 e.getMessage()).setUnfinishedMessage(this));
       } finally {
-        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
           transaction_ = java.util.Collections.unmodifiableList(transaction_);
         }
         this.unknownFields = unknownFields.build();
@@ -6945,21 +5722,25 @@ public final class BudgetUIProtos {
        */
       PS_UNKNOWN(0, 0),
       /**
-       * <code>PS_NOT_SCHEDULED = 1;</code>
+       * <code>PS_ESTIMATED_AMOUNT = 1;</code>
        */
-      PS_NOT_SCHEDULED(1, 1),
+      PS_ESTIMATED_AMOUNT(1, 1),
       /**
-       * <code>PS_SCHEDULED = 2;</code>
+       * <code>PS_BILLED_AMOUNT = 2;</code>
        */
-      PS_SCHEDULED(2, 2),
+      PS_BILLED_AMOUNT(2, 2),
       /**
-       * <code>PS_PENDING = 3;</code>
+       * <code>PS_SCHEDULED = 3;</code>
        */
-      PS_PENDING(3, 3),
+      PS_SCHEDULED(3, 3),
       /**
-       * <code>PS_PAID = 4;</code>
+       * <code>PS_PENDING = 4;</code>
        */
-      PS_PAID(4, 4),
+      PS_PENDING(4, 4),
+      /**
+       * <code>PS_PAID = 5;</code>
+       */
+      PS_PAID(5, 5),
       ;
 
       /**
@@ -6967,21 +5748,25 @@ public final class BudgetUIProtos {
        */
       public static final int PS_UNKNOWN_VALUE = 0;
       /**
-       * <code>PS_NOT_SCHEDULED = 1;</code>
+       * <code>PS_ESTIMATED_AMOUNT = 1;</code>
        */
-      public static final int PS_NOT_SCHEDULED_VALUE = 1;
+      public static final int PS_ESTIMATED_AMOUNT_VALUE = 1;
       /**
-       * <code>PS_SCHEDULED = 2;</code>
+       * <code>PS_BILLED_AMOUNT = 2;</code>
        */
-      public static final int PS_SCHEDULED_VALUE = 2;
+      public static final int PS_BILLED_AMOUNT_VALUE = 2;
       /**
-       * <code>PS_PENDING = 3;</code>
+       * <code>PS_SCHEDULED = 3;</code>
        */
-      public static final int PS_PENDING_VALUE = 3;
+      public static final int PS_SCHEDULED_VALUE = 3;
       /**
-       * <code>PS_PAID = 4;</code>
+       * <code>PS_PENDING = 4;</code>
        */
-      public static final int PS_PAID_VALUE = 4;
+      public static final int PS_PENDING_VALUE = 4;
+      /**
+       * <code>PS_PAID = 5;</code>
+       */
+      public static final int PS_PAID_VALUE = 5;
 
 
       public final int getNumber() {
@@ -6991,10 +5776,11 @@ public final class BudgetUIProtos {
       public static PaymentStatusUI valueOf(int value) {
         switch (value) {
           case 0: return PS_UNKNOWN;
-          case 1: return PS_NOT_SCHEDULED;
-          case 2: return PS_SCHEDULED;
-          case 3: return PS_PENDING;
-          case 4: return PS_PAID;
+          case 1: return PS_ESTIMATED_AMOUNT;
+          case 2: return PS_BILLED_AMOUNT;
+          case 3: return PS_SCHEDULED;
+          case 4: return PS_PENDING;
+          case 5: return PS_PAID;
           default: return null;
         }
       }
@@ -7051,58 +5837,40 @@ public final class BudgetUIProtos {
         com.google.protobuf.MessageOrBuilder {
 
       /**
-       * <code>optional int32 id = 1;</code>
-       */
-      boolean hasId();
-      /**
-       * <code>optional int32 id = 1;</code>
-       */
-      int getId();
-
-      /**
-       * <code>optional int32 debit_account_id = 2;</code>
+       * <code>optional int32 debit_account_id = 1;</code>
        */
       boolean hasDebitAccountId();
       /**
-       * <code>optional int32 debit_account_id = 2;</code>
+       * <code>optional int32 debit_account_id = 1;</code>
        */
       int getDebitAccountId();
 
       /**
-       * <code>optional double amount = 3;</code>
+       * <code>optional double amount = 2;</code>
        */
       boolean hasAmount();
       /**
-       * <code>optional double amount = 3;</code>
+       * <code>optional double amount = 2;</code>
        */
       double getAmount();
 
       /**
-       * <code>optional int64 payment_date = 4;</code>
+       * <code>optional int64 payment_date = 3;</code>
        */
       boolean hasPaymentDate();
       /**
-       * <code>optional int64 payment_date = 4;</code>
+       * <code>optional int64 payment_date = 3;</code>
        */
       long getPaymentDate();
 
       /**
-       * <code>optional .budget.BillUI.PaymentStatusUI status = 5;</code>
+       * <code>optional .budget.BillUI.PaymentStatusUI status = 4;</code>
        */
       boolean hasStatus();
       /**
-       * <code>optional .budget.BillUI.PaymentStatusUI status = 5;</code>
+       * <code>optional .budget.BillUI.PaymentStatusUI status = 4;</code>
        */
       com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI getStatus();
-
-      /**
-       * <code>optional bool active = 6;</code>
-       */
-      boolean hasActive();
-      /**
-       * <code>optional bool active = 6;</code>
-       */
-      boolean getActive();
     }
     /**
      * Protobuf type {@code budget.BillUI.TransactionUI}
@@ -7116,12 +5884,10 @@ public final class BudgetUIProtos {
         super(builder);
       }
       private TransactionUI() {
-        id_ = 0;
         debitAccountId_ = 0;
         amount_ = 0D;
         paymentDate_ = 0L;
         status_ = 0;
-        active_ = false;
       }
 
       @java.lang.Override
@@ -7153,38 +5919,28 @@ public final class BudgetUIProtos {
               }
               case 8: {
                 bitField0_ |= 0x00000001;
-                id_ = input.readInt32();
-                break;
-              }
-              case 16: {
-                bitField0_ |= 0x00000002;
                 debitAccountId_ = input.readInt32();
                 break;
               }
-              case 25: {
-                bitField0_ |= 0x00000004;
+              case 17: {
+                bitField0_ |= 0x00000002;
                 amount_ = input.readDouble();
                 break;
               }
-              case 32: {
-                bitField0_ |= 0x00000008;
+              case 24: {
+                bitField0_ |= 0x00000004;
                 paymentDate_ = input.readInt64();
                 break;
               }
-              case 40: {
+              case 32: {
                 int rawValue = input.readEnum();
                 com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI value = com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI.valueOf(rawValue);
                 if (value == null) {
-                  unknownFields.mergeVarintField(5, rawValue);
+                  unknownFields.mergeVarintField(4, rawValue);
                 } else {
-                  bitField0_ |= 0x00000010;
+                  bitField0_ |= 0x00000008;
                   status_ = rawValue;
                 }
-                break;
-              }
-              case 48: {
-                bitField0_ |= 0x00000020;
-                active_ = input.readBool();
                 break;
               }
             }
@@ -7213,95 +5969,65 @@ public final class BudgetUIProtos {
       }
 
       private int bitField0_;
-      public static final int ID_FIELD_NUMBER = 1;
-      private int id_;
+      public static final int DEBIT_ACCOUNT_ID_FIELD_NUMBER = 1;
+      private int debitAccountId_;
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>optional int32 debit_account_id = 1;</code>
        */
-      public boolean hasId() {
+      public boolean hasDebitAccountId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 id = 1;</code>
-       */
-      public int getId() {
-        return id_;
-      }
-
-      public static final int DEBIT_ACCOUNT_ID_FIELD_NUMBER = 2;
-      private int debitAccountId_;
-      /**
-       * <code>optional int32 debit_account_id = 2;</code>
-       */
-      public boolean hasDebitAccountId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 debit_account_id = 2;</code>
+       * <code>optional int32 debit_account_id = 1;</code>
        */
       public int getDebitAccountId() {
         return debitAccountId_;
       }
 
-      public static final int AMOUNT_FIELD_NUMBER = 3;
+      public static final int AMOUNT_FIELD_NUMBER = 2;
       private double amount_;
       /**
-       * <code>optional double amount = 3;</code>
+       * <code>optional double amount = 2;</code>
        */
       public boolean hasAmount() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional double amount = 3;</code>
+       * <code>optional double amount = 2;</code>
        */
       public double getAmount() {
         return amount_;
       }
 
-      public static final int PAYMENT_DATE_FIELD_NUMBER = 4;
+      public static final int PAYMENT_DATE_FIELD_NUMBER = 3;
       private long paymentDate_;
       /**
-       * <code>optional int64 payment_date = 4;</code>
+       * <code>optional int64 payment_date = 3;</code>
        */
       public boolean hasPaymentDate() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int64 payment_date = 4;</code>
+       * <code>optional int64 payment_date = 3;</code>
        */
       public long getPaymentDate() {
         return paymentDate_;
       }
 
-      public static final int STATUS_FIELD_NUMBER = 5;
+      public static final int STATUS_FIELD_NUMBER = 4;
       private int status_;
       /**
-       * <code>optional .budget.BillUI.PaymentStatusUI status = 5;</code>
+       * <code>optional .budget.BillUI.PaymentStatusUI status = 4;</code>
        */
       public boolean hasStatus() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .budget.BillUI.PaymentStatusUI status = 5;</code>
+       * <code>optional .budget.BillUI.PaymentStatusUI status = 4;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI getStatus() {
         com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI result = com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI.valueOf(status_);
         return result == null ? com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI.PS_UNKNOWN : result;
-      }
-
-      public static final int ACTIVE_FIELD_NUMBER = 6;
-      private boolean active_;
-      /**
-       * <code>optional bool active = 6;</code>
-       */
-      public boolean hasActive() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional bool active = 6;</code>
-       */
-      public boolean getActive() {
-        return active_;
       }
 
       private byte memoizedIsInitialized = -1;
@@ -7317,22 +6043,16 @@ public final class BudgetUIProtos {
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeInt32(1, id_);
+          output.writeInt32(1, debitAccountId_);
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          output.writeInt32(2, debitAccountId_);
+          output.writeDouble(2, amount_);
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          output.writeDouble(3, amount_);
+          output.writeInt64(3, paymentDate_);
         }
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          output.writeInt64(4, paymentDate_);
-        }
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          output.writeEnum(5, status_);
-        }
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          output.writeBool(6, active_);
+          output.writeEnum(4, status_);
         }
         unknownFields.writeTo(output);
       }
@@ -7344,27 +6064,19 @@ public final class BudgetUIProtos {
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(1, id_);
+            .computeInt32Size(1, debitAccountId_);
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(2, debitAccountId_);
+            .computeDoubleSize(2, amount_);
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeDoubleSize(3, amount_);
+            .computeInt64Size(3, paymentDate_);
         }
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt64Size(4, paymentDate_);
-        }
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeEnumSize(5, status_);
-        }
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeBoolSize(6, active_);
+            .computeEnumSize(4, status_);
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -7478,18 +6190,14 @@ public final class BudgetUIProtos {
         }
         public Builder clear() {
           super.clear();
-          id_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000001);
           debitAccountId_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
           amount_ = 0D;
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
           paymentDate_ = 0L;
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
           status_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000010);
-          active_ = false;
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000008);
           return this;
         }
 
@@ -7517,27 +6225,19 @@ public final class BudgetUIProtos {
           if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
             to_bitField0_ |= 0x00000001;
           }
-          result.id_ = id_;
+          result.debitAccountId_ = debitAccountId_;
           if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
             to_bitField0_ |= 0x00000002;
           }
-          result.debitAccountId_ = debitAccountId_;
+          result.amount_ = amount_;
           if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
             to_bitField0_ |= 0x00000004;
           }
-          result.amount_ = amount_;
+          result.paymentDate_ = paymentDate_;
           if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
             to_bitField0_ |= 0x00000008;
           }
-          result.paymentDate_ = paymentDate_;
-          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-            to_bitField0_ |= 0x00000010;
-          }
           result.status_ = status_;
-          if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-            to_bitField0_ |= 0x00000020;
-          }
-          result.active_ = active_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -7554,9 +6254,6 @@ public final class BudgetUIProtos {
 
         public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI other) {
           if (other == com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.getDefaultInstance()) return this;
-          if (other.hasId()) {
-            setId(other.getId());
-          }
           if (other.hasDebitAccountId()) {
             setDebitAccountId(other.getDebitAccountId());
           }
@@ -7568,9 +6265,6 @@ public final class BudgetUIProtos {
           }
           if (other.hasStatus()) {
             setStatus(other.getStatus());
-          }
-          if (other.hasActive()) {
-            setActive(other.getActive());
           }
           this.mergeUnknownFields(other.unknownFields);
           onChanged();
@@ -7600,65 +6294,33 @@ public final class BudgetUIProtos {
         }
         private int bitField0_;
 
-        private int id_ ;
+        private int debitAccountId_ ;
         /**
-         * <code>optional int32 id = 1;</code>
+         * <code>optional int32 debit_account_id = 1;</code>
          */
-        public boolean hasId() {
+        public boolean hasDebitAccountId() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional int32 id = 1;</code>
-         */
-        public int getId() {
-          return id_;
-        }
-        /**
-         * <code>optional int32 id = 1;</code>
-         */
-        public Builder setId(int value) {
-          bitField0_ |= 0x00000001;
-          id_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional int32 id = 1;</code>
-         */
-        public Builder clearId() {
-          bitField0_ = (bitField0_ & ~0x00000001);
-          id_ = 0;
-          onChanged();
-          return this;
-        }
-
-        private int debitAccountId_ ;
-        /**
-         * <code>optional int32 debit_account_id = 2;</code>
-         */
-        public boolean hasDebitAccountId() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
-        }
-        /**
-         * <code>optional int32 debit_account_id = 2;</code>
+         * <code>optional int32 debit_account_id = 1;</code>
          */
         public int getDebitAccountId() {
           return debitAccountId_;
         }
         /**
-         * <code>optional int32 debit_account_id = 2;</code>
+         * <code>optional int32 debit_account_id = 1;</code>
          */
         public Builder setDebitAccountId(int value) {
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
           debitAccountId_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional int32 debit_account_id = 2;</code>
+         * <code>optional int32 debit_account_id = 1;</code>
          */
         public Builder clearDebitAccountId() {
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
           debitAccountId_ = 0;
           onChanged();
           return this;
@@ -7666,31 +6328,31 @@ public final class BudgetUIProtos {
 
         private double amount_ ;
         /**
-         * <code>optional double amount = 3;</code>
+         * <code>optional double amount = 2;</code>
          */
         public boolean hasAmount() {
-          return ((bitField0_ & 0x00000004) == 0x00000004);
+          return ((bitField0_ & 0x00000002) == 0x00000002);
         }
         /**
-         * <code>optional double amount = 3;</code>
+         * <code>optional double amount = 2;</code>
          */
         public double getAmount() {
           return amount_;
         }
         /**
-         * <code>optional double amount = 3;</code>
+         * <code>optional double amount = 2;</code>
          */
         public Builder setAmount(double value) {
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
           amount_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional double amount = 3;</code>
+         * <code>optional double amount = 2;</code>
          */
         public Builder clearAmount() {
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
           amount_ = 0D;
           onChanged();
           return this;
@@ -7698,31 +6360,31 @@ public final class BudgetUIProtos {
 
         private long paymentDate_ ;
         /**
-         * <code>optional int64 payment_date = 4;</code>
+         * <code>optional int64 payment_date = 3;</code>
          */
         public boolean hasPaymentDate() {
-          return ((bitField0_ & 0x00000008) == 0x00000008);
+          return ((bitField0_ & 0x00000004) == 0x00000004);
         }
         /**
-         * <code>optional int64 payment_date = 4;</code>
+         * <code>optional int64 payment_date = 3;</code>
          */
         public long getPaymentDate() {
           return paymentDate_;
         }
         /**
-         * <code>optional int64 payment_date = 4;</code>
+         * <code>optional int64 payment_date = 3;</code>
          */
         public Builder setPaymentDate(long value) {
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
           paymentDate_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional int64 payment_date = 4;</code>
+         * <code>optional int64 payment_date = 3;</code>
          */
         public Builder clearPaymentDate() {
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
           paymentDate_ = 0L;
           onChanged();
           return this;
@@ -7730,68 +6392,36 @@ public final class BudgetUIProtos {
 
         private int status_ = 0;
         /**
-         * <code>optional .budget.BillUI.PaymentStatusUI status = 5;</code>
+         * <code>optional .budget.BillUI.PaymentStatusUI status = 4;</code>
          */
         public boolean hasStatus() {
-          return ((bitField0_ & 0x00000010) == 0x00000010);
+          return ((bitField0_ & 0x00000008) == 0x00000008);
         }
         /**
-         * <code>optional .budget.BillUI.PaymentStatusUI status = 5;</code>
+         * <code>optional .budget.BillUI.PaymentStatusUI status = 4;</code>
          */
         public com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI getStatus() {
           com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI result = com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI.valueOf(status_);
           return result == null ? com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI.PS_UNKNOWN : result;
         }
         /**
-         * <code>optional .budget.BillUI.PaymentStatusUI status = 5;</code>
+         * <code>optional .budget.BillUI.PaymentStatusUI status = 4;</code>
          */
         public Builder setStatus(com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI value) {
           if (value == null) {
             throw new NullPointerException();
           }
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000008;
           status_ = value.getNumber();
           onChanged();
           return this;
         }
         /**
-         * <code>optional .budget.BillUI.PaymentStatusUI status = 5;</code>
+         * <code>optional .budget.BillUI.PaymentStatusUI status = 4;</code>
          */
         public Builder clearStatus() {
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000008);
           status_ = 0;
-          onChanged();
-          return this;
-        }
-
-        private boolean active_ ;
-        /**
-         * <code>optional bool active = 6;</code>
-         */
-        public boolean hasActive() {
-          return ((bitField0_ & 0x00000020) == 0x00000020);
-        }
-        /**
-         * <code>optional bool active = 6;</code>
-         */
-        public boolean getActive() {
-          return active_;
-        }
-        /**
-         * <code>optional bool active = 6;</code>
-         */
-        public Builder setActive(boolean value) {
-          bitField0_ |= 0x00000020;
-          active_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional bool active = 6;</code>
-         */
-        public Builder clearActive() {
-          bitField0_ = (bitField0_ & ~0x00000020);
-          active_ = false;
           onChanged();
           return this;
         }
@@ -8007,92 +6637,50 @@ public final class BudgetUIProtos {
       return result == null ? com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI.PS_UNKNOWN : result;
     }
 
-    public static final int ACTIVE_FIELD_NUMBER = 10;
-    private boolean active_;
+    public static final int RANK_FIELD_NUMBER = 10;
+    private int rank_;
     /**
-     * <code>optional bool active = 10;</code>
+     * <code>optional int32 rank = 10;</code>
      */
-    public boolean hasActive() {
+    public boolean hasRank() {
       return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
-     * <code>optional bool active = 10;</code>
+     * <code>optional int32 rank = 10;</code>
      */
-    public boolean getActive() {
-      return active_;
+    public int getRank() {
+      return rank_;
     }
 
-    public static final int DESCRIPTION_FIELD_NUMBER = 11;
-    private volatile java.lang.Object description_;
-    /**
-     * <code>optional string description = 11;</code>
-     */
-    public boolean hasDescription() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
-    }
-    /**
-     * <code>optional string description = 11;</code>
-     */
-    public java.lang.String getDescription() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          description_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string description = 11;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDescriptionBytes() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        description_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int TRANSACTION_FIELD_NUMBER = 12;
+    public static final int TRANSACTION_FIELD_NUMBER = 13;
     private java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> transaction_;
     /**
-     * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
      */
     public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> getTransactionList() {
       return transaction_;
     }
     /**
-     * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
      */
     public java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder> 
         getTransactionOrBuilderList() {
       return transaction_;
     }
     /**
-     * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
      */
     public int getTransactionCount() {
       return transaction_.size();
     }
     /**
-     * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
      */
     public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI getTransaction(int index) {
       return transaction_.get(index);
     }
     /**
-     * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
      */
     public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder getTransactionOrBuilder(
         int index) {
@@ -8139,13 +6727,10 @@ public final class BudgetUIProtos {
         output.writeEnum(9, status_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeBool(10, active_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 11, description_);
+        output.writeInt32(10, rank_);
       }
       for (int i = 0; i < transaction_.size(); i++) {
-        output.writeMessage(12, transaction_.get(i));
+        output.writeMessage(13, transaction_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -8192,14 +6777,11 @@ public final class BudgetUIProtos {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(10, active_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(11, description_);
+          .computeInt32Size(10, rank_);
       }
       for (int i = 0; i < transaction_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(12, transaction_.get(i));
+          .computeMessageSize(13, transaction_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -8332,13 +6914,11 @@ public final class BudgetUIProtos {
         bitField0_ = (bitField0_ & ~0x00000080);
         status_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
-        active_ = false;
+        rank_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
-        description_ = "";
-        bitField0_ = (bitField0_ & ~0x00000400);
         if (transactionBuilder_ == null) {
           transaction_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000800);
+          bitField0_ = (bitField0_ & ~0x00000400);
         } else {
           transactionBuilder_.clear();
         }
@@ -8405,15 +6985,11 @@ public final class BudgetUIProtos {
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.active_ = active_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
-        }
-        result.description_ = description_;
+        result.rank_ = rank_;
         if (transactionBuilder_ == null) {
-          if (((bitField0_ & 0x00000800) == 0x00000800)) {
+          if (((bitField0_ & 0x00000400) == 0x00000400)) {
             transaction_ = java.util.Collections.unmodifiableList(transaction_);
-            bitField0_ = (bitField0_ & ~0x00000800);
+            bitField0_ = (bitField0_ & ~0x00000400);
           }
           result.transaction_ = transaction_;
         } else {
@@ -8464,19 +7040,14 @@ public final class BudgetUIProtos {
         if (other.hasStatus()) {
           setStatus(other.getStatus());
         }
-        if (other.hasActive()) {
-          setActive(other.getActive());
-        }
-        if (other.hasDescription()) {
-          bitField0_ |= 0x00000400;
-          description_ = other.description_;
-          onChanged();
+        if (other.hasRank()) {
+          setRank(other.getRank());
         }
         if (transactionBuilder_ == null) {
           if (!other.transaction_.isEmpty()) {
             if (transaction_.isEmpty()) {
               transaction_ = other.transaction_;
-              bitField0_ = (bitField0_ & ~0x00000800);
+              bitField0_ = (bitField0_ & ~0x00000400);
             } else {
               ensureTransactionIsMutable();
               transaction_.addAll(other.transaction_);
@@ -8489,7 +7060,7 @@ public final class BudgetUIProtos {
               transactionBuilder_.dispose();
               transactionBuilder_ = null;
               transaction_ = other.transaction_;
-              bitField0_ = (bitField0_ & ~0x00000800);
+              bitField0_ = (bitField0_ & ~0x00000400);
               transactionBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getTransactionFieldBuilder() : null;
@@ -8862,110 +7433,34 @@ public final class BudgetUIProtos {
         return this;
       }
 
-      private boolean active_ ;
+      private int rank_ ;
       /**
-       * <code>optional bool active = 10;</code>
+       * <code>optional int32 rank = 10;</code>
        */
-      public boolean hasActive() {
+      public boolean hasRank() {
         return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
-       * <code>optional bool active = 10;</code>
+       * <code>optional int32 rank = 10;</code>
        */
-      public boolean getActive() {
-        return active_;
+      public int getRank() {
+        return rank_;
       }
       /**
-       * <code>optional bool active = 10;</code>
+       * <code>optional int32 rank = 10;</code>
        */
-      public Builder setActive(boolean value) {
+      public Builder setRank(int value) {
         bitField0_ |= 0x00000200;
-        active_ = value;
+        rank_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool active = 10;</code>
+       * <code>optional int32 rank = 10;</code>
        */
-      public Builder clearActive() {
+      public Builder clearRank() {
         bitField0_ = (bitField0_ & ~0x00000200);
-        active_ = false;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object description_ = "";
-      /**
-       * <code>optional string description = 11;</code>
-       */
-      public boolean hasDescription() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      /**
-       * <code>optional string description = 11;</code>
-       */
-      public java.lang.String getDescription() {
-        java.lang.Object ref = description_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string description = 11;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDescriptionBytes() {
-        java.lang.Object ref = description_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          description_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string description = 11;</code>
-       */
-      public Builder setDescription(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000400;
-        description_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string description = 11;</code>
-       */
-      public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000400);
-        description_ = getDefaultInstance().getDescription();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string description = 11;</code>
-       */
-      public Builder setDescriptionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000400;
-        description_ = value;
+        rank_ = 0;
         onChanged();
         return this;
       }
@@ -8973,9 +7468,9 @@ public final class BudgetUIProtos {
       private java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> transaction_ =
         java.util.Collections.emptyList();
       private void ensureTransactionIsMutable() {
-        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
           transaction_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI>(transaction_);
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00000400;
          }
       }
 
@@ -8983,7 +7478,7 @@ public final class BudgetUIProtos {
           com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder> transactionBuilder_;
 
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> getTransactionList() {
         if (transactionBuilder_ == null) {
@@ -8993,7 +7488,7 @@ public final class BudgetUIProtos {
         }
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public int getTransactionCount() {
         if (transactionBuilder_ == null) {
@@ -9003,7 +7498,7 @@ public final class BudgetUIProtos {
         }
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI getTransaction(int index) {
         if (transactionBuilder_ == null) {
@@ -9013,7 +7508,7 @@ public final class BudgetUIProtos {
         }
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public Builder setTransaction(
           int index, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI value) {
@@ -9030,7 +7525,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public Builder setTransaction(
           int index, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder builderForValue) {
@@ -9044,7 +7539,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public Builder addTransaction(com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI value) {
         if (transactionBuilder_ == null) {
@@ -9060,7 +7555,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public Builder addTransaction(
           int index, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI value) {
@@ -9077,7 +7572,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public Builder addTransaction(
           com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder builderForValue) {
@@ -9091,7 +7586,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public Builder addTransaction(
           int index, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder builderForValue) {
@@ -9105,7 +7600,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public Builder addAllTransaction(
           java.lang.Iterable<? extends com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> values) {
@@ -9120,12 +7615,12 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public Builder clearTransaction() {
         if (transactionBuilder_ == null) {
           transaction_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000800);
+          bitField0_ = (bitField0_ & ~0x00000400);
           onChanged();
         } else {
           transactionBuilder_.clear();
@@ -9133,7 +7628,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public Builder removeTransaction(int index) {
         if (transactionBuilder_ == null) {
@@ -9146,14 +7641,14 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder getTransactionBuilder(
           int index) {
         return getTransactionFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder getTransactionOrBuilder(
           int index) {
@@ -9163,7 +7658,7 @@ public final class BudgetUIProtos {
         }
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder> 
            getTransactionOrBuilderList() {
@@ -9174,14 +7669,14 @@ public final class BudgetUIProtos {
         }
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder addTransactionBuilder() {
         return getTransactionFieldBuilder().addBuilder(
             com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.getDefaultInstance());
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder addTransactionBuilder(
           int index) {
@@ -9189,7 +7684,7 @@ public final class BudgetUIProtos {
             index, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.getDefaultInstance());
       }
       /**
-       * <code>repeated .budget.BillUI.TransactionUI transaction = 12;</code>
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 13;</code>
        */
       public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder> 
            getTransactionBuilderList() {
@@ -9202,7 +7697,7 @@ public final class BudgetUIProtos {
           transactionBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder>(
                   transaction_,
-                  ((bitField0_ & 0x00000800) == 0x00000800),
+                  ((bitField0_ & 0x00000400) == 0x00000400),
                   getParentForChildren(),
                   isClean());
           transaction_ = null;
@@ -9280,13 +7775,13 @@ public final class BudgetUIProtos {
     long getRefDate();
 
     /**
-     * <code>optional .common.DateRangeType date_range = 3;</code>
+     * <code>optional .common.DateRange date_range = 3;</code>
      */
     boolean hasDateRange();
     /**
-     * <code>optional .common.DateRangeType date_range = 3;</code>
+     * <code>optional .common.DateRange date_range = 3;</code>
      */
-    com.digitald4.common.proto.DD4UIProtos.DateRangeType getDateRange();
+    com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange();
   }
   /**
    * Protobuf type {@code budget.BillListRequest}
@@ -9344,7 +7839,7 @@ public final class BudgetUIProtos {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.digitald4.common.proto.DD4UIProtos.DateRangeType value = com.digitald4.common.proto.DD4UIProtos.DateRangeType.valueOf(rawValue);
+              com.digitald4.common.proto.DD4UIProtos.DateRange value = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -9412,17 +7907,17 @@ public final class BudgetUIProtos {
     public static final int DATE_RANGE_FIELD_NUMBER = 3;
     private int dateRange_;
     /**
-     * <code>optional .common.DateRangeType date_range = 3;</code>
+     * <code>optional .common.DateRange date_range = 3;</code>
      */
     public boolean hasDateRange() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .common.DateRangeType date_range = 3;</code>
+     * <code>optional .common.DateRange date_range = 3;</code>
      */
-    public com.digitald4.common.proto.DD4UIProtos.DateRangeType getDateRange() {
-      com.digitald4.common.proto.DD4UIProtos.DateRangeType result = com.digitald4.common.proto.DD4UIProtos.DateRangeType.valueOf(dateRange_);
-      return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRangeType.UNSPECIFIED : result;
+    public com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange() {
+      com.digitald4.common.proto.DD4UIProtos.DateRange result = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(dateRange_);
+      return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRange.UNSPECIFIED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -9739,22 +8234,22 @@ public final class BudgetUIProtos {
 
       private int dateRange_ = 0;
       /**
-       * <code>optional .common.DateRangeType date_range = 3;</code>
+       * <code>optional .common.DateRange date_range = 3;</code>
        */
       public boolean hasDateRange() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .common.DateRangeType date_range = 3;</code>
+       * <code>optional .common.DateRange date_range = 3;</code>
        */
-      public com.digitald4.common.proto.DD4UIProtos.DateRangeType getDateRange() {
-        com.digitald4.common.proto.DD4UIProtos.DateRangeType result = com.digitald4.common.proto.DD4UIProtos.DateRangeType.valueOf(dateRange_);
-        return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRangeType.UNSPECIFIED : result;
+      public com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange() {
+        com.digitald4.common.proto.DD4UIProtos.DateRange result = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(dateRange_);
+        return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRange.UNSPECIFIED : result;
       }
       /**
-       * <code>optional .common.DateRangeType date_range = 3;</code>
+       * <code>optional .common.DateRange date_range = 3;</code>
        */
-      public Builder setDateRange(com.digitald4.common.proto.DD4UIProtos.DateRangeType value) {
+      public Builder setDateRange(com.digitald4.common.proto.DD4UIProtos.DateRange value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -9764,7 +8259,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>optional .common.DateRangeType date_range = 3;</code>
+       * <code>optional .common.DateRange date_range = 3;</code>
        */
       public Builder clearDateRange() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -9815,402 +8310,6 @@ public final class BudgetUIProtos {
     }
 
     public com.digitald4.budget.proto.BudgetUIProtos.BillListRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface BillGetRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:budget.BillGetRequest)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 bill_id = 1;</code>
-     */
-    boolean hasBillId();
-    /**
-     * <code>optional int32 bill_id = 1;</code>
-     */
-    int getBillId();
-  }
-  /**
-   * Protobuf type {@code budget.BillGetRequest}
-   */
-  public  static final class BillGetRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:budget.BillGetRequest)
-      BillGetRequestOrBuilder {
-    // Use BillGetRequest.newBuilder() to construct.
-    private BillGetRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private BillGetRequest() {
-      billId_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private BillGetRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
-      this();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              billId_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
-      } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillGetRequest_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillGetRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest.class, com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int BILL_ID_FIELD_NUMBER = 1;
-    private int billId_;
-    /**
-     * <code>optional int32 bill_id = 1;</code>
-     */
-    public boolean hasBillId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 bill_id = 1;</code>
-     */
-    public int getBillId() {
-      return billId_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, billId_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, billId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code budget.BillGetRequest}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:budget.BillGetRequest)
-        com.digitald4.budget.proto.BudgetUIProtos.BillGetRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillGetRequest_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillGetRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest.class, com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest.Builder.class);
-      }
-
-      // Construct using com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        billId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillGetRequest_descriptor;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest getDefaultInstanceForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest.getDefaultInstance();
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest build() {
-        com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest buildPartial() {
-        com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest result = new com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.billId_ = billId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest) {
-          return mergeFrom((com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest other) {
-        if (other == com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest.getDefaultInstance()) return this;
-        if (other.hasBillId()) {
-          setBillId(other.getBillId());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int billId_ ;
-      /**
-       * <code>optional int32 bill_id = 1;</code>
-       */
-      public boolean hasBillId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 bill_id = 1;</code>
-       */
-      public int getBillId() {
-        return billId_;
-      }
-      /**
-       * <code>optional int32 bill_id = 1;</code>
-       */
-      public Builder setBillId(int value) {
-        bitField0_ |= 0x00000001;
-        billId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 bill_id = 1;</code>
-       */
-      public Builder clearBillId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        billId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:budget.BillGetRequest)
-    }
-
-    // @@protoc_insertion_point(class_scope:budget.BillGetRequest)
-    private static final com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest();
-    }
-
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<BillGetRequest>
-        PARSER = new com.google.protobuf.AbstractParser<BillGetRequest>() {
-      public BillGetRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
-          return new BillGetRequest(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
-      }
-    };
-
-    public static com.google.protobuf.Parser<BillGetRequest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<BillGetRequest> getParserForType() {
-      return PARSER;
-    }
-
-    public com.digitald4.budget.proto.BudgetUIProtos.BillGetRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -10724,8 +8823,8 @@ public final class BudgetUIProtos {
 
   }
 
-  public interface BillDeleteRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:budget.BillDeleteRequest)
+  public interface BillTransUpdateRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:budget.BillTransUpdateRequest)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -10736,20 +8835,45 @@ public final class BudgetUIProtos {
      * <code>optional int32 bill_id = 1;</code>
      */
     int getBillId();
+
+    /**
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+     */
+    java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> 
+        getTransactionList();
+    /**
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+     */
+    com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI getTransaction(int index);
+    /**
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+     */
+    int getTransactionCount();
+    /**
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+     */
+    java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder> 
+        getTransactionOrBuilderList();
+    /**
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+     */
+    com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder getTransactionOrBuilder(
+        int index);
   }
   /**
-   * Protobuf type {@code budget.BillDeleteRequest}
+   * Protobuf type {@code budget.BillTransUpdateRequest}
    */
-  public  static final class BillDeleteRequest extends
+  public  static final class BillTransUpdateRequest extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:budget.BillDeleteRequest)
-      BillDeleteRequestOrBuilder {
-    // Use BillDeleteRequest.newBuilder() to construct.
-    private BillDeleteRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:budget.BillTransUpdateRequest)
+      BillTransUpdateRequestOrBuilder {
+    // Use BillTransUpdateRequest.newBuilder() to construct.
+    private BillTransUpdateRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private BillDeleteRequest() {
+    private BillTransUpdateRequest() {
       billId_ = 0;
+      transaction_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -10757,7 +8881,7 @@ public final class BudgetUIProtos {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private BillDeleteRequest(
+    private BillTransUpdateRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
       this();
@@ -10784,6 +8908,14 @@ public final class BudgetUIProtos {
               billId_ = input.readInt32();
               break;
             }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                transaction_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              transaction_.add(input.readMessage(com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.parser(), extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -10793,20 +8925,23 @@ public final class BudgetUIProtos {
             new com.google.protobuf.InvalidProtocolBufferException(
                 e.getMessage()).setUnfinishedMessage(this));
       } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          transaction_ = java.util.Collections.unmodifiableList(transaction_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillDeleteRequest_descriptor;
+      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillTransUpdateRequest_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillDeleteRequest_fieldAccessorTable
+      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillTransUpdateRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest.class, com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest.Builder.class);
+              com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest.class, com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest.Builder.class);
     }
 
     private int bitField0_;
@@ -10825,6 +8960,41 @@ public final class BudgetUIProtos {
       return billId_;
     }
 
+    public static final int TRANSACTION_FIELD_NUMBER = 2;
+    private java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> transaction_;
+    /**
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+     */
+    public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> getTransactionList() {
+      return transaction_;
+    }
+    /**
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+     */
+    public java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder> 
+        getTransactionOrBuilderList() {
+      return transaction_;
+    }
+    /**
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+     */
+    public int getTransactionCount() {
+      return transaction_.size();
+    }
+    /**
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+     */
+    public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI getTransaction(int index) {
+      return transaction_.get(index);
+    }
+    /**
+     * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+     */
+    public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder getTransactionOrBuilder(
+        int index) {
+      return transaction_.get(index);
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -10840,6 +9010,9 @@ public final class BudgetUIProtos {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, billId_);
       }
+      for (int i = 0; i < transaction_.size(); i++) {
+        output.writeMessage(2, transaction_.get(i));
+      }
       unknownFields.writeTo(output);
     }
 
@@ -10852,59 +9025,63 @@ public final class BudgetUIProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, billId_);
       }
+      for (int i = 0; i < transaction_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, transaction_.get(i));
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest parseFrom(
+    public static com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest parseFrom(
+    public static com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest parseFrom(byte[] data)
+    public static com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest parseFrom(
+    public static com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest parseFrom(java.io.InputStream input)
+    public static com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest parseFrom(
+    public static com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest parseDelimitedFrom(java.io.InputStream input)
+    public static com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest parseDelimitedFrom(
+    public static com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest parseFrom(
+    public static com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest parseFrom(
+    public static com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10915,7 +9092,7 @@ public final class BudgetUIProtos {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest prototype) {
+    public static Builder newBuilder(com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -10930,25 +9107,25 @@ public final class BudgetUIProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code budget.BillDeleteRequest}
+     * Protobuf type {@code budget.BillTransUpdateRequest}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:budget.BillDeleteRequest)
-        com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequestOrBuilder {
+        // @@protoc_insertion_point(builder_implements:budget.BillTransUpdateRequest)
+        com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillDeleteRequest_descriptor;
+        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillTransUpdateRequest_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillDeleteRequest_fieldAccessorTable
+        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillTransUpdateRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest.class, com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest.Builder.class);
+                com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest.class, com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest.Builder.class);
       }
 
-      // Construct using com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest.newBuilder()
+      // Construct using com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -10960,58 +9137,100 @@ public final class BudgetUIProtos {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getTransactionFieldBuilder();
         }
       }
       public Builder clear() {
         super.clear();
         billId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        if (transactionBuilder_ == null) {
+          transaction_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          transactionBuilder_.clear();
+        }
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillDeleteRequest_descriptor;
+        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_BillTransUpdateRequest_descriptor;
       }
 
-      public com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest getDefaultInstanceForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest.getDefaultInstance();
+      public com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest getDefaultInstanceForType() {
+        return com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest.getDefaultInstance();
       }
 
-      public com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest build() {
-        com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest result = buildPartial();
+      public com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest build() {
+        com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest buildPartial() {
-        com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest result = new com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest(this);
+      public com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest buildPartial() {
+        com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest result = new com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
         result.billId_ = billId_;
+        if (transactionBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            transaction_ = java.util.Collections.unmodifiableList(transaction_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.transaction_ = transaction_;
+        } else {
+          result.transaction_ = transactionBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest) {
-          return mergeFrom((com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest)other);
+        if (other instanceof com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest) {
+          return mergeFrom((com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest other) {
-        if (other == com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest other) {
+        if (other == com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest.getDefaultInstance()) return this;
         if (other.hasBillId()) {
           setBillId(other.getBillId());
+        }
+        if (transactionBuilder_ == null) {
+          if (!other.transaction_.isEmpty()) {
+            if (transaction_.isEmpty()) {
+              transaction_ = other.transaction_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureTransactionIsMutable();
+              transaction_.addAll(other.transaction_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.transaction_.isEmpty()) {
+            if (transactionBuilder_.isEmpty()) {
+              transactionBuilder_.dispose();
+              transactionBuilder_ = null;
+              transaction_ = other.transaction_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              transactionBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getTransactionFieldBuilder() : null;
+            } else {
+              transactionBuilder_.addAllMessages(other.transaction_);
+            }
+          }
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -11026,11 +9245,11 @@ public final class BudgetUIProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest parsedMessage = null;
+        com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest) e.getUnfinishedMessage();
+          parsedMessage = (com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -11073,27 +9292,267 @@ public final class BudgetUIProtos {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:budget.BillDeleteRequest)
+      private java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> transaction_ =
+        java.util.Collections.emptyList();
+      private void ensureTransactionIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          transaction_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI>(transaction_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder> transactionBuilder_;
+
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> getTransactionList() {
+        if (transactionBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(transaction_);
+        } else {
+          return transactionBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public int getTransactionCount() {
+        if (transactionBuilder_ == null) {
+          return transaction_.size();
+        } else {
+          return transactionBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI getTransaction(int index) {
+        if (transactionBuilder_ == null) {
+          return transaction_.get(index);
+        } else {
+          return transactionBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public Builder setTransaction(
+          int index, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI value) {
+        if (transactionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTransactionIsMutable();
+          transaction_.set(index, value);
+          onChanged();
+        } else {
+          transactionBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public Builder setTransaction(
+          int index, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder builderForValue) {
+        if (transactionBuilder_ == null) {
+          ensureTransactionIsMutable();
+          transaction_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          transactionBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public Builder addTransaction(com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI value) {
+        if (transactionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTransactionIsMutable();
+          transaction_.add(value);
+          onChanged();
+        } else {
+          transactionBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public Builder addTransaction(
+          int index, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI value) {
+        if (transactionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTransactionIsMutable();
+          transaction_.add(index, value);
+          onChanged();
+        } else {
+          transactionBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public Builder addTransaction(
+          com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder builderForValue) {
+        if (transactionBuilder_ == null) {
+          ensureTransactionIsMutable();
+          transaction_.add(builderForValue.build());
+          onChanged();
+        } else {
+          transactionBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public Builder addTransaction(
+          int index, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder builderForValue) {
+        if (transactionBuilder_ == null) {
+          ensureTransactionIsMutable();
+          transaction_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          transactionBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public Builder addAllTransaction(
+          java.lang.Iterable<? extends com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI> values) {
+        if (transactionBuilder_ == null) {
+          ensureTransactionIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, transaction_);
+          onChanged();
+        } else {
+          transactionBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public Builder clearTransaction() {
+        if (transactionBuilder_ == null) {
+          transaction_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          transactionBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public Builder removeTransaction(int index) {
+        if (transactionBuilder_ == null) {
+          ensureTransactionIsMutable();
+          transaction_.remove(index);
+          onChanged();
+        } else {
+          transactionBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder getTransactionBuilder(
+          int index) {
+        return getTransactionFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder getTransactionOrBuilder(
+          int index) {
+        if (transactionBuilder_ == null) {
+          return transaction_.get(index);  } else {
+          return transactionBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder> 
+           getTransactionOrBuilderList() {
+        if (transactionBuilder_ != null) {
+          return transactionBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(transaction_);
+        }
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder addTransactionBuilder() {
+        return getTransactionFieldBuilder().addBuilder(
+            com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder addTransactionBuilder(
+          int index) {
+        return getTransactionFieldBuilder().addBuilder(
+            index, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .budget.BillUI.TransactionUI transaction = 2;</code>
+       */
+      public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder> 
+           getTransactionBuilderList() {
+        return getTransactionFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder> 
+          getTransactionFieldBuilder() {
+        if (transactionBuilder_ == null) {
+          transactionBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUIOrBuilder>(
+                  transaction_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          transaction_ = null;
+        }
+        return transactionBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:budget.BillTransUpdateRequest)
     }
 
-    // @@protoc_insertion_point(class_scope:budget.BillDeleteRequest)
-    private static final com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:budget.BillTransUpdateRequest)
+    private static final com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest();
+      DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest();
     }
 
-    public static com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest getDefaultInstance() {
+    public static com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<BillDeleteRequest>
-        PARSER = new com.google.protobuf.AbstractParser<BillDeleteRequest>() {
-      public BillDeleteRequest parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<BillTransUpdateRequest>
+        PARSER = new com.google.protobuf.AbstractParser<BillTransUpdateRequest>() {
+      public BillTransUpdateRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         try {
-          return new BillDeleteRequest(input, extensionRegistry);
+          return new BillTransUpdateRequest(input, extensionRegistry);
         } catch (RuntimeException e) {
           if (e.getCause() instanceof
               com.google.protobuf.InvalidProtocolBufferException) {
@@ -11105,16 +9564,16 @@ public final class BudgetUIProtos {
       }
     };
 
-    public static com.google.protobuf.Parser<BillDeleteRequest> parser() {
+    public static com.google.protobuf.Parser<BillTransUpdateRequest> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<BillDeleteRequest> getParserForType() {
+    public com.google.protobuf.Parser<BillTransUpdateRequest> getParserForType() {
       return PARSER;
     }
 
-    public com.digitald4.budget.proto.BudgetUIProtos.BillDeleteRequest getDefaultInstanceForType() {
+    public com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -11157,39 +9616,25 @@ public final class BudgetUIProtos {
         getNameBytes();
 
     /**
-     * <code>optional string description = 4;</code>
-     */
-    boolean hasDescription();
-    /**
-     * <code>optional string description = 4;</code>
-     */
-    java.lang.String getDescription();
-    /**
-     * <code>optional string description = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getDescriptionBytes();
-
-    /**
-     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
      */
     java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI> 
         getBillList();
     /**
-     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
      */
     com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI getBill(int index);
     /**
-     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
      */
     int getBillCount();
     /**
-     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
      */
     java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUIOrBuilder> 
         getBillOrBuilderList();
     /**
-     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
      */
     com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUIOrBuilder getBillOrBuilder(
         int index);
@@ -11209,7 +9654,6 @@ public final class BudgetUIProtos {
       id_ = 0;
       portfolioId_ = 0;
       name_ = "";
-      description_ = "";
       bill_ = java.util.Collections.emptyList();
     }
 
@@ -11257,15 +9701,9 @@ public final class BudgetUIProtos {
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
-              description_ = bs;
-              break;
-            }
-            case 42: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                 bill_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI>();
-                mutable_bitField0_ |= 0x00000010;
+                mutable_bitField0_ |= 0x00000008;
               }
               bill_.add(input.readMessage(com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.parser(), extensionRegistry));
               break;
@@ -11279,7 +9717,7 @@ public final class BudgetUIProtos {
             new com.google.protobuf.InvalidProtocolBufferException(
                 e.getMessage()).setUnfinishedMessage(this));
       } finally {
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           bill_ = java.util.Collections.unmodifiableList(bill_);
         }
         this.unknownFields = unknownFields.build();
@@ -11303,116 +9741,66 @@ public final class BudgetUIProtos {
         com.google.protobuf.MessageOrBuilder {
 
       /**
-       * <code>optional int32 id = 1;</code>
-       */
-      boolean hasId();
-      /**
-       * <code>optional int32 id = 1;</code>
-       */
-      int getId();
-
-      /**
-       * <code>optional int32 template_id = 2;</code>
-       */
-      boolean hasTemplateId();
-      /**
-       * <code>optional int32 template_id = 2;</code>
-       */
-      int getTemplateId();
-
-      /**
-       * <code>optional int32 account_id = 3;</code>
+       * <code>optional int32 account_id = 1;</code>
        */
       boolean hasAccountId();
       /**
-       * <code>optional int32 account_id = 3;</code>
+       * <code>optional int32 account_id = 1;</code>
        */
       int getAccountId();
 
       /**
-       * <code>optional int32 due_day = 4;</code>
+       * <code>optional int32 due_day = 2;</code>
        */
       boolean hasDueDay();
       /**
-       * <code>optional int32 due_day = 4;</code>
+       * <code>optional int32 due_day = 2;</code>
        */
       int getDueDay();
 
       /**
-       * <code>optional string name = 5;</code>
+       * <code>optional string name = 3;</code>
        */
       boolean hasName();
       /**
-       * <code>optional string name = 5;</code>
+       * <code>optional string name = 3;</code>
        */
       java.lang.String getName();
       /**
-       * <code>optional string name = 5;</code>
+       * <code>optional string name = 3;</code>
        */
       com.google.protobuf.ByteString
           getNameBytes();
 
       /**
-       * <code>optional double amount_due = 6;</code>
+       * <code>optional double amount_due = 4;</code>
        */
       boolean hasAmountDue();
       /**
-       * <code>optional double amount_due = 6;</code>
+       * <code>optional double amount_due = 4;</code>
        */
       double getAmountDue();
 
       /**
-       * <code>optional bool active = 7 [default = true];</code>
-       */
-      boolean hasActive();
-      /**
-       * <code>optional bool active = 7 [default = true];</code>
-       */
-      boolean getActive();
-
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      boolean hasDescription();
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      java.lang.String getDescription();
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      com.google.protobuf.ByteString
-          getDescriptionBytes();
-
-      /**
-       * <code>optional int32 rank = 9;</code>
-       */
-      boolean hasRank();
-      /**
-       * <code>optional int32 rank = 9;</code>
-       */
-      int getRank();
-
-      /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
        */
       java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI> 
           getTransactionList();
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
        */
       com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI getTransaction(int index);
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
        */
       int getTransactionCount();
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
        */
       java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUIOrBuilder> 
           getTransactionOrBuilderList();
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
        */
       com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUIOrBuilder getTransactionOrBuilder(
           int index);
@@ -11429,15 +9817,10 @@ public final class BudgetUIProtos {
         super(builder);
       }
       private TemplateBillUI() {
-        id_ = 0;
-        templateId_ = 0;
         accountId_ = 0;
         dueDay_ = 0;
         name_ = "";
         amountDue_ = 0D;
-        active_ = true;
-        description_ = "";
-        rank_ = 0;
         transaction_ = java.util.Collections.emptyList();
       }
 
@@ -11470,55 +9853,29 @@ public final class BudgetUIProtos {
               }
               case 8: {
                 bitField0_ |= 0x00000001;
-                id_ = input.readInt32();
+                accountId_ = input.readInt32();
                 break;
               }
               case 16: {
                 bitField0_ |= 0x00000002;
-                templateId_ = input.readInt32();
-                break;
-              }
-              case 24: {
-                bitField0_ |= 0x00000004;
-                accountId_ = input.readInt32();
-                break;
-              }
-              case 32: {
-                bitField0_ |= 0x00000008;
                 dueDay_ = input.readInt32();
                 break;
               }
-              case 42: {
+              case 26: {
                 com.google.protobuf.ByteString bs = input.readBytes();
-                bitField0_ |= 0x00000010;
+                bitField0_ |= 0x00000004;
                 name_ = bs;
                 break;
               }
-              case 49: {
-                bitField0_ |= 0x00000020;
+              case 33: {
+                bitField0_ |= 0x00000008;
                 amountDue_ = input.readDouble();
                 break;
               }
-              case 56: {
-                bitField0_ |= 0x00000040;
-                active_ = input.readBool();
-                break;
-              }
-              case 66: {
-                com.google.protobuf.ByteString bs = input.readBytes();
-                bitField0_ |= 0x00000080;
-                description_ = bs;
-                break;
-              }
-              case 72: {
-                bitField0_ |= 0x00000100;
-                rank_ = input.readInt32();
-                break;
-              }
-              case 82: {
-                if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+              case 42: {
+                if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                   transaction_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI>();
-                  mutable_bitField0_ |= 0x00000200;
+                  mutable_bitField0_ |= 0x00000010;
                 }
                 transaction_.add(input.readMessage(com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.parser(), extensionRegistry));
                 break;
@@ -11532,7 +9889,7 @@ public final class BudgetUIProtos {
               new com.google.protobuf.InvalidProtocolBufferException(
                   e.getMessage()).setUnfinishedMessage(this));
         } finally {
-          if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+          if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
             transaction_ = java.util.Collections.unmodifiableList(transaction_);
           }
           this.unknownFields = unknownFields.build();
@@ -12026,76 +10383,46 @@ public final class BudgetUIProtos {
       }
 
       private int bitField0_;
-      public static final int ID_FIELD_NUMBER = 1;
-      private int id_;
+      public static final int ACCOUNT_ID_FIELD_NUMBER = 1;
+      private int accountId_;
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>optional int32 account_id = 1;</code>
        */
-      public boolean hasId() {
+      public boolean hasAccountId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 id = 1;</code>
-       */
-      public int getId() {
-        return id_;
-      }
-
-      public static final int TEMPLATE_ID_FIELD_NUMBER = 2;
-      private int templateId_;
-      /**
-       * <code>optional int32 template_id = 2;</code>
-       */
-      public boolean hasTemplateId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 template_id = 2;</code>
-       */
-      public int getTemplateId() {
-        return templateId_;
-      }
-
-      public static final int ACCOUNT_ID_FIELD_NUMBER = 3;
-      private int accountId_;
-      /**
-       * <code>optional int32 account_id = 3;</code>
-       */
-      public boolean hasAccountId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 account_id = 3;</code>
+       * <code>optional int32 account_id = 1;</code>
        */
       public int getAccountId() {
         return accountId_;
       }
 
-      public static final int DUE_DAY_FIELD_NUMBER = 4;
+      public static final int DUE_DAY_FIELD_NUMBER = 2;
       private int dueDay_;
       /**
-       * <code>optional int32 due_day = 4;</code>
+       * <code>optional int32 due_day = 2;</code>
        */
       public boolean hasDueDay() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 due_day = 4;</code>
+       * <code>optional int32 due_day = 2;</code>
        */
       public int getDueDay() {
         return dueDay_;
       }
 
-      public static final int NAME_FIELD_NUMBER = 5;
+      public static final int NAME_FIELD_NUMBER = 3;
       private volatile java.lang.Object name_;
       /**
-       * <code>optional string name = 5;</code>
+       * <code>optional string name = 3;</code>
        */
       public boolean hasName() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional string name = 5;</code>
+       * <code>optional string name = 3;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -12112,7 +10439,7 @@ public final class BudgetUIProtos {
         }
       }
       /**
-       * <code>optional string name = 5;</code>
+       * <code>optional string name = 3;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -12128,122 +10455,50 @@ public final class BudgetUIProtos {
         }
       }
 
-      public static final int AMOUNT_DUE_FIELD_NUMBER = 6;
+      public static final int AMOUNT_DUE_FIELD_NUMBER = 4;
       private double amountDue_;
       /**
-       * <code>optional double amount_due = 6;</code>
+       * <code>optional double amount_due = 4;</code>
        */
       public boolean hasAmountDue() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional double amount_due = 6;</code>
+       * <code>optional double amount_due = 4;</code>
        */
       public double getAmountDue() {
         return amountDue_;
       }
 
-      public static final int ACTIVE_FIELD_NUMBER = 7;
-      private boolean active_;
-      /**
-       * <code>optional bool active = 7 [default = true];</code>
-       */
-      public boolean hasActive() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional bool active = 7 [default = true];</code>
-       */
-      public boolean getActive() {
-        return active_;
-      }
-
-      public static final int DESCRIPTION_FIELD_NUMBER = 8;
-      private volatile java.lang.Object description_;
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      public boolean hasDescription() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      public java.lang.String getDescription() {
-        java.lang.Object ref = description_;
-        if (ref instanceof java.lang.String) {
-          return (java.lang.String) ref;
-        } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
-          return s;
-        }
-      }
-      /**
-       * <code>optional string description = 8;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDescriptionBytes() {
-        java.lang.Object ref = description_;
-        if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          description_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-
-      public static final int RANK_FIELD_NUMBER = 9;
-      private int rank_;
-      /**
-       * <code>optional int32 rank = 9;</code>
-       */
-      public boolean hasRank() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional int32 rank = 9;</code>
-       */
-      public int getRank() {
-        return rank_;
-      }
-
-      public static final int TRANSACTION_FIELD_NUMBER = 10;
+      public static final int TRANSACTION_FIELD_NUMBER = 5;
       private java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI> transaction_;
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
        */
       public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI> getTransactionList() {
         return transaction_;
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
        */
       public java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUIOrBuilder> 
           getTransactionOrBuilderList() {
         return transaction_;
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
        */
       public int getTransactionCount() {
         return transaction_.size();
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI getTransaction(int index) {
         return transaction_.get(index);
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUIOrBuilder getTransactionOrBuilder(
           int index) {
@@ -12263,34 +10518,19 @@ public final class BudgetUIProtos {
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeInt32(1, id_);
+          output.writeInt32(1, accountId_);
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          output.writeInt32(2, templateId_);
+          output.writeInt32(2, dueDay_);
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          output.writeInt32(3, accountId_);
+          com.google.protobuf.GeneratedMessage.writeString(output, 3, name_);
         }
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          output.writeInt32(4, dueDay_);
-        }
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          com.google.protobuf.GeneratedMessage.writeString(output, 5, name_);
-        }
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          output.writeDouble(6, amountDue_);
-        }
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          output.writeBool(7, active_);
-        }
-        if (((bitField0_ & 0x00000080) == 0x00000080)) {
-          com.google.protobuf.GeneratedMessage.writeString(output, 8, description_);
-        }
-        if (((bitField0_ & 0x00000100) == 0x00000100)) {
-          output.writeInt32(9, rank_);
+          output.writeDouble(4, amountDue_);
         }
         for (int i = 0; i < transaction_.size(); i++) {
-          output.writeMessage(10, transaction_.get(i));
+          output.writeMessage(5, transaction_.get(i));
         }
         unknownFields.writeTo(output);
       }
@@ -12302,41 +10542,22 @@ public final class BudgetUIProtos {
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(1, id_);
+            .computeInt32Size(1, accountId_);
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(2, templateId_);
+            .computeInt32Size(2, dueDay_);
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(3, accountId_);
+          size += com.google.protobuf.GeneratedMessage.computeStringSize(3, name_);
         }
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(4, dueDay_);
-        }
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          size += com.google.protobuf.GeneratedMessage.computeStringSize(5, name_);
-        }
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeDoubleSize(6, amountDue_);
-        }
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeBoolSize(7, active_);
-        }
-        if (((bitField0_ & 0x00000080) == 0x00000080)) {
-          size += com.google.protobuf.GeneratedMessage.computeStringSize(8, description_);
-        }
-        if (((bitField0_ & 0x00000100) == 0x00000100)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(9, rank_);
+            .computeDoubleSize(4, amountDue_);
         }
         for (int i = 0; i < transaction_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(10, transaction_.get(i));
+            .computeMessageSize(5, transaction_.get(i));
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -12451,27 +10672,17 @@ public final class BudgetUIProtos {
         }
         public Builder clear() {
           super.clear();
-          id_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000001);
-          templateId_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000002);
           accountId_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000001);
           dueDay_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000002);
           name_ = "";
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000004);
           amountDue_ = 0D;
-          bitField0_ = (bitField0_ & ~0x00000020);
-          active_ = true;
-          bitField0_ = (bitField0_ & ~0x00000040);
-          description_ = "";
-          bitField0_ = (bitField0_ & ~0x00000080);
-          rank_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000008);
           if (transactionBuilder_ == null) {
             transaction_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000200);
+            bitField0_ = (bitField0_ & ~0x00000010);
           } else {
             transactionBuilder_.clear();
           }
@@ -12502,43 +10713,23 @@ public final class BudgetUIProtos {
           if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
             to_bitField0_ |= 0x00000001;
           }
-          result.id_ = id_;
+          result.accountId_ = accountId_;
           if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
             to_bitField0_ |= 0x00000002;
           }
-          result.templateId_ = templateId_;
+          result.dueDay_ = dueDay_;
           if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
             to_bitField0_ |= 0x00000004;
           }
-          result.accountId_ = accountId_;
+          result.name_ = name_;
           if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
             to_bitField0_ |= 0x00000008;
           }
-          result.dueDay_ = dueDay_;
-          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-            to_bitField0_ |= 0x00000010;
-          }
-          result.name_ = name_;
-          if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-            to_bitField0_ |= 0x00000020;
-          }
           result.amountDue_ = amountDue_;
-          if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-            to_bitField0_ |= 0x00000040;
-          }
-          result.active_ = active_;
-          if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-            to_bitField0_ |= 0x00000080;
-          }
-          result.description_ = description_;
-          if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-            to_bitField0_ |= 0x00000100;
-          }
-          result.rank_ = rank_;
           if (transactionBuilder_ == null) {
-            if (((bitField0_ & 0x00000200) == 0x00000200)) {
+            if (((bitField0_ & 0x00000010) == 0x00000010)) {
               transaction_ = java.util.Collections.unmodifiableList(transaction_);
-              bitField0_ = (bitField0_ & ~0x00000200);
+              bitField0_ = (bitField0_ & ~0x00000010);
             }
             result.transaction_ = transaction_;
           } else {
@@ -12560,12 +10751,6 @@ public final class BudgetUIProtos {
 
         public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI other) {
           if (other == com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.getDefaultInstance()) return this;
-          if (other.hasId()) {
-            setId(other.getId());
-          }
-          if (other.hasTemplateId()) {
-            setTemplateId(other.getTemplateId());
-          }
           if (other.hasAccountId()) {
             setAccountId(other.getAccountId());
           }
@@ -12573,29 +10758,18 @@ public final class BudgetUIProtos {
             setDueDay(other.getDueDay());
           }
           if (other.hasName()) {
-            bitField0_ |= 0x00000010;
+            bitField0_ |= 0x00000004;
             name_ = other.name_;
             onChanged();
           }
           if (other.hasAmountDue()) {
             setAmountDue(other.getAmountDue());
           }
-          if (other.hasActive()) {
-            setActive(other.getActive());
-          }
-          if (other.hasDescription()) {
-            bitField0_ |= 0x00000080;
-            description_ = other.description_;
-            onChanged();
-          }
-          if (other.hasRank()) {
-            setRank(other.getRank());
-          }
           if (transactionBuilder_ == null) {
             if (!other.transaction_.isEmpty()) {
               if (transaction_.isEmpty()) {
                 transaction_ = other.transaction_;
-                bitField0_ = (bitField0_ & ~0x00000200);
+                bitField0_ = (bitField0_ & ~0x00000010);
               } else {
                 ensureTransactionIsMutable();
                 transaction_.addAll(other.transaction_);
@@ -12608,7 +10782,7 @@ public final class BudgetUIProtos {
                 transactionBuilder_.dispose();
                 transactionBuilder_ = null;
                 transaction_ = other.transaction_;
-                bitField0_ = (bitField0_ & ~0x00000200);
+                bitField0_ = (bitField0_ & ~0x00000010);
                 transactionBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                      getTransactionFieldBuilder() : null;
@@ -12645,97 +10819,33 @@ public final class BudgetUIProtos {
         }
         private int bitField0_;
 
-        private int id_ ;
+        private int accountId_ ;
         /**
-         * <code>optional int32 id = 1;</code>
+         * <code>optional int32 account_id = 1;</code>
          */
-        public boolean hasId() {
+        public boolean hasAccountId() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional int32 id = 1;</code>
-         */
-        public int getId() {
-          return id_;
-        }
-        /**
-         * <code>optional int32 id = 1;</code>
-         */
-        public Builder setId(int value) {
-          bitField0_ |= 0x00000001;
-          id_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional int32 id = 1;</code>
-         */
-        public Builder clearId() {
-          bitField0_ = (bitField0_ & ~0x00000001);
-          id_ = 0;
-          onChanged();
-          return this;
-        }
-
-        private int templateId_ ;
-        /**
-         * <code>optional int32 template_id = 2;</code>
-         */
-        public boolean hasTemplateId() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
-        }
-        /**
-         * <code>optional int32 template_id = 2;</code>
-         */
-        public int getTemplateId() {
-          return templateId_;
-        }
-        /**
-         * <code>optional int32 template_id = 2;</code>
-         */
-        public Builder setTemplateId(int value) {
-          bitField0_ |= 0x00000002;
-          templateId_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional int32 template_id = 2;</code>
-         */
-        public Builder clearTemplateId() {
-          bitField0_ = (bitField0_ & ~0x00000002);
-          templateId_ = 0;
-          onChanged();
-          return this;
-        }
-
-        private int accountId_ ;
-        /**
-         * <code>optional int32 account_id = 3;</code>
-         */
-        public boolean hasAccountId() {
-          return ((bitField0_ & 0x00000004) == 0x00000004);
-        }
-        /**
-         * <code>optional int32 account_id = 3;</code>
+         * <code>optional int32 account_id = 1;</code>
          */
         public int getAccountId() {
           return accountId_;
         }
         /**
-         * <code>optional int32 account_id = 3;</code>
+         * <code>optional int32 account_id = 1;</code>
          */
         public Builder setAccountId(int value) {
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000001;
           accountId_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional int32 account_id = 3;</code>
+         * <code>optional int32 account_id = 1;</code>
          */
         public Builder clearAccountId() {
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000001);
           accountId_ = 0;
           onChanged();
           return this;
@@ -12743,31 +10853,31 @@ public final class BudgetUIProtos {
 
         private int dueDay_ ;
         /**
-         * <code>optional int32 due_day = 4;</code>
+         * <code>optional int32 due_day = 2;</code>
          */
         public boolean hasDueDay() {
-          return ((bitField0_ & 0x00000008) == 0x00000008);
+          return ((bitField0_ & 0x00000002) == 0x00000002);
         }
         /**
-         * <code>optional int32 due_day = 4;</code>
+         * <code>optional int32 due_day = 2;</code>
          */
         public int getDueDay() {
           return dueDay_;
         }
         /**
-         * <code>optional int32 due_day = 4;</code>
+         * <code>optional int32 due_day = 2;</code>
          */
         public Builder setDueDay(int value) {
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000002;
           dueDay_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional int32 due_day = 4;</code>
+         * <code>optional int32 due_day = 2;</code>
          */
         public Builder clearDueDay() {
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000002);
           dueDay_ = 0;
           onChanged();
           return this;
@@ -12775,13 +10885,13 @@ public final class BudgetUIProtos {
 
         private java.lang.Object name_ = "";
         /**
-         * <code>optional string name = 5;</code>
+         * <code>optional string name = 3;</code>
          */
         public boolean hasName() {
-          return ((bitField0_ & 0x00000010) == 0x00000010);
+          return ((bitField0_ & 0x00000004) == 0x00000004);
         }
         /**
-         * <code>optional string name = 5;</code>
+         * <code>optional string name = 3;</code>
          */
         public java.lang.String getName() {
           java.lang.Object ref = name_;
@@ -12798,7 +10908,7 @@ public final class BudgetUIProtos {
           }
         }
         /**
-         * <code>optional string name = 5;</code>
+         * <code>optional string name = 3;</code>
          */
         public com.google.protobuf.ByteString
             getNameBytes() {
@@ -12814,36 +10924,36 @@ public final class BudgetUIProtos {
           }
         }
         /**
-         * <code>optional string name = 5;</code>
+         * <code>optional string name = 3;</code>
          */
         public Builder setName(
             java.lang.String value) {
           if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000004;
           name_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional string name = 5;</code>
+         * <code>optional string name = 3;</code>
          */
         public Builder clearName() {
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000004);
           name_ = getDefaultInstance().getName();
           onChanged();
           return this;
         }
         /**
-         * <code>optional string name = 5;</code>
+         * <code>optional string name = 3;</code>
          */
         public Builder setNameBytes(
             com.google.protobuf.ByteString value) {
           if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000004;
           name_ = value;
           onChanged();
           return this;
@@ -12851,172 +10961,32 @@ public final class BudgetUIProtos {
 
         private double amountDue_ ;
         /**
-         * <code>optional double amount_due = 6;</code>
+         * <code>optional double amount_due = 4;</code>
          */
         public boolean hasAmountDue() {
-          return ((bitField0_ & 0x00000020) == 0x00000020);
+          return ((bitField0_ & 0x00000008) == 0x00000008);
         }
         /**
-         * <code>optional double amount_due = 6;</code>
+         * <code>optional double amount_due = 4;</code>
          */
         public double getAmountDue() {
           return amountDue_;
         }
         /**
-         * <code>optional double amount_due = 6;</code>
+         * <code>optional double amount_due = 4;</code>
          */
         public Builder setAmountDue(double value) {
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000008;
           amountDue_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional double amount_due = 6;</code>
+         * <code>optional double amount_due = 4;</code>
          */
         public Builder clearAmountDue() {
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000008);
           amountDue_ = 0D;
-          onChanged();
-          return this;
-        }
-
-        private boolean active_ = true;
-        /**
-         * <code>optional bool active = 7 [default = true];</code>
-         */
-        public boolean hasActive() {
-          return ((bitField0_ & 0x00000040) == 0x00000040);
-        }
-        /**
-         * <code>optional bool active = 7 [default = true];</code>
-         */
-        public boolean getActive() {
-          return active_;
-        }
-        /**
-         * <code>optional bool active = 7 [default = true];</code>
-         */
-        public Builder setActive(boolean value) {
-          bitField0_ |= 0x00000040;
-          active_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional bool active = 7 [default = true];</code>
-         */
-        public Builder clearActive() {
-          bitField0_ = (bitField0_ & ~0x00000040);
-          active_ = true;
-          onChanged();
-          return this;
-        }
-
-        private java.lang.Object description_ = "";
-        /**
-         * <code>optional string description = 8;</code>
-         */
-        public boolean hasDescription() {
-          return ((bitField0_ & 0x00000080) == 0x00000080);
-        }
-        /**
-         * <code>optional string description = 8;</code>
-         */
-        public java.lang.String getDescription() {
-          java.lang.Object ref = description_;
-          if (!(ref instanceof java.lang.String)) {
-            com.google.protobuf.ByteString bs =
-                (com.google.protobuf.ByteString) ref;
-            java.lang.String s = bs.toStringUtf8();
-            if (bs.isValidUtf8()) {
-              description_ = s;
-            }
-            return s;
-          } else {
-            return (java.lang.String) ref;
-          }
-        }
-        /**
-         * <code>optional string description = 8;</code>
-         */
-        public com.google.protobuf.ByteString
-            getDescriptionBytes() {
-          java.lang.Object ref = description_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            description_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        /**
-         * <code>optional string description = 8;</code>
-         */
-        public Builder setDescription(
-            java.lang.String value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
-          description_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional string description = 8;</code>
-         */
-        public Builder clearDescription() {
-          bitField0_ = (bitField0_ & ~0x00000080);
-          description_ = getDefaultInstance().getDescription();
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional string description = 8;</code>
-         */
-        public Builder setDescriptionBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000080;
-          description_ = value;
-          onChanged();
-          return this;
-        }
-
-        private int rank_ ;
-        /**
-         * <code>optional int32 rank = 9;</code>
-         */
-        public boolean hasRank() {
-          return ((bitField0_ & 0x00000100) == 0x00000100);
-        }
-        /**
-         * <code>optional int32 rank = 9;</code>
-         */
-        public int getRank() {
-          return rank_;
-        }
-        /**
-         * <code>optional int32 rank = 9;</code>
-         */
-        public Builder setRank(int value) {
-          bitField0_ |= 0x00000100;
-          rank_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional int32 rank = 9;</code>
-         */
-        public Builder clearRank() {
-          bitField0_ = (bitField0_ & ~0x00000100);
-          rank_ = 0;
           onChanged();
           return this;
         }
@@ -13024,9 +10994,9 @@ public final class BudgetUIProtos {
         private java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI> transaction_ =
           java.util.Collections.emptyList();
         private void ensureTransactionIsMutable() {
-          if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          if (!((bitField0_ & 0x00000010) == 0x00000010)) {
             transaction_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI>(transaction_);
-            bitField0_ |= 0x00000200;
+            bitField0_ |= 0x00000010;
            }
         }
 
@@ -13034,7 +11004,7 @@ public final class BudgetUIProtos {
             com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUIOrBuilder> transactionBuilder_;
 
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI> getTransactionList() {
           if (transactionBuilder_ == null) {
@@ -13044,7 +11014,7 @@ public final class BudgetUIProtos {
           }
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public int getTransactionCount() {
           if (transactionBuilder_ == null) {
@@ -13054,7 +11024,7 @@ public final class BudgetUIProtos {
           }
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI getTransaction(int index) {
           if (transactionBuilder_ == null) {
@@ -13064,7 +11034,7 @@ public final class BudgetUIProtos {
           }
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public Builder setTransaction(
             int index, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI value) {
@@ -13081,7 +11051,7 @@ public final class BudgetUIProtos {
           return this;
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public Builder setTransaction(
             int index, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.Builder builderForValue) {
@@ -13095,7 +11065,7 @@ public final class BudgetUIProtos {
           return this;
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public Builder addTransaction(com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI value) {
           if (transactionBuilder_ == null) {
@@ -13111,7 +11081,7 @@ public final class BudgetUIProtos {
           return this;
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public Builder addTransaction(
             int index, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI value) {
@@ -13128,7 +11098,7 @@ public final class BudgetUIProtos {
           return this;
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public Builder addTransaction(
             com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.Builder builderForValue) {
@@ -13142,7 +11112,7 @@ public final class BudgetUIProtos {
           return this;
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public Builder addTransaction(
             int index, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.Builder builderForValue) {
@@ -13156,7 +11126,7 @@ public final class BudgetUIProtos {
           return this;
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public Builder addAllTransaction(
             java.lang.Iterable<? extends com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI> values) {
@@ -13171,12 +11141,12 @@ public final class BudgetUIProtos {
           return this;
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public Builder clearTransaction() {
           if (transactionBuilder_ == null) {
             transaction_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000200);
+            bitField0_ = (bitField0_ & ~0x00000010);
             onChanged();
           } else {
             transactionBuilder_.clear();
@@ -13184,7 +11154,7 @@ public final class BudgetUIProtos {
           return this;
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public Builder removeTransaction(int index) {
           if (transactionBuilder_ == null) {
@@ -13197,14 +11167,14 @@ public final class BudgetUIProtos {
           return this;
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.Builder getTransactionBuilder(
             int index) {
           return getTransactionFieldBuilder().getBuilder(index);
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUIOrBuilder getTransactionOrBuilder(
             int index) {
@@ -13214,7 +11184,7 @@ public final class BudgetUIProtos {
           }
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUIOrBuilder> 
              getTransactionOrBuilderList() {
@@ -13225,14 +11195,14 @@ public final class BudgetUIProtos {
           }
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.Builder addTransactionBuilder() {
           return getTransactionFieldBuilder().addBuilder(
               com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.getDefaultInstance());
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.Builder addTransactionBuilder(
             int index) {
@@ -13240,7 +11210,7 @@ public final class BudgetUIProtos {
               index, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.getDefaultInstance());
         }
         /**
-         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 10;</code>
+         * <code>repeated .budget.TemplateUI.TemplateBillUI.TemplateTransactionUI transaction = 5;</code>
          */
         public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.Builder> 
              getTransactionBuilderList() {
@@ -13253,7 +11223,7 @@ public final class BudgetUIProtos {
             transactionBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUIOrBuilder>(
                     transaction_,
-                    ((bitField0_ & 0x00000200) == 0x00000200),
+                    ((bitField0_ & 0x00000010) == 0x00000010),
                     getParentForChildren(),
                     isClean());
             transaction_ = null;
@@ -13381,77 +11351,35 @@ public final class BudgetUIProtos {
       }
     }
 
-    public static final int DESCRIPTION_FIELD_NUMBER = 4;
-    private volatile java.lang.Object description_;
-    /**
-     * <code>optional string description = 4;</code>
-     */
-    public boolean hasDescription() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional string description = 4;</code>
-     */
-    public java.lang.String getDescription() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          description_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string description = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDescriptionBytes() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        description_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int BILL_FIELD_NUMBER = 5;
+    public static final int BILL_FIELD_NUMBER = 4;
     private java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI> bill_;
     /**
-     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
      */
     public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI> getBillList() {
       return bill_;
     }
     /**
-     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
      */
     public java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUIOrBuilder> 
         getBillOrBuilderList() {
       return bill_;
     }
     /**
-     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
      */
     public int getBillCount() {
       return bill_.size();
     }
     /**
-     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
      */
     public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI getBill(int index) {
       return bill_.get(index);
     }
     /**
-     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+     * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
      */
     public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUIOrBuilder getBillOrBuilder(
         int index) {
@@ -13479,11 +11407,8 @@ public final class BudgetUIProtos {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         com.google.protobuf.GeneratedMessage.writeString(output, 3, name_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 4, description_);
-      }
       for (int i = 0; i < bill_.size(); i++) {
-        output.writeMessage(5, bill_.get(i));
+        output.writeMessage(4, bill_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -13504,12 +11429,9 @@ public final class BudgetUIProtos {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(3, name_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(4, description_);
-      }
       for (int i = 0; i < bill_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, bill_.get(i));
+          .computeMessageSize(4, bill_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -13630,11 +11552,9 @@ public final class BudgetUIProtos {
         bitField0_ = (bitField0_ & ~0x00000002);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        description_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
         if (billBuilder_ == null) {
           bill_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000008);
         } else {
           billBuilder_.clear();
         }
@@ -13674,14 +11594,10 @@ public final class BudgetUIProtos {
           to_bitField0_ |= 0x00000004;
         }
         result.name_ = name_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.description_ = description_;
         if (billBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
             bill_ = java.util.Collections.unmodifiableList(bill_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.bill_ = bill_;
         } else {
@@ -13714,16 +11630,11 @@ public final class BudgetUIProtos {
           name_ = other.name_;
           onChanged();
         }
-        if (other.hasDescription()) {
-          bitField0_ |= 0x00000008;
-          description_ = other.description_;
-          onChanged();
-        }
         if (billBuilder_ == null) {
           if (!other.bill_.isEmpty()) {
             if (bill_.isEmpty()) {
               bill_ = other.bill_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000008);
             } else {
               ensureBillIsMutable();
               bill_.addAll(other.bill_);
@@ -13736,7 +11647,7 @@ public final class BudgetUIProtos {
               billBuilder_.dispose();
               billBuilder_ = null;
               bill_ = other.bill_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000008);
               billBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getBillFieldBuilder() : null;
@@ -13913,88 +11824,12 @@ public final class BudgetUIProtos {
         return this;
       }
 
-      private java.lang.Object description_ = "";
-      /**
-       * <code>optional string description = 4;</code>
-       */
-      public boolean hasDescription() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional string description = 4;</code>
-       */
-      public java.lang.String getDescription() {
-        java.lang.Object ref = description_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string description = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDescriptionBytes() {
-        java.lang.Object ref = description_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          description_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string description = 4;</code>
-       */
-      public Builder setDescription(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        description_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string description = 4;</code>
-       */
-      public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        description_ = getDefaultInstance().getDescription();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string description = 4;</code>
-       */
-      public Builder setDescriptionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        description_ = value;
-        onChanged();
-        return this;
-      }
-
       private java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI> bill_ =
         java.util.Collections.emptyList();
       private void ensureBillIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
           bill_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI>(bill_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000008;
          }
       }
 
@@ -14002,7 +11837,7 @@ public final class BudgetUIProtos {
           com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUIOrBuilder> billBuilder_;
 
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI> getBillList() {
         if (billBuilder_ == null) {
@@ -14012,7 +11847,7 @@ public final class BudgetUIProtos {
         }
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public int getBillCount() {
         if (billBuilder_ == null) {
@@ -14022,7 +11857,7 @@ public final class BudgetUIProtos {
         }
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI getBill(int index) {
         if (billBuilder_ == null) {
@@ -14032,7 +11867,7 @@ public final class BudgetUIProtos {
         }
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public Builder setBill(
           int index, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI value) {
@@ -14049,7 +11884,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public Builder setBill(
           int index, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.Builder builderForValue) {
@@ -14063,7 +11898,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public Builder addBill(com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI value) {
         if (billBuilder_ == null) {
@@ -14079,7 +11914,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public Builder addBill(
           int index, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI value) {
@@ -14096,7 +11931,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public Builder addBill(
           com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.Builder builderForValue) {
@@ -14110,7 +11945,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public Builder addBill(
           int index, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.Builder builderForValue) {
@@ -14124,7 +11959,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public Builder addAllBill(
           java.lang.Iterable<? extends com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI> values) {
@@ -14139,12 +11974,12 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public Builder clearBill() {
         if (billBuilder_ == null) {
           bill_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
           billBuilder_.clear();
@@ -14152,7 +11987,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public Builder removeBill(int index) {
         if (billBuilder_ == null) {
@@ -14165,14 +12000,14 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.Builder getBillBuilder(
           int index) {
         return getBillFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUIOrBuilder getBillOrBuilder(
           int index) {
@@ -14182,7 +12017,7 @@ public final class BudgetUIProtos {
         }
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public java.util.List<? extends com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUIOrBuilder> 
            getBillOrBuilderList() {
@@ -14193,14 +12028,14 @@ public final class BudgetUIProtos {
         }
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.Builder addBillBuilder() {
         return getBillFieldBuilder().addBuilder(
             com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.getDefaultInstance());
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.Builder addBillBuilder(
           int index) {
@@ -14208,7 +12043,7 @@ public final class BudgetUIProtos {
             index, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.getDefaultInstance());
       }
       /**
-       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 5;</code>
+       * <code>repeated .budget.TemplateUI.TemplateBillUI bill = 4;</code>
        */
       public java.util.List<com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.Builder> 
            getBillBuilderList() {
@@ -14221,7 +12056,7 @@ public final class BudgetUIProtos {
           billBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.Builder, com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUIOrBuilder>(
                   bill_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           bill_ = null;
@@ -14667,402 +12502,6 @@ public final class BudgetUIProtos {
     }
 
     public com.digitald4.budget.proto.BudgetUIProtos.TemplateListRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface TemplateGetRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:budget.TemplateGetRequest)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 template_id = 1;</code>
-     */
-    boolean hasTemplateId();
-    /**
-     * <code>optional int32 template_id = 1;</code>
-     */
-    int getTemplateId();
-  }
-  /**
-   * Protobuf type {@code budget.TemplateGetRequest}
-   */
-  public  static final class TemplateGetRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:budget.TemplateGetRequest)
-      TemplateGetRequestOrBuilder {
-    // Use TemplateGetRequest.newBuilder() to construct.
-    private TemplateGetRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private TemplateGetRequest() {
-      templateId_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private TemplateGetRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
-      this();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              templateId_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
-      } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_TemplateGetRequest_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_TemplateGetRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest.class, com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int TEMPLATE_ID_FIELD_NUMBER = 1;
-    private int templateId_;
-    /**
-     * <code>optional int32 template_id = 1;</code>
-     */
-    public boolean hasTemplateId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 template_id = 1;</code>
-     */
-    public int getTemplateId() {
-      return templateId_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, templateId_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, templateId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code budget.TemplateGetRequest}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:budget.TemplateGetRequest)
-        com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_TemplateGetRequest_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_TemplateGetRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest.class, com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest.Builder.class);
-      }
-
-      // Construct using com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        templateId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_TemplateGetRequest_descriptor;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest getDefaultInstanceForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest.getDefaultInstance();
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest build() {
-        com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest buildPartial() {
-        com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest result = new com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.templateId_ = templateId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest) {
-          return mergeFrom((com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest other) {
-        if (other == com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest.getDefaultInstance()) return this;
-        if (other.hasTemplateId()) {
-          setTemplateId(other.getTemplateId());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int templateId_ ;
-      /**
-       * <code>optional int32 template_id = 1;</code>
-       */
-      public boolean hasTemplateId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 template_id = 1;</code>
-       */
-      public int getTemplateId() {
-        return templateId_;
-      }
-      /**
-       * <code>optional int32 template_id = 1;</code>
-       */
-      public Builder setTemplateId(int value) {
-        bitField0_ |= 0x00000001;
-        templateId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 template_id = 1;</code>
-       */
-      public Builder clearTemplateId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        templateId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:budget.TemplateGetRequest)
-    }
-
-    // @@protoc_insertion_point(class_scope:budget.TemplateGetRequest)
-    private static final com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest();
-    }
-
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<TemplateGetRequest>
-        PARSER = new com.google.protobuf.AbstractParser<TemplateGetRequest>() {
-      public TemplateGetRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
-          return new TemplateGetRequest(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
-      }
-    };
-
-    public static com.google.protobuf.Parser<TemplateGetRequest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<TemplateGetRequest> getParserForType() {
-      return PARSER;
-    }
-
-    public com.digitald4.budget.proto.BudgetUIProtos.TemplateGetRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -15576,402 +13015,6 @@ public final class BudgetUIProtos {
 
   }
 
-  public interface TemplateDeleteRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:budget.TemplateDeleteRequest)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 template_id = 1;</code>
-     */
-    boolean hasTemplateId();
-    /**
-     * <code>optional int32 template_id = 1;</code>
-     */
-    int getTemplateId();
-  }
-  /**
-   * Protobuf type {@code budget.TemplateDeleteRequest}
-   */
-  public  static final class TemplateDeleteRequest extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:budget.TemplateDeleteRequest)
-      TemplateDeleteRequestOrBuilder {
-    // Use TemplateDeleteRequest.newBuilder() to construct.
-    private TemplateDeleteRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private TemplateDeleteRequest() {
-      templateId_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private TemplateDeleteRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
-      this();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              templateId_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
-      } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_TemplateDeleteRequest_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_TemplateDeleteRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest.class, com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int TEMPLATE_ID_FIELD_NUMBER = 1;
-    private int templateId_;
-    /**
-     * <code>optional int32 template_id = 1;</code>
-     */
-    public boolean hasTemplateId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 template_id = 1;</code>
-     */
-    public int getTemplateId() {
-      return templateId_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, templateId_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, templateId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code budget.TemplateDeleteRequest}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:budget.TemplateDeleteRequest)
-        com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_TemplateDeleteRequest_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_TemplateDeleteRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest.class, com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest.Builder.class);
-      }
-
-      // Construct using com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        templateId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.internal_static_budget_TemplateDeleteRequest_descriptor;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest getDefaultInstanceForType() {
-        return com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest.getDefaultInstance();
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest build() {
-        com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest buildPartial() {
-        com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest result = new com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.templateId_ = templateId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest) {
-          return mergeFrom((com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest other) {
-        if (other == com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest.getDefaultInstance()) return this;
-        if (other.hasTemplateId()) {
-          setTemplateId(other.getTemplateId());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int templateId_ ;
-      /**
-       * <code>optional int32 template_id = 1;</code>
-       */
-      public boolean hasTemplateId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 template_id = 1;</code>
-       */
-      public int getTemplateId() {
-        return templateId_;
-      }
-      /**
-       * <code>optional int32 template_id = 1;</code>
-       */
-      public Builder setTemplateId(int value) {
-        bitField0_ |= 0x00000001;
-        templateId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 template_id = 1;</code>
-       */
-      public Builder clearTemplateId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        templateId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:budget.TemplateDeleteRequest)
-    }
-
-    // @@protoc_insertion_point(class_scope:budget.TemplateDeleteRequest)
-    private static final com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest();
-    }
-
-    public static com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<TemplateDeleteRequest>
-        PARSER = new com.google.protobuf.AbstractParser<TemplateDeleteRequest>() {
-      public TemplateDeleteRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
-          return new TemplateDeleteRequest(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
-      }
-    };
-
-    public static com.google.protobuf.Parser<TemplateDeleteRequest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<TemplateDeleteRequest> getParserForType() {
-      return PARSER;
-    }
-
-    public com.digitald4.budget.proto.BudgetUIProtos.TemplateDeleteRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface ApplyTemplateRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:budget.ApplyTemplateRequest)
       com.google.protobuf.MessageOrBuilder {
@@ -15995,13 +13038,13 @@ public final class BudgetUIProtos {
     long getRefDate();
 
     /**
-     * <code>optional .common.DateRangeType date_range = 3;</code>
+     * <code>optional .common.DateRange date_range = 3;</code>
      */
     boolean hasDateRange();
     /**
-     * <code>optional .common.DateRangeType date_range = 3;</code>
+     * <code>optional .common.DateRange date_range = 3;</code>
      */
-    com.digitald4.common.proto.DD4UIProtos.DateRangeType getDateRange();
+    com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange();
   }
   /**
    * Protobuf type {@code budget.ApplyTemplateRequest}
@@ -16059,7 +13102,7 @@ public final class BudgetUIProtos {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.digitald4.common.proto.DD4UIProtos.DateRangeType value = com.digitald4.common.proto.DD4UIProtos.DateRangeType.valueOf(rawValue);
+              com.digitald4.common.proto.DD4UIProtos.DateRange value = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -16127,17 +13170,17 @@ public final class BudgetUIProtos {
     public static final int DATE_RANGE_FIELD_NUMBER = 3;
     private int dateRange_;
     /**
-     * <code>optional .common.DateRangeType date_range = 3;</code>
+     * <code>optional .common.DateRange date_range = 3;</code>
      */
     public boolean hasDateRange() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .common.DateRangeType date_range = 3;</code>
+     * <code>optional .common.DateRange date_range = 3;</code>
      */
-    public com.digitald4.common.proto.DD4UIProtos.DateRangeType getDateRange() {
-      com.digitald4.common.proto.DD4UIProtos.DateRangeType result = com.digitald4.common.proto.DD4UIProtos.DateRangeType.valueOf(dateRange_);
-      return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRangeType.UNSPECIFIED : result;
+    public com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange() {
+      com.digitald4.common.proto.DD4UIProtos.DateRange result = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(dateRange_);
+      return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRange.UNSPECIFIED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -16454,22 +13497,22 @@ public final class BudgetUIProtos {
 
       private int dateRange_ = 0;
       /**
-       * <code>optional .common.DateRangeType date_range = 3;</code>
+       * <code>optional .common.DateRange date_range = 3;</code>
        */
       public boolean hasDateRange() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .common.DateRangeType date_range = 3;</code>
+       * <code>optional .common.DateRange date_range = 3;</code>
        */
-      public com.digitald4.common.proto.DD4UIProtos.DateRangeType getDateRange() {
-        com.digitald4.common.proto.DD4UIProtos.DateRangeType result = com.digitald4.common.proto.DD4UIProtos.DateRangeType.valueOf(dateRange_);
-        return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRangeType.UNSPECIFIED : result;
+      public com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange() {
+        com.digitald4.common.proto.DD4UIProtos.DateRange result = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(dateRange_);
+        return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRange.UNSPECIFIED : result;
       }
       /**
-       * <code>optional .common.DateRangeType date_range = 3;</code>
+       * <code>optional .common.DateRange date_range = 3;</code>
        */
-      public Builder setDateRange(com.digitald4.common.proto.DD4UIProtos.DateRangeType value) {
+      public Builder setDateRange(com.digitald4.common.proto.DD4UIProtos.DateRange value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -16479,7 +13522,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>optional .common.DateRangeType date_range = 3;</code>
+       * <code>optional .common.DateRange date_range = 3;</code>
        */
       public Builder clearDateRange() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -16551,30 +13594,20 @@ public final class BudgetUIProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_budget_PortfolioListRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_budget_PortfolioGetRequest_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_budget_PortfolioGetRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_budget_PortfolioCreateRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_budget_PortfolioCreateRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_budget_PortfolioDeleteRequest_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_budget_PortfolioDeleteRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_budget_BalanceUI_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_budget_BalanceUI_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_budget_AccountUI_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_budget_AccountUI_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_budget_AccountUI_BalanceUI_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_budget_AccountUI_BalanceUI_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_budget_AccountListRequest_descriptor;
   private static
@@ -16591,11 +13624,6 @@ public final class BudgetUIProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_budget_AccountCreateRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_budget_AccountDeleteRequest_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_budget_AccountDeleteRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_budget_BillUI_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -16611,20 +13639,15 @@ public final class BudgetUIProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_budget_BillListRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_budget_BillGetRequest_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_budget_BillGetRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_budget_BillCreateRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_budget_BillCreateRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_budget_BillDeleteRequest_descriptor;
+    internal_static_budget_BillTransUpdateRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_budget_BillDeleteRequest_fieldAccessorTable;
+      internal_static_budget_BillTransUpdateRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_budget_TemplateUI_descriptor;
   private static
@@ -16646,20 +13669,10 @@ public final class BudgetUIProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_budget_TemplateListRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_budget_TemplateGetRequest_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_budget_TemplateGetRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_budget_TemplateCreateRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_budget_TemplateCreateRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_budget_TemplateDeleteRequest_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_budget_TemplateDeleteRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_budget_ApplyTemplateRequest_descriptor;
   private static
@@ -16675,68 +13688,59 @@ public final class BudgetUIProtos {
   static {
     java.lang.String[] descriptorData = {
       "\n\017budget_ui.proto\022\006budget\032\017common_ui.pro" +
-      "to\"\277\001\n\013PortfolioUI\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002" +
-      " \001(\t\022\023\n\013description\030\003 \001(\t\022;\n\016portfolio_u" +
-      "ser\030\004 \003(\0132#.budget.PortfolioUI.Portfolio" +
-      "UserUI\032D\n\017PortfolioUserUI\022\017\n\007user_id\030\001 \001" +
-      "(\005\022 \n\004role\030\002 \001(\0162\022.budget.UserRoleUI\"\026\n\024" +
-      "PortfolioListRequest\"+\n\023PortfolioGetRequ" +
-      "est\022\024\n\014portfolio_id\030\001 \001(\005\"@\n\026PortfolioCr" +
-      "eateRequest\022&\n\tportfolio\030\001 \001(\0132\023.budget." +
-      "PortfolioUI\".\n\026PortfolioDeleteRequest\022\024\n",
-      "\014portfolio_id\030\001 \001(\005\"H\n\tBalanceUI\022\014\n\004date" +
-      "\030\001 \001(\003\022\017\n\007balance\030\002 \001(\001\022\034\n\024balance_year_" +
-      "to_date\030\003 \001(\001\"\250\001\n\tAccountUI\022\n\n\002id\030\001 \001(\005\022" +
-      "\024\n\014portfolio_id\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\023\n\013d" +
-      "escription\030\004 \001(\t\022\027\n\017payment_account\030\005 \001(" +
-      "\010\022\031\n\021parent_account_id\030\006 \001(\005\022\"\n\007balance\030" +
-      "\007 \001(\0132\021.budget.BalanceUI\"*\n\022AccountListR" +
-      "equest\022\024\n\014portfolio_id\030\001 \001(\005\"\'\n\021AccountG" +
-      "etRequest\022\022\n\naccount_id\030\001 \001(\005\":\n\024Account" +
-      "CreateRequest\022\"\n\007account\030\001 \001(\0132\021.budget.",
-      "AccountUI\"*\n\024AccountDeleteRequest\022\022\n\nacc" +
-      "ount_id\030\001 \001(\005\"\253\004\n\006BillUI\022\n\n\002id\030\001 \001(\005\022\024\n\014" +
-      "portfolio_id\030\002 \001(\005\022\022\n\naccount_id\030\003 \001(\005\022\023" +
-      "\n\013template_id\030\004 \001(\005\022\020\n\010due_date\030\005 \001(\003\022\014\n" +
-      "\004name\030\006 \001(\t\022\024\n\014payment_date\030\007 \001(\003\022\022\n\namo" +
-      "unt_due\030\010 \001(\001\022.\n\006status\030\t \001(\0162\036.budget.B" +
-      "illUI.PaymentStatusUI\022\016\n\006active\030\n \001(\010\022\023\n" +
-      "\013description\030\013 \001(\t\0221\n\013transaction\030\014 \003(\0132" +
-      "\034.budget.BillUI.TransactionUI\032\233\001\n\rTransa" +
-      "ctionUI\022\n\n\002id\030\001 \001(\005\022\030\n\020debit_account_id\030",
-      "\002 \001(\005\022\016\n\006amount\030\003 \001(\001\022\024\n\014payment_date\030\004 " +
-      "\001(\003\022.\n\006status\030\005 \001(\0162\036.budget.BillUI.Paym" +
-      "entStatusUI\022\016\n\006active\030\006 \001(\010\"f\n\017PaymentSt" +
-      "atusUI\022\016\n\nPS_UNKNOWN\020\000\022\024\n\020PS_NOT_SCHEDUL" +
-      "ED\020\001\022\020\n\014PS_SCHEDULED\020\002\022\016\n\nPS_PENDING\020\003\022\013" +
-      "\n\007PS_PAID\020\004\"d\n\017BillListRequest\022\024\n\014portfo" +
-      "lio_id\030\001 \001(\005\022\020\n\010ref_date\030\002 \001(\003\022)\n\ndate_r" +
-      "ange\030\003 \001(\0162\025.common.DateRangeType\"!\n\016Bil" +
-      "lGetRequest\022\017\n\007bill_id\030\001 \001(\005\"1\n\021BillCrea" +
-      "teRequest\022\034\n\004bill\030\001 \001(\0132\016.budget.BillUI\"",
-      "$\n\021BillDeleteRequest\022\017\n\007bill_id\030\001 \001(\005\"\307\003" +
-      "\n\nTemplateUI\022\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id" +
-      "\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\023\n\013description\030\004 \001(" +
-      "\t\022/\n\004bill\030\005 \003(\0132!.budget.TemplateUI.Temp" +
-      "lateBillUI\032\302\002\n\016TemplateBillUI\022\n\n\002id\030\001 \001(" +
-      "\005\022\023\n\013template_id\030\002 \001(\005\022\022\n\naccount_id\030\003 \001" +
-      "(\005\022\017\n\007due_day\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022\022\n\namo" +
-      "unt_due\030\006 \001(\001\022\024\n\006active\030\007 \001(\010:\004true\022\023\n\013d" +
-      "escription\030\010 \001(\t\022\014\n\004rank\030\t \001(\005\022L\n\013transa" +
-      "ction\030\n \003(\01327.budget.TemplateUI.Template",
-      "BillUI.TemplateTransactionUI\032A\n\025Template" +
-      "TransactionUI\022\030\n\020debit_account_id\030\001 \001(\005\022" +
-      "\016\n\006amount\030\002 \001(\001\"+\n\023TemplateListRequest\022\024" +
-      "\n\014portfolio_id\030\001 \001(\005\")\n\022TemplateGetReque" +
-      "st\022\023\n\013template_id\030\001 \001(\005\"=\n\025TemplateCreat" +
-      "eRequest\022$\n\010template\030\001 \001(\0132\022.budget.Temp" +
-      "lateUI\",\n\025TemplateDeleteRequest\022\023\n\013templ" +
-      "ate_id\030\001 \001(\005\"h\n\024ApplyTemplateRequest\022\023\n\013" +
-      "template_id\030\001 \001(\005\022\020\n\010ref_date\030\002 \001(\003\022)\n\nd" +
-      "ate_range\030\003 \001(\0162\025.common.DateRangeType*;",
-      "\n\nUserRoleUI\022\016\n\nUR_UNKNOWN\020\000\022\014\n\010UR_OWNER" +
-      "\020\014\022\017\n\013UR_READONLY\020\rB,\n\032com.digitald4.bud" +
-      "get.protoB\016BudgetUIProtos"
+      "to\"\252\001\n\013PortfolioUI\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002" +
+      " \001(\t\022;\n\016portfolio_user\030\004 \003(\0132#.budget.Po" +
+      "rtfolioUI.PortfolioUserUI\032D\n\017PortfolioUs" +
+      "erUI\022\017\n\007user_id\030\001 \001(\005\022 \n\004role\030\002 \001(\0162\022.bu" +
+      "dget.UserRoleUI\"\026\n\024PortfolioListRequest\"" +
+      "@\n\026PortfolioCreateRequest\022&\n\tportfolio\030\001" +
+      " \001(\0132\023.budget.PortfolioUI\"\347\001\n\tAccountUI\022" +
+      "\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id\030\002 \001(\005\022\014\n\004nam" +
+      "e\030\003 \001(\t\022\027\n\017payment_account\030\004 \001(\010\022\031\n\021pare",
+      "nt_account_id\030\005 \001(\005\022,\n\007balance\030\006 \001(\0132\033.b" +
+      "udget.AccountUI.BalanceUI\032H\n\tBalanceUI\022\014" +
+      "\n\004date\030\001 \001(\t\022\017\n\007balance\030\002 \001(\001\022\034\n\024balance" +
+      "_year_to_date\030\003 \001(\001\"<\n\022AccountListReques" +
+      "t\022\024\n\014portfolio_id\030\001 \001(\005\022\020\n\010ref_date\030\002 \001(" +
+      "\003\"9\n\021AccountGetRequest\022\022\n\naccount_id\030\001 \001" +
+      "(\005\022\020\n\010ref_date\030\002 \001(\003\":\n\024AccountCreateReq" +
+      "uest\022\"\n\007account\030\001 \001(\0132\021.budget.AccountUI" +
+      "\"\220\004\n\006BillUI\022\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id\030" +
+      "\002 \001(\005\022\022\n\naccount_id\030\003 \001(\005\022\023\n\013template_id",
+      "\030\004 \001(\005\022\020\n\010due_date\030\005 \001(\003\022\014\n\004name\030\006 \001(\t\022\024" +
+      "\n\014payment_date\030\007 \001(\003\022\022\n\namount_due\030\010 \001(\001" +
+      "\022.\n\006status\030\t \001(\0162\036.budget.BillUI.Payment" +
+      "StatusUI\022\014\n\004rank\030\n \001(\005\0221\n\013transaction\030\r " +
+      "\003(\0132\034.budget.BillUI.TransactionUI\032\177\n\rTra" +
+      "nsactionUI\022\030\n\020debit_account_id\030\001 \001(\005\022\016\n\006" +
+      "amount\030\002 \001(\001\022\024\n\014payment_date\030\003 \001(\003\022.\n\006st" +
+      "atus\030\004 \001(\0162\036.budget.BillUI.PaymentStatus" +
+      "UI\"\177\n\017PaymentStatusUI\022\016\n\nPS_UNKNOWN\020\000\022\027\n" +
+      "\023PS_ESTIMATED_AMOUNT\020\001\022\024\n\020PS_BILLED_AMOU",
+      "NT\020\002\022\020\n\014PS_SCHEDULED\020\003\022\016\n\nPS_PENDING\020\004\022\013" +
+      "\n\007PS_PAID\020\005\"`\n\017BillListRequest\022\024\n\014portfo" +
+      "lio_id\030\001 \001(\005\022\020\n\010ref_date\030\002 \001(\003\022%\n\ndate_r" +
+      "ange\030\003 \001(\0162\021.common.DateRange\"1\n\021BillCre" +
+      "ateRequest\022\034\n\004bill\030\001 \001(\0132\016.budget.BillUI" +
+      "\"\\\n\026BillTransUpdateRequest\022\017\n\007bill_id\030\001 " +
+      "\001(\005\0221\n\013transaction\030\002 \003(\0132\034.budget.BillUI" +
+      ".TransactionUI\"\330\002\n\nTemplateUI\022\n\n\002id\030\001 \001(" +
+      "\005\022\024\n\014portfolio_id\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022/\n" +
+      "\004bill\030\004 \003(\0132!.budget.TemplateUI.Template",
+      "BillUI\032\350\001\n\016TemplateBillUI\022\022\n\naccount_id\030" +
+      "\001 \001(\005\022\017\n\007due_day\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\022\n\n" +
+      "amount_due\030\004 \001(\001\022L\n\013transaction\030\005 \003(\01327." +
+      "budget.TemplateUI.TemplateBillUI.Templat" +
+      "eTransactionUI\032A\n\025TemplateTransactionUI\022" +
+      "\030\n\020debit_account_id\030\001 \001(\005\022\016\n\006amount\030\002 \001(" +
+      "\001\"+\n\023TemplateListRequest\022\024\n\014portfolio_id" +
+      "\030\001 \001(\005\"=\n\025TemplateCreateRequest\022$\n\010templ" +
+      "ate\030\001 \001(\0132\022.budget.TemplateUI\"d\n\024ApplyTe" +
+      "mplateRequest\022\023\n\013template_id\030\001 \001(\005\022\020\n\010re",
+      "f_date\030\002 \001(\003\022%\n\ndate_range\030\003 \001(\0162\021.commo" +
+      "n.DateRange*;\n\nUserRoleUI\022\016\n\nUR_UNKNOWN\020" +
+      "\000\022\014\n\010UR_OWNER\020\014\022\017\n\013UR_READONLY\020\rB,\n\032com." +
+      "digitald4.budget.protoB\016BudgetUIProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16756,7 +13760,7 @@ public final class BudgetUIProtos {
     internal_static_budget_PortfolioUI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_PortfolioUI_descriptor,
-        new java.lang.String[] { "Id", "Name", "Description", "PortfolioUser", });
+        new java.lang.String[] { "Id", "Name", "PortfolioUser", });
     internal_static_budget_PortfolioUI_PortfolioUserUI_descriptor =
       internal_static_budget_PortfolioUI_descriptor.getNestedTypes().get(0);
     internal_static_budget_PortfolioUI_PortfolioUserUI_fieldAccessorTable = new
@@ -16769,108 +13773,84 @@ public final class BudgetUIProtos {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_PortfolioListRequest_descriptor,
         new java.lang.String[] { });
-    internal_static_budget_PortfolioGetRequest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_budget_PortfolioGetRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_budget_PortfolioGetRequest_descriptor,
-        new java.lang.String[] { "PortfolioId", });
     internal_static_budget_PortfolioCreateRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_budget_PortfolioCreateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_PortfolioCreateRequest_descriptor,
         new java.lang.String[] { "Portfolio", });
-    internal_static_budget_PortfolioDeleteRequest_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_budget_PortfolioDeleteRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_budget_PortfolioDeleteRequest_descriptor,
-        new java.lang.String[] { "PortfolioId", });
-    internal_static_budget_BalanceUI_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_budget_BalanceUI_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_budget_BalanceUI_descriptor,
-        new java.lang.String[] { "Date", "Balance", "BalanceYearToDate", });
     internal_static_budget_AccountUI_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_budget_AccountUI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_AccountUI_descriptor,
-        new java.lang.String[] { "Id", "PortfolioId", "Name", "Description", "PaymentAccount", "ParentAccountId", "Balance", });
+        new java.lang.String[] { "Id", "PortfolioId", "Name", "PaymentAccount", "ParentAccountId", "Balance", });
+    internal_static_budget_AccountUI_BalanceUI_descriptor =
+      internal_static_budget_AccountUI_descriptor.getNestedTypes().get(0);
+    internal_static_budget_AccountUI_BalanceUI_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_budget_AccountUI_BalanceUI_descriptor,
+        new java.lang.String[] { "Date", "Balance", "BalanceYearToDate", });
     internal_static_budget_AccountListRequest_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_budget_AccountListRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_AccountListRequest_descriptor,
-        new java.lang.String[] { "PortfolioId", });
+        new java.lang.String[] { "PortfolioId", "RefDate", });
     internal_static_budget_AccountGetRequest_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_budget_AccountGetRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_AccountGetRequest_descriptor,
-        new java.lang.String[] { "AccountId", });
+        new java.lang.String[] { "AccountId", "RefDate", });
     internal_static_budget_AccountCreateRequest_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_budget_AccountCreateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_AccountCreateRequest_descriptor,
         new java.lang.String[] { "Account", });
-    internal_static_budget_AccountDeleteRequest_descriptor =
-      getDescriptor().getMessageTypes().get(10);
-    internal_static_budget_AccountDeleteRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_budget_AccountDeleteRequest_descriptor,
-        new java.lang.String[] { "AccountId", });
     internal_static_budget_BillUI_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_budget_BillUI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_BillUI_descriptor,
-        new java.lang.String[] { "Id", "PortfolioId", "AccountId", "TemplateId", "DueDate", "Name", "PaymentDate", "AmountDue", "Status", "Active", "Description", "Transaction", });
+        new java.lang.String[] { "Id", "PortfolioId", "AccountId", "TemplateId", "DueDate", "Name", "PaymentDate", "AmountDue", "Status", "Rank", "Transaction", });
     internal_static_budget_BillUI_TransactionUI_descriptor =
       internal_static_budget_BillUI_descriptor.getNestedTypes().get(0);
     internal_static_budget_BillUI_TransactionUI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_BillUI_TransactionUI_descriptor,
-        new java.lang.String[] { "Id", "DebitAccountId", "Amount", "PaymentDate", "Status", "Active", });
+        new java.lang.String[] { "DebitAccountId", "Amount", "PaymentDate", "Status", });
     internal_static_budget_BillListRequest_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_budget_BillListRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_BillListRequest_descriptor,
         new java.lang.String[] { "PortfolioId", "RefDate", "DateRange", });
-    internal_static_budget_BillGetRequest_descriptor =
-      getDescriptor().getMessageTypes().get(13);
-    internal_static_budget_BillGetRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_budget_BillGetRequest_descriptor,
-        new java.lang.String[] { "BillId", });
     internal_static_budget_BillCreateRequest_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_budget_BillCreateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_BillCreateRequest_descriptor,
         new java.lang.String[] { "Bill", });
-    internal_static_budget_BillDeleteRequest_descriptor =
-      getDescriptor().getMessageTypes().get(15);
-    internal_static_budget_BillDeleteRequest_fieldAccessorTable = new
+    internal_static_budget_BillTransUpdateRequest_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_budget_BillTransUpdateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_budget_BillDeleteRequest_descriptor,
-        new java.lang.String[] { "BillId", });
+        internal_static_budget_BillTransUpdateRequest_descriptor,
+        new java.lang.String[] { "BillId", "Transaction", });
     internal_static_budget_TemplateUI_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_budget_TemplateUI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_TemplateUI_descriptor,
-        new java.lang.String[] { "Id", "PortfolioId", "Name", "Description", "Bill", });
+        new java.lang.String[] { "Id", "PortfolioId", "Name", "Bill", });
     internal_static_budget_TemplateUI_TemplateBillUI_descriptor =
       internal_static_budget_TemplateUI_descriptor.getNestedTypes().get(0);
     internal_static_budget_TemplateUI_TemplateBillUI_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_TemplateUI_TemplateBillUI_descriptor,
-        new java.lang.String[] { "Id", "TemplateId", "AccountId", "DueDay", "Name", "AmountDue", "Active", "Description", "Rank", "Transaction", });
+        new java.lang.String[] { "AccountId", "DueDay", "Name", "AmountDue", "Transaction", });
     internal_static_budget_TemplateUI_TemplateBillUI_TemplateTransactionUI_descriptor =
       internal_static_budget_TemplateUI_TemplateBillUI_descriptor.getNestedTypes().get(0);
     internal_static_budget_TemplateUI_TemplateBillUI_TemplateTransactionUI_fieldAccessorTable = new
@@ -16878,31 +13858,19 @@ public final class BudgetUIProtos {
         internal_static_budget_TemplateUI_TemplateBillUI_TemplateTransactionUI_descriptor,
         new java.lang.String[] { "DebitAccountId", "Amount", });
     internal_static_budget_TemplateListRequest_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_budget_TemplateListRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_TemplateListRequest_descriptor,
         new java.lang.String[] { "PortfolioId", });
-    internal_static_budget_TemplateGetRequest_descriptor =
-      getDescriptor().getMessageTypes().get(18);
-    internal_static_budget_TemplateGetRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_budget_TemplateGetRequest_descriptor,
-        new java.lang.String[] { "TemplateId", });
     internal_static_budget_TemplateCreateRequest_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_budget_TemplateCreateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_TemplateCreateRequest_descriptor,
         new java.lang.String[] { "Template", });
-    internal_static_budget_TemplateDeleteRequest_descriptor =
-      getDescriptor().getMessageTypes().get(20);
-    internal_static_budget_TemplateDeleteRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_budget_TemplateDeleteRequest_descriptor,
-        new java.lang.String[] { "TemplateId", });
     internal_static_budget_ApplyTemplateRequest_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_budget_ApplyTemplateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_ApplyTemplateRequest_descriptor,

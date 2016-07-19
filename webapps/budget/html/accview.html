@@ -5,55 +5,55 @@
 				<th>Date</th><th>Transaction</th><th>Amount</th><th>Credit Account</th><th>Debit Account</th><th>Action</th>
 		</tr></thead>
 		<tbody>
-			<tr data-ng-repeat="trans in transactions">
+			<tr data-ng-repeat="trans in accountingCtrl.transactions">
 				<td class="th table-check-cell">
 					<input type="checkbox" data-ng-model="trans.selected">
 				</td>
 				<td>
-					<input class="datepicker" type="text" data-ng-model="trans.date" data-on-change="updateTransaction(trans, 'date_d')">
+					<input class="datepicker" type="text" data-ng-model="trans.trans.payment_date" data-on-change="accountingCtrl.updateTransaction(trans, 'payment_date')">
 					<img src="images/icons/fugue/calendar-month.png" width="16" height="16">
 				</td>
-				<td><input type="text" data-ng-model="trans.name" data-on-change="updateTransaction(trans, 'name_d')"></td>
-				<td><input type="text" data-ng-model="trans.amount" data-on-change="updateTransaction(trans, 'amount')"/></td>
+				<td><input type="text" data-ng-model="trans.bill.name" data-on-change="accountingCtrl.updateTransaction(trans, 'name')"></td>
+				<td><input type="text" data-ng-model="trans.trans.amount" data-on-change="accountingCtrl.updateTransaction(trans, 'amount')"/></td>
 				<td>
-					<select data-ng-model="trans.creditAccountId" data-ng-change="updateTransaction(trans, 'creditAccountId')"
-						data-ng-options="account.id as account.name for account in accounts">
+					<select data-ng-model="trans.bill.account_id" data-ng-change="accountingCtrl.updateTransaction(trans, 'account_id')"
+							data-ng-options="account.id as account.name for account in accountingCtrl.accounts | orderBy:'name'">
 					</select>
 					{{trans.creditAcctBalPost}}
 				</td>
 				<td>
-					<select data-ng-model="trans.debitAccountId" data-ng-change="updateTransaction(trans, 'debitAccountId')"
-						data-ng-options="account.id as account.name for account in bankAccounts">
+					<select data-ng-model="trans.trans.debit_account_id" data-ng-change="accountingCtrl.updateTransaction(trans, 'debit_account_id')"
+							data-ng-options="account.id as account.name for account in accountingCtrl.paymentAccounts | orderBy:'name'">
 					</select>
 					{{trans.debitAcctBalPost}}
 				</td>
 			</tr>
 			<tr>
 				<td class="th">
-					<button data-ng-click="addTransaction()">+</button>
-					<div class="error-block" data-ng-show="transAddError">
+					<button data-ng-click="accountingCtrl.addTransaction()">+</button>
+					<div class="error-block" data-ng-show="accountingCtrl.transAddError">
 						<p class="message error no-margin">{{transAddError}}</p>
 					</div>
 				</td>
 				<td>
-					<input class="datepicker" type="text" data-ng-model="newtrans.date">
+					<input class="datepicker" type="text" data-ng-model="accountingCtrl.newTrans.date">
 					<img src="images/icons/fugue/calendar-month.png" width="16" height="16">
 				</td>
-				<td><input type="text" data-ng-model="newtrans.name"></td>
-				<td><input type="text" data-ng-model="newtrans.amount"/></td>
+				<td><input type="text" data-ng-model="accountingCtrl.newTrans.name"></td>
+				<td><input type="text" data-ng-model="accountingCtrl.newTrans.amount"/></td>
 				<td>
-					<select data-ng-model="newtrans.creditAccountId"
+					<select data-ng-model="accountingCtrl.newTrans.creditAccountId"
 						data-ng-options="account.id as account.name for account in accounts">
 					</select>
 				</td>
 				<td>
-					<select data-ng-model="newtrans.debitAccountId"
+					<select data-ng-model="accountingCtrl.newTrans.debitAccountId"
 						data-ng-options="account.id as account.name for account in bankAccounts">
 					</select>
 				</td>
 				<td class="th">
-					<button data-ng-click="addTransaction()">+</button>
-					<div class="error-block" data-ng-show="transAddError">
+					<button data-ng-click="accountingCtrl.addTransaction()">+</button>
+					<div class="error-block" data-ng-show="accountingCtrl.transAddError">
 						<p class="message error no-margin">{{transAddError}}</p>
 					</div>
 				</td>

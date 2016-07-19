@@ -16,13 +16,13 @@ com.digitald4.budget.AccountsCtrl.prototype.accountService;
 com.digitald4.budget.AccountsCtrl.prototype.refresh = function() {
 	var scope = this.scope;
 	
-	this.accountService.getAccounts(this.sharedData.getSelectedPortfolioId(), function(accounts) {
+	this.accountService.getAccounts(this.sharedData.getSelectedPortfolioId(),
+			this.sharedData.getStartDate().getTime(), function(accounts) {
 		scope.accounts = accounts;
-		scope.$apply();
 	}, function(error) {
 		notify(error);
 	});
-	this.scope.newAccount = {};
+	this.scope.newAccount = {portfolio_id: this.sharedData.getSelectedPortfolioId()};
 };
 
 com.digitald4.budget.AccountsCtrl.prototype.showAddDialog = function() {
@@ -41,10 +41,9 @@ com.digitald4.budget.AccountsCtrl.prototype.showAddDialog = function() {
 com.digitald4.budget.AccountsCtrl.prototype.addAccount = function() {
 	var scope = this.scope;
 	scope.addError = undefined;
-	this.accountService.addAccount(scope.newAccount, this.sharedData.getSelectedPortfolioId(),
-			function(accounts) {
+	this.accountService.addAccount(scope.newAccount, function(accounts) {
 		scope.accounts = accounts;
-		scope.newAccount = {};
+		scope.newAccount = {portfolio_id: this.sharedData.getSelectedPortfolioId()};
 		scope.$apply();
 	}, function(error) {
 		scope.addError = error;

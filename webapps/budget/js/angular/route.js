@@ -1,25 +1,8 @@
-var com = com || {
-};
-
-com.digitald4 = com.digitald4 || {
-	common: {},
-	budget: {}
-}
-
-var proto = proto || { 
-};
-
-proto.budget = proto.budget || {
-};
-
-var goog = goog || {
-	provide: function(provides) {}
-};
-
 com.digitald4.budget.router = function($routeProvider) {
 	$routeProvider
 		.when('/', {
 				controller: 'DefaultViewCtrl',
+				controllerAs: 'defaultViewCtrl',
 				templateUrl: 'html/defview.html'
 		}).when('/accounts', {
 				controller: 'AccountsCtrl',
@@ -34,6 +17,7 @@ com.digitald4.budget.router = function($routeProvider) {
 				templateUrl: 'html/calview.html'
 		}).when('/accounting', {
 				controller: 'AccountingCtrl',
+				controllerAs: 'accountingCtrl',
 				templateUrl: 'html/accview.html'
 		}).when('/summary', {
 				controller: 'SummaryCtrl',

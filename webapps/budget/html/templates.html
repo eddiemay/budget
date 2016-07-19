@@ -1,6 +1,6 @@
 <div>
 	Template
-	<select data-ng-model="templatesCtrl.selectedTemplate" data-ng-change="templatesCtrl.setBills(templatesCtrl.selectedTemplate.bill)"
+	<select data-ng-model="templatesCtrl.selectedTemplate" data-ng-change="templatesCtrl.selectionChanged()"
 			data-ng-options="template as template.name for template in templatesCtrl.templates">
 	</select>
 	<a data-ng-click="templatesCtrl.showTemplateAdd=true"><button>New Template</button></a>
@@ -27,7 +27,7 @@
 					<input type="text" data-ng-model="bill.due_day" size="3" data-on-change="templatesCtrl.updateBill(bill, 'due_day')">
 				</td>
 				<td>
-					<select data-ng-model="bill.account_id" data-ng-change="templatesCtrl.updateBill(bill, 'accountId')"
+					<select data-ng-model="bill.account_id" data-ng-change="templatesCtrl.updateBill(bill, 'account_id')"
 							data-ng-options="account.id as account.name for account in templatesCtrl.accounts">
 					</select>
 				</td>
@@ -35,13 +35,13 @@
 					<input type="text" data-ng-model="bill.name" data-on-change="templatesCtrl.updateBill(bill, 'name')">
 				</td>
 				<td>
-					<input type="text" data-ng-model="bill.amount_due" size="8" data-on-change="templatesCtrl.updateBill(bill, 'amountDue')">
-					{{bill.balance_post | currency}}
+					<input type="text" data-ng-model="bill.amount_due" size="8" data-on-change="templatesCtrl.updateBill(bill, 'amount_due')">
+					{{bill.balancePost | currency}}
 				</td>
-				<td data-ng-repeat="account in bill.accounts">
-					<input type="text" data-ng-model="account.amount" size="8"
-							data-on-change="templatesCtrl.updateBillTrans(account, 'amount')">
-					{{account.balance_post | currency}}
+				<td data-ng-repeat="tran in bill.trans">
+					<input type="text" data-ng-model="tran.amount" size="8"
+							data-on-change="templatesCtrl.updateBillTrans(bill)">
+					{{tran.balancePost | currency}}
 				</td>
 			</tr>
 			<tr>

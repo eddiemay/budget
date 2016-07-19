@@ -23,15 +23,16 @@ com.digitald4.budget.module.controller('SummaryCtrl', com.digitald4.budget.Summa
 com.digitald4.budget.module.controller('TemplatesCtrl', com.digitald4.budget.TemplatesCtrl);
 
 com.digitald4.budget.module.directive('onChange', function() {
-    return function(scope, element, attrs) {
-    	var stValue = element.val();
-    	element.bind('blur', function() {
-    		if (stValue != element.val()) {
-    			scope.$apply(attrs.onChange);
-    			stValue = element.val();
-    		}
-    	});
-    };
+  return function(scope, element, attrs) {
+  	var startingValue = element.val();
+  	element.bind('blur', function() {
+  		// console.log('evaluating: ' + startingValue + ' vs ' + element.val());
+  		if (startingValue != element.val()) {
+  			scope.$apply(attrs.onChange);
+  			startingValue = element.val();
+  		}
+  	});
+  };
 });
 
 com.digitald4.budget.module.directive('portfolios', function() {

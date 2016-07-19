@@ -16,7 +16,6 @@ enum UserRoleUI {
 message PortfolioUI {
 	optional int32 id = 1;
 	optional string name = 2;
-	optional string description = 3;
 
 	message PortfolioUserUI {
 		optional int32 user_id = 1;
@@ -28,48 +27,37 @@ message PortfolioUI {
 message PortfolioListRequest {
 };
 
-message PortfolioGetRequest {
-	optional int32 portfolio_id = 1;
-};
-
 message PortfolioCreateRequest {
 	optional PortfolioUI portfolio = 1;
 };
-
-message PortfolioDeleteRequest {
-	optional int32 portfolio_id = 1;
-};
-
-message BalanceUI {
-	optional int64 date = 1;
-	optional double balance = 2;
-	optional double balance_year_to_date = 3;
-}
 
 message AccountUI {
   optional int32 id = 1;
 	optional int32 portfolio_id = 2;
   optional string name = 3;
-  optional string description = 4;
-  optional bool payment_account = 5;
-  optional int32 parent_account_id = 6;
-  optional BalanceUI balance = 7;
+  optional bool payment_account = 4;
+  optional int32 parent_account_id = 5;
+
+	message BalanceUI {
+		optional string date = 1;
+		optional double balance = 2;
+		optional double balance_year_to_date = 3;
+	}
+  optional BalanceUI balance = 6;
 }
 
 message AccountListRequest {
 	optional int32 portfolio_id = 1;
+	optional int64 ref_date = 2; // Reference date needed for balance information.
 };
 
 message AccountGetRequest {
 	optional int32 account_id = 1;
+	optional int64 ref_date = 2; // Reference date needed for balance information.
 };
 
 message AccountCreateRequest {
 	optional AccountUI account = 1;
-};
-
-message AccountDeleteRequest {
-	optional int32 account_id = 1;
 };
 
 message BillUI {
@@ -84,88 +72,69 @@ message BillUI {
 
 	enum PaymentStatusUI {
 		PS_UNKNOWN = 0;
-		PS_NOT_SCHEDULED = 1;
-		PS_SCHEDULED = 2;
-		PS_PENDING = 3;
-		PS_PAID = 4;
+		PS_ESTIMATED_AMOUNT = 1;
+		PS_BILLED_AMOUNT = 2;
+		PS_SCHEDULED = 3;
+		PS_PENDING = 4;
+		PS_PAID = 5;
 	}
 	optional PaymentStatusUI status = 9;
-	optional bool active = 10;
-	optional string description = 11;
+	optional int32 rank = 10;
 
 	message TransactionUI {
-		optional int32 id = 1;
-		optional int32 debit_account_id = 2;
-		optional double amount = 3;
-		optional int64 payment_date = 4;
-		optional PaymentStatusUI status = 5;
-		optional bool active = 6;
+		optional int32 debit_account_id = 1;
+		optional double amount = 2;
+		optional int64 payment_date = 3;
+		optional PaymentStatusUI status = 4;
 	}
-	repeated TransactionUI transaction = 12;
+	repeated TransactionUI transaction = 13;
 }
 
 message BillListRequest {
 	optional int32 portfolio_id = 1;
 	optional int64 ref_date = 2;
-	optional common.DateRangeType date_range = 3;
-};
-
-message BillGetRequest {
-	optional int32 bill_id = 1;
+	optional common.DateRange date_range = 3;
 };
 
 message BillCreateRequest {
 	optional BillUI bill = 1;
 };
 
-message BillDeleteRequest {
+message BillTransUpdateRequest {
 	optional int32 bill_id = 1;
+	repeated BillUI.TransactionUI transaction = 2;
 };
 
 message TemplateUI {
   optional int32 id = 1;
 	optional int32 portfolio_id = 2;
   optional string name = 3;
-  optional string description = 4;
 
 	message TemplateBillUI {
-		optional int32 id = 1;
-		optional int32 template_id = 2;
-		optional int32 account_id = 3;
-		optional int32 due_day = 4;
-		optional string name = 5;
-		optional double amount_due = 6;
-		optional bool active = 7 [default = true];
-		optional string description = 8;
-		optional int32 rank = 9;
+		optional int32 account_id = 1;
+		optional int32 due_day = 2;
+		optional string name = 3;
+		optional double amount_due = 4;
 
 		message TemplateTransactionUI {
 			optional int32 debit_account_id = 1;
 			optional double amount = 2;
 		}
-		repeated TemplateTransactionUI transaction = 10;
+		repeated TemplateTransactionUI transaction = 5;
 	}
-  repeated TemplateBillUI bill = 5;
+  repeated TemplateBillUI bill = 4;
 }
 
 message TemplateListRequest {
 	optional int32 portfolio_id = 1;
 };
 
-message TemplateGetRequest {
-	optional int32 template_id = 1;
-};
-
 message TemplateCreateRequest {
 	optional TemplateUI template = 1;
-};
-
-message TemplateDeleteRequest {
-	optional int32 template_id = 1;
 };
 
 message ApplyTemplateRequest {
 	optional int32 template_id = 1;
 	optional int64 ref_date = 2;
-	optional common.DateRangeType date_range = 3;
+	optional common.DateRange date_range = 3;
 };

@@ -113,19 +113,20 @@
 		<!-- Compile the source files into the buid directory -->
 		<copy todir="webapps/${app.name}/WEB-INF/lib">
 			<fileset dir="../common/lib">
-			  <include name="javax.persistence*.jar" />
-				<include name="joda-time*.jar" />
 				<include name="commons-dbcp*.jar" />
 				<include name="commons-pool*.jar" />
-				<include name="mysql-connector*.jar" />
-				<include name="javax.servlet.jsp.jstl*.jar" />
-				<include name="itextpdf-5.5.1.jar" />
 				<include name="javax.mail.jar" />
+				<include name="javax.servlet.jsp.jstl*.jar" />
+				<include name="joda-time*.jar" />
+				<include name="mysql-connector*.jar" />
 				<include name="protobuf-java-3.0.0-beta-2.jar" />
 			</fileset>
 		</copy>
 		<copy todir="webapps/${app.name}/js/common" flatten="true">
 			<fileset dir="../common/src/js">
+				<include name="**/*.js"/>
+			</fileset>
+			<fileset dir="../common/src-gen/js">
 				<include name="**/*.js"/>
 			</fileset>
 		</copy>
@@ -134,12 +135,15 @@
 				<include name="**/*.js"/>
 			</fileset>
 		</copy>
+		<concat destfile="webapps/${app.name}/js/bootstrap.js">
+			<filelist dir="../common/src/js" files="bootstrap.js"/>
+			<filelist dir="src/js" files="bootstrap.js"/>
+		</concat>
 		<concat destfile="webapps/${app.name}/WEB-INF/web.xml">
 			<filelist dir="src/conf" files="web.xml,dev_web.xml"/>
 		</concat>
 		<javac destdir="webapps/${app.name}/WEB-INF/classes" 
-				includes="com/digitald4/${app.name}/servlet/*,com/digitald4/common/servlet/*,com/digitald4/common/tld/*,com/digitald4/${app.name}/tld/*
-					com/digitald4/common/jpa/DD4EntityManagerFactory.java" 
+				includes="com/digitald4/${app.name}/servlet/*" 
 				target="1.7" source="1.7" optimize="yes">
 			<src path="../common/src" />
 			<src path="../common/src-gen" />

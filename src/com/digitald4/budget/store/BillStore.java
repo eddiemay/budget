@@ -17,8 +17,10 @@ import org.joda.time.DateTime;
 
 public class BillStore extends GenericDAOStore<Bill> {
 	
-	public BillStore(DAO<Bill> dao) {
+	private final AccountStore accountStore;
+	public BillStore(DAO<Bill> dao, AccountStore accountStore) {
 		super(dao);
+		this.accountStore = accountStore;
 	}
 	
 	public List<Bill> getByDateRange(int portfolioId, DateTime start, DateTime end)
@@ -26,6 +28,15 @@ public class BillStore extends GenericDAOStore<Bill> {
 		return get(new QueryParam("portfolio_id", "=", portfolioId),
 				new QueryParam("due_date", ">=", start.getMillis()),
 				new QueryParam("due_date", "<", end.getMillis()));
+	}
+	
+	public Bill create(Bill bill) throws DD4StorageException {
+		bill = super.create(bill);
+		accountStore.updateBalance(bill.getAccountId(), bill.getDueDate(), bill.getAmountDue());
+		for (Transaction trans : bill.getTransactionList()) {
+			accountStore.updateBalance(trans.getDebitAccountId(), bill.getDueDate(), -trans.getAmount());
+		}
+		return bill;
 	}
 	
 	public List<Bill> applyTemplate(Template template, DateTime refDate) throws DD4StorageException {
@@ -37,13 +48,13 @@ public class BillStore extends GenericDAOStore<Bill> {
 					.setDueDate(refDate.plusDays(tempBill.getDueDay() - 1).getMillis())
 					.setAmountDue(tempBill.getAmountDue())
 					.setName(tempBill.getName())
-					.setStatus(PaymentStatus.PS_NOT_SCHEDULED)
+					.setStatus(PaymentStatus.PS_ESTIMATED_AMOUNT)
 					.setActive(true);
 			for (TemplateTransaction tempTrans : tempBill.getTransactionList()) {
 				bill.addTransaction(Transaction.newBuilder()
 						.setDebitAccountId(tempTrans.getDebitAccountId())
 						.setAmount(tempTrans.getAmount())
-						.setStatus(PaymentStatus.PS_NOT_SCHEDULED)
+						.setStatus(PaymentStatus.PS_ESTIMATED_AMOUNT)
 						.setActive(true));
 			}
 			create(bill.build());

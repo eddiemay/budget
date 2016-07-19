@@ -1,8 +1,7 @@
 var ONE_HOUR = 1000 * 60 * 60;
 var ONE_DAY = ONE_HOUR * 24;
 
-com.digitald4.budget.CalCtrl = function($scope, $filter, sharedData, billService, accountService) {
-	this.scope = $scope;
+com.digitald4.budget.CalCtrl = function($filter, sharedData, billService, accountService) {
 	this.dateFilter = $filter('date');
 	this.sharedData = sharedData;
 	this.sharedData.refresh = this.refresh.bind(this);
@@ -10,8 +9,6 @@ com.digitald4.budget.CalCtrl = function($scope, $filter, sharedData, billService
 	this.accountService = accountService;
 	this.refresh();
 };
-
-com.digitald4.budget.CalCtrl.prototype.scope;
 
 com.digitald4.budget.CalCtrl.prototype.billService;
 com.digitald4.budget.CalCtrl.prototype.accountService;
@@ -58,27 +55,21 @@ addDay = function(date) {
 
 com.digitald4.budget.CalCtrl.prototype.refresh = function() {
 	this.setupCalendar();
-	var scope = this.scope;
-	var s = this;
-	
-	this.accountService.getAccounts(this.sharedData.activePortfolioId, function(accounts) {
-		s.accounts = accounts;
-		scope.$apply();
+	this.accountService.getAccounts(this.sharedData.activePortfolioId,
+			this.sharedData.getStartDate().getTime(), function(accounts) {
+		this.accounts = accounts;
 	}, function(error) {
 		notify(error);
 	});
 	
-	var billsSuccessCallback = this.billsSuccessCallback.bind(this);
-	
 	this.billService.getBills(this.sharedData.getSelectedPortfolioId(),
-			this.sharedData.getStartDateCal().toJSON(), this.sharedData.getEndDateCal().toJSON(),
-			billsSuccessCallback, function(error) {
+			this.sharedData.getStartDate().getTime(), proto.common.DateRange.CAL_MONTH,
+			this.billsSuccessCallback.bind(this), function(error) {
 		notify(error);
 	});
 };
 
 com.digitald4.budget.CalCtrl.prototype.billsSuccessCallback = function(bills) {
-	var scope = this.scope;
 	for (var d in this.days) {
 		this.days[d].bills = [];
 	}
@@ -91,7 +82,6 @@ com.digitald4.budget.CalCtrl.prototype.billsSuccessCallback = function(bills) {
 		}
 	}
 	this.closeAddBillDialog();
-	scope.$apply();
 };
 
 com.digitald4.budget.CalCtrl.prototype.showAddBillDialog = function(date) {
@@ -104,14 +94,11 @@ com.digitald4.budget.CalCtrl.prototype.closeAddBillDialog = function() {
 };
 
 com.digitald4.budget.CalCtrl.prototype.addBill = function() {
-	var scope = this.scope;
-	var tis = this;
 	this.billAddError = undefined;
 	this.billService.addBill(this.newBill, this.sharedData.getSelectedPortfolioId(),
-			com.digitald4.budget.DisplayWindow.CAL_MONTH, this.billsSuccessCallback, function(error) {
-		tis.billAddError = error;
-		scope.$apply();
-	});
+			proto.common.DateRange.CAL_MONTH, this.billsSuccessCallback, function(error) {
+		this.billAddError = error;
+	}.bind(this));
 };
 
 com.digitald4.budget.CalCtrl.prototype.editBill = function(bill) {
@@ -124,23 +111,17 @@ com.digitald4.budget.CalCtrl.prototype.closeEditBillDialog = function() {
 };
 
 com.digitald4.budget.CalCtrl.prototype.updateBill = function(property) {
-	var scope = this.scope;
-	var tis = this;
 	this.billUpdateError = undefined;
 	this.billService.updateBill(this.eBill, property, this.sharedData.getSelectedPortfolioId(),
-			com.digitald4.budget.DisplayWindow.CAL_MONTH, this.billsSuccessCallback, function(error) {
-		tis.billUpdateError = error;
-		scope.$apply();
-	});
+			proto.common.DateRange.CAL_MONTH, this.billsSuccessCallback, function(error) {
+		this.billUpdateError = error;
+	}.bind(this));
 };
 
 com.digitald4.budget.CalCtrl.prototype.updateBillTrans = function(billTrans, property) {
-	var scope = this.scope;
-	var tis = this;
 	this.billUpdateError = undefined;
 	this.billService.updateBillTrans(billTrans, property, this.sharedData.getSelectedPortfolioId(),
-			com.digitald4.budget.DisplayWindow.CAL_MONTH, this.billsSuccessCallback, function(error) {
-		tis.billUpdateError = error;
-		scope.$apply();
-	});
+			proto.common.DateRange.CAL_MONTH, this.billsSuccessCallback, function(error) {
+		this.billUpdateError = error;
+	}.bind(this));
 };

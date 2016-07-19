@@ -249,7 +249,7 @@ proto.budget.TemplateUI.TemplateBillUI.toObject = function(includeInstance, msg)
     templateId: jspb.Message.getField(msg, 2),
     accountId: jspb.Message.getField(msg, 3),
     dueDay: jspb.Message.getField(msg, 4),
-    nameD: jspb.Message.getField(msg, 5),
+    name: jspb.Message.getField(msg, 5),
     amountDue: jspb.Message.getField(msg, 6),
     active: jspb.Message.getField(msg, 7) != null ? jspb.Message.getField(msg, 7) : true,
     description: jspb.Message.getField(msg, 8),
@@ -356,21 +356,21 @@ proto.budget.TemplateUI.TemplateBillUI.prototype.clearDueDay = function() {
 
 
 /**
- * optional string name_d = 5;
+ * optional string name = 5;
  * @return {string?}
  */
-proto.budget.TemplateUI.TemplateBillUI.prototype.getNameD = function() {
+proto.budget.TemplateUI.TemplateBillUI.prototype.getName = function() {
   return /** @type {string?} */ (jspb.Message.getField(this, 5));
 };
 
 
 /** @param {string?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.prototype.setNameD = function(value) {
+proto.budget.TemplateUI.TemplateBillUI.prototype.setName = function(value) {
   jspb.Message.setField(this, 5, value);
 };
 
 
-proto.budget.TemplateUI.TemplateBillUI.prototype.clearNameD = function() {
+proto.budget.TemplateUI.TemplateBillUI.prototype.clearName = function() {
   jspb.Message.setField(this, 5, undefined);
 };
 
@@ -526,10 +526,8 @@ proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.toObject 
  */
 proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getField(msg, 1),
-    templateBillId: jspb.Message.getField(msg, 2),
-    debitAccountId: jspb.Message.getField(msg, 3),
-    amount: jspb.Message.getField(msg, 4)
+    debitAccountId: jspb.Message.getField(msg, 1),
+    amount: jspb.Message.getField(msg, 2)
   };
 
   if (includeInstance) {
@@ -550,82 +548,42 @@ proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.cloneMess
 
 
 /**
- * optional int32 id = 1;
+ * optional int32 debit_account_id = 1;
  * @return {number?}
  */
-proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.getId = function() {
+proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.getDebitAccountId = function() {
   return /** @type {number?} */ (jspb.Message.getField(this, 1));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.setId = function(value) {
+proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.setDebitAccountId = function(value) {
   jspb.Message.setField(this, 1, value);
 };
 
 
-proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.clearId = function() {
+proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.clearDebitAccountId = function() {
   jspb.Message.setField(this, 1, undefined);
 };
 
 
 /**
- * optional int32 template_bill_id = 2;
+ * optional double amount = 2;
  * @return {number?}
  */
-proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.getTemplateBillId = function() {
+proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.getAmount = function() {
   return /** @type {number?} */ (jspb.Message.getField(this, 2));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.setTemplateBillId = function(value) {
+proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.setAmount = function(value) {
   jspb.Message.setField(this, 2, value);
 };
 
 
-proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.clearTemplateBillId = function() {
-  jspb.Message.setField(this, 2, undefined);
-};
-
-
-/**
- * optional int32 debit_account_id = 3;
- * @return {number?}
- */
-proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.getDebitAccountId = function() {
-  return /** @type {number?} */ (jspb.Message.getField(this, 3));
-};
-
-
-/** @param {number?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.setDebitAccountId = function(value) {
-  jspb.Message.setField(this, 3, value);
-};
-
-
-proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.clearDebitAccountId = function() {
-  jspb.Message.setField(this, 3, undefined);
-};
-
-
-/**
- * optional double amount = 4;
- * @return {number?}
- */
-proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.getAmount = function() {
-  return /** @type {number?} */ (jspb.Message.getField(this, 4));
-};
-
-
-/** @param {number?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.setAmount = function(value) {
-  jspb.Message.setField(this, 4, value);
-};
-
-
 proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.prototype.clearAmount = function() {
-  jspb.Message.setField(this, 4, undefined);
+  jspb.Message.setField(this, 2, undefined);
 };
 
 

@@ -5,19 +5,19 @@
 				<th>Name</th><th>Parent Account</th><th>Payment Account</th><th>Action</th>
 		</tr></thead>
 		<tbody>
-			<tr data-ng-repeat="account in accounts | orderBy:'sortValue'">
+			<tr data-ng-repeat="account in accounts | orderBy:'name'">
 				<td class="th table-check-cell">
 					<input type="checkbox" data-ng-model="account.selected">
 				</td>
 				<td><input type="text" data-ng-model="account.name" data-on-change="updateAccount(account, 'name')"></td>
 				<td>
 					<select data-ng-model="account.parent_account_id" data-ng-change="updateAccount(account, 'parent_account_id')"
-						data-ng-options="parent.id as parent.name for parent in accounts">
+							data-ng-options="parent.id as parent.name for parent in accounts">
 					</select>
 				</td>
 				<td class="th table-check-cell">
 					<input type="checkbox" data-ng-model="account.payment_account"
-						data-ng-change="updateAccount(account, 'payment_account')">
+							data-ng-change="updateAccount(account, 'payment_account')">
 				</td>
 			</tr>
 			<tr>

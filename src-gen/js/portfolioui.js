@@ -217,9 +217,8 @@ proto.budget.PortfolioUI.PortfolioUserUI.prototype.toObject = function(opt_inclu
  */
 proto.budget.PortfolioUI.PortfolioUserUI.toObject = function(includeInstance, msg) {
   var f, obj = {
-    portfolioId: jspb.Message.getField(msg, 2),
-    userId: jspb.Message.getField(msg, 3),
-    role: jspb.Message.getField(msg, 4)
+    userId: jspb.Message.getField(msg, 1),
+    role: jspb.Message.getField(msg, 2)
   };
 
   if (includeInstance) {
@@ -240,62 +239,42 @@ proto.budget.PortfolioUI.PortfolioUserUI.prototype.cloneMessage = function() {
 
 
 /**
- * optional int32 portfolio_id = 2;
- * @return {number?}
- */
-proto.budget.PortfolioUI.PortfolioUserUI.prototype.getPortfolioId = function() {
-  return /** @type {number?} */ (jspb.Message.getField(this, 2));
-};
-
-
-/** @param {number?|undefined} value  */
-proto.budget.PortfolioUI.PortfolioUserUI.prototype.setPortfolioId = function(value) {
-  jspb.Message.setField(this, 2, value);
-};
-
-
-proto.budget.PortfolioUI.PortfolioUserUI.prototype.clearPortfolioId = function() {
-  jspb.Message.setField(this, 2, undefined);
-};
-
-
-/**
- * optional int32 user_id = 3;
+ * optional int32 user_id = 1;
  * @return {number?}
  */
 proto.budget.PortfolioUI.PortfolioUserUI.prototype.getUserId = function() {
-  return /** @type {number?} */ (jspb.Message.getField(this, 3));
+  return /** @type {number?} */ (jspb.Message.getField(this, 1));
 };
 
 
 /** @param {number?|undefined} value  */
 proto.budget.PortfolioUI.PortfolioUserUI.prototype.setUserId = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setField(this, 1, value);
 };
 
 
 proto.budget.PortfolioUI.PortfolioUserUI.prototype.clearUserId = function() {
-  jspb.Message.setField(this, 3, undefined);
+  jspb.Message.setField(this, 1, undefined);
 };
 
 
 /**
- * optional UserRoleUI role = 4;
+ * optional UserRoleUI role = 2;
  * @return {proto.budget.UserRoleUI}
  */
 proto.budget.PortfolioUI.PortfolioUserUI.prototype.getRole = function() {
-  return /** @type {proto.budget.UserRoleUI} */ (jspb.Message.getField(this, 4));
+  return /** @type {proto.budget.UserRoleUI} */ (jspb.Message.getField(this, 2));
 };
 
 
 /** @param {proto.budget.UserRoleUI|undefined} value  */
 proto.budget.PortfolioUI.PortfolioUserUI.prototype.setRole = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setField(this, 2, value);
 };
 
 
 proto.budget.PortfolioUI.PortfolioUserUI.prototype.clearRole = function() {
-  jspb.Message.setField(this, 4, undefined);
+  jspb.Message.setField(this, 2, undefined);
 };
 
 
