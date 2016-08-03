@@ -3,6 +3,7 @@
 			data-ng-options="template as template.name for template in listCtrl.templates">
 	</select>
 	<a data-ng-click="listCtrl.applyTemplate()"><button>Apply Template</button></a>
+	<label>Filter:<input data-ng-model="filterText"/></label>
 	<table class="table sortable no-margin" cellspacing="0" width="100%">
 		<thead><tr>
 				<th class="black-cell"><span class="loading"></span></th>
@@ -13,7 +14,7 @@
 				<th>Status</th>
 		</tr></thead>
 		<tbody>
-			<tr data-ng-repeat="bill in listCtrl.bills">
+			<tr data-ng-repeat="bill in listCtrl.bills | filter:filterText">
 				<td class="th table-check-cell">
 					<input type="checkbox" data-ng-model="bill.selected">
 					<a data-ng-show="bill.selected" data-ng-click="listCtrl.deleteBill(bill)"><button>Delete</button></a>

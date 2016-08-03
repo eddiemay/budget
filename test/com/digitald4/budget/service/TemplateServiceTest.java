@@ -19,7 +19,7 @@ public class TemplateServiceTest extends TestCase {
 	@Test
 	public void testGetTemplates() throws DD4StorageException {
 		TemplateStore store = new TemplateStore(
-				new DAOProtoSQLImpl<Template>(Template.getDefaultInstance(), dbConnector));
+				new DAOProtoSQLImpl<>(Template.class, dbConnector));
 		TemplateService service = new TemplateService(store);
 		
 		List<TemplateUI> templates = service.list(TemplateListRequest.newBuilder()

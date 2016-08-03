@@ -5,7 +5,9 @@ import com.digitald4.budget.proto.BudgetProtos.Account.Balance;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountCreateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountGetRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountListRequest;
+import com.digitald4.budget.proto.BudgetUIProtos.AccountSummaryRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountUI;
+import com.digitald4.budget.proto.BudgetUIProtos.AccountUI.AccountSummary;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI;
 import com.digitald4.budget.store.AccountStore;
 import com.digitald4.common.distributed.Function;
@@ -72,7 +74,7 @@ public class AccountService extends DualProtoService<AccountUI, Account> {
 	};
 	
 	public AccountService(AccountStore store) {
-		super(store);
+		super(AccountUI.class, store);
 		this.store = store;
 	}
 	
@@ -107,6 +109,12 @@ public class AccountService extends DualProtoService<AccountUI, Account> {
 		return getConverter(0).execute(store.create(reverse.execute(request.getAccount())));
 	}
 	
+	public List<AccountUI> getSummary(AccountSummaryRequest request)
+			throws DD4StorageException {
+		return threader.parDo(store.getByPortfolio(request.getPortfolioId()),
+				new AccountSummaryConverter(request.getYear()));
+	}
+	
 	private static class DefaultComparator implements Comparable<DefaultComparator> {
 		private final AccountUI account;
 		public DefaultComparator(AccountUI account) {
@@ -137,6 +145,51 @@ public class AccountService extends DualProtoService<AccountUI, Account> {
 		@Override
 		public DefaultComparator execute(Account account) {
 			return new DefaultComparator(converter.execute(account));
+		}
+	}
+	
+
+	
+	private class AccountSummaryConverter implements Function<AccountUI, Account> {
+		
+		private final int year;
+		public AccountSummaryConverter(int year) {
+			this.year = year;
+		}
+		
+		@Override
+		public AccountUI execute(Account account) {
+			String thisYear = year + "-01";
+			String nextYear = (year + 1) + "-01";
+			AccountUI.Builder builder = new Converter(0).execute(account).toBuilder();
+			for (int x = 1; x <= 12; x++) {
+				builder.addSummary(AccountSummary.newBuilder()
+						.setMonth(year + (x < 10 ? "-0" : "-") + x));
+			}
+			int start = 0;
+			double total = 0;
+			while (start < account.getBalanceCount()
+					&& account.getBalance(start).getDate().compareTo(nextYear) > 0) {
+				start++;
+			}
+			for (int index = start; index < account.getBalanceCount(); index++) {
+				Balance post = account.getBalance(index);
+				if (thisYear.compareTo(post.getDate()) > -1) {
+					break;
+				}
+				Balance pre = (index + 1 < account.getBalanceCount()) ? account.getBalance(index + 1)
+						: Balance.getDefaultInstance();
+				int month = (Integer.valueOf(post.getDate().substring(5, 7)) - 2) % 12;
+				total += post.getBalance() - pre.getBalance();
+				builder.setSummary(month, builder.getSummary(month).toBuilder()
+						.setTotal(post.getBalance() - pre.getBalance())
+						.build());
+			}
+			return builder
+					.addSummary(AccountSummary.newBuilder()
+							.setMonth(String.valueOf(year))
+							.setTotal(total))
+					.build();
 		}
 	}
 }

@@ -25,11 +25,11 @@ message PortfolioUI {
 }
 
 message PortfolioListRequest {
-};
+}
 
 message PortfolioCreateRequest {
 	optional PortfolioUI portfolio = 1;
-};
+}
 
 message AccountUI {
   optional int32 id = 1;
@@ -44,21 +44,27 @@ message AccountUI {
 		optional double balance_year_to_date = 3;
 	}
   optional BalanceUI balance = 6;
+
+	message AccountSummary {
+		optional string month = 1;
+		optional double total = 2;
+	}
+	repeated AccountSummary summary = 7;
 }
 
 message AccountListRequest {
 	optional int32 portfolio_id = 1;
 	optional int64 ref_date = 2; // Reference date needed for balance information.
-};
+}
 
 message AccountGetRequest {
 	optional int32 account_id = 1;
 	optional int64 ref_date = 2; // Reference date needed for balance information.
-};
+}
 
 message AccountCreateRequest {
 	optional AccountUI account = 1;
-};
+}
 
 message BillUI {
 	optional int32 id = 1;
@@ -94,16 +100,16 @@ message BillListRequest {
 	optional int32 portfolio_id = 1;
 	optional int64 ref_date = 2;
 	optional common.DateRange date_range = 3;
-};
+}
 
 message BillCreateRequest {
 	optional BillUI bill = 1;
-};
+}
 
 message BillTransUpdateRequest {
 	optional int32 bill_id = 1;
 	repeated BillUI.TransactionUI transaction = 2;
-};
+}
 
 message TemplateUI {
   optional int32 id = 1;
@@ -127,14 +133,19 @@ message TemplateUI {
 
 message TemplateListRequest {
 	optional int32 portfolio_id = 1;
-};
+}
 
 message TemplateCreateRequest {
 	optional TemplateUI template = 1;
-};
+}
 
 message ApplyTemplateRequest {
 	optional int32 template_id = 1;
 	optional int64 ref_date = 2;
 	optional common.DateRange date_range = 3;
-};
+}
+
+message AccountSummaryRequest {
+	optional int32 portfolio_id = 1;
+	optional int32 year = 2;
+}

@@ -19,9 +19,7 @@ import com.digitald4.common.server.DualProtoService;
 
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 
 public class BillService extends DualProtoService<BillUI, Bill> {
 	
@@ -90,7 +88,7 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 	};
 	
 	public BillService(BillStore store, TemplateStore templateStore) {
-		super(store);
+		super(BillUI.class, store);
 		this.store = store;
 		this.templateStore = templateStore;
 	}
@@ -124,13 +122,7 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 			case MONTH:
 			case UNSPECIFIED: end = start.plusMonths(1); break;
 		}
-		TreeSet<DefaultComparator> sorted = new TreeSet<>(
-				threader.parDo(store.getByDateRange(request.getPortfolioId(), start, end), sortWrapper));
-		List<BillUI> result = new ArrayList<>();
-		for (DefaultComparator dc : sorted) {
-			result.add(dc.bill);
-		}
-		return result;
+		return threader.parDo(store.getByDateRange(request.getPortfolioId(), start, end), converter);
 	}
 
 	public BillUI updateTransaction(final BillTransUpdateRequest request)
@@ -152,42 +144,4 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 		return threader.parDo(store.applyTemplate(templateStore.get(request.getTemplateId()),
 				new DateTime(request.getRefDate())), getConverter());
 	}
-	
-	private static class DefaultComparator implements Comparable<DefaultComparator> {
-		private final BillUI bill;
-		public DefaultComparator(BillUI bill) {
-			this.bill = bill;
-		}
-		
-		@Override
-		public int compareTo(DefaultComparator dc) {
-			BillUI bill2 = dc.bill;
-			if (bill.getDueDate() < bill2.getDueDate()) {
-				return -1;
-			} else if (bill.getDueDate() > bill2.getDueDate()) {
-				return 1;
-			} else if (bill.getRank() > bill2.getRank()) {
-				return -1;
-			} else if (bill.getRank() < bill2.getRank()) {
-				return 1;
-			} else if (bill.getAmountDue() < bill2.getAmountDue()) {
-				return -1;
-			} else if (bill.getAmountDue() > bill2.getAmountDue()) {
-				return 1;
-			} else if (bill.getId() < bill2.getId()) {
-				return -1;
-			} else if (bill.getId() > bill2.getId()) {
-				return 1;
-			}
-			return 0;
-		}
-	}
-	
-	private static Function<DefaultComparator, Bill> sortWrapper =
-			new Function<DefaultComparator, Bill>() {
-				@Override
-				public DefaultComparator execute(Bill bill) {
-					return new DefaultComparator(converter.execute(bill));
-				}
-			};
 }

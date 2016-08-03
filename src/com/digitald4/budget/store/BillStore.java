@@ -7,8 +7,9 @@ import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetProtos.Template.TemplateBill;
 import com.digitald4.budget.proto.BudgetProtos.Template.TemplateBill.TemplateTransaction;
 import com.digitald4.common.dao.DAO;
-import com.digitald4.common.dao.QueryParam;
+import com.digitald4.common.distributed.Function;
 import com.digitald4.common.exception.DD4StorageException;
+import com.digitald4.common.proto.DD4UIProtos.ListRequest.QueryParam;
 import com.digitald4.common.store.impl.GenericDAOStore;
 
 import java.util.List;
@@ -25,11 +26,13 @@ public class BillStore extends GenericDAOStore<Bill> {
 	
 	public List<Bill> getByDateRange(int portfolioId, DateTime start, DateTime end)
 			throws DD4StorageException {
-		return get(new QueryParam("portfolio_id", "=", portfolioId),
-				new QueryParam("due_date", ">=", start.getMillis()),
-				new QueryParam("due_date", "<", end.getMillis()));
+		return get(
+				QueryParam.newBuilder().setColumn("portfolio_id").setOperan("=").setValue(String.valueOf(portfolioId)).build(),
+				QueryParam.newBuilder().setColumn("due_date").setOperan(">=").setValue(String.valueOf(start.getMillis())).build(),
+				QueryParam.newBuilder().setColumn("due_date").setOperan("<").setValue(String.valueOf(end.getMillis())).build());
 	}
 	
+	@Override
 	public Bill create(Bill bill) throws DD4StorageException {
 		bill = super.create(bill);
 		accountStore.updateBalance(bill.getAccountId(), bill.getDueDate(), bill.getAmountDue());
@@ -37,6 +40,32 @@ public class BillStore extends GenericDAOStore<Bill> {
 			accountStore.updateBalance(trans.getDebitAccountId(), bill.getDueDate(), -trans.getAmount());
 		}
 		return bill;
+	}
+	
+	@Override
+	public Bill update(int id, Function<Bill, Bill> updater) throws DD4StorageException {
+		Bill orig = get(id);
+		Bill bill = super.update(id, updater);
+		accountStore.updateBalance(bill.getAccountId(), bill.getDueDate(),
+				bill.getAmountDue() - orig.getAmountDue());
+		for (Transaction trans : bill.getTransactionList()) {
+			for (Transaction origTrans : orig.getTransactionList()) {
+				if (trans.getDebitAccountId() == origTrans.getDebitAccountId()) {
+					accountStore.updateBalance(trans.getDebitAccountId(), bill.getDueDate(),
+							origTrans.getAmount() - trans.getAmount());
+				}
+			}
+		}
+		return bill;
+	}
+	
+	@Override
+	public void delete(int id) throws DD4StorageException {
+		Bill bill = get(id);
+		accountStore.updateBalance(bill.getAccountId(), bill.getDueDate(), -bill.getAmountDue());
+		for (Transaction trans : bill.getTransactionList()) {
+			accountStore.updateBalance(trans.getDebitAccountId(), bill.getDueDate(), trans.getAmount());
+		}
 	}
 	
 	public List<Bill> applyTemplate(Template template, DateTime refDate) throws DD4StorageException {

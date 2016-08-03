@@ -16,7 +16,7 @@ import com.digitald4.common.jdbc.DBConnector;
 public class PortfolioSQLDao extends DAOProtoSQLImpl<Portfolio> {
 
 	public PortfolioSQLDao(DBConnector dbConnector) {
-		super(Portfolio.getDefaultInstance(), dbConnector);
+		super(Portfolio.class, dbConnector);
 	}
 	
 	@Override

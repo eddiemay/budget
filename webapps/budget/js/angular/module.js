@@ -3,7 +3,6 @@ com.digitald4.budget.module = angular.module('budget', ['ngRoute', 'ui.date']);
 com.digitald4.budget.module.config(com.digitald4.budget.router);
 
 com.digitald4.budget.module.service('connector', com.digitald4.common.JSONConnector);
-com.digitald4.budget.module.service('restService', com.digitald4.budget.Connector);
 com.digitald4.budget.module.service('accountService', com.digitald4.budget.AccountService);
 com.digitald4.budget.module.service('billService', com.digitald4.budget.BillService);
 com.digitald4.budget.module.service('portfolioService', com.digitald4.budget.PortfolioService);

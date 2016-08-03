@@ -21,6 +21,7 @@ com.digitald4.budget.router = function($routeProvider) {
 				templateUrl: 'html/accview.html'
 		}).when('/summary', {
 				controller: 'SummaryCtrl',
+				controllerAs: 'summaryCtrl',
 				templateUrl: 'html/sumview.html'
 		}).when('/settings', {
 				templateUrl: 'html/settings.html'

@@ -50,15 +50,15 @@ public class End2EndServiceTest extends TestCase {
 		PortfolioService portfolioService = new PortfolioService(portfolioStore, userProvider);
 		
 		AccountStore accountStore = new AccountStore(
-				new DAOProtoSQLImpl<Account>(Account.getDefaultInstance(), dbConnector));
+				new DAOProtoSQLImpl<Account>(Account.class, dbConnector));
 		AccountService accountService = new AccountService(accountStore);
 		
 		TemplateStore templateStore = new TemplateStore(
-				new DAOProtoSQLImpl<Template>(Template.getDefaultInstance(), dbConnector));
+				new DAOProtoSQLImpl<Template>(Template.class, dbConnector));
 		TemplateService templateService = new TemplateService(templateStore);
 		
 		BillStore billStore = new BillStore(
-				new DAOProtoSQLImpl<Bill>(Bill.getDefaultInstance(), dbConnector), accountStore);
+				new DAOProtoSQLImpl<Bill>(Bill.class, dbConnector), accountStore);
 		BillService billService = new BillService(billStore, templateStore);
 		
 		PortfolioUI portfolio = portfolioService.create(PortfolioCreateRequest.newBuilder()

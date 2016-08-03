@@ -5,9 +5,9 @@ import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
 import com.digitald4.budget.proto.BudgetProtos.Account.Balance;
 import com.digitald4.common.dao.DAO;
-import com.digitald4.common.dao.QueryParam;
 import com.digitald4.common.distributed.Function;
 import com.digitald4.common.exception.DD4StorageException;
+import com.digitald4.common.proto.DD4UIProtos.ListRequest.QueryParam;
 import com.digitald4.common.store.impl.GenericDAOStore;
 import com.google.annotations.VisibleForTesting;
 
@@ -24,11 +24,18 @@ public class AccountStore extends GenericDAOStore<Account> {
 	}
 	
 	public List<Account> getByPortfolio(int portfolioId) throws DD4StorageException {
-		return get(new QueryParam("portfolio_id", "=", portfolioId));
+		return get(QueryParam.newBuilder()
+				.setColumn("portfolio_id")
+				.setOperan("=")
+				.setValue(String.valueOf(portfolioId))
+				.build());
 	}
 
 	public Account updateBalance(int accountId, long dueDate, double delta)
 			throws DD4StorageException {
+		if (delta == 0) {
+			return null;
+		}
 		return update(accountId, new BalanceUpdater(dueDate, delta));
 	}
 	
@@ -38,7 +45,9 @@ public class AccountStore extends GenericDAOStore<Account> {
 			accountHash.put(account.getId(), account.toBuilder().clearBalance().build());
 		}
 		
-		for (Bill bill : billStore.get(new QueryParam("portfolio_id", "=", portfolioId))) {
+		List<Bill> bills = billStore.get(
+				QueryParam.newBuilder().setColumn("portfolio_id").setOperan("=").setValue(String.valueOf(portfolioId)).build());
+		for (Bill bill : bills) {
 			accountHash.put(bill.getAccountId(),
 					new BalanceUpdater(bill.getDueDate(), bill.getAmountDue())
 							.execute(accountHash.get(bill.getAccountId())));
@@ -93,9 +102,13 @@ public class AccountStore extends GenericDAOStore<Account> {
 					if (balance.getDate().equals(nextMonthStr)) {
 						foundNextMonth = true;
 					}
-					builder.setBalance(x, balance.toBuilder()
-							.setBalance(balance.getBalance() + delta)
-							.setBalanceYearToDate(balance.getBalanceYearToDate() + delta));
+					Balance.Builder balanceBuilder = balance.toBuilder()
+							.setBalance(balance.getBalance() + delta);
+					// Carry over year2date only if the same year.
+					if (balance.getDate().substring(0, 4).equals(dateStr.substring(0, 4))) {
+						balanceBuilder.setBalanceYearToDate(balance.getBalanceYearToDate() + delta);
+					}
+					builder.setBalance(x, balanceBuilder);
 				} else {
 					break;
 				}
@@ -104,10 +117,13 @@ public class AccountStore extends GenericDAOStore<Account> {
 				if (balance == null || balance.getDate().compareTo(dateStr) > 0) {
 					balance = Balance.getDefaultInstance();
 				}
-				builder.addBalance(x, Balance.newBuilder()
+				Balance.Builder balanceBuilder = Balance.newBuilder()
 						.setDate(nextMonthStr)
-						.setBalance(balance.getBalance() + delta)
-						.setBalanceYearToDate(balance.getBalanceYearToDate() + delta));
+						.setBalance(balance.getBalance() + delta);
+				if (nextMonthStr.substring(0, 4).equals(dateStr.substring(0, 4))) {
+					balanceBuilder .setBalanceYearToDate(balance.getBalanceYearToDate() + delta);
+				}
+				builder.addBalance(x, balanceBuilder);
 			}
 			return builder.build();
 		}

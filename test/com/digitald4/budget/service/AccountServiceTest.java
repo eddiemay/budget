@@ -20,8 +20,7 @@ public class AccountServiceTest extends TestCase {
 
 	@Test
 	public void testListAccounts() throws DD4StorageException {
-		AccountStore store = new AccountStore(
-				new DAOProtoSQLImpl<Account>(Account.getDefaultInstance(), dbConnector));
+		AccountStore store = new AccountStore(new DAOProtoSQLImpl<>(Account.class, dbConnector));
 		AccountService service = new AccountService(store);
 		
 		List<AccountUI> accounts = service.list(AccountListRequest.newBuilder()
@@ -39,8 +38,7 @@ public class AccountServiceTest extends TestCase {
 	
 	@Test
 	public void testGetAccount() throws DD4StorageException {
-		AccountStore store = new AccountStore(
-				new DAOProtoSQLImpl<Account>(Account.getDefaultInstance(), dbConnector));
+		AccountStore store = new AccountStore(new DAOProtoSQLImpl<>(Account.class, dbConnector));
 		AccountService service = new AccountService(store);
 		
 		AccountUI account = service.get(AccountGetRequest.newBuilder()

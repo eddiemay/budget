@@ -1,14 +1,10 @@
 package com.digitald4.budget.servlet;
 
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.digitald4.budget.dao.PortfolioSQLDao;
@@ -18,6 +14,8 @@ import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountCreateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountGetRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountListRequest;
+import com.digitald4.budget.proto.BudgetUIProtos.AccountSummaryRequest;
+import com.digitald4.budget.proto.BudgetUIProtos.ApplyTemplateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.BillCreateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.BillListRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest;
@@ -39,15 +37,14 @@ import com.digitald4.common.proto.DD4UIProtos.DeleteRequest;
 import com.digitald4.common.proto.DD4UIProtos.GetRequest;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.server.ServiceServlet;
-import com.google.protobuf.Message;
-import com.googlecode.protobuf.format.JsonFormat;
 
-@WebServlet(name = "JSON Service Servlet", urlPatterns = {"/json/*"}) 
+@WebServlet(name = "JSON Service Servlet", urlPatterns = {"/json/*"})
 public class JSONServiceServlet extends ServiceServlet {
 	public enum ACTIONS {PORTFOLIO, PORTFOLIOS, CREATE_PORTFOLIO, UPDATE_PORTFOLIO, DELETE_PORTFOLIO,
 			ACCOUNT, ACCOUNTS, CREATE_ACCOUNT, UPDATE_ACCOUNT, DELETE_ACCOUNT,
 			BILL, BILLS, CREATE_BILL, UPDATE_BILL, UPDATE_BILL_TRANS, DELETE_BILL,
-			TEMPLATE, TEMPLATES, CREATE_TEMPLATE, UPDATE_TEMPLATE, DELETE_TEMPLATE};
+			TEMPLATE, TEMPLATES, CREATE_TEMPLATE, UPDATE_TEMPLATE, DELETE_TEMPLATE, APPLY_TEMPLATE,
+			ACCOUNT_SUMMARY};
 	
 	private PortfolioService portfolioService;
 	private AccountService accountService;
@@ -62,15 +59,15 @@ public class JSONServiceServlet extends ServiceServlet {
 		portfolioService = new PortfolioService(portfolioStore, userProvider);
 		
 		AccountStore accountStore = new AccountStore(
-				new DAOProtoSQLImpl<Account>(Account.getDefaultInstance(), dbConnector));
+				new DAOProtoSQLImpl<>(Account.class, dbConnector));
 		accountService = new AccountService(accountStore);
 		
 		TemplateStore templateStore = new TemplateStore(
-				new DAOProtoSQLImpl<Template>(Template.getDefaultInstance(), dbConnector));
+				new DAOProtoSQLImpl<>(Template.class, dbConnector));
 		templateService = new TemplateService(templateStore);
 		
 		BillStore billStore = new BillStore(
-				new DAOProtoSQLImpl<Bill>(Bill.getDefaultInstance(), dbConnector), accountStore);
+				new DAOProtoSQLImpl<>(Bill.class, dbConnector), accountStore);
 		billService = new BillService(billStore, templateStore);
 	}
 
@@ -146,6 +143,12 @@ public class JSONServiceServlet extends ServiceServlet {
 					case DELETE_TEMPLATE: json.put("data", convertToJSON(templateService.delete(
 							transformJSONRequest(DeleteRequest.getDefaultInstance(), request))));
 					break;
+					case APPLY_TEMPLATE: json.put("data", convertToJSON(billService.applyTemplate(
+							transformJSONRequest(ApplyTemplateRequest.getDefaultInstance(), request))));
+					break;
+					case ACCOUNT_SUMMARY: json.put("data", convertToJSON(accountService.getSummary(
+							transformJSONRequest(AccountSummaryRequest.getDefaultInstance(), request))));
+					break;
 				}
 				json.put("valid", true);
 			} catch (Exception e) {
@@ -175,21 +178,5 @@ public class JSONServiceServlet extends ServiceServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException {
 		process(request, response);
-	}
-	
-	public JSONArray convertToJSON(List<? extends Message> items) throws JSONException {
-		JSONArray array = new JSONArray();
-		for (Message item : items) {
-			array.put(convertToJSON(item));
-		}
-		return array;
-	}
-	
-	public JSONObject convertToJSON(Message item) throws JSONException {
-		return new JSONObject(JsonFormat.printToString(item));
-	}
-	
-	public JSONObject convertToJSON(boolean bool) throws JSONException {
-		return new JSONObject(bool);
 	}
 }

@@ -50,7 +50,7 @@ public class PortfolioService extends DualProtoService<PortfolioUI, Portfolio> {
 	private final UserProvider userProvider;
 	
 	public PortfolioService(PortfolioStore store, UserProvider userProvider) {
-		super(store);
+		super(PortfolioUI.class, store);
 		this.store = store;
 		this.userProvider = userProvider;
 	}

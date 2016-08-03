@@ -19,7 +19,7 @@ com.digitald4.budget.PortfolioService.prototype.updatePortfolio = function(portf
 		successCallback, errorCallback) {
 	var request = {id: portfolio.id,
 			property: property,
-			value: portfolio[property]};
+			value: portfolio[property].toString()};
 	this.connector.performRequest('update_portfolio', request, successCallback, errorCallback);
 };
 

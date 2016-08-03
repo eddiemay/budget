@@ -21,11 +21,11 @@ public class BalanceRecalculator {
 				"jdbc:mysql://localhost/budget?autoReconnect=true",
 				"dd4_user", "getSchooled85");
 		final AccountStore accountStore = new AccountStore(
-				new DAOProtoSQLImpl<Account>(Account.getDefaultInstance(), dbConnector));
+				new DAOProtoSQLImpl<>(Account.class, dbConnector));
 		final BillStore billStore = new BillStore(
-				new DAOProtoSQLImpl<Bill>(Bill.getDefaultInstance(), dbConnector), accountStore);
+				new DAOProtoSQLImpl<>(Bill.class, dbConnector), accountStore);
 		PortfolioStore portfolioStore = new PortfolioStore(
-				new DAOProtoSQLImpl<Portfolio>(Portfolio.getDefaultInstance(), dbConnector));
+				new DAOProtoSQLImpl<>(Portfolio.class, dbConnector));
 		MultiCoreThreader threader = new MultiCoreThreader();
 		threader.parDo(portfolioStore.getAll(), new Function<Boolean, Portfolio>() {
 			@Override

@@ -136,17 +136,19 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 	this.billService.getBills(this.sharedData.getSelectedPortfolioId(),
 			this.sharedData.getStartDate().getTime(), proto.common.DateRange.MONTH,
 			function(bills) {
+				var sortedBills = [];
 				for (var b = 0; b < bills.length; b++) {
 					var bill = bills[b];
 					if (bill.due_date) {
 						bill.dueDate = this.dateFilter(bill.due_date, 'MM/dd/yyyy');
 					}
+					this.insertBill(sortedBills, bill);
 				}
 				if (this.accounts) { 
-					this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, bills);
+					this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sortedBills);
 					this.scope.apply();
 				} else {
-					this.bills = bills;
+					this.bills = sortedBills;
 				}
 			}.bind(this), function(error) {
 				notify(error);
@@ -157,13 +159,14 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 	}.bind(this), notify);
 };
 
-com.digitald4.budget.ListCtrl.prototype.insertBill = function(bill) {
-	for (var b = 0; b < this.bills.length; b++) {
-		if (com.digitald4.budget.ListCtrl.compare(this.bills[b], bill) > 0) {
-			this.bills.splice(b, 0, bill);
+com.digitald4.budget.ListCtrl.prototype.insertBill = function(bills, bill) {
+	for (var b = 0; b < bills.length; b++) {
+		if (com.digitald4.budget.ListCtrl.compare(bills[b], bill) > 0) {
+			bills.splice(b, 0, bill);
 			return;
 		}
 	}
+	bills.push(bill);
 };
 
 com.digitald4.budget.ListCtrl.prototype.addBill = function() {
@@ -180,7 +183,7 @@ com.digitald4.budget.ListCtrl.prototype.addBill = function() {
 	}
 	this.billService.addBill(this.newBill, function(bill) {
 		bill.dueDate = this.dateFilter(bill.due_date, 'MM/dd/yyyy');
-		this.insertBill(bill);
+		this.insertBill(this.bills, bill);
 		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
 		this.makeNew();
 		this.scope.apply();
@@ -197,7 +200,7 @@ com.digitald4.budget.ListCtrl.prototype.updateBill = function(bill, property) {
 	this.billService.updateBill(bill, property, function(bill) {
 		bill.dueDate = this.dateFilter(bill.due_date, 'MM/dd/yyyy');
 		this.bills.splice(index, 1);
-		this.insertBill(bill);
+		this.insertBill(this.bills, bill);
 		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
 		this.scope.apply();
 	}.bind(this), function(error) {

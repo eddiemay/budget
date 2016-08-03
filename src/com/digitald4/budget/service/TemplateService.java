@@ -70,7 +70,7 @@ public class TemplateService extends DualProtoService<TemplateUI, Template> {
 	};
 	
 	public TemplateService(TemplateStore store) {
-		super(store);
+		super(TemplateUI.class, store);
 		this.store = store;
 	}
 	

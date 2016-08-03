@@ -1,9 +1,7 @@
-com.digitald4.budget.AccountService = function(restService, connector) {
-	this.restService = restService;
+com.digitald4.budget.AccountService = function(connector) {
 	this.connector = connector;
 };
 
-com.digitald4.budget.AccountService.prototype.restService;
 com.digitald4.budget.AccountService.prototype.connector;
 
 com.digitald4.budget.AccountService.prototype.getAccounts = function(portfolioId, refDate,
@@ -22,7 +20,7 @@ com.digitald4.budget.AccountService.prototype.updateAccount = function(account, 
 		successCallback, errorCallback) {
 	var request = {id: account.id,
 			property: property,
-			value: account[property]};
+			value: account[property].toString()};
 	this.connector.performRequest('update_account', request, function(account_) {
 		account.sortValue = account_.sortValue;
 		successCallback(account);
@@ -43,9 +41,6 @@ com.digitald4.budget.AccountService.prototype.addTemplate = function(newTemplate
 
 com.digitald4.budget.AccountService.prototype.getSummaryData = function(portfolioId, year,
 		successCallback, errorCallback) {
-	this.restService.performRequest({action: 'getSummaryData', portfolioId: portfolioId, year: year},
+	this.connector.performRequest('account_summary', {portfolio_id: portfolioId, year: year},
 			successCallback, errorCallback);
 };
-
-// 2504 W Cypress St Compton, CA 90220
-// Stevens, C41-340 Cell 5388
