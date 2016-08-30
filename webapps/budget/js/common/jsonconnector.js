@@ -35,6 +35,10 @@ com.digitald4.common.JSONConnector.prototype.performRequest =
 			}
 		},
 		function(response) {
-			errorCallback(errorThrown);
+		  console.log('Status code: ' + response.status);
+		  if (response.status == 401) {
+		    document.location.href = 'login.html';
+		  }
+			errorCallback(response);
 		});
 };

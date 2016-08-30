@@ -138,11 +138,8 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 			function(bills) {
 				var sortedBills = [];
 				for (var b = 0; b < bills.length; b++) {
-					var bill = bills[b];
-					if (bill.due_date) {
-						bill.dueDate = this.dateFilter(bill.due_date, 'MM/dd/yyyy');
-					}
-					this.insertBill(sortedBills, bill);
+				  bills[b].dueDate = this.dateFilter(bills[b].due_date, 'MM/dd/yyyy');
+					this.insertBill(sortedBills, bills[b]);
 				}
 				if (this.accounts) { 
 					this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sortedBills);
@@ -247,7 +244,12 @@ com.digitald4.budget.ListCtrl.prototype.applyTemplate = function() {
 	this.applyTemplateError = undefined;
 	this.billService.applyTemplate(this.selectedTemplate, this.sharedData.getMonth().getTime(),
 			proto.common.DateRange.MONTH, function(bills) {
-		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, bills);
+		var sortedBills = [];
+        for (var b = 0; b < bills.length; b++) {
+          bills[b].dueDate = this.dateFilter(bills[b].due_date, 'MM/dd/yyyy');
+          this.insertBill(sortedBills, bills[b]);
+        }
+		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sortedBills);
 		this.scope.apply();
 	}.bind(this), notify);
 };

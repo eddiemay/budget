@@ -66,7 +66,6 @@ proto.budget.PortfolioUI.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getField(msg, 1),
     name: jspb.Message.getField(msg, 2),
-    description: jspb.Message.getField(msg, 3),
     portfolioUserList: jspb.Message.toObjectList(msg.getPortfolioUserList(),
     proto.budget.PortfolioUI.PortfolioUserUI.toObject, includeInstance)
   };
@@ -125,26 +124,6 @@ proto.budget.PortfolioUI.prototype.setName = function(value) {
 
 proto.budget.PortfolioUI.prototype.clearName = function() {
   jspb.Message.setField(this, 2, undefined);
-};
-
-
-/**
- * optional string description = 3;
- * @return {string?}
- */
-proto.budget.PortfolioUI.prototype.getDescription = function() {
-  return /** @type {string?} */ (jspb.Message.getField(this, 3));
-};
-
-
-/** @param {string?|undefined} value  */
-proto.budget.PortfolioUI.prototype.setDescription = function(value) {
-  jspb.Message.setField(this, 3, value);
-};
-
-
-proto.budget.PortfolioUI.prototype.clearDescription = function() {
-  jspb.Message.setField(this, 3, undefined);
 };
 
 

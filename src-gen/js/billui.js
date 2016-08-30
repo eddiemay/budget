@@ -34,7 +34,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.budget.BillUI.repeatedFields_ = [12];
+proto.budget.BillUI.repeatedFields_ = [13];
 
 
 
@@ -73,8 +73,7 @@ proto.budget.BillUI.toObject = function(includeInstance, msg) {
     paymentDate: jspb.Message.getField(msg, 7),
     amountDue: jspb.Message.getField(msg, 8),
     status: jspb.Message.getField(msg, 9),
-    active: jspb.Message.getField(msg, 10),
-    description: jspb.Message.getField(msg, 11),
+    rank: jspb.Message.getField(msg, 10),
     transactionList: jspb.Message.toObjectList(msg.getTransactionList(),
     proto.budget.BillUI.TransactionUI.toObject, includeInstance)
   };
@@ -277,62 +276,40 @@ proto.budget.BillUI.prototype.clearStatus = function() {
 
 
 /**
- * optional bool active = 10;
- * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
- * You should avoid comparisons like {@code val === true/false} in those cases.
- * @return {boolean?}
+ * optional int32 rank = 10;
+ * @return {number?}
  */
-proto.budget.BillUI.prototype.getActive = function() {
-  return /** @type {boolean?} */ (jspb.Message.getField(this, 10));
+proto.budget.BillUI.prototype.getRank = function() {
+  return /** @type {number?} */ (jspb.Message.getField(this, 10));
 };
 
 
-/** @param {boolean?|undefined} value  */
-proto.budget.BillUI.prototype.setActive = function(value) {
+/** @param {number?|undefined} value  */
+proto.budget.BillUI.prototype.setRank = function(value) {
   jspb.Message.setField(this, 10, value);
 };
 
 
-proto.budget.BillUI.prototype.clearActive = function() {
+proto.budget.BillUI.prototype.clearRank = function() {
   jspb.Message.setField(this, 10, undefined);
 };
 
 
 /**
- * optional string description = 11;
- * @return {string?}
- */
-proto.budget.BillUI.prototype.getDescription = function() {
-  return /** @type {string?} */ (jspb.Message.getField(this, 11));
-};
-
-
-/** @param {string?|undefined} value  */
-proto.budget.BillUI.prototype.setDescription = function(value) {
-  jspb.Message.setField(this, 11, value);
-};
-
-
-proto.budget.BillUI.prototype.clearDescription = function() {
-  jspb.Message.setField(this, 11, undefined);
-};
-
-
-/**
- * repeated TransactionUI transaction = 12;
+ * repeated TransactionUI transaction = 13;
  * If you change this array by adding, removing or replacing elements, or if you
  * replace the array itself, then you must call the setter to update it.
  * @return {!Array.<!proto.budget.BillUI.TransactionUI>}
  */
 proto.budget.BillUI.prototype.getTransactionList = function() {
   return /** @type{!Array.<!proto.budget.BillUI.TransactionUI>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.budget.BillUI.TransactionUI, 12));
+    jspb.Message.getRepeatedWrapperField(this, proto.budget.BillUI.TransactionUI, 13));
 };
 
 
 /** @param {Array.<!proto.budget.BillUI.TransactionUI>|undefined} value  */
 proto.budget.BillUI.prototype.setTransactionList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 12, value);
+  jspb.Message.setRepeatedWrapperField(this, 13, value);
 };
 
 
@@ -346,10 +323,11 @@ proto.budget.BillUI.prototype.clearTransactionList = function() {
  */
 proto.budget.BillUI.PaymentStatusUI = {
   PS_UNKNOWN: 0,
-  PS_NOT_SCHEDULED: 1,
-  PS_SCHEDULED: 2,
-  PS_PENDING: 3,
-  PS_PAID: 4
+  PS_ESTIMATED_AMOUNT: 1,
+  PS_BILLED_AMOUNT: 2,
+  PS_SCHEDULED: 3,
+  PS_PENDING: 4,
+  PS_PAID: 5
 };
 
 
@@ -398,12 +376,10 @@ proto.budget.BillUI.TransactionUI.prototype.toObject = function(opt_includeInsta
  */
 proto.budget.BillUI.TransactionUI.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getField(msg, 1),
-    debitAccountId: jspb.Message.getField(msg, 2),
-    amount: jspb.Message.getField(msg, 3),
-    paymentDate: jspb.Message.getField(msg, 4),
-    status: jspb.Message.getField(msg, 5),
-    active: jspb.Message.getField(msg, 6)
+    debitAccountId: jspb.Message.getField(msg, 1),
+    amount: jspb.Message.getField(msg, 2),
+    paymentDate: jspb.Message.getField(msg, 3),
+    status: jspb.Message.getField(msg, 4)
   };
 
   if (includeInstance) {
@@ -424,124 +400,82 @@ proto.budget.BillUI.TransactionUI.prototype.cloneMessage = function() {
 
 
 /**
- * optional int32 id = 1;
+ * optional int32 debit_account_id = 1;
  * @return {number?}
  */
-proto.budget.BillUI.TransactionUI.prototype.getId = function() {
+proto.budget.BillUI.TransactionUI.prototype.getDebitAccountId = function() {
   return /** @type {number?} */ (jspb.Message.getField(this, 1));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.budget.BillUI.TransactionUI.prototype.setId = function(value) {
+proto.budget.BillUI.TransactionUI.prototype.setDebitAccountId = function(value) {
   jspb.Message.setField(this, 1, value);
 };
 
 
-proto.budget.BillUI.TransactionUI.prototype.clearId = function() {
+proto.budget.BillUI.TransactionUI.prototype.clearDebitAccountId = function() {
   jspb.Message.setField(this, 1, undefined);
 };
 
 
 /**
- * optional int32 debit_account_id = 2;
+ * optional double amount = 2;
  * @return {number?}
  */
-proto.budget.BillUI.TransactionUI.prototype.getDebitAccountId = function() {
+proto.budget.BillUI.TransactionUI.prototype.getAmount = function() {
   return /** @type {number?} */ (jspb.Message.getField(this, 2));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.budget.BillUI.TransactionUI.prototype.setDebitAccountId = function(value) {
+proto.budget.BillUI.TransactionUI.prototype.setAmount = function(value) {
   jspb.Message.setField(this, 2, value);
 };
 
 
-proto.budget.BillUI.TransactionUI.prototype.clearDebitAccountId = function() {
+proto.budget.BillUI.TransactionUI.prototype.clearAmount = function() {
   jspb.Message.setField(this, 2, undefined);
 };
 
 
 /**
- * optional double amount = 3;
+ * optional int64 payment_date = 3;
  * @return {number?}
  */
-proto.budget.BillUI.TransactionUI.prototype.getAmount = function() {
+proto.budget.BillUI.TransactionUI.prototype.getPaymentDate = function() {
   return /** @type {number?} */ (jspb.Message.getField(this, 3));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.budget.BillUI.TransactionUI.prototype.setAmount = function(value) {
+proto.budget.BillUI.TransactionUI.prototype.setPaymentDate = function(value) {
   jspb.Message.setField(this, 3, value);
 };
 
 
-proto.budget.BillUI.TransactionUI.prototype.clearAmount = function() {
+proto.budget.BillUI.TransactionUI.prototype.clearPaymentDate = function() {
   jspb.Message.setField(this, 3, undefined);
 };
 
 
 /**
- * optional int64 payment_date = 4;
- * @return {number?}
- */
-proto.budget.BillUI.TransactionUI.prototype.getPaymentDate = function() {
-  return /** @type {number?} */ (jspb.Message.getField(this, 4));
-};
-
-
-/** @param {number?|undefined} value  */
-proto.budget.BillUI.TransactionUI.prototype.setPaymentDate = function(value) {
-  jspb.Message.setField(this, 4, value);
-};
-
-
-proto.budget.BillUI.TransactionUI.prototype.clearPaymentDate = function() {
-  jspb.Message.setField(this, 4, undefined);
-};
-
-
-/**
- * optional PaymentStatusUI status = 5;
+ * optional PaymentStatusUI status = 4;
  * @return {proto.budget.BillUI.PaymentStatusUI}
  */
 proto.budget.BillUI.TransactionUI.prototype.getStatus = function() {
-  return /** @type {proto.budget.BillUI.PaymentStatusUI} */ (jspb.Message.getField(this, 5));
+  return /** @type {proto.budget.BillUI.PaymentStatusUI} */ (jspb.Message.getField(this, 4));
 };
 
 
 /** @param {proto.budget.BillUI.PaymentStatusUI|undefined} value  */
 proto.budget.BillUI.TransactionUI.prototype.setStatus = function(value) {
-  jspb.Message.setField(this, 5, value);
+  jspb.Message.setField(this, 4, value);
 };
 
 
 proto.budget.BillUI.TransactionUI.prototype.clearStatus = function() {
-  jspb.Message.setField(this, 5, undefined);
-};
-
-
-/**
- * optional bool active = 6;
- * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
- * You should avoid comparisons like {@code val === true/false} in those cases.
- * @return {boolean?}
- */
-proto.budget.BillUI.TransactionUI.prototype.getActive = function() {
-  return /** @type {boolean?} */ (jspb.Message.getField(this, 6));
-};
-
-
-/** @param {boolean?|undefined} value  */
-proto.budget.BillUI.TransactionUI.prototype.setActive = function(value) {
-  jspb.Message.setField(this, 6, value);
-};
-
-
-proto.budget.BillUI.TransactionUI.prototype.clearActive = function() {
-  jspb.Message.setField(this, 6, undefined);
+  jspb.Message.setField(this, 4, undefined);
 };
 
 

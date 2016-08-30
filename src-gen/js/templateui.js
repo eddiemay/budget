@@ -34,7 +34,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.budget.TemplateUI.repeatedFields_ = [5];
+proto.budget.TemplateUI.repeatedFields_ = [4];
 
 
 
@@ -67,7 +67,6 @@ proto.budget.TemplateUI.toObject = function(includeInstance, msg) {
     id: jspb.Message.getField(msg, 1),
     portfolioId: jspb.Message.getField(msg, 2),
     name: jspb.Message.getField(msg, 3),
-    description: jspb.Message.getField(msg, 4),
     billList: jspb.Message.toObjectList(msg.getBillList(),
     proto.budget.TemplateUI.TemplateBillUI.toObject, includeInstance)
   };
@@ -150,40 +149,20 @@ proto.budget.TemplateUI.prototype.clearName = function() {
 
 
 /**
- * optional string description = 4;
- * @return {string?}
- */
-proto.budget.TemplateUI.prototype.getDescription = function() {
-  return /** @type {string?} */ (jspb.Message.getField(this, 4));
-};
-
-
-/** @param {string?|undefined} value  */
-proto.budget.TemplateUI.prototype.setDescription = function(value) {
-  jspb.Message.setField(this, 4, value);
-};
-
-
-proto.budget.TemplateUI.prototype.clearDescription = function() {
-  jspb.Message.setField(this, 4, undefined);
-};
-
-
-/**
- * repeated TemplateBillUI bill = 5;
+ * repeated TemplateBillUI bill = 4;
  * If you change this array by adding, removing or replacing elements, or if you
  * replace the array itself, then you must call the setter to update it.
  * @return {!Array.<!proto.budget.TemplateUI.TemplateBillUI>}
  */
 proto.budget.TemplateUI.prototype.getBillList = function() {
   return /** @type{!Array.<!proto.budget.TemplateUI.TemplateBillUI>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.budget.TemplateUI.TemplateBillUI, 5));
+    jspb.Message.getRepeatedWrapperField(this, proto.budget.TemplateUI.TemplateBillUI, 4));
 };
 
 
 /** @param {Array.<!proto.budget.TemplateUI.TemplateBillUI>|undefined} value  */
 proto.budget.TemplateUI.prototype.setBillList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 5, value);
+  jspb.Message.setRepeatedWrapperField(this, 4, value);
 };
 
 
@@ -215,7 +194,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.budget.TemplateUI.TemplateBillUI.repeatedFields_ = [10];
+proto.budget.TemplateUI.TemplateBillUI.repeatedFields_ = [5];
 
 
 
@@ -245,15 +224,10 @@ proto.budget.TemplateUI.TemplateBillUI.prototype.toObject = function(opt_include
  */
 proto.budget.TemplateUI.TemplateBillUI.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getField(msg, 1),
-    templateId: jspb.Message.getField(msg, 2),
-    accountId: jspb.Message.getField(msg, 3),
-    dueDay: jspb.Message.getField(msg, 4),
-    name: jspb.Message.getField(msg, 5),
-    amountDue: jspb.Message.getField(msg, 6),
-    active: jspb.Message.getField(msg, 7) != null ? jspb.Message.getField(msg, 7) : true,
-    description: jspb.Message.getField(msg, 8),
-    rank: jspb.Message.getField(msg, 9),
+    accountId: jspb.Message.getField(msg, 1),
+    dueDay: jspb.Message.getField(msg, 2),
+    name: jspb.Message.getField(msg, 3),
+    amountDue: jspb.Message.getField(msg, 4),
     transactionList: jspb.Message.toObjectList(msg.getTransactionList(),
     proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI.toObject, includeInstance)
   };
@@ -276,202 +250,100 @@ proto.budget.TemplateUI.TemplateBillUI.prototype.cloneMessage = function() {
 
 
 /**
- * optional int32 id = 1;
+ * optional int32 account_id = 1;
  * @return {number?}
  */
-proto.budget.TemplateUI.TemplateBillUI.prototype.getId = function() {
+proto.budget.TemplateUI.TemplateBillUI.prototype.getAccountId = function() {
   return /** @type {number?} */ (jspb.Message.getField(this, 1));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.prototype.setId = function(value) {
+proto.budget.TemplateUI.TemplateBillUI.prototype.setAccountId = function(value) {
   jspb.Message.setField(this, 1, value);
 };
 
 
-proto.budget.TemplateUI.TemplateBillUI.prototype.clearId = function() {
+proto.budget.TemplateUI.TemplateBillUI.prototype.clearAccountId = function() {
   jspb.Message.setField(this, 1, undefined);
 };
 
 
 /**
- * optional int32 template_id = 2;
+ * optional int32 due_day = 2;
  * @return {number?}
  */
-proto.budget.TemplateUI.TemplateBillUI.prototype.getTemplateId = function() {
+proto.budget.TemplateUI.TemplateBillUI.prototype.getDueDay = function() {
   return /** @type {number?} */ (jspb.Message.getField(this, 2));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.prototype.setTemplateId = function(value) {
+proto.budget.TemplateUI.TemplateBillUI.prototype.setDueDay = function(value) {
   jspb.Message.setField(this, 2, value);
 };
 
 
-proto.budget.TemplateUI.TemplateBillUI.prototype.clearTemplateId = function() {
+proto.budget.TemplateUI.TemplateBillUI.prototype.clearDueDay = function() {
   jspb.Message.setField(this, 2, undefined);
 };
 
 
 /**
- * optional int32 account_id = 3;
- * @return {number?}
- */
-proto.budget.TemplateUI.TemplateBillUI.prototype.getAccountId = function() {
-  return /** @type {number?} */ (jspb.Message.getField(this, 3));
-};
-
-
-/** @param {number?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.prototype.setAccountId = function(value) {
-  jspb.Message.setField(this, 3, value);
-};
-
-
-proto.budget.TemplateUI.TemplateBillUI.prototype.clearAccountId = function() {
-  jspb.Message.setField(this, 3, undefined);
-};
-
-
-/**
- * optional int32 due_day = 4;
- * @return {number?}
- */
-proto.budget.TemplateUI.TemplateBillUI.prototype.getDueDay = function() {
-  return /** @type {number?} */ (jspb.Message.getField(this, 4));
-};
-
-
-/** @param {number?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.prototype.setDueDay = function(value) {
-  jspb.Message.setField(this, 4, value);
-};
-
-
-proto.budget.TemplateUI.TemplateBillUI.prototype.clearDueDay = function() {
-  jspb.Message.setField(this, 4, undefined);
-};
-
-
-/**
- * optional string name = 5;
+ * optional string name = 3;
  * @return {string?}
  */
 proto.budget.TemplateUI.TemplateBillUI.prototype.getName = function() {
-  return /** @type {string?} */ (jspb.Message.getField(this, 5));
+  return /** @type {string?} */ (jspb.Message.getField(this, 3));
 };
 
 
 /** @param {string?|undefined} value  */
 proto.budget.TemplateUI.TemplateBillUI.prototype.setName = function(value) {
-  jspb.Message.setField(this, 5, value);
+  jspb.Message.setField(this, 3, value);
 };
 
 
 proto.budget.TemplateUI.TemplateBillUI.prototype.clearName = function() {
-  jspb.Message.setField(this, 5, undefined);
+  jspb.Message.setField(this, 3, undefined);
 };
 
 
 /**
- * optional double amount_due = 6;
+ * optional double amount_due = 4;
  * @return {number?}
  */
 proto.budget.TemplateUI.TemplateBillUI.prototype.getAmountDue = function() {
-  return /** @type {number?} */ (jspb.Message.getField(this, 6));
+  return /** @type {number?} */ (jspb.Message.getField(this, 4));
 };
 
 
 /** @param {number?|undefined} value  */
 proto.budget.TemplateUI.TemplateBillUI.prototype.setAmountDue = function(value) {
-  jspb.Message.setField(this, 6, value);
+  jspb.Message.setField(this, 4, value);
 };
 
 
 proto.budget.TemplateUI.TemplateBillUI.prototype.clearAmountDue = function() {
-  jspb.Message.setField(this, 6, undefined);
+  jspb.Message.setField(this, 4, undefined);
 };
 
 
 /**
- * optional bool active = 7;
- * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
- * You should avoid comparisons like {@code val === true/false} in those cases.
- * @return {boolean}
- */
-proto.budget.TemplateUI.TemplateBillUI.prototype.getActive = function() {
-  return /** @type {boolean} */ (jspb.Message.getField(this, 7) != null ? jspb.Message.getField(this, 7) : true);
-};
-
-
-/** @param {boolean?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.prototype.setActive = function(value) {
-  jspb.Message.setField(this, 7, value);
-};
-
-
-proto.budget.TemplateUI.TemplateBillUI.prototype.clearActive = function() {
-  jspb.Message.setField(this, 7, undefined);
-};
-
-
-/**
- * optional string description = 8;
- * @return {string?}
- */
-proto.budget.TemplateUI.TemplateBillUI.prototype.getDescription = function() {
-  return /** @type {string?} */ (jspb.Message.getField(this, 8));
-};
-
-
-/** @param {string?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.prototype.setDescription = function(value) {
-  jspb.Message.setField(this, 8, value);
-};
-
-
-proto.budget.TemplateUI.TemplateBillUI.prototype.clearDescription = function() {
-  jspb.Message.setField(this, 8, undefined);
-};
-
-
-/**
- * optional int32 rank = 9;
- * @return {number?}
- */
-proto.budget.TemplateUI.TemplateBillUI.prototype.getRank = function() {
-  return /** @type {number?} */ (jspb.Message.getField(this, 9));
-};
-
-
-/** @param {number?|undefined} value  */
-proto.budget.TemplateUI.TemplateBillUI.prototype.setRank = function(value) {
-  jspb.Message.setField(this, 9, value);
-};
-
-
-proto.budget.TemplateUI.TemplateBillUI.prototype.clearRank = function() {
-  jspb.Message.setField(this, 9, undefined);
-};
-
-
-/**
- * repeated TemplateTransactionUI transaction = 10;
+ * repeated TemplateTransactionUI transaction = 5;
  * If you change this array by adding, removing or replacing elements, or if you
  * replace the array itself, then you must call the setter to update it.
  * @return {!Array.<!proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI>}
  */
 proto.budget.TemplateUI.TemplateBillUI.prototype.getTransactionList = function() {
   return /** @type{!Array.<!proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI, 10));
+    jspb.Message.getRepeatedWrapperField(this, proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI, 5));
 };
 
 
 /** @param {Array.<!proto.budget.TemplateUI.TemplateBillUI.TemplateTransactionUI>|undefined} value  */
 proto.budget.TemplateUI.TemplateBillUI.prototype.setTransactionList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 10, value);
+  jspb.Message.setRepeatedWrapperField(this, 5, value);
 };
 
 

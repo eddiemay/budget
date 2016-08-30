@@ -101,6 +101,126 @@ public final class BudgetUIProtos {
     // @@protoc_insertion_point(enum_scope:budget.UserRoleUI)
   }
 
+  /**
+   * Protobuf enum {@code budget.DateRange}
+   */
+  public enum DateRange
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>UNSPECIFIED = 0;</code>
+     */
+    UNSPECIFIED(0, 0),
+    /**
+     * <code>DAY = 1;</code>
+     */
+    DAY(1, 1),
+    /**
+     * <code>WEEK = 2;</code>
+     */
+    WEEK(2, 2),
+    /**
+     * <code>MONTH = 3;</code>
+     */
+    MONTH(3, 3),
+    /**
+     * <code>CAL_MONTH = 4;</code>
+     */
+    CAL_MONTH(4, 4),
+    /**
+     * <code>YEAR = 5;</code>
+     */
+    YEAR(5, 5),
+    ;
+
+    /**
+     * <code>UNSPECIFIED = 0;</code>
+     */
+    public static final int UNSPECIFIED_VALUE = 0;
+    /**
+     * <code>DAY = 1;</code>
+     */
+    public static final int DAY_VALUE = 1;
+    /**
+     * <code>WEEK = 2;</code>
+     */
+    public static final int WEEK_VALUE = 2;
+    /**
+     * <code>MONTH = 3;</code>
+     */
+    public static final int MONTH_VALUE = 3;
+    /**
+     * <code>CAL_MONTH = 4;</code>
+     */
+    public static final int CAL_MONTH_VALUE = 4;
+    /**
+     * <code>YEAR = 5;</code>
+     */
+    public static final int YEAR_VALUE = 5;
+
+
+    public final int getNumber() {
+      return value;
+    }
+
+    public static DateRange valueOf(int value) {
+      switch (value) {
+        case 0: return UNSPECIFIED;
+        case 1: return DAY;
+        case 2: return WEEK;
+        case 3: return MONTH;
+        case 4: return CAL_MONTH;
+        case 5: return YEAR;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<DateRange>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        DateRange> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<DateRange>() {
+            public DateRange findValueByNumber(int number) {
+              return DateRange.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.digitald4.budget.proto.BudgetUIProtos.getDescriptor().getEnumTypes().get(1);
+    }
+
+    private static final DateRange[] VALUES = values();
+
+    public static DateRange valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private DateRange(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:budget.DateRange)
+  }
+
   public interface PortfolioUIOrBuilder extends
       // @@protoc_insertion_point(interface_extends:budget.PortfolioUI)
       com.google.protobuf.MessageOrBuilder {
@@ -8687,13 +8807,13 @@ public final class BudgetUIProtos {
     long getRefDate();
 
     /**
-     * <code>optional .common.DateRange date_range = 3;</code>
+     * <code>optional .budget.DateRange date_range = 3;</code>
      */
     boolean hasDateRange();
     /**
-     * <code>optional .common.DateRange date_range = 3;</code>
+     * <code>optional .budget.DateRange date_range = 3;</code>
      */
-    com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange();
+    com.digitald4.budget.proto.BudgetUIProtos.DateRange getDateRange();
   }
   /**
    * Protobuf type {@code budget.BillListRequest}
@@ -8751,7 +8871,7 @@ public final class BudgetUIProtos {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.digitald4.common.proto.DD4UIProtos.DateRange value = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(rawValue);
+              com.digitald4.budget.proto.BudgetUIProtos.DateRange value = com.digitald4.budget.proto.BudgetUIProtos.DateRange.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -8819,17 +8939,17 @@ public final class BudgetUIProtos {
     public static final int DATE_RANGE_FIELD_NUMBER = 3;
     private int dateRange_;
     /**
-     * <code>optional .common.DateRange date_range = 3;</code>
+     * <code>optional .budget.DateRange date_range = 3;</code>
      */
     public boolean hasDateRange() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .common.DateRange date_range = 3;</code>
+     * <code>optional .budget.DateRange date_range = 3;</code>
      */
-    public com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange() {
-      com.digitald4.common.proto.DD4UIProtos.DateRange result = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(dateRange_);
-      return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRange.UNSPECIFIED : result;
+    public com.digitald4.budget.proto.BudgetUIProtos.DateRange getDateRange() {
+      com.digitald4.budget.proto.BudgetUIProtos.DateRange result = com.digitald4.budget.proto.BudgetUIProtos.DateRange.valueOf(dateRange_);
+      return result == null ? com.digitald4.budget.proto.BudgetUIProtos.DateRange.UNSPECIFIED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -9146,22 +9266,22 @@ public final class BudgetUIProtos {
 
       private int dateRange_ = 0;
       /**
-       * <code>optional .common.DateRange date_range = 3;</code>
+       * <code>optional .budget.DateRange date_range = 3;</code>
        */
       public boolean hasDateRange() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .common.DateRange date_range = 3;</code>
+       * <code>optional .budget.DateRange date_range = 3;</code>
        */
-      public com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange() {
-        com.digitald4.common.proto.DD4UIProtos.DateRange result = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(dateRange_);
-        return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRange.UNSPECIFIED : result;
+      public com.digitald4.budget.proto.BudgetUIProtos.DateRange getDateRange() {
+        com.digitald4.budget.proto.BudgetUIProtos.DateRange result = com.digitald4.budget.proto.BudgetUIProtos.DateRange.valueOf(dateRange_);
+        return result == null ? com.digitald4.budget.proto.BudgetUIProtos.DateRange.UNSPECIFIED : result;
       }
       /**
-       * <code>optional .common.DateRange date_range = 3;</code>
+       * <code>optional .budget.DateRange date_range = 3;</code>
        */
-      public Builder setDateRange(com.digitald4.common.proto.DD4UIProtos.DateRange value) {
+      public Builder setDateRange(com.digitald4.budget.proto.BudgetUIProtos.DateRange value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -9171,7 +9291,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>optional .common.DateRange date_range = 3;</code>
+       * <code>optional .budget.DateRange date_range = 3;</code>
        */
       public Builder clearDateRange() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -13950,13 +14070,13 @@ public final class BudgetUIProtos {
     long getRefDate();
 
     /**
-     * <code>optional .common.DateRange date_range = 3;</code>
+     * <code>optional .budget.DateRange date_range = 3;</code>
      */
     boolean hasDateRange();
     /**
-     * <code>optional .common.DateRange date_range = 3;</code>
+     * <code>optional .budget.DateRange date_range = 3;</code>
      */
-    com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange();
+    com.digitald4.budget.proto.BudgetUIProtos.DateRange getDateRange();
   }
   /**
    * Protobuf type {@code budget.ApplyTemplateRequest}
@@ -14014,7 +14134,7 @@ public final class BudgetUIProtos {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.digitald4.common.proto.DD4UIProtos.DateRange value = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(rawValue);
+              com.digitald4.budget.proto.BudgetUIProtos.DateRange value = com.digitald4.budget.proto.BudgetUIProtos.DateRange.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -14082,17 +14202,17 @@ public final class BudgetUIProtos {
     public static final int DATE_RANGE_FIELD_NUMBER = 3;
     private int dateRange_;
     /**
-     * <code>optional .common.DateRange date_range = 3;</code>
+     * <code>optional .budget.DateRange date_range = 3;</code>
      */
     public boolean hasDateRange() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .common.DateRange date_range = 3;</code>
+     * <code>optional .budget.DateRange date_range = 3;</code>
      */
-    public com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange() {
-      com.digitald4.common.proto.DD4UIProtos.DateRange result = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(dateRange_);
-      return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRange.UNSPECIFIED : result;
+    public com.digitald4.budget.proto.BudgetUIProtos.DateRange getDateRange() {
+      com.digitald4.budget.proto.BudgetUIProtos.DateRange result = com.digitald4.budget.proto.BudgetUIProtos.DateRange.valueOf(dateRange_);
+      return result == null ? com.digitald4.budget.proto.BudgetUIProtos.DateRange.UNSPECIFIED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -14409,22 +14529,22 @@ public final class BudgetUIProtos {
 
       private int dateRange_ = 0;
       /**
-       * <code>optional .common.DateRange date_range = 3;</code>
+       * <code>optional .budget.DateRange date_range = 3;</code>
        */
       public boolean hasDateRange() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .common.DateRange date_range = 3;</code>
+       * <code>optional .budget.DateRange date_range = 3;</code>
        */
-      public com.digitald4.common.proto.DD4UIProtos.DateRange getDateRange() {
-        com.digitald4.common.proto.DD4UIProtos.DateRange result = com.digitald4.common.proto.DD4UIProtos.DateRange.valueOf(dateRange_);
-        return result == null ? com.digitald4.common.proto.DD4UIProtos.DateRange.UNSPECIFIED : result;
+      public com.digitald4.budget.proto.BudgetUIProtos.DateRange getDateRange() {
+        com.digitald4.budget.proto.BudgetUIProtos.DateRange result = com.digitald4.budget.proto.BudgetUIProtos.DateRange.valueOf(dateRange_);
+        return result == null ? com.digitald4.budget.proto.BudgetUIProtos.DateRange.UNSPECIFIED : result;
       }
       /**
-       * <code>optional .common.DateRange date_range = 3;</code>
+       * <code>optional .budget.DateRange date_range = 3;</code>
        */
-      public Builder setDateRange(com.digitald4.common.proto.DD4UIProtos.DateRange value) {
+      public Builder setDateRange(com.digitald4.budget.proto.BudgetUIProtos.DateRange value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -14434,7 +14554,7 @@ public final class BudgetUIProtos {
         return this;
       }
       /**
-       * <code>optional .common.DateRange date_range = 3;</code>
+       * <code>optional .budget.DateRange date_range = 3;</code>
        */
       public Builder clearDateRange() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -15083,64 +15203,66 @@ public final class BudgetUIProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017budget_ui.proto\022\006budget\032\017common_ui.pro" +
-      "to\"\252\001\n\013PortfolioUI\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002" +
-      " \001(\t\022;\n\016portfolio_user\030\004 \003(\0132#.budget.Po" +
-      "rtfolioUI.PortfolioUserUI\032D\n\017PortfolioUs" +
-      "erUI\022\017\n\007user_id\030\001 \001(\005\022 \n\004role\030\002 \001(\0162\022.bu" +
-      "dget.UserRoleUI\"\026\n\024PortfolioListRequest\"" +
-      "@\n\026PortfolioCreateRequest\022&\n\tportfolio\030\001" +
-      " \001(\0132\023.budget.PortfolioUI\"\312\002\n\tAccountUI\022" +
-      "\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id\030\002 \001(\005\022\014\n\004nam" +
-      "e\030\003 \001(\t\022\027\n\017payment_account\030\004 \001(\010\022\031\n\021pare",
-      "nt_account_id\030\005 \001(\005\022,\n\007balance\030\006 \001(\0132\033.b" +
-      "udget.AccountUI.BalanceUI\0221\n\007summary\030\007 \003" +
-      "(\0132 .budget.AccountUI.AccountSummary\032H\n\t" +
-      "BalanceUI\022\014\n\004date\030\001 \001(\t\022\017\n\007balance\030\002 \001(\001" +
-      "\022\034\n\024balance_year_to_date\030\003 \001(\001\032.\n\016Accoun" +
-      "tSummary\022\r\n\005month\030\001 \001(\t\022\r\n\005total\030\002 \001(\001\"<" +
-      "\n\022AccountListRequest\022\024\n\014portfolio_id\030\001 \001" +
-      "(\005\022\020\n\010ref_date\030\002 \001(\003\"9\n\021AccountGetReques" +
-      "t\022\022\n\naccount_id\030\001 \001(\005\022\020\n\010ref_date\030\002 \001(\003\"" +
-      ":\n\024AccountCreateRequest\022\"\n\007account\030\001 \001(\013",
-      "2\021.budget.AccountUI\"\220\004\n\006BillUI\022\n\n\002id\030\001 \001" +
-      "(\005\022\024\n\014portfolio_id\030\002 \001(\005\022\022\n\naccount_id\030\003" +
-      " \001(\005\022\023\n\013template_id\030\004 \001(\005\022\020\n\010due_date\030\005 " +
-      "\001(\003\022\014\n\004name\030\006 \001(\t\022\024\n\014payment_date\030\007 \001(\003\022" +
-      "\022\n\namount_due\030\010 \001(\001\022.\n\006status\030\t \001(\0162\036.bu" +
-      "dget.BillUI.PaymentStatusUI\022\014\n\004rank\030\n \001(" +
-      "\005\0221\n\013transaction\030\r \003(\0132\034.budget.BillUI.T" +
-      "ransactionUI\032\177\n\rTransactionUI\022\030\n\020debit_a" +
-      "ccount_id\030\001 \001(\005\022\016\n\006amount\030\002 \001(\001\022\024\n\014payme" +
-      "nt_date\030\003 \001(\003\022.\n\006status\030\004 \001(\0162\036.budget.B",
-      "illUI.PaymentStatusUI\"\177\n\017PaymentStatusUI" +
-      "\022\016\n\nPS_UNKNOWN\020\000\022\027\n\023PS_ESTIMATED_AMOUNT\020" +
-      "\001\022\024\n\020PS_BILLED_AMOUNT\020\002\022\020\n\014PS_SCHEDULED\020" +
-      "\003\022\016\n\nPS_PENDING\020\004\022\013\n\007PS_PAID\020\005\"`\n\017BillLi" +
-      "stRequest\022\024\n\014portfolio_id\030\001 \001(\005\022\020\n\010ref_d" +
-      "ate\030\002 \001(\003\022%\n\ndate_range\030\003 \001(\0162\021.common.D" +
-      "ateRange\"1\n\021BillCreateRequest\022\034\n\004bill\030\001 " +
-      "\001(\0132\016.budget.BillUI\"\\\n\026BillTransUpdateRe" +
-      "quest\022\017\n\007bill_id\030\001 \001(\005\0221\n\013transaction\030\002 " +
-      "\003(\0132\034.budget.BillUI.TransactionUI\"\330\002\n\nTe",
-      "mplateUI\022\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id\030\002 \001" +
-      "(\005\022\014\n\004name\030\003 \001(\t\022/\n\004bill\030\004 \003(\0132!.budget." +
-      "TemplateUI.TemplateBillUI\032\350\001\n\016TemplateBi" +
-      "llUI\022\022\n\naccount_id\030\001 \001(\005\022\017\n\007due_day\030\002 \001(" +
-      "\005\022\014\n\004name\030\003 \001(\t\022\022\n\namount_due\030\004 \001(\001\022L\n\013t" +
-      "ransaction\030\005 \003(\01327.budget.TemplateUI.Tem" +
-      "plateBillUI.TemplateTransactionUI\032A\n\025Tem" +
-      "plateTransactionUI\022\030\n\020debit_account_id\030\001" +
-      " \001(\005\022\016\n\006amount\030\002 \001(\001\"+\n\023TemplateListRequ" +
-      "est\022\024\n\014portfolio_id\030\001 \001(\005\"=\n\025TemplateCre",
-      "ateRequest\022$\n\010template\030\001 \001(\0132\022.budget.Te" +
-      "mplateUI\"d\n\024ApplyTemplateRequest\022\023\n\013temp" +
-      "late_id\030\001 \001(\005\022\020\n\010ref_date\030\002 \001(\003\022%\n\ndate_" +
-      "range\030\003 \001(\0162\021.common.DateRange\";\n\025Accoun" +
-      "tSummaryRequest\022\024\n\014portfolio_id\030\001 \001(\005\022\014\n" +
-      "\004year\030\002 \001(\005*;\n\nUserRoleUI\022\016\n\nUR_UNKNOWN\020" +
-      "\000\022\014\n\010UR_OWNER\020\014\022\017\n\013UR_READONLY\020\rB,\n\032com." +
-      "digitald4.budget.protoB\016BudgetUIProtos"
+      "\n\017budget_ui.proto\022\006budget\"\252\001\n\013PortfolioU" +
+      "I\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022;\n\016portfolio" +
+      "_user\030\004 \003(\0132#.budget.PortfolioUI.Portfol" +
+      "ioUserUI\032D\n\017PortfolioUserUI\022\017\n\007user_id\030\001" +
+      " \001(\005\022 \n\004role\030\002 \001(\0162\022.budget.UserRoleUI\"\026" +
+      "\n\024PortfolioListRequest\"@\n\026PortfolioCreat" +
+      "eRequest\022&\n\tportfolio\030\001 \001(\0132\023.budget.Por" +
+      "tfolioUI\"\312\002\n\tAccountUI\022\n\n\002id\030\001 \001(\005\022\024\n\014po" +
+      "rtfolio_id\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\027\n\017paymen" +
+      "t_account\030\004 \001(\010\022\031\n\021parent_account_id\030\005 \001",
+      "(\005\022,\n\007balance\030\006 \001(\0132\033.budget.AccountUI.B" +
+      "alanceUI\0221\n\007summary\030\007 \003(\0132 .budget.Accou" +
+      "ntUI.AccountSummary\032H\n\tBalanceUI\022\014\n\004date" +
+      "\030\001 \001(\t\022\017\n\007balance\030\002 \001(\001\022\034\n\024balance_year_" +
+      "to_date\030\003 \001(\001\032.\n\016AccountSummary\022\r\n\005month" +
+      "\030\001 \001(\t\022\r\n\005total\030\002 \001(\001\"<\n\022AccountListRequ" +
+      "est\022\024\n\014portfolio_id\030\001 \001(\005\022\020\n\010ref_date\030\002 " +
+      "\001(\003\"9\n\021AccountGetRequest\022\022\n\naccount_id\030\001" +
+      " \001(\005\022\020\n\010ref_date\030\002 \001(\003\":\n\024AccountCreateR" +
+      "equest\022\"\n\007account\030\001 \001(\0132\021.budget.Account",
+      "UI\"\220\004\n\006BillUI\022\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_i" +
+      "d\030\002 \001(\005\022\022\n\naccount_id\030\003 \001(\005\022\023\n\013template_" +
+      "id\030\004 \001(\005\022\020\n\010due_date\030\005 \001(\003\022\014\n\004name\030\006 \001(\t" +
+      "\022\024\n\014payment_date\030\007 \001(\003\022\022\n\namount_due\030\010 \001" +
+      "(\001\022.\n\006status\030\t \001(\0162\036.budget.BillUI.Payme" +
+      "ntStatusUI\022\014\n\004rank\030\n \001(\005\0221\n\013transaction\030" +
+      "\r \003(\0132\034.budget.BillUI.TransactionUI\032\177\n\rT" +
+      "ransactionUI\022\030\n\020debit_account_id\030\001 \001(\005\022\016" +
+      "\n\006amount\030\002 \001(\001\022\024\n\014payment_date\030\003 \001(\003\022.\n\006" +
+      "status\030\004 \001(\0162\036.budget.BillUI.PaymentStat",
+      "usUI\"\177\n\017PaymentStatusUI\022\016\n\nPS_UNKNOWN\020\000\022" +
+      "\027\n\023PS_ESTIMATED_AMOUNT\020\001\022\024\n\020PS_BILLED_AM" +
+      "OUNT\020\002\022\020\n\014PS_SCHEDULED\020\003\022\016\n\nPS_PENDING\020\004" +
+      "\022\013\n\007PS_PAID\020\005\"`\n\017BillListRequest\022\024\n\014port" +
+      "folio_id\030\001 \001(\005\022\020\n\010ref_date\030\002 \001(\003\022%\n\ndate" +
+      "_range\030\003 \001(\0162\021.budget.DateRange\"1\n\021BillC" +
+      "reateRequest\022\034\n\004bill\030\001 \001(\0132\016.budget.Bill" +
+      "UI\"\\\n\026BillTransUpdateRequest\022\017\n\007bill_id\030" +
+      "\001 \001(\005\0221\n\013transaction\030\002 \003(\0132\034.budget.Bill" +
+      "UI.TransactionUI\"\330\002\n\nTemplateUI\022\n\n\002id\030\001 ",
+      "\001(\005\022\024\n\014portfolio_id\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022" +
+      "/\n\004bill\030\004 \003(\0132!.budget.TemplateUI.Templa" +
+      "teBillUI\032\350\001\n\016TemplateBillUI\022\022\n\naccount_i" +
+      "d\030\001 \001(\005\022\017\n\007due_day\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\022" +
+      "\n\namount_due\030\004 \001(\001\022L\n\013transaction\030\005 \003(\0132" +
+      "7.budget.TemplateUI.TemplateBillUI.Templ" +
+      "ateTransactionUI\032A\n\025TemplateTransactionU" +
+      "I\022\030\n\020debit_account_id\030\001 \001(\005\022\016\n\006amount\030\002 " +
+      "\001(\001\"+\n\023TemplateListRequest\022\024\n\014portfolio_" +
+      "id\030\001 \001(\005\"=\n\025TemplateCreateRequest\022$\n\010tem",
+      "plate\030\001 \001(\0132\022.budget.TemplateUI\"d\n\024Apply" +
+      "TemplateRequest\022\023\n\013template_id\030\001 \001(\005\022\020\n\010" +
+      "ref_date\030\002 \001(\003\022%\n\ndate_range\030\003 \001(\0162\021.bud" +
+      "get.DateRange\";\n\025AccountSummaryRequest\022\024" +
+      "\n\014portfolio_id\030\001 \001(\005\022\014\n\004year\030\002 \001(\005*;\n\nUs" +
+      "erRoleUI\022\016\n\nUR_UNKNOWN\020\000\022\014\n\010UR_OWNER\020\014\022\017" +
+      "\n\013UR_READONLY\020\r*S\n\tDateRange\022\017\n\013UNSPECIF" +
+      "IED\020\000\022\007\n\003DAY\020\001\022\010\n\004WEEK\020\002\022\t\n\005MONTH\020\003\022\r\n\tC" +
+      "AL_MONTH\020\004\022\010\n\004YEAR\020\005B,\n\032com.digitald4.bu" +
+      "dget.protoB\016BudgetUIProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15153,7 +15275,6 @@ public final class BudgetUIProtos {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.digitald4.common.proto.DD4UIProtos.getDescriptor(),
         }, assigner);
     internal_static_budget_PortfolioUI_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -15287,7 +15408,6 @@ public final class BudgetUIProtos {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_budget_AccountSummaryRequest_descriptor,
         new java.lang.String[] { "PortfolioId", "Year", });
-    com.digitald4.common.proto.DD4UIProtos.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

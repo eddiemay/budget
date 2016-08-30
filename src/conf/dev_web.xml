@@ -4,8 +4,8 @@
 		<param-value>jdbc:mysql://localhost/budget?autoReconnect=true</param-value>
 	</context-param>
 
-	<context-param>
+	<!-- context-param>
 		<param-name>auto_login_id</param-name>
 		<param-value>1</param-value>
-	</context-param>
+	</context-param -->
 </web-app>

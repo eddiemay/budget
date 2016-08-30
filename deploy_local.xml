@@ -116,7 +116,6 @@
 				<include name="commons-dbcp*.jar" />
 				<include name="commons-pool*.jar" />
 				<include name="javax.mail.jar" />
-				<include name="javax.servlet.jsp.jstl*.jar" />
 				<include name="joda-time*.jar" />
 				<include name="mysql-connector*.jar" />
 				<include name="protobuf-java-3.0.0-beta-2.jar" />
@@ -143,7 +142,7 @@
 			<filelist dir="src/conf" files="web.xml,dev_web.xml"/>
 		</concat>
 		<javac destdir="webapps/${app.name}/WEB-INF/classes" 
-				includes="com/digitald4/${app.name}/servlet/*" 
+				includes="com/digitald4/${app.name}/server/JSONServiceServlet.java"
 				target="1.7" source="1.7" optimize="yes">
 			<src path="../common/src" />
 			<src path="../common/src-gen" />

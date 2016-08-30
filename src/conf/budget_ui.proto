@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package budget;
 
-import "common_ui.proto";
+// import "../../../common/src/conf/common_ui.proto";
 
 option java_package = "com.digitald4.budget.proto";
 option java_outer_classname = "BudgetUIProtos";
@@ -11,6 +11,15 @@ enum UserRoleUI {
 	UR_UNKNOWN = 0;
 	UR_OWNER = 12;
 	UR_READONLY = 13;
+}
+
+enum DateRange {
+  UNSPECIFIED = 0;
+  DAY = 1;
+  WEEK = 2;
+  MONTH = 3;
+  CAL_MONTH = 4;
+  YEAR = 5;
 }
 
 message PortfolioUI {
@@ -99,7 +108,7 @@ message BillUI {
 message BillListRequest {
 	optional int32 portfolio_id = 1;
 	optional int64 ref_date = 2;
-	optional common.DateRange date_range = 3;
+	optional DateRange date_range = 3;
 }
 
 message BillCreateRequest {
@@ -142,7 +151,7 @@ message TemplateCreateRequest {
 message ApplyTemplateRequest {
 	optional int32 template_id = 1;
 	optional int64 ref_date = 2;
-	optional common.DateRange date_range = 3;
+	optional DateRange date_range = 3;
 }
 
 message AccountSummaryRequest {

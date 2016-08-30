@@ -24,6 +24,7 @@ com.digitald4.common.HttpConnector.prototype.performRequest =
 			'Content-Type': 'json'
 		}
 	}).then(function(response) {
+		  console.log('Success response: ' + response);
 			if (response.data.valid) {
 				successCallback(response.data.data);
 			} else {
@@ -35,6 +36,7 @@ com.digitald4.common.HttpConnector.prototype.performRequest =
 			}
 		},
 		function(response) {
-			errorCallback(errorThrown);
+		  console.log('Error response: ' + response);
+			errorCallback(response);
 		});
 };
