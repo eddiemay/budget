@@ -51,6 +51,7 @@
 	<script src="js/gen/userroleui.js"></script>
 	<script src="js/common/jsonconnector.js"></script>
 	<script src="js/common/daterange.js"></script>
+  <script src="js/common/module.js"></script>
 	<script src="js/angular/factory/shareddata.js"></script>
 	<script src="js/angular/service/accountservice.js"></script>
 	<script src="js/angular/service/billservice.js"></script>
@@ -64,7 +65,7 @@
 	<script src="js/angular/controller/calctrl.js"></script>
 	<script src="js/angular/controller/summaryctrl.js"></script>
 	<script src="js/angular/controller/templatesctrl.js"></script>
-	<script src="js/angular/module.js"></script>	
+	<script src="js/angular/module.js"></script>
 </head>
 
 <body data-ng-app="budget" data-ng-controller="BudgetCtrl as budgetCtrl">
@@ -178,70 +179,18 @@
 	<script src="js/libs/jquery.dataTables-1.10.0.js"></script>
 	<script src="js/libs/jquery.datepick/jquery.datepick.js"></script>
 	
-	<!-- Charts library -->
-	<!--Load the AJAX API-->
-	<script src="http://www.google.com/jsapi"></script>
-	
 	<script>
-	
-		var setupDatepicker = function() {
-			/*
-			 * Datepicker
-			 * Thanks to sbkyle! http://themeforest.net/user/sbkyle
-			 */
-			$('.datepicker').datepick({
-				alignment: 'bottom',
-				showOtherMonths: true,
-				selectOtherMonths: true,
-				renderer: {
-					picker: '<div class="datepick block-border clearfix form"><div class="mini-calendar clearfix">' +
-							'{months}</div></div>',
-					monthRow: '{months}', 
-					month: '<div class="calendar-controls" style="white-space: nowrap">' +
-								'{monthHeader:M yyyy}' +
-							'</div>' +
-							'<table cellspacing="0">' +
-								'<thead>{weekHeader}</thead>' +
-								'<tbody>{weeks}</tbody></table>', 
-					weekHeader: '<tr>{days}</tr>', 
-					dayHeader: '<th>{day}</th>', 
-					week: '<tr>{days}</tr>', 
-					day: '<td>{day}</td>', 
-					monthSelector: '.month', 
-					daySelector: 'td', 
-					rtlClass: 'rtl', 
-					multiClass: 'multi', 
-					defaultClass: 'default', 
-					selectedClass: 'selected', 
-					highlightedClass: 'highlight', 
-					todayClass: 'today', 
-					otherMonthClass: 'other-month', 
-					weekendClass: 'week-end', 
-					commandClass: 'calendar', 
-					commandLinkClass: 'button',
-					disabledClass: 'unavailable'
-				},
-				onSelect: function(dateText, inst) {
-					$(this).change();
-				}
-			});
-			
-			$('.weekpicker').datepick({selectWeek: true, closeOnSelect: false});
-		};
-		
 		/*
 		 * This script shows how to setup the various template plugins and functions
 		 */
 		var setupPage = function() {
-			// checkSession();
 			
 			/*
 			 * Example context menu
 			 */
 			
 			// Context menu for all favorites
-			$('.favorites li').bind('contextMenu', function(event, list)
-			{
+			$('.favorites li').bind('contextMenu', function(event, list) {
 				var li = $(this);
 				
 				// Add links to the menu
@@ -277,10 +226,6 @@
 				});
 			}, true);
 			
-			/*
-			 * Table sorting
-			 */
-			
 			// A small classes setup...
 			$.fn.dataTableExt.oStdClasses.sWrapper = 'no-margin last-child';
 			$.fn.dataTableExt.oStdClasses.sInfo = 'message no-margin';
@@ -295,150 +240,8 @@
 			$.fn.dataTableExt.oStdClasses.sPagePrevious = 'control-prev';
 			$.fn.dataTableExt.oStdClasses.sPageNext = 'control-next';
 			$.fn.dataTableExt.oStdClasses.sPageLast = 'control-last';
-			
-			// Apply to table
-			$('.sortable').each(function(i) {
-				// DataTable config
-				var table = $(this),
-					oTable = table.dataTable({
-						//"bSort": false,
-						
-						/*
-						 * We set specific options for each columns here. Some columns contain raw data to enable correct sorting, so we convert it for display
-						 * @url http://www.datatables.net/usage/columns
-						 *
-						aoColumns: [
-							{ bSortable: false},	// No sorting for this columns, as it only contains checkboxes
-							{ sType: 'string' },
-							{ sType: 'date'   },
-							{ sType: 'string' },
-							{ sType: 'string' },
-							{ sType: 'numeric'},
-							{ sType: 'string' }
-						],*/
-						
-						"aoColumnDefs": [
-						  { "bSortable": false, "aTargets": [ 0 ] }
-						],
-						
-						//"order": [[ 1, "asc" ]],
-						
-						
-						/*
-						 * Set DOM structure for table controls
-						 * @url http://www.datatables.net/examples/basic_init/dom.html
-						 */
-						sDom: '<"block-controls"<"controls-buttons"p>>rti<"block-footer clearfix"lf>',
-						
-						/*
-						 * Callback to apply template setup
-						 */
-						fnDrawCallback: function()
-						{
-							this.parent().applyTemplateSetup();
-						},
-						fnInitComplete: function()
-						{
-							this.parent().applyTemplateSetup();
-						}
-					});
-				
-				// Sorting arrows behaviour
-				table.find('thead .sort-up').click(function(event) {
-					// Stop link behaviour
-					event.preventDefault();
-					
-					// Find column index
-					var column = $(this).closest('th'),
-						columnIndex = column.parent().children().index(column.get(0));
-					
-					// Send command
-					oTable.fnSort([[columnIndex, 'asc']]);
-					
-					// Prevent bubbling
-					return false;
-				});
-				table.find('thead .sort-down').click(function(event) {
-					// Stop link behaviour
-					event.preventDefault();
-					
-					// Find column index
-					var column = $(this).closest('th'),
-						columnIndex = column.parent().children().index(column.get(0));
-					
-					// Send command
-					oTable.fnSort([[columnIndex, 'desc']]);
-					
-					// Prevent bubbling
-					return false;
-				});
-			});
-			
-			/*
-			 * Datepicker
-			 * Thanks to sbkyle! http://themeforest.net/user/sbkyle
-			 */
-			$('.datepicker').datepick({
-				alignment: 'bottom',
-				showOtherMonths: true,
-				selectOtherMonths: true,
-				renderer: {
-					picker: '<div class="datepick block-border clearfix form"><div class="mini-calendar clearfix">' +
-							'{months}</div></div>',
-					monthRow: '{months}', 
-					month: '<div class="calendar-controls" style="white-space: nowrap">' +
-								'{monthHeader:M yyyy}' +
-							'</div>' +
-							'<table cellspacing="0">' +
-								'<thead>{weekHeader}</thead>' +
-								'<tbody>{weeks}</tbody></table>', 
-					weekHeader: '<tr>{days}</tr>', 
-					dayHeader: '<th>{day}</th>', 
-					week: '<tr>{days}</tr>', 
-					day: '<td>{day}</td>', 
-					monthSelector: '.month', 
-					daySelector: 'td', 
-					rtlClass: 'rtl', 
-					multiClass: 'multi', 
-					defaultClass: 'default', 
-					selectedClass: 'selected', 
-					highlightedClass: 'highlight', 
-					todayClass: 'today', 
-					otherMonthClass: 'other-month', 
-					weekendClass: 'week-end', 
-					commandClass: 'calendar', 
-					commandLinkClass: 'button',
-					disabledClass: 'unavailable'
-				},
-				onSelect: function(dateText, inst) {
-					$(this).change();
-				}
-			});
-			
-			$('.weekpicker').datepick({selectWeek: true, closeOnSelect: false});
-		};
 		
 		$(document).ready(setupPage());
-		
-		
-		// Demo modal
-		function openModal() {
-			$.modal({
-				content: '<p>This is an example of modal window. You can open several at the same time (click button below!), move them and resize them.</p>'+
-						  '<p>The plugin provides several other functions to control them, try below:</p>'+
-						  '<ul class="simple-list with-icon">'+
-						  '    <li><a href="javascript:void(0)" onclick="$(this).getModalWindow().setModalTitle(\'\')">Remove title</a></li>'+
-						  '    <li><a href="javascript:void(0)" onclick="$(this).getModalWindow().setModalTitle(\'New title\')">Change title</a></li>'+
-						  '    <li><a href="javascript:void(0)" onclick="$(this).getModalWindow().loadModalContent(\'ajax-modal.html\')">Load Ajax content</a></li>'+
-						  '</ul>',
-				title: 'Example modal window',
-				maxWidth: 500,
-				buttons: {
-					'Open new modal': function(win) { openModal(); },
-					'Close': function(win) { win.closeModal(); }
-				}
-			});
-		}
 	</script>
 
 </body>

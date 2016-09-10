@@ -1,10 +1,4 @@
-com.digitald4.budget.ListCtrl = function($scope, $filter, sharedData, billService, accountService) {
-	this.scope = {
-		apply: function() {
-			// $scope.$apply();
-			setupDatepicker();
-		}
-	};
+com.digitald4.budget.ListCtrl = function($filter, sharedData, billService, accountService) {
 	this.dateFilter = $filter('date');
 	this.sharedData = sharedData;
 	this.sharedData.refresh = this.refresh.bind(this);
@@ -20,8 +14,6 @@ com.digitald4.budget.ListCtrl = function($scope, $filter, sharedData, billServic
 	this.refresh();
 };
 
-com.digitald4.budget.ListCtrl.prototype.scope;
-
 com.digitald4.budget.ListCtrl.prototype.billService;
 com.digitald4.budget.ListCtrl.prototype.accountService;
 
@@ -32,7 +24,7 @@ com.digitald4.budget.ListCtrl.prototype.makeNew = function() {
 		month = '0' + month;
 	}
 	var newBill = {'trans': [],
-			'dueDate': month + '/15/' + baseDate.getFullYear(),
+			'due_date': new Date(month + '/15/' + baseDate.getFullYear()).getTime(),
 			'portfolio_id': this.sharedData.getSelectedPortfolioId()};
 	for (var x = 0; x < this.bankAccounts.length; x++) {
 		var ba = this.bankAccounts[x];
@@ -119,7 +111,6 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 		this.accounts = accounts;
 		if (this.bills) {
 			this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
-			this.scope.apply();
 		}
 		this.bankAccounts = [];
 		for (var a = 0; a < accounts.length; a++) {
@@ -138,12 +129,10 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 			function(bills) {
 				var sortedBills = [];
 				for (var b = 0; b < bills.length; b++) {
-				  bills[b].dueDate = this.dateFilter(bills[b].due_date, 'MM/dd/yyyy');
 					this.insertBill(sortedBills, bills[b]);
 				}
 				if (this.accounts) { 
 					this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sortedBills);
-					this.scope.apply();
 				} else {
 					this.bills = sortedBills;
 				}
@@ -168,7 +157,6 @@ com.digitald4.budget.ListCtrl.prototype.insertBill = function(bills, bill) {
 
 com.digitald4.budget.ListCtrl.prototype.addBill = function() {
 	this.billAddError = undefined;
-	this.newBill.due_date = new Date(this.newBill.dueDate).getTime();
 	this.newBill.amount_due = parseFloat(this.newBill.amount_due);
 	this.newBill.transaction = [];
 	for (var t = 0; t < this.newBill.trans.length; t++) {
@@ -179,27 +167,21 @@ com.digitald4.budget.ListCtrl.prototype.addBill = function() {
 		}
 	}
 	this.billService.addBill(this.newBill, function(bill) {
-		bill.dueDate = this.dateFilter(bill.due_date, 'MM/dd/yyyy');
 		this.insertBill(this.bills, bill);
 		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
 		this.makeNew();
-		this.scope.apply();
 	}.bind(this), function(error) {
 		this.billAddError = error;
-		this.scope.apply();
 	}.bind(this));
 };
 
 com.digitald4.budget.ListCtrl.prototype.updateBill = function(bill, property) {
 	this.billUpdateError = undefined;
-	bill.due_date = new Date(bill.dueDate).getTime();
 	var index = this.bills.indexOf(bill);
 	this.billService.updateBill(bill, property, function(bill) {
-		bill.dueDate = this.dateFilter(bill.due_date, 'MM/dd/yyyy');
 		this.bills.splice(index, 1);
 		this.insertBill(this.bills, bill);
 		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
-		this.scope.apply();
 	}.bind(this), function(error) {
 		this.billUpdateError = error;
 	}.bind(this));
@@ -212,7 +194,6 @@ com.digitald4.budget.ListCtrl.prototype.deleteBill = function(bill) {
 		if (success) {
 			this.bills.splice(index, 1);
 			this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
-			this.scope.apply();
 		}
 	}.bind(this), function(error) {
 		this.billUpdateError = error;
@@ -231,10 +212,8 @@ com.digitald4.budget.ListCtrl.prototype.updateBillTrans = function(bill) {
 	}
 	this.billUpdateError = undefined;
 	this.billService.updateBillTrans(bill, function(bill) {
-		bill.dueDate = this.dateFilter(bill.due_date, 'MM/dd/yyyy');
 		this.bills[index] = bill;
 		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
-		this.scope.apply();
 	}.bind(this), function(error) {
 		this.billUpdateError = error;
 	}.bind(this));
@@ -244,12 +223,10 @@ com.digitald4.budget.ListCtrl.prototype.applyTemplate = function() {
 	this.applyTemplateError = undefined;
 	this.billService.applyTemplate(this.selectedTemplate, this.sharedData.getMonth().getTime(),
 			proto.common.DateRange.MONTH, function(bills) {
-		var sortedBills = [];
+		    var sortedBills = [];
         for (var b = 0; b < bills.length; b++) {
-          bills[b].dueDate = this.dateFilter(bills[b].due_date, 'MM/dd/yyyy');
           this.insertBill(sortedBills, bills[b]);
         }
-		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sortedBills);
-		this.scope.apply();
-	}.bind(this), notify);
+		    this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sortedBills);
+	    }.bind(this), notify);
 };

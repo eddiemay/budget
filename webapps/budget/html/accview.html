@@ -10,8 +10,8 @@
 					<input type="checkbox" data-ng-model="trans.selected">
 				</td>
 				<td>
-					<input class="datepicker" type="text" data-ng-model="trans.trans.payment_date" data-on-change="accountingCtrl.updateTransaction(trans, 'payment_date')">
-					<img src="images/icons/fugue/calendar-month.png" width="16" height="16">
+					<div data-dd4-datepicker="accountingCtrl.updateTransaction(trans, 'payment_date')" data-ng-model="trans.trans.payment_date">
+					</div>
 				</td>
 				<td><input type="text" data-ng-model="trans.bill.name" data-on-change="accountingCtrl.updateTransaction(trans, 'name')"></td>
 				<td><input type="text" data-ng-model="trans.trans.amount" data-on-change="accountingCtrl.updateTransaction(trans, 'amount')"/></td>
@@ -36,8 +36,7 @@
 					</div>
 				</td>
 				<td>
-					<input class="datepicker" type="text" data-ng-model="accountingCtrl.newTrans.date">
-					<img src="images/icons/fugue/calendar-month.png" width="16" height="16">
+					<div data-dd4-datepicker data-ng-model="accountingCtrl.newTrans.date"></div>
 				</td>
 				<td><input type="text" data-ng-model="accountingCtrl.newTrans.name"></td>
 				<td><input type="text" data-ng-model="accountingCtrl.newTrans.amount"/></td>

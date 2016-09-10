@@ -1,8 +1,7 @@
-com.digitald4.budget.module = angular.module('budget', ['ngRoute', 'ui.date']);
+com.digitald4.budget.module = angular.module('budget', ['DD4Common', 'ngRoute', 'ui.date']);
 
 com.digitald4.budget.module.config(com.digitald4.budget.router);
 
-com.digitald4.budget.module.service('connector', com.digitald4.common.JSONConnector);
 com.digitald4.budget.module.service('accountService', com.digitald4.budget.AccountService);
 com.digitald4.budget.module.service('billService', com.digitald4.budget.BillService);
 com.digitald4.budget.module.service('portfolioService', com.digitald4.budget.PortfolioService);
@@ -21,19 +20,6 @@ com.digitald4.budget.module.controller('CalCtrl', com.digitald4.budget.CalCtrl);
 com.digitald4.budget.module.controller('SummaryCtrl', com.digitald4.budget.SummaryCtrl);
 com.digitald4.budget.module.controller('TemplatesCtrl', com.digitald4.budget.TemplatesCtrl);
 
-com.digitald4.budget.module.directive('onChange', function() {
-  return function(scope, element, attrs) {
-  	var startingValue = element.val();
-  	element.bind('blur', function() {
-  		// console.log('evaluating: ' + startingValue + ' vs ' + element.val());
-  		if (startingValue != element.val()) {
-  			scope.$apply(attrs.onChange);
-  			startingValue = element.val();
-  		}
-  	});
-  };
-});
-
 com.digitald4.budget.module.directive('portfolios', function() {
   return {
     restrict: 'A',
@@ -50,12 +36,4 @@ com.digitald4.budget.module.directive('accounts', function() {
     controller: 'AccountsCtrl',
     templateUrl: 'html/accounts.html'
   };
-});
-
-com.digitald4.budget.module.directive('enter', function() {
-	return function(scope, element, attrs) {
-		element.bind('mouseenter', function() {
-			scope.doSomething();
-		});
-	};
 });

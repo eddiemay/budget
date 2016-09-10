@@ -20,9 +20,8 @@
 					<a data-ng-show="bill.selected" data-ng-click="listCtrl.deleteBill(bill)"><button>Delete</button></a>
 				</td>
 				<td>
-					<input class="datepicker" type="text" data-ng-model="bill.dueDate" size="10"
-							data-ng-change="listCtrl.updateBill(bill, 'due_date')">
-					<img src="images/icons/fugue/calendar-month.png" width="16" height="16">
+					<div data-dd4-datepicker="listCtrl.updateBill(bill, 'due_date')" data-ng-model="bill.due_date">
+					</div>
 				</td>
 				<td>
 					<select data-ng-model="bill.account_id" data-ng-change="listCtrl.updateBill(bill, 'account_id')"
@@ -56,8 +55,7 @@
 					</div>
 				</td>
 				<td>
-					<input class="datepicker" type="text" data-ng-model="listCtrl.newBill.dueDate" size="10">
-					<img src="images/icons/fugue/calendar-month.png" width="16" height="16">
+					<div data-dd4-datepicker data-ng-model="listCtrl.newBill.dueDate"></div>
 				</td>
 				<td>
 					<select data-ng-model="listCtrl.newBill.account_id"

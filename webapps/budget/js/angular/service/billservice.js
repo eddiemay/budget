@@ -1,17 +1,17 @@
-com.digitald4.budget.BillService = function(connector) {
-	this.connector = connector;
+com.digitald4.budget.BillService = function(restService) {
+	this.restService = restService;
 };
 
-com.digitald4.budget.BillService.prototype.connector;
+com.digitald4.budget.BillService.prototype.restService;
 
 com.digitald4.budget.BillService.prototype.getBills = function(portfolioId, refDate, dateRange,
 		successCallback, errorCallback) {
-	this.connector.performRequest('bills', {portfolio_id: portfolioId, ref_date: refDate,
+	this.restService.performRequest('bills', {portfolio_id: portfolioId, ref_date: refDate,
 		date_range: dateRange}, successCallback, errorCallback);
 };
 
 com.digitald4.budget.BillService.prototype.addBill = function(newBill, successCallback, errorCallback) {
-	this.connector.performRequest('create_bill', {bill: newBill}, successCallback, errorCallback);
+	this.restService.performRequest('create_bill', {bill: newBill}, successCallback, errorCallback);
 };
 
 com.digitald4.budget.BillService.prototype.updateBill = function(bill, property,
@@ -20,12 +20,12 @@ com.digitald4.budget.BillService.prototype.updateBill = function(bill, property,
 			id: bill.id,
 			property: property,
 			value: bill[property].toString()};
-	this.connector.performRequest('update_bill', request, successCallback, errorCallback);
+	this.restService.performRequest('update_bill', request, successCallback, errorCallback);
 };
 
 com.digitald4.budget.BillService.prototype.deleteBill = function(bill,
 		successCallback, errorCallback) {
-	this.connector.performRequest('delete_bill', {id: bill.id}, successCallback, errorCallback);
+	this.restService.performRequest('delete_bill', {id: bill.id}, successCallback, errorCallback);
 };
 
 com.digitald4.budget.BillService.prototype.updateBillTrans = function(bill,
@@ -33,12 +33,12 @@ com.digitald4.budget.BillService.prototype.updateBillTrans = function(bill,
 	var request = {
 			bill_id: bill.id,
 			transaction: bill.transaction};
-	this.connector.performRequest('update_bill_trans', request, successCallback, errorCallback);
+	this.restService.performRequest('update_bill_trans', request, successCallback, errorCallback);
 };
 
 com.digitald4.budget.BillService.prototype.applyTemplate = function(template, refDate, dateRange,
 		successCallback, errorCallback) {
-	this.connector.performRequest('apply_template',
+	this.restService.performRequest('apply_template',
 			{template_id: template.id, ref_date: refDate, date_range: dateRange},
 			successCallback, errorCallback);
 };
