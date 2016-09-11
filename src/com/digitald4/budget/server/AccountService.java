@@ -10,7 +10,6 @@ import com.digitald4.budget.proto.BudgetUIProtos.AccountUI;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountUI.AccountSummary;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI;
 import com.digitald4.budget.storage.AccountStore;
-import com.digitald4.common.distributed.Function;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.server.DualProtoService;
 
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.joda.time.DateTime;

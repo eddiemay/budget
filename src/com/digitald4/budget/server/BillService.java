@@ -12,13 +12,14 @@ import com.digitald4.budget.proto.BudgetUIProtos.BillUI.PaymentStatusUI;
 import com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.TemplateStore;
-import com.digitald4.common.distributed.Function;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.server.DualProtoService;
 
 import org.joda.time.DateTime;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 public class BillService extends DualProtoService<BillUI, Bill> {
@@ -128,7 +129,7 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 
 	public BillUI updateTransaction(final BillTransUpdateRequest request)
 			throws DD4StorageException {
-		return getConverter().apply(store.update(request.getBillId(), new Function<Bill, Bill>() {
+		return getConverter().apply(store.update(request.getBillId(), new UnaryOperator<Bill>() {
 			@Override
 			public Bill apply(Bill bill) {
 				Bill.Builder builder = bill.toBuilder()

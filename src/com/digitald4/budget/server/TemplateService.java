@@ -9,11 +9,11 @@ import com.digitald4.budget.proto.BudgetUIProtos.TemplateUI;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI;
 import com.digitald4.budget.storage.TemplateStore;
-import com.digitald4.common.distributed.Function;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.server.DualProtoService;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class TemplateService extends DualProtoService<TemplateUI, Template> {

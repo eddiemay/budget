@@ -6,13 +6,13 @@ import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
 import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetProtos.Template.TemplateBill;
 import com.digitald4.budget.proto.BudgetProtos.Template.TemplateBill.TemplateTransaction;
-import com.digitald4.common.distributed.Function;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.QueryParam;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericDAOStore;
 
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 import org.joda.time.DateTime;
 
@@ -43,9 +43,9 @@ public class BillStore extends GenericDAOStore<Bill> {
 	}
 	
 	@Override
-	public Bill update(int id, final Function<Bill, Bill> updater) throws DD4StorageException {
+	public Bill update(int id, final UnaryOperator<Bill> updater) throws DD4StorageException {
 		Bill orig = get(id);
-		Bill bill = super.update(id, new Function<Bill, Bill>() {
+		Bill bill = super.update(id, new UnaryOperator<Bill>() {
 			@Override
 			public Bill apply(Bill bill) {
 				Bill updated = updater.apply(bill);

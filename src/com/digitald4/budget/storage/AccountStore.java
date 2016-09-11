@@ -4,7 +4,6 @@ import com.digitald4.budget.proto.BudgetProtos.Account;
 import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
 import com.digitald4.budget.proto.BudgetProtos.Account.Balance;
-import com.digitald4.common.distributed.Function;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.QueryParam;
 import com.digitald4.common.storage.DAO;
@@ -14,6 +13,7 @@ import com.google.annotations.VisibleForTesting;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.UnaryOperator;
 
 import org.joda.time.DateTime;
 
@@ -60,7 +60,7 @@ public class AccountStore extends GenericDAOStore<Account> {
 		
 		for (final Account account : accountHash.values()) {
 			try {
-				update(account.getId(), new Function<Account, Account>() {
+				update(account.getId(), new UnaryOperator<Account>() {
 					@Override
 					public Account apply(Account account_) {
 						return account_.toBuilder()
@@ -76,7 +76,7 @@ public class AccountStore extends GenericDAOStore<Account> {
 		}
 	}
 	
-	@VisibleForTesting static class BalanceUpdater implements Function<Account, Account> {
+	@VisibleForTesting static class BalanceUpdater implements UnaryOperator<Account> {
 		private final long dueDate;
 		private final double delta;
 		public BalanceUpdater(long dueDate, double delta) {
