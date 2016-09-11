@@ -9,18 +9,18 @@ import com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI;
 import com.digitald4.budget.proto.BudgetUIProtos.UserRoleUI;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.common.distributed.Function;
-import com.digitald4.common.distributed.MultiCoreThreader;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.server.DualProtoService;
 import com.digitald4.common.util.UserProvider;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PortfolioService extends DualProtoService<PortfolioUI, Portfolio> {
 	
-	private static Function<PortfolioUI, Portfolio> converter = new Function<PortfolioUI, Portfolio>() {
+	private static Function<Portfolio, PortfolioUI> converter = new Function<Portfolio, PortfolioUI>() {
 		@Override
-		public PortfolioUI execute(Portfolio portfolio) {
+		public PortfolioUI apply(Portfolio portfolio) {
 			PortfolioUI.Builder result = PortfolioUI.newBuilder()
 					.setId(portfolio.getId())
 					.setName(portfolio.getName());
@@ -34,17 +34,15 @@ public class PortfolioService extends DualProtoService<PortfolioUI, Portfolio> {
 		}
 	};
 	
-	private static Function<Portfolio, PortfolioUI> reverse = new Function<Portfolio, PortfolioUI>() {
+	private static Function<PortfolioUI, Portfolio> reverse = new Function<PortfolioUI, Portfolio>() {
 		@Override
-		public Portfolio execute(PortfolioUI template) {
+		public Portfolio apply(PortfolioUI template) {
 			return Portfolio.newBuilder()
 					.setId(template.getId())
 					.setName(template.getName())
 					.build();
 		}
 	};
-	
-	private final MultiCoreThreader threader = new MultiCoreThreader();
 	
 	private final PortfolioStore store;
 	private final UserProvider userProvider;
@@ -56,20 +54,20 @@ public class PortfolioService extends DualProtoService<PortfolioUI, Portfolio> {
 	}
 	
 	@Override
-	public Function<PortfolioUI, Portfolio> getConverter() {
+	public Function<Portfolio, PortfolioUI> getConverter() {
 		return converter;
 	}
 	
 	@Override
-	public Function<Portfolio, PortfolioUI> getReverseConverter() {
+	public Function<PortfolioUI, Portfolio> getReverseConverter() {
 		return reverse;
 	}
 	
 	public List<PortfolioUI> list(PortfolioListRequest request) throws DD4StorageException {
-		return threader.parDo(store.getByUser(userProvider.get().getId()), getConverter());
+		return store.getByUser(userProvider.get().getId()).stream().map(getConverter()).collect(Collectors.toList());
 	}
 	
 	public PortfolioUI create(PortfolioCreateRequest request) throws DD4StorageException {
-		return getConverter().execute(store.create(reverse.execute(request.getPortfolio())));
+		return getConverter().apply(store.create(reverse.apply(request.getPortfolio())));
 	}
 }

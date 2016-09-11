@@ -47,8 +47,8 @@ public class BillStore extends GenericDAOStore<Bill> {
 		Bill orig = get(id);
 		Bill bill = super.update(id, new Function<Bill, Bill>() {
 			@Override
-			public Bill execute(Bill bill) {
-				Bill updated = updater.execute(bill);
+			public Bill apply(Bill bill) {
+				Bill updated = updater.apply(bill);
 				// If the amount due changed and there is a transaction that is of the same amount
 				// as the original amount due, update that transaction to the new value.
 				if (bill.getAmountDue() != updated.getAmountDue()) {

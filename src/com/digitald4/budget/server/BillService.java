@@ -13,23 +13,22 @@ import com.digitald4.budget.proto.BudgetUIProtos.BillUI.TransactionUI;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.TemplateStore;
 import com.digitald4.common.distributed.Function;
-import com.digitald4.common.distributed.MultiCoreThreader;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.server.DualProtoService;
 
 import org.joda.time.DateTime;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BillService extends DualProtoService<BillUI, Bill> {
 	
 	private final BillStore store;
 	private final TemplateStore templateStore;
-	private final MultiCoreThreader threader = new MultiCoreThreader();
-	
-	private static Function<BillUI, Bill> converter = new Function<BillUI, Bill>() {
+
+	private static Function<Bill, BillUI> converter = new Function<Bill, BillUI>() {
 		@Override
-		public BillUI execute(Bill bill) {
+		public BillUI apply(Bill bill) {
 			BillUI.Builder billUI = BillUI.newBuilder()
 					.setId(bill.getId())
 					.setPortfolioId(bill.getPortfolioId())
@@ -53,9 +52,9 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 		}
 	};
 	
-	private static Function<Bill, BillUI> reverse = new Function<Bill, BillUI>() {
+	private static Function<BillUI, Bill> reverse = new Function<BillUI, Bill>() {
 		@Override
-		public Bill execute(BillUI billUI) {
+		public Bill apply(BillUI billUI) {
 			Bill.Builder bill = Bill.newBuilder()
 					.setId(billUI.getId())
 					.setPortfolioId(billUI.getPortfolioId())
@@ -68,16 +67,16 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 					.setRank(billUI.getRank())
 					.setStatus(PaymentStatus.valueOf(billUI.getStatus().getNumber()));
 			for (TransactionUI trans : billUI.getTransactionList()) {
-				bill.addTransaction(reverseTrans.execute(trans));
+				bill.addTransaction(reverseTrans.apply(trans));
 			}
 			return bill.build();
 		}
 	};
 	
-	private static Function<Transaction, TransactionUI> reverseTrans =
-			new Function<Transaction, TransactionUI>() {
+	private static Function<TransactionUI, Transaction> reverseTrans =
+			new Function<TransactionUI, Transaction>() {
 				@Override
-				public Transaction execute(TransactionUI trans) {
+				public Transaction apply(TransactionUI trans) {
 					return Transaction.newBuilder()
 							.setDebitAccountId(trans.getDebitAccountId())
 							.setAmount(trans.getAmount())
@@ -94,17 +93,17 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 	}
 	
 	@Override
-	public Function<BillUI, Bill> getConverter() {
+	public Function<Bill, BillUI> getConverter() {
 		return converter;
 	}
 	
 	@Override
-	public Function<Bill, BillUI> getReverseConverter() {
+	public Function<BillUI, Bill> getReverseConverter() {
 		return reverse;
 	}
 	
 	public BillUI create(BillCreateRequest request) throws DD4StorageException {
-		return getConverter().execute(store.create(reverse.execute(request.getBill())));
+		return getConverter().apply(store.create(reverse.apply(request.getBill())));
 	}
 	
 	public List<BillUI> list(BillListRequest request) throws DD4StorageException {
@@ -122,18 +121,20 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 			case MONTH:
 			case UNSPECIFIED: end = start.plusMonths(1); break;
 		}
-		return threader.parDo(store.getByDateRange(request.getPortfolioId(), start, end), converter);
+		return store.getByDateRange(request.getPortfolioId(), start, end).stream()
+				.map(converter)
+				.collect(Collectors.toList());
 	}
 
 	public BillUI updateTransaction(final BillTransUpdateRequest request)
 			throws DD4StorageException {
-		return getConverter().execute(store.update(request.getBillId(), new Function<Bill, Bill>() {
+		return getConverter().apply(store.update(request.getBillId(), new Function<Bill, Bill>() {
 			@Override
-			public Bill execute(Bill bill) {
+			public Bill apply(Bill bill) {
 				Bill.Builder builder = bill.toBuilder()
 						.clearTransaction();
 				for (TransactionUI trans : request.getTransactionList()) {
-						builder.addTransaction(reverseTrans.execute(trans));
+						builder.addTransaction(reverseTrans.apply(trans));
 				}
 				return builder.build();
 			}
@@ -141,7 +142,7 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 	}
 	
 	public List<BillUI> applyTemplate(ApplyTemplateRequest request) throws DD4StorageException {
-		return threader.parDo(store.applyTemplate(templateStore.get(request.getTemplateId()),
-				new DateTime(request.getRefDate())), getConverter());
+		return store.applyTemplate(templateStore.get(request.getTemplateId()),
+				new DateTime(request.getRefDate())).stream().map(getConverter()).collect(Collectors.toList());
 	}
 }

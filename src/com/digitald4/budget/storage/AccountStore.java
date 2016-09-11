@@ -39,7 +39,7 @@ public class AccountStore extends GenericDAOStore<Account> {
 		return update(accountId, new BalanceUpdater(dueDate, delta));
 	}
 	
-	public boolean recalculateBalance(int portfolioId, BillStore billStore) throws DD4StorageException {
+	public void recalculateBalance(int portfolioId, BillStore billStore) throws DD4StorageException {
 		Map<Integer, Account> accountHash = new HashMap<>();
 		for (Account account : getByPortfolio(portfolioId)) {
 			accountHash.put(account.getId(), account.toBuilder().clearBalance().build());
@@ -50,11 +50,11 @@ public class AccountStore extends GenericDAOStore<Account> {
 		for (Bill bill : bills) {
 			accountHash.put(bill.getAccountId(),
 					new BalanceUpdater(bill.getDueDate(), bill.getAmountDue())
-							.execute(accountHash.get(bill.getAccountId())));
+							.apply(accountHash.get(bill.getAccountId())));
 			for (Transaction trans : bill.getTransactionList()) {
 				accountHash.put(trans.getDebitAccountId(),
 						new BalanceUpdater(bill.getDueDate(), -trans.getAmount())
-								.execute(accountHash.get(trans.getDebitAccountId())));
+								.apply(accountHash.get(trans.getDebitAccountId())));
 			}
 		}
 		
@@ -62,7 +62,7 @@ public class AccountStore extends GenericDAOStore<Account> {
 			try {
 				update(account.getId(), new Function<Account, Account>() {
 					@Override
-					public Account execute(Account account_) {
+					public Account apply(Account account_) {
 						return account_.toBuilder()
 								.clearBalance()
 								.addAllBalance(account.getBalanceList())
@@ -74,7 +74,6 @@ public class AccountStore extends GenericDAOStore<Account> {
 			}
 			System.out.println(account);
 		}
-		return true;
 	}
 	
 	@VisibleForTesting static class BalanceUpdater implements Function<Account, Account> {
@@ -86,7 +85,7 @@ public class AccountStore extends GenericDAOStore<Account> {
 		}
 		
 		@Override
-		public Account execute(Account account) {
+		public Account apply(Account account) {
 			DateTime date = new DateTime(dueDate);
 			String dateStr = date.toString("yyyy-MM-dd");
 			DateTime nextMonth = date.minusDays(date.getDayOfMonth() - 1)
@@ -121,7 +120,7 @@ public class AccountStore extends GenericDAOStore<Account> {
 						.setDate(nextMonthStr)
 						.setBalance(balance.getBalance() + delta);
 				if (nextMonthStr.substring(0, 4).equals(dateStr.substring(0, 4))) {
-					balanceBuilder .setBalanceYearToDate(balance.getBalanceYearToDate() + delta);
+					balanceBuilder.setBalanceYearToDate(balance.getBalanceYearToDate() + delta);
 				}
 				builder.addBalance(x, balanceBuilder);
 			}

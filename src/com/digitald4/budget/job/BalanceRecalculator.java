@@ -8,10 +8,11 @@ import com.digitald4.budget.storage.BillStore;
 import com.digitald4.common.storage.DAOProtoSQLImpl;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.common.distributed.Function;
-import com.digitald4.common.distributed.MultiCoreThreader;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.jdbc.DBConnector;
 import com.digitald4.common.jdbc.DBConnectorThreadPoolImpl;
+
+import java.util.function.Consumer;
 
 public class BalanceRecalculator {
 
@@ -26,15 +27,13 @@ public class BalanceRecalculator {
 				new DAOProtoSQLImpl<>(Bill.class, dbConnector), accountStore);
 		PortfolioStore portfolioStore = new PortfolioStore(
 				new DAOProtoSQLImpl<>(Portfolio.class, dbConnector));
-		MultiCoreThreader threader = new MultiCoreThreader();
-		threader.parDo(portfolioStore.getAll(), new Function<Boolean, Portfolio>() {
+		portfolioStore.getAll().forEach(new Consumer<Portfolio>() {
 			@Override
-			public Boolean execute(Portfolio portfolio) {
+			public void accept(Portfolio portfolio) {
 				try {
-					return accountStore.recalculateBalance(portfolio.getId(), billStore);
+					accountStore.recalculateBalance(portfolio.getId(), billStore);
 				} catch (DD4StorageException e) {
 					e.printStackTrace();
-					return false;
 				}
 			}
 		});

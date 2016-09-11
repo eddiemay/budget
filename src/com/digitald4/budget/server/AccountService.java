@@ -11,22 +11,22 @@ import com.digitald4.budget.proto.BudgetUIProtos.AccountUI.AccountSummary;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI;
 import com.digitald4.budget.storage.AccountStore;
 import com.digitald4.common.distributed.Function;
-import com.digitald4.common.distributed.MultiCoreThreader;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.server.DualProtoService;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import org.joda.time.DateTime;
 
 public class AccountService extends DualProtoService<AccountUI, Account> {
 	
 	private final AccountStore store;
-	private final MultiCoreThreader threader = new MultiCoreThreader();
-	
-	private class Converter implements Function<AccountUI, Account> {
+
+	private class Converter implements Function<Account, AccountUI> {
 		
 		private final DateTime refDate;
 		public Converter(DateTime refDate) {
@@ -38,7 +38,7 @@ public class AccountService extends DualProtoService<AccountUI, Account> {
 		}
 		
 		@Override
-		public AccountUI execute(Account account) {
+		public AccountUI apply(Account account) {
 			AccountUI.Builder accountUI = AccountUI.newBuilder()
 					.setId(account.getId())
 					.setPortfolioId(account.getPortfolioId())
@@ -60,9 +60,9 @@ public class AccountService extends DualProtoService<AccountUI, Account> {
 		}
 	};
 	
-	private static Function<Account, AccountUI> reverse = new Function<Account, AccountUI>() {
+	private static Function<AccountUI, Account> reverse = new Function<AccountUI, Account>() {
 		@Override
-		public Account execute(AccountUI account) {
+		public Account apply(AccountUI account) {
 			return Account.newBuilder()
 					.setId(account.getId())
 					.setPortfolioId(account.getPortfolioId())
@@ -78,90 +78,66 @@ public class AccountService extends DualProtoService<AccountUI, Account> {
 		this.store = store;
 	}
 	
-	public Function<AccountUI, Account> getConverter() {
+	public Function<Account, AccountUI> getConverter() {
 		return new Converter(0);
 	}
 	
-	public Function<AccountUI, Account> getConverter(long refDate) {
+	public Function<Account, AccountUI> getConverter(long refDate) {
 		return new Converter(refDate);
 	}
 	
 	@Override
-	public Function<Account, AccountUI> getReverseConverter() {
+	public Function<AccountUI, Account> getReverseConverter() {
 		return reverse;
 	}
 	
 	public List<AccountUI> list(AccountListRequest request) throws DD4StorageException {
-		TreeSet<DefaultComparator> sorted = new TreeSet<>(threader.parDo(store.getByPortfolio(
-				request.getPortfolioId()), new SortWrapper(new Converter(request.getRefDate()))));
-		List<AccountUI> result = new ArrayList<>();
-		for (DefaultComparator dc : sorted) {
-			result.add(dc.account);
-		}
-		return result;
+		return store.getByPortfolio(request.getPortfolioId()).stream()
+				.map(new Converter(request.getRefDate()))
+				.sorted(AccountComparator)
+				.collect(Collectors.toList());
 	}
 	
 	public AccountUI get(AccountGetRequest request) throws DD4StorageException {
-		return getConverter(request.getRefDate()).execute(store.get(request.getAccountId()));
+		return getConverter(request.getRefDate()).apply(store.get(request.getAccountId()));
 	}
 	
 	public AccountUI create(AccountCreateRequest request) throws DD4StorageException {
-		return getConverter(0).execute(store.create(reverse.execute(request.getAccount())));
+		return getConverter(0).apply(store.create(reverse.apply(request.getAccount())));
 	}
 	
 	public List<AccountUI> getSummary(AccountSummaryRequest request)
 			throws DD4StorageException {
-		return threader.parDo(store.getByPortfolio(request.getPortfolioId()),
-				new AccountSummaryConverter(request.getYear()));
+		return store.getByPortfolio(request.getPortfolioId()).stream().map(
+				new AccountSummaryConverter(request.getYear())).collect(Collectors.toList());
 	}
-	
-	private static class DefaultComparator implements Comparable<DefaultComparator> {
-		private final AccountUI account;
-		public DefaultComparator(AccountUI account) {
-			this.account = account;
-		}
-		
-		@Override
-		public int compareTo(DefaultComparator dc) {
-			int ret = account.getName().compareTo(dc.account.getName());
+
+	private static final Comparator<AccountUI> AccountComparator = new Comparator<AccountUI>() {
+		public int compare(AccountUI account, AccountUI account2) {
+			int ret = account.getName().compareTo(account2.getName());
 			if (ret == 0) {
-				if (account.getId() < dc.account.getId()) {
+				if (account.getId() < account2.getId()) {
 					ret = -1;
-				} else if (account.getId() > dc.account.getId()) {
+				} else if (account.getId() > account2.getId()) {
 					ret = 1;
 				}
 			}
 			return ret;
 		}
-	}
+	};
 	
-	private class SortWrapper implements Function<DefaultComparator, Account> {
-		
-		private final Converter converter;
-		public SortWrapper(Converter converter) {
-			this.converter = converter;
-		}
-		
-		@Override
-		public DefaultComparator execute(Account account) {
-			return new DefaultComparator(converter.execute(account));
-		}
-	}
-	
-
-	
-	private class AccountSummaryConverter implements Function<AccountUI, Account> {
-		
+	private class AccountSummaryConverter implements Function<Account, AccountUI> {
 		private final int year;
+
 		public AccountSummaryConverter(int year) {
 			this.year = year;
 		}
 		
 		@Override
-		public AccountUI execute(Account account) {
+		public AccountUI apply(Account account) {
 			String thisYear = year + "-01";
 			String nextYear = (year + 1) + "-01";
-			AccountUI.Builder builder = new Converter(0).execute(account).toBuilder();
+			AccountUI.Builder builder = new Converter(0).apply(account).toBuilder();
 			for (int x = 1; x <= 12; x++) {
 				builder.addSummary(AccountSummary.newBuilder()
 						.setMonth(year + (x < 10 ? "-0" : "-") + x));

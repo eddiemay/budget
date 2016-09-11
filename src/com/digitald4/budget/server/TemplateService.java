@@ -10,20 +10,19 @@ import com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.TemplateTransactionUI;
 import com.digitald4.budget.storage.TemplateStore;
 import com.digitald4.common.distributed.Function;
-import com.digitald4.common.distributed.MultiCoreThreader;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.server.DualProtoService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TemplateService extends DualProtoService<TemplateUI, Template> {
 	
 	private final TemplateStore store;
-	private final MultiCoreThreader threader = new MultiCoreThreader();
-	
-	private static Function<TemplateUI, Template> converter = new Function<TemplateUI, Template>() {
+
+	private static Function<Template, TemplateUI> converter = new Function<Template, TemplateUI>() {
 		@Override
-		public TemplateUI execute(Template template) {
+		public TemplateUI apply(Template template) {
 			TemplateUI.Builder templateUI = TemplateUI.newBuilder()
 					.setId(template.getId())
 					.setPortfolioId(template.getPortfolioId())
@@ -45,9 +44,9 @@ public class TemplateService extends DualProtoService<TemplateUI, Template> {
 		}
 	};
 	
-	private static Function<Template, TemplateUI> reverse = new Function<Template, TemplateUI>() {
+	private static Function<TemplateUI, Template> reverse = new Function<TemplateUI, Template>() {
 		@Override
-		public Template execute(TemplateUI templateUI) {
+		public Template apply(TemplateUI templateUI) {
 			Template.Builder template = Template.newBuilder()
 					.setId(templateUI.getId())
 					.setPortfolioId(templateUI.getPortfolioId())
@@ -75,20 +74,20 @@ public class TemplateService extends DualProtoService<TemplateUI, Template> {
 	}
 	
 	@Override
-	public Function<TemplateUI, Template> getConverter() {
+	public Function<Template, TemplateUI> getConverter() {
 		return converter;
 	}
 	
 	@Override
-	public Function<Template, TemplateUI> getReverseConverter() {
+	public Function<TemplateUI, Template> getReverseConverter() {
 		return reverse;
 	}
 	
 	public List<TemplateUI> list(TemplateListRequest request) throws DD4StorageException {
-		return threader.parDo(store.getByPortfolio(request.getPortfolioId()), converter);
+		return store.getByPortfolio(request.getPortfolioId()).stream().map(converter).collect(Collectors.toList());
 	}
 	
 	public TemplateUI create(TemplateCreateRequest request) throws DD4StorageException {
-		return converter.execute(store.create(reverse.execute(request.getTemplate())));
+		return converter.apply(store.create(reverse.apply(request.getTemplate())));
 	}
 }
