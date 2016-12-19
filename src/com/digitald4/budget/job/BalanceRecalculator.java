@@ -7,7 +7,6 @@ import com.digitald4.budget.storage.AccountStore;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.common.storage.DAOProtoSQLImpl;
 import com.digitald4.budget.storage.PortfolioStore;
-import com.digitald4.common.distributed.Function;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.jdbc.DBConnector;
 import com.digitald4.common.jdbc.DBConnectorThreadPoolImpl;

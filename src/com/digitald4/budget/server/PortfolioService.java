@@ -9,8 +9,9 @@ import com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI;
 import com.digitald4.budget.proto.BudgetUIProtos.UserRoleUI;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.common.exception.DD4StorageException;
+import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.server.DualProtoService;
-import com.digitald4.common.util.UserProvider;
+import com.digitald4.common.util.Provider;
 
 import java.util.List;
 import java.util.function.Function;
@@ -45,9 +46,9 @@ public class PortfolioService extends DualProtoService<PortfolioUI, Portfolio> {
 	};
 	
 	private final PortfolioStore store;
-	private final UserProvider userProvider;
+	private final Provider<User> userProvider;
 	
-	public PortfolioService(PortfolioStore store, UserProvider userProvider) {
+	public PortfolioService(PortfolioStore store, Provider<User> userProvider) {
 		super(PortfolioUI.class, store);
 		this.store = store;
 		this.userProvider = userProvider;

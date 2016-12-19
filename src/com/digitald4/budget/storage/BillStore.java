@@ -67,7 +67,7 @@ public class BillStore extends GenericDAOStore<Bill> {
 		// The best way to keep everything synced is to minus off the transaction from the balance...
 		accountStore.updateBalance(orig.getAccountId(), orig.getDueDate(), -orig.getAmountDue());
 		for (Transaction trans : orig.getTransactionList()) {
-			accountStore.updateBalance(trans.getDebitAccountId(), bill.getDueDate(), trans.getAmount());
+			accountStore.updateBalance(trans.getDebitAccountId(), orig.getDueDate(), trans.getAmount());
 		}
 
 		// and then add it back to the balance. This approch handles amount due, date and account changes.

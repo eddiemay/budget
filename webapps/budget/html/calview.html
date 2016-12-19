@@ -4,11 +4,15 @@
 		
 		<div class="block-controls">
 			<ul class="controls-buttons">
-				<li><a data-ng-click="calCtrl.sharedData.prevMonth()" title="Previous month"><img src="images/icons/fugue/navigation-180.png" width="16" height="16"></a></li>
+				<li><a data-ng-click="calCtrl.sharedData.prevMonth()" title="Previous month">
+          <img src="images/icons/fugue/navigation-180.png" width="16" height="16">
+        </a></li>
 				<li class="sep"></li>
 				<li class="controls-block"><strong>{{calCtrl.sharedData.getMonth() | date:'MMM yyyy'}}</strong></li>
 				<li class="sep"></li>
-				<li><a data-ng-click="calCtrl.sharedData.nextMonth()" title="Next month"><img src="images/icons/fugue/navigation.png" width="16" height="16"></a></li>
+				<li><a data-ng-click="calCtrl.sharedData.nextMonth()" title="Next month">
+          <img src="images/icons/fugue/navigation.png" width="16" height="16">
+        </a></li>
 			</ul>
 		</div>
 		
@@ -29,14 +33,17 @@
 				<tbody>
 					<tr data-ng-repeat="week in calCtrl.weeks">
 						<th scope="row">{{week.weekOfYear}}</th>
-						<td data-ng-repeat="day in week.days" data-ng-class="{'week-end': day.weekend, 'other-month': day.otherMonth}">
+						<td data-ng-repeat="day in week.days"
+                data-ng-class="{'week-end': day.weekend, 'other-month': day.otherMonth}">
 							<a href="#" class="day">{{day.date.getDate()}}</a>
 							<ul class="dot-events with-children-tip">
 								<li data-ng-repeat="notification in day.notifications"><a href="#">{{notification.title}}</a></li>
 							</ul>
 							<a data-ng-click="calCtrl.showAddBillDialog(day.date)" class="add-event">Add</a>
 							<ul class="events">
-								<li data-ng-repeat="bill in day.bills"><a data-ng-click="calCtrl.editBill(bill)"><b>{{bill.amountDue}}</b> {{bill.name}}</a></li>
+								<li data-ng-repeat="bill in day.bills">
+                  <a data-ng-click="calCtrl.editBill(bill)"><b>{{bill.amount_due}}</b> {{bill.name}}</a>
+                </li>
 							</ul>
 						</td>
 					</tr>
@@ -51,7 +58,9 @@
 	<div data-ng-show="calCtrl.addDialogShown" id="modal" style="display: block;">
 		<div class="modal-window block-border" style="display: block; left: 388px; top: 250px;">
 			<ul class="action-tabs right">
-				<li><a data-ng-click="calCtrl.closeAddBillDialog()" title="Close window"><img src="images/icons/fugue/cross-circle.png" width="16" height="16"></a></li>
+				<li><a data-ng-click="calCtrl.closeAddBillDialog()" title="Close window">
+            <img src="images/icons/fugue/cross-circle.png" width="16" height="16">
+        </a></li>
 			</ul>
 			<div class="block-content form">
 				<h1>Add Bill</h1>
@@ -62,10 +71,14 @@
 						</div>
 						<div class="columns">
 							<div class="colx2-left">
-								<label>Date</label><input class="datepicker" type="text" data-ng-model="calCtrl.newBill.dueDate"><img src="images/icons/fugue/calendar-month.png" width="16" height="16">
+								<label>Date</label>
+                <input class="datepicker" type="text" data-ng-model="calCtrl.newBill.due_date">
+                <img src="images/icons/fugue/calendar-month.png" width="16" height="16">
 							</div>
 							<div class="colx2-right">
-								<label>Account</label><select data-ng-model="calCtrl.newBill.accountId" data-ng-options="account.id as account.name for account in calCtrl.accounts"></select>
+								<label>Account</label>
+                <select data-ng-model="calCtrl.newBill.account_id"
+                        data-ng-options="account.id as account.name for account in calCtrl.accounts"></select>
 							</div>
 						</div>
 						<div class="columns">
@@ -73,13 +86,14 @@
 								<label>Name</label><input type="text" data-ng-model="calCtrl.newBill.name">
 							</div>
 							<div class="colx2-right">
-								<label>Amount Due</label><input type="text" data-ng-model="calCtrl.newBill.amountDue">
+								<label>Amount Due</label><input type="text" data-ng-model="calCtrl.newBill.amount_due">
 							</div>
 						</div>
 					</fieldset>
 				</div>
 				<div class="block-footer align-right">
-					<button type="button" data-ng-click="calCtrl.addBill()">Ok</button>&nbsp;<button type="button" data-ng-click="calCtrl.closeAddBillDialog()">Cancel</button>
+					<button type="button" data-ng-click="calCtrl.addBill()">Ok</button>
+          <button type="button" data-ng-click="calCtrl.closeAddBillDialog()">Cancel</button>
 				</div>
 			</div>
 			<div class="modal-resize-tl"></div>
@@ -95,7 +109,9 @@
 	<div data-ng-show="calCtrl.editDialogShown" id="modal" style="display: block;">
 		<div class="modal-window block-border" style="display: block; left: 388px; top: 250px;">
 			<ul class="action-tabs right">
-				<li><a data-ng-click="calCtrl.closeAddBillDialog()" title="Close window"><img src="images/icons/fugue/cross-circle.png" width="16" height="16"></a></li>
+				<li><a data-ng-click="calCtrl.closeAddBillDialog()" title="Close window">
+          <img src="images/icons/fugue/cross-circle.png" width="16" height="16">
+        </a></li>
 			</ul>
 			<div class="block-content form">
 				<h1>Add Bill</h1>
@@ -106,7 +122,9 @@
 						</div>
 						<div class="columns">
 							<div class="colx2-left">
-								<label>Date</label><input class="datepicker" type="text" data-ng-model="calCtrl.eBill.dueDate" data-on-change="calCtrl.updateBill('dueDate')"><img src="images/icons/fugue/calendar-month.png" width="16" height="16">
+								<label>Date</label>
+                <div data-dd4-datepicker="calCtrl.updateBill('due_date')" data-ng-model="calCtrl.eBill.due_date">
+                </div>
 							</div>
 							<div class="colx2-right">
 								<label>Account</label>
@@ -116,10 +134,13 @@
 						</div>
 						<div class="columns">
 							<div class="colx2-left">
-								<label>Name</label><input type="text" data-ng-model="calCtrl.eBill.name" data-on-change="calCtrl.updateBill('name')">
+								<label>Name</label>
+                <input type="text" data-ng-model="calCtrl.eBill.name" data-on-change="calCtrl.updateBill('name')">
 							</div>
 							<div class="colx2-right">
-								<label>Amount Due</label><input type="text" data-ng-model="calCtrl.eBill.amountDue" data-on-change="calCtrl.updateBill('amountDue')">
+								<label>Amount Due</label>
+                <input type="text" data-ng-model="calCtrl.eBill.amount_due"
+                       data-on-change="calCtrl.updateBill('amount_due')">
 							</div>
 						</div>
 					</fieldset>

@@ -1,5 +1,8 @@
 package com.digitald4.budget.server;
 
+import static com.digitald4.common.server.JSONService.convertToJSON;
+import static com.digitald4.common.server.JSONService.transformJSONRequest;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -71,14 +74,15 @@ public class JSONServiceServlet extends ServiceServlet {
 	@Override
 	protected void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException {
+		requestProvider.set(request);
 		try {
 			JSONObject json = new JSONObject();
 			try {
 				String action = request.getRequestURL().toString();
 				action = action.substring(action.lastIndexOf("/") + 1).toUpperCase();
 				if (action.equals("LOGIN")) {
-					json.put("data", handleLogin(request, response,
-							transformJSONRequest(LoginRequest.getDefaultInstance(), request)));
+					json.put("data", convertToJSON(userService.login(
+							transformJSONRequest(LoginRequest.getDefaultInstance(), request))));
 				} else {
 					if (!checkLogin(request, response)) return;
 					switch (ACTIONS.valueOf(action)) {

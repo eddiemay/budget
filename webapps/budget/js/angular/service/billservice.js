@@ -18,8 +18,8 @@ com.digitald4.budget.BillService.prototype.updateBill = function(bill, property,
 		successCallback, errorCallback) {
 	var request = {
 			id: bill.id,
-			property: property,
-			value: bill[property].toString()};
+			update: [{property: property, value: bill[property].toString()}]
+	};
 	this.restService.performRequest('update_bill', request, successCallback, errorCallback);
 };
 

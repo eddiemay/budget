@@ -7,6 +7,17 @@ com.digitald4.budget.CalCtrl = function($filter, sharedData, billService, accoun
 	this.sharedData.refresh = this.refresh.bind(this);
 	this.billService = billService;
 	this.accountService = accountService;
+	this.accountService.getAccounts(this.sharedData.activePortfolioId,
+			this.sharedData.getStartDate().getTime(), function(accounts) {
+		var accountHash = {};
+		for (var a = 0; a < accounts.length; a++) {
+		  var account = accounts[a];
+		  accountHash[account.id] = account;
+		}
+		this.accounts = accountHash;
+	}.bind(this), function(error) {
+		notify(error);
+	});
 	this.refresh();
 };
 
@@ -32,7 +43,7 @@ com.digitald4.budget.CalCtrl.prototype.setupCalendar = function() {
 				bills: []
 			};
 			weekdays.push(day);
-			days[day.date.getTime()] = day;
+			days[this.dateFilter(day.date.getTime(), 'MMdd')] = day;
 			currDay = addDay(currDay);
 		}
 		week.days = weekdays;
@@ -40,7 +51,6 @@ com.digitald4.budget.CalCtrl.prototype.setupCalendar = function() {
 	} while (currDay.getMonth() == month.getMonth());
 	this.days = days;
 	this.weeks = weeks;
-	console.log('Weeks: ' + this.weeks.length);
 };
 
 addDay = function(date) {
@@ -55,12 +65,6 @@ addDay = function(date) {
 
 com.digitald4.budget.CalCtrl.prototype.refresh = function() {
 	this.setupCalendar();
-	this.accountService.getAccounts(this.sharedData.activePortfolioId,
-			this.sharedData.getStartDate().getTime(), function(accounts) {
-		this.accounts = accounts;
-	}, function(error) {
-		notify(error);
-	});
 	
 	this.billService.getBills(this.sharedData.getSelectedPortfolioId(),
 			this.sharedData.getStartDate().getTime(), proto.common.DateRange.CAL_MONTH,
@@ -76,7 +80,11 @@ com.digitald4.budget.CalCtrl.prototype.billsSuccessCallback = function(bills) {
 	this.bills = bills;
 	for (var t = 0; t < bills.length; t++) {
 		var bill = bills[t];
-		var day = this.days[Date.parse(bill.dueDate)];
+		var account = this.accounts['' + bill.account_id];
+    if (account) {
+      bill.name = bill.name || account.name;
+    }
+		var day = this.days[this.dateFilter(bill.due_date, 'MMdd')];
 		if (day) {
 			day.bills.push(bill);
 		}
