@@ -1,0 +1,33 @@
+<div>
+	<table class="table sortable no-margin" cellspacing="0" width="100%">
+		<thead><tr>
+				<th class="black-cell"><span class="loading"></span></th>
+				<th>Name</th><th>Role</th><th>Action</th>
+		</tr></thead>
+		<tbody>
+			<tr data-ng-repeat="portfolio in sharedData.portfolios | orderBy:'name'">
+				<td class="th table-check-cell">
+					<input type="checkbox" data-ng-model="portfolio.selected">
+				</td>
+				<td><input type="text" data-ng-model="portfolio.name" data-on-change="updatePortfolio(portfolio, 'name')"></td>
+				<td>{{getUserRoleName(portfolio.portfolio_user[0].role)}}</td>
+			</tr>
+			<tr>
+				<td class="th">
+					<button data-ng-click="addPortfolio()">+</button>
+					<div class="error-block" data-ng-show="portAddError">
+						<p class="message error no-margin">{{portAddError}}</p>
+					</div>
+				</td>
+				<td><input type="text" data-ng-model="newPortfolio.name"></td>
+				<td>Owner</td>
+				<td class="th">
+					<button data-ng-click="addPortfolio()">+</button>
+					<div class="error-block" data-ng-show="portAddError">
+						<p class="message error no-margin">{{portAddError}}</p>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

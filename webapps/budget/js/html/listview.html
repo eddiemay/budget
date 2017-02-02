@@ -1,0 +1,78 @@
+<div>
+	<select data-ng-model="listCtrl.selectedTemplate"
+			data-ng-options="template as template.name for template in listCtrl.templates">
+	</select>
+	<a data-ng-click="listCtrl.applyTemplate()"><button>Apply Template</button></a>
+	<label>Filter:<input data-ng-model="filterText"/></label>
+	<table class="table sortable no-margin" cellspacing="0" width="100%">
+		<thead><tr>
+				<th class="black-cell"><span class="loading"></span></th>
+				<th>Date</th><th>Bill</th><th>Name</th><th>Amount Due</th>
+				<th data-ng-repeat="ba in listCtrl.bankAccounts">
+					{{ba.name}}
+				</th>
+				<th>Status</th>
+		</tr></thead>
+		<tbody>
+			<tr data-ng-repeat="bill in listCtrl.bills | filter:filterText">
+				<td class="th table-check-cell">
+					<input type="checkbox" data-ng-model="bill.selected">
+					<a data-ng-show="bill.selected" data-ng-click="listCtrl.deleteBill(bill)"><button>Delete</button></a>
+				</td>
+				<td>
+					<div data-dd4-datepicker="listCtrl.updateBill(bill, 'due_date')" data-ng-model="bill.due_date">
+					</div>
+				</td>
+				<td>
+					<select data-ng-model="bill.account_id" data-ng-change="listCtrl.updateBill(bill, 'account_id')"
+							data-ng-options="account.id as account.name for account in listCtrl.accounts">
+					</select>
+				</td>
+				<td>
+					<input type="text" data-ng-model="bill.name" data-on-change="listCtrl.updateBill(bill, 'name')">
+				</td>
+				<td>
+					<input type="text" data-ng-model="bill.amount_due" size="8"
+							data-on-change="listCtrl.updateBill(bill, 'amount_due')">
+					{{bill.balancePost | currency}}
+				</td>
+				<td data-ng-repeat="tran in bill.trans">
+					<input type="text" data-ng-model="tran.amount" size="8"
+							data-on-change="listCtrl.updateBillTrans(bill)">
+					{{tran.balancePost | currency}}
+				</td>
+				<td>
+					<select data-ng-model="bill.status" data-ng-change="listCtrl.updateBill(bill, 'status')"
+							data-ng-options="status.id as status.name for status in listCtrl.statuses">
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="th">
+					<button data-ng-click="listCtrl.addBill()">+</button>
+					<div class="error-block" data-ng-show="listCtrl.billAddError">
+						<p class="message error no-margin">{{listCtrl.billAddError}}</p>
+					</div>
+				</td>
+				<td>
+					<div data-dd4-datepicker data-ng-model="listCtrl.newBill.due_date"></div>
+				</td>
+				<td>
+					<select data-ng-model="listCtrl.newBill.account_id"
+							data-ng-options="account.id as account.name for account in listCtrl.accounts">
+					</select>
+				</td>
+				<td><input type="text" data-ng-model="listCtrl.newBill.name"></td>
+				<td><input type="text" data-ng-model="listCtrl.newBill.amount_due" size="8"></td>
+				<td data-ng-repeat="tran in listCtrl.newBill.trans">
+					<input type="text" data-ng-model="tran.amount" size="8">
+				</td>
+				<td>
+					<select data-ng-model="listCtrl.newBill.status"
+							data-ng-options="status.id as status.name for status in listCtrl.statuses">
+					</select>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

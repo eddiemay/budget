@@ -3,7 +3,6 @@ package com.digitald4.budget.server;
 import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetProtos.Template.TemplateBill;
 import com.digitald4.budget.proto.BudgetProtos.Template.TemplateBill.TemplateTransaction;
-import com.digitald4.budget.proto.BudgetUIProtos.TemplateCreateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateListRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateUI;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI;
@@ -11,6 +10,10 @@ import com.digitald4.budget.proto.BudgetUIProtos.TemplateUI.TemplateBillUI.Templ
 import com.digitald4.budget.storage.TemplateStore;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.server.DualProtoService;
+import com.digitald4.common.server.JSONService;
+import com.googlecode.protobuf.format.JsonFormat;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 import java.util.function.Function;
@@ -86,8 +89,15 @@ public class TemplateService extends DualProtoService<TemplateUI, Template> {
 	public List<TemplateUI> list(TemplateListRequest request) throws DD4StorageException {
 		return store.getByPortfolio(request.getPortfolioId()).stream().map(converter).collect(Collectors.toList());
 	}
-	
-	public TemplateUI create(TemplateCreateRequest request) throws DD4StorageException {
-		return converter.apply(store.create(reverse.apply(request.getTemplate())));
+
+	@Override
+	public Object performAction(String action, String jsonRequest)
+			throws DD4StorageException, JSONException, JsonFormat.ParseException {
+		switch (action) {
+			case "list":
+				return JSONService.convertToJSON(list(
+						JSONService.transformJSONRequest(TemplateListRequest.getDefaultInstance(), jsonRequest)));
+			default: return super.performAction(action, jsonRequest);
+		}
 	}
 }

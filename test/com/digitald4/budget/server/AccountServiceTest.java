@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.digitald4.budget.proto.BudgetProtos.Account;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountGetRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountListRequest;
+import com.digitald4.budget.proto.BudgetUIProtos.AccountSummaryRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountUI;
 import com.digitald4.budget.storage.AccountStore;
 import com.digitald4.budget.test.TestCase;
@@ -33,6 +34,7 @@ public class AccountServiceTest extends TestCase {
 		AccountUI last = accounts.get(0);
 		for (AccountUI account : accounts) {
 			assertTrue(last.getName().compareTo(account.getName()) < 1);
+			last = account;
 		}
 	}
 	
@@ -47,5 +49,20 @@ public class AccountServiceTest extends TestCase {
 				.build());
 		assertEquals(71, account.getId());
 		assertEquals("2016-07", account.getBalance().getDate());
+	}
+
+	@Test
+	public void testGetSummary() throws DD4StorageException {
+		AccountStore store = new AccountStore(new DAOProtoSQLImpl<>(Account.class, dbConnector));
+		AccountService service = new AccountService(store);
+
+		List<AccountUI> accounts = service.getSummary(AccountSummaryRequest.newBuilder()
+				.setPortfolioId(3)
+				.setYear(2016)
+				.build());
+		assertTrue(accounts.size() > 0);
+		assertEquals(3, accounts.get(0).getPortfolioId());
+		assertTrue(accounts.get(0).getSummaryCount() > 0);
+		// assertTrue(accounts.get(0).getSummary(0).getMonth().startsWith("2016-"));
 	}
 }

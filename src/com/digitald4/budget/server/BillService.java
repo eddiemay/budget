@@ -4,7 +4,6 @@ import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Bill.PaymentStatus;
 import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
 import com.digitald4.budget.proto.BudgetUIProtos.ApplyTemplateRequest;
-import com.digitald4.budget.proto.BudgetUIProtos.BillCreateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.BillListRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.BillTransUpdateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.BillUI;
@@ -14,8 +13,10 @@ import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.TemplateStore;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.server.DualProtoService;
-
+import com.digitald4.common.server.JSONService;
+import com.googlecode.protobuf.format.JsonFormat;
 import org.joda.time.DateTime;
+import org.json.JSONException;
 
 import java.util.List;
 import java.util.function.Function;
@@ -103,10 +104,6 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 		return reverse;
 	}
 	
-	public BillUI create(BillCreateRequest request) throws DD4StorageException {
-		return getConverter().apply(store.create(reverse.apply(request.getBill())));
-	}
-	
 	public List<BillUI> list(BillListRequest request) throws DD4StorageException {
 		DateTime start = new DateTime(request.getRefDate());
 		DateTime end = null;
@@ -145,5 +142,22 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 	public List<BillUI> applyTemplate(ApplyTemplateRequest request) throws DD4StorageException {
 		return store.applyTemplate(templateStore.get(request.getTemplateId()),
 				new DateTime(request.getRefDate())).stream().map(getConverter()).collect(Collectors.toList());
+	}
+
+	@Override
+	public Object performAction(String action, String jsonRequest)
+			throws DD4StorageException, JSONException, JsonFormat.ParseException {
+		switch (action) {
+			case "list":
+				return JSONService.convertToJSON(list(
+						JSONService.transformJSONRequest(BillListRequest.getDefaultInstance(), jsonRequest)));
+			case "updateTrans":
+				return JSONService.convertToJSON(updateTransaction(
+						JSONService.transformJSONRequest(BillTransUpdateRequest.getDefaultInstance(), jsonRequest)));
+			case "applyTemplate":
+				return JSONService.convertToJSON(applyTemplate(
+						JSONService.transformJSONRequest(ApplyTemplateRequest.getDefaultInstance(), jsonRequest)));
+			default: return super.performAction(action, jsonRequest);
+		}
 	}
 }

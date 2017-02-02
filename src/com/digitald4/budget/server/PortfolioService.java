@@ -2,14 +2,13 @@ package com.digitald4.budget.server;
 
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
 import com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser;
-import com.digitald4.budget.proto.BudgetUIProtos.PortfolioListRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI;
-import com.digitald4.budget.proto.BudgetUIProtos.PortfolioCreateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI.PortfolioUserUI;
 import com.digitald4.budget.proto.BudgetUIProtos.UserRoleUI;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4Protos.User;
+import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.server.DualProtoService;
 import com.digitald4.common.util.Provider;
 
@@ -63,12 +62,9 @@ public class PortfolioService extends DualProtoService<PortfolioUI, Portfolio> {
 	public Function<PortfolioUI, Portfolio> getReverseConverter() {
 		return reverse;
 	}
-	
-	public List<PortfolioUI> list(PortfolioListRequest request) throws DD4StorageException {
+
+	@Override
+	public List<PortfolioUI> list(ListRequest request) throws DD4StorageException {
 		return store.getByUser(userProvider.get().getId()).stream().map(getConverter()).collect(Collectors.toList());
-	}
-	
-	public PortfolioUI create(PortfolioCreateRequest request) throws DD4StorageException {
-		return getConverter().apply(store.create(reverse.apply(request.getPortfolio())));
 	}
 }

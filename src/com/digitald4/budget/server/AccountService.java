@@ -2,7 +2,6 @@ package com.digitald4.budget.server;
 
 import com.digitald4.budget.proto.BudgetProtos.Account;
 import com.digitald4.budget.proto.BudgetProtos.Account.Balance;
-import com.digitald4.budget.proto.BudgetUIProtos.AccountCreateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountGetRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountListRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountSummaryRequest;
@@ -11,6 +10,7 @@ import com.digitald4.budget.proto.BudgetUIProtos.AccountUI.AccountSummary;
 import com.digitald4.budget.proto.BudgetUIProtos.AccountUI.BalanceUI;
 import com.digitald4.budget.storage.AccountStore;
 import com.digitald4.common.exception.DD4StorageException;
+import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
 import com.digitald4.common.server.DualProtoService;
 
 import java.util.ArrayList;
@@ -20,7 +20,11 @@ import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.digitald4.common.server.JSONService;
+import com.googlecode.protobuf.format.JsonFormat;
 import org.joda.time.DateTime;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AccountService extends DualProtoService<AccountUI, Account> {
 	
@@ -102,14 +106,27 @@ public class AccountService extends DualProtoService<AccountUI, Account> {
 		return getConverter(request.getRefDate()).apply(store.get(request.getAccountId()));
 	}
 	
-	public AccountUI create(AccountCreateRequest request) throws DD4StorageException {
-		return getConverter(0).apply(store.create(reverse.apply(request.getAccount())));
-	}
-	
 	public List<AccountUI> getSummary(AccountSummaryRequest request)
 			throws DD4StorageException {
 		return store.getByPortfolio(request.getPortfolioId()).stream().map(
 				new AccountSummaryConverter(request.getYear())).collect(Collectors.toList());
+	}
+
+	@Override
+	public Object performAction(String action, String jsonRequest)
+			throws DD4StorageException, JSONException, JsonFormat.ParseException {
+		switch (action) {
+			case "list":
+				return JSONService.convertToJSON(list(
+						JSONService.transformJSONRequest(AccountListRequest.getDefaultInstance(), jsonRequest)));
+			case "get":
+				return JSONService.convertToJSON(get(
+						JSONService.transformJSONRequest(AccountGetRequest.getDefaultInstance(), jsonRequest)));
+			case "getSummary":
+				return JSONService.convertToJSON(getSummary(
+						JSONService.transformJSONRequest(AccountSummaryRequest.getDefaultInstance(), jsonRequest)));
+			default: return super.performAction(action, jsonRequest);
+		}
 	}
 
 	private static final Comparator<AccountUI> AccountComparator = new Comparator<AccountUI>() {
@@ -150,14 +167,17 @@ public class AccountService extends DualProtoService<AccountUI, Account> {
 			}
 			for (int index = start; index < account.getBalanceCount(); index++) {
 				Balance post = account.getBalance(index);
-				if (thisYear.compareTo(post.getDate()) > -1) {
+				int monthIndex = Integer.valueOf(post.getDate().substring(5, 7)) - 2 +
+						(Integer.valueOf(post.getDate().substring(0, 4)) - year) * 12;
+				if (monthIndex < 0) {
 					break;
+				} else if (monthIndex > 11) {
+					continue;
 				}
 				Balance pre = (index + 1 < account.getBalanceCount()) ? account.getBalance(index + 1)
 						: Balance.getDefaultInstance();
-				int month = (Integer.valueOf(post.getDate().substring(5, 7)) - 2) % 12;
 				total += post.getBalance() - pre.getBalance();
-				builder.setSummary(month, builder.getSummary(month).toBuilder()
+				builder.setSummary(monthIndex, builder.getSummary(monthIndex).toBuilder()
 						.setTotal(post.getBalance() - pre.getBalance())
 						.build());
 			}

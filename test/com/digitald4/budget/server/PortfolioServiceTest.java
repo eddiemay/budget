@@ -2,31 +2,32 @@ package com.digitald4.budget.server;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
-import org.junit.Test;
-
 import com.digitald4.budget.storage.PortfolioSQLDao;
-import com.digitald4.budget.proto.BudgetUIProtos.PortfolioListRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.PortfolioUI;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.test.TestCase;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4Protos.User;
-import com.digitald4.common.util.UserProvider;
+import com.digitald4.common.proto.DD4UIProtos.ListRequest;
+import com.digitald4.common.util.Provider;
+import java.util.List;
+import org.junit.Test;
 
 public class PortfolioServiceTest extends TestCase {
+	private final User user = User.newBuilder().setId(1).build();
+	private final Provider<User> userProvider = new Provider<User>() {
+		@Override
+		public User get() {
+			return user;
+		}
+	};
 
 	@Test
 	public void testGetPortfolios() throws DD4StorageException {
 		PortfolioStore store = new PortfolioStore(new PortfolioSQLDao(dbConnector));
-		UserProvider userProvider = new UserProvider();
-		userProvider.set(User.newBuilder()
-				.setId(1)
-				.build());
 		PortfolioService service = new PortfolioService(store, userProvider);
 		
-		List<PortfolioUI> results = service.list(PortfolioListRequest.newBuilder()
+		List<PortfolioUI> results = service.list(ListRequest.newBuilder()
 				.build());
 		assertTrue(results.size() > 0);
 		assertTrue(results.get(0).getPortfolioUserCount() > 0);

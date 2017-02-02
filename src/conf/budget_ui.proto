@@ -33,13 +33,6 @@ message PortfolioUI {
 	repeated PortfolioUserUI portfolio_user = 4;
 }
 
-message PortfolioListRequest {
-}
-
-message PortfolioCreateRequest {
-	optional PortfolioUI portfolio = 1;
-}
-
 message AccountUI {
   optional int32 id = 1;
 	optional int32 portfolio_id = 2;
@@ -69,10 +62,6 @@ message AccountListRequest {
 message AccountGetRequest {
 	optional int32 account_id = 1;
 	optional int64 ref_date = 2; // Reference date needed for balance information.
-}
-
-message AccountCreateRequest {
-	optional AccountUI account = 1;
 }
 
 message BillUI {
@@ -111,10 +100,6 @@ message BillListRequest {
 	optional DateRange date_range = 3;
 }
 
-message BillCreateRequest {
-	optional BillUI bill = 1;
-}
-
 message BillTransUpdateRequest {
 	optional int32 bill_id = 1;
 	repeated BillUI.TransactionUI transaction = 2;
@@ -142,10 +127,6 @@ message TemplateUI {
 
 message TemplateListRequest {
 	optional int32 portfolio_id = 1;
-}
-
-message TemplateCreateRequest {
-	optional TemplateUI template = 1;
 }
 
 message ApplyTemplateRequest {

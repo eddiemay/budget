@@ -79,13 +79,14 @@ public class BillStore extends GenericDAOStore<Bill> {
 	}
 	
 	@Override
-	public void delete(int id) throws DD4StorageException {
+	public boolean delete(int id) throws DD4StorageException {
 		Bill bill = get(id);
-		super.delete(id);
+		boolean ret = super.delete(id);
 		accountStore.updateBalance(bill.getAccountId(), bill.getDueDate(), -bill.getAmountDue());
 		for (Transaction trans : bill.getTransactionList()) {
 			accountStore.updateBalance(trans.getDebitAccountId(), bill.getDueDate(), trans.getAmount());
 		}
+		return ret;
 	}
 	
 	public List<Bill> applyTemplate(Template template, DateTime refDate) throws DD4StorageException {

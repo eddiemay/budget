@@ -47,25 +47,29 @@
 	
 	<!-- Digital D4 -->
 	<script src="js/bootstrap.js"></script>
-	<script src="js/angular/route.js"></script>
+	<script src="js/route.js"></script>
 	<script src="js/gen/userroleui.js"></script>
+  <script src="js/common/sessionwatcher.js"></script>
 	<script src="js/common/jsonconnector.js"></script>
+  <script src="js/common/protoservice.js"></script>
+  <script src="js/common/userservice.js"></script>
 	<script src="js/common/daterange.js"></script>
   <script src="js/common/module.js"></script>
-	<script src="js/angular/factory/shareddata.js"></script>
-	<script src="js/angular/service/accountservice.js"></script>
-	<script src="js/angular/service/billservice.js"></script>
-	<script src="js/angular/service/portfolioservice.js"></script>
-	<script src="js/angular/controller/budgetctrl.js"></script>
-	<script src="js/angular/controller/portfoliosctrl.js"></script>
-	<script src="js/angular/controller/accountsctrl.js"></script>
-	<script src="js/angular/controller/defaultviewctrl.js"></script>
-	<script src="js/angular/controller/listctrl.js"></script>
-	<script src="js/angular/controller/accountingctrl.js"></script>
-	<script src="js/angular/controller/calctrl.js"></script>
-	<script src="js/angular/controller/summaryctrl.js"></script>
-	<script src="js/angular/controller/templatesctrl.js"></script>
-	<script src="js/angular/module.js"></script>
+	<script src="js/factory/shareddata.js"></script>
+	<script src="js/service/accountservice.js"></script>
+	<script src="js/service/billservice.js"></script>
+	<script src="js/service/portfolioservice.js"></script>
+  <script src="js/service/templateservice.js"></script>
+	<script src="js/controller/budgetctrl.js"></script>
+	<script src="js/controller/portfoliosctrl.js"></script>
+	<script src="js/controller/accountsctrl.js"></script>
+	<script src="js/controller/defaultviewctrl.js"></script>
+	<script src="js/controller/listctrl.js"></script>
+	<script src="js/controller/accountingctrl.js"></script>
+	<script src="js/controller/calctrl.js"></script>
+	<script src="js/controller/summaryctrl.js"></script>
+	<script src="js/controller/templatesctrl.js"></script>
+	<script src="js/module.js"></script>
 </head>
 
 <body data-ng-app="budget" data-ng-controller="BudgetCtrl as budgetCtrl">
@@ -76,8 +80,8 @@
 	<header><div class="container_12">
 		
 		<p id="skin-name"><small>Budget</small> <strong>0.5</strong></p>
-		<div class="server-info">Server: <strong><%=application.getServerInfo()%></strong></div>
-		<div class="server-info">Java: <strong>1.7.0_79</strong></div>
+		<div class="server-info">Server: <strong>Tomcat</strong></div>
+		<div class="server-info">Java: <strong>1.8</strong></div>
 		
 	</div></header>
 	<!-- End server status -->
@@ -96,7 +100,7 @@
 	
 		<ul id="status-infos">
 			<li class="spaced">Logged as: <strong>{{budgetCtrl.sharedData.user.email}}</strong></li>
-			<li><a href="logout" class="button red" title="Logout"><span class="smaller">LOGOUT</span></a></li>
+			<li><a ng-click="budgetCtrl.logout()" class="button red" title="Logout"><span class="smaller">LOGOUT</span></a></li>
 		</ul>
 		
 	</div></div>

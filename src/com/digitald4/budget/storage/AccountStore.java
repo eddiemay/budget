@@ -72,7 +72,6 @@ public class AccountStore extends GenericDAOStore<Account> {
 			} catch (DD4StorageException e) {
 				e.printStackTrace();
 			}
-			System.out.println(account);
 		}
 	}
 	
