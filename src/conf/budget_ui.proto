@@ -10,7 +10,8 @@ option java_outer_classname = "BudgetUIProtos";
 enum UserRoleUI {
 	UR_UNKNOWN = 0;
 	UR_OWNER = 12;
-	UR_READONLY = 13;
+  UR_CAN_EDIT = 2;
+	UR_READONLY = 3;
 }
 
 enum DateRange {

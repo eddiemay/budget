@@ -37,7 +37,6 @@ public class PortfolioSQLDao extends DAOProtoSQLImpl<Portfolio> {
 				portfolios.put(portfolioId, portfolio);
 			}
 			portfolio.addPortfolioUser(PortfolioUser.newBuilder()
-					.setPortfolioId(portfolioId)
 					.setUserId(rs.getInt("user_id"))
 					.setRole(UserRole.valueOf(rs.getInt("role_id"))));
 		}

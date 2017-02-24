@@ -102,11 +102,10 @@ com.digitald4.budget.CalCtrl.prototype.closeAddBillDialog = function() {
 };
 
 com.digitald4.budget.CalCtrl.prototype.addBill = function() {
-	this.billAddError = undefined;
-	this.billService.addBill(this.newBill, this.sharedData.getSelectedPortfolioId(),
-			proto.common.DateRange.CAL_MONTH, this.billsSuccessCallback, function(error) {
-		this.billAddError = error;
-	}.bind(this));
+	this.billService.create(this.newBill, function(bill) {
+	  this.bills.push(bill);
+	  this.billsSuccessCallback(this.bills);
+	}.bind(this), notify);
 };
 
 com.digitald4.budget.CalCtrl.prototype.editBill = function(bill) {
@@ -120,16 +119,9 @@ com.digitald4.budget.CalCtrl.prototype.closeEditBillDialog = function() {
 
 com.digitald4.budget.CalCtrl.prototype.updateBill = function(property) {
 	this.billUpdateError = undefined;
-	this.billService.updateBill(this.eBill, property, this.sharedData.getSelectedPortfolioId(),
-			proto.common.DateRange.CAL_MONTH, this.billsSuccessCallback, function(error) {
-		this.billUpdateError = error;
-	}.bind(this));
-};
-
-com.digitald4.budget.CalCtrl.prototype.updateBillTrans = function(billTrans, property) {
-	this.billUpdateError = undefined;
-	this.billService.updateBillTrans(billTrans, property, this.sharedData.getSelectedPortfolioId(),
-			proto.common.DateRange.CAL_MONTH, this.billsSuccessCallback, function(error) {
-		this.billUpdateError = error;
-	}.bind(this));
+	var index = this.bills.indexOf(this.eBill);
+	this.billService.update(this.eBill, [property], function(bill) {
+		this.bills.splice(index, 1, bill);
+	  this.billsSuccessCallback(this.bills);
+	}.bind(this), notify);
 };

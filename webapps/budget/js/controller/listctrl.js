@@ -122,10 +122,8 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 			}
 		}
 		this.makeNew();
-	}.bind(this), function(error) {
-		notify(error);
-	});
-	
+	}.bind(this), notify);
+
 	this.billService.getBills(this.sharedData.getSelectedPortfolioId(),
 			this.sharedData.getStartDate().getTime(), proto.common.DateRange.MONTH,
 			function(bills) {
@@ -138,10 +136,8 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 				} else {
 					this.bills = sortedBills;
 				}
-			}.bind(this), function(error) {
-				notify(error);
-	});
-	
+			}.bind(this), notify);
+
 	this.templateService.list(this.sharedData.getSelectedPortfolioId(), function(templates) {
 		this.templates = templates;
 	}.bind(this), notify);
@@ -169,7 +165,7 @@ com.digitald4.budget.ListCtrl.prototype.addBill = function() {
 		}
 	}
 	this.newBill.trans = undefined;
-	this.billService.addBill(this.newBill, function(bill) {
+	this.billService.create(this.newBill, function(bill) {
 		this.insertBill(this.bills, bill);
 		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
 		this.makeNew();
@@ -181,7 +177,7 @@ com.digitald4.budget.ListCtrl.prototype.addBill = function() {
 com.digitald4.budget.ListCtrl.prototype.updateBill = function(bill, property) {
 	this.billUpdateError = undefined;
 	var index = this.bills.indexOf(bill);
-	this.billService.updateBill(bill, property, function(bill) {
+	this.billService.update(bill, [property], function(bill) {
 		this.bills.splice(index, 1);
 		this.insertBill(this.bills, bill);
 		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
@@ -193,7 +189,7 @@ com.digitald4.budget.ListCtrl.prototype.updateBill = function(bill, property) {
 com.digitald4.budget.ListCtrl.prototype.deleteBill = function(bill) {
 	this.billUpdateError = undefined;
 	var index = this.bills.indexOf(bill);
-	this.billService.deleteBill(bill, function(success) {
+	this.billService.Delete(bill.id, function(success) {
 		if (success) {
 			this.bills.splice(index, 1);
 			this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
@@ -214,12 +210,10 @@ com.digitald4.budget.ListCtrl.prototype.updateBillTrans = function(bill) {
 		}
 	}
 	this.billUpdateError = undefined;
-	this.billService.updateBillTrans(bill, function(bill) {
+	this.billService.update(bill, ['transaction'], function(bill) {
 		this.bills[index] = bill;
 		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
-	}.bind(this), function(error) {
-		this.billUpdateError = error;
-	}.bind(this));
+	}.bind(this), notify);
 };
 
 com.digitald4.budget.ListCtrl.prototype.applyTemplate = function() {

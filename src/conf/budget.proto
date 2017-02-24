@@ -10,7 +10,8 @@ option java_outer_classname = "BudgetProtos";
 enum UserRole {
 	UR_UNKNOWN = 0;
 	UR_OWNER = 12;
-	UR_READONLY = 13;
+  UR_CAN_EDIT = 2;
+	UR_READONLY = 3;
 }
 
 message Portfolio {
@@ -18,9 +19,8 @@ message Portfolio {
 	optional string name = 2;
 
 	message PortfolioUser {
-		optional int32 portfolio_id = 2;
-		optional int32 user_id = 3;
-		optional UserRole role = 4;
+		optional int32 user_id = 1;
+		optional UserRole role = 2;
 	}
 	repeated PortfolioUser portfolio_user = 4;
 }

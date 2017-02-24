@@ -6,8 +6,8 @@ com.digitald4.budget.BudgetCtrl = function(sharedData, userService, portfolioSer
 	  sharedData.setUser(user);
 	}, notify);
 	
-	portfolioService.getPortfolios(sharedData.getSelectedPortfolioId(), function(portfolioData) {
-		sharedData.setPortfolioData(portfolioData);
+	portfolioService.list([], function(portfolios) {
+		sharedData.setPortfolioData(portfolios);
 	}, notify);
 };
 

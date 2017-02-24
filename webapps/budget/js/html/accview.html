@@ -10,20 +10,29 @@
 					<input type="checkbox" data-ng-model="trans.selected">
 				</td>
 				<td>
-					<div data-dd4-datepicker="accountingCtrl.updateTransaction(trans, 'payment_date')" data-ng-model="trans.trans.payment_date">
+					<div data-dd4-datepicker="accountingCtrl.updateTransaction(trans, 'payment_date')"
+               data-ng-model="trans.trans.payment_date">
 					</div>
 				</td>
-				<td><input type="text" data-ng-model="trans.bill.name" data-on-change="accountingCtrl.updateTransaction(trans, 'name')"></td>
-				<td><input type="text" data-ng-model="trans.trans.amount" data-on-change="accountingCtrl.updateTransaction(trans, 'amount')"/></td>
 				<td>
-					<select data-ng-model="trans.bill.account_id" data-ng-change="accountingCtrl.updateTransaction(trans, 'account_id')"
-							data-ng-options="account.id as account.name for account in accountingCtrl.accounts | orderBy:'name'">
+          <input type="text" data-ng-model="trans.bill.name"
+                 data-on-change="accountingCtrl.updateTransaction(trans, 'name')">
+        </td>
+				<td>
+          <input type="text" data-ng-model="trans.trans.amount"
+                 data-on-change="accountingCtrl.updateTransaction(trans, 'amount')">
+        </td>
+				<td>
+					<select data-ng-model="trans.bill.account_id"
+                  data-ng-options="account.id as account.name for account in accountingCtrl.accounts | orderBy:'name'"
+                  data-ng-change="accountingCtrl.updateTransaction(trans, 'account_id')">
 					</select>
 					{{trans.creditAcctBalPost}}
 				</td>
 				<td>
-					<select data-ng-model="trans.trans.debit_account_id" data-ng-change="accountingCtrl.updateTransaction(trans, 'debit_account_id')"
-							data-ng-options="account.id as account.name for account in accountingCtrl.paymentAccounts | orderBy:'name'">
+					<select data-ng-model="trans.trans.debit_account_id"
+                  data-ng-options="acct.id as acct.name for acct in accountingCtrl.paymentAccounts | orderBy:'name'"
+                  data-ng-change="accountingCtrl.updateTransaction(trans, 'debit_account_id')">
 					</select>
 					{{trans.debitAcctBalPost}}
 				</td>

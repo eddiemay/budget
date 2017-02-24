@@ -22,9 +22,13 @@ public final class BudgetUIProtos {
      */
     UR_OWNER(1, 12),
     /**
-     * <code>UR_READONLY = 13;</code>
+     * <code>UR_CAN_EDIT = 2;</code>
      */
-    UR_READONLY(2, 13),
+    UR_CAN_EDIT(2, 2),
+    /**
+     * <code>UR_READONLY = 3;</code>
+     */
+    UR_READONLY(3, 3),
     ;
 
     /**
@@ -36,9 +40,13 @@ public final class BudgetUIProtos {
      */
     public static final int UR_OWNER_VALUE = 12;
     /**
-     * <code>UR_READONLY = 13;</code>
+     * <code>UR_CAN_EDIT = 2;</code>
      */
-    public static final int UR_READONLY_VALUE = 13;
+    public static final int UR_CAN_EDIT_VALUE = 2;
+    /**
+     * <code>UR_READONLY = 3;</code>
+     */
+    public static final int UR_READONLY_VALUE = 3;
 
 
     public final int getNumber() {
@@ -49,7 +57,8 @@ public final class BudgetUIProtos {
       switch (value) {
         case 0: return UR_UNKNOWN;
         case 12: return UR_OWNER;
-        case 13: return UR_READONLY;
+        case 2: return UR_CAN_EDIT;
+        case 3: return UR_READONLY;
         default: return null;
       }
     }
@@ -12882,12 +12891,12 @@ public final class BudgetUIProtos {
       "ate_id\030\001 \001(\005\022\020\n\010ref_date\030\002 \001(\003\022%\n\ndate_r" +
       "ange\030\003 \001(\0162\021.budget.DateRange\";\n\025Account" +
       "SummaryRequest\022\024\n\014portfolio_id\030\001 \001(\005\022\014\n\004" +
-      "year\030\002 \001(\005*;\n\nUserRoleUI\022\016\n\nUR_UNKNOWN\020\000" +
-      "\022\014\n\010UR_OWNER\020\014\022\017\n\013UR_READONLY\020\r*S\n\tDateR",
-      "ange\022\017\n\013UNSPECIFIED\020\000\022\007\n\003DAY\020\001\022\010\n\004WEEK\020\002" +
-      "\022\t\n\005MONTH\020\003\022\r\n\tCAL_MONTH\020\004\022\010\n\004YEAR\020\005B,\n\032" +
-      "com.digitald4.budget.protoB\016BudgetUIProt" +
-      "os"
+      "year\030\002 \001(\005*L\n\nUserRoleUI\022\016\n\nUR_UNKNOWN\020\000" +
+      "\022\014\n\010UR_OWNER\020\014\022\017\n\013UR_CAN_EDIT\020\002\022\017\n\013UR_RE",
+      "ADONLY\020\003*S\n\tDateRange\022\017\n\013UNSPECIFIED\020\000\022\007" +
+      "\n\003DAY\020\001\022\010\n\004WEEK\020\002\022\t\n\005MONTH\020\003\022\r\n\tCAL_MONT" +
+      "H\020\004\022\010\n\004YEAR\020\005B,\n\032com.digitald4.budget.pr" +
+      "otoB\016BudgetUIProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

@@ -5,12 +5,12 @@
 				<th>Name</th><th>Role</th><th>Action</th>
 		</tr></thead>
 		<tbody>
-			<tr data-ng-repeat="portfolio in sharedData.portfolios | orderBy:'name'">
+			<tr data-ng-repeat="portfolio in portfoliosCtrl.sharedData.portfolios | orderBy:'name'">
 				<td class="th table-check-cell">
 					<input type="checkbox" data-ng-model="portfolio.selected">
 				</td>
 				<td><input type="text" data-ng-model="portfolio.name" data-on-change="updatePortfolio(portfolio, 'name')"></td>
-				<td>{{getUserRoleName(portfolio.portfolio_user[0].role)}}</td>
+				<td>{{portfoliosCtrl.UserRoleName[portfolio.portfolio_user[0].role]}}</td>
 			</tr>
 			<tr>
 				<td class="th">
@@ -19,10 +19,10 @@
 						<p class="message error no-margin">{{portAddError}}</p>
 					</div>
 				</td>
-				<td><input type="text" data-ng-model="newPortfolio.name"></td>
+				<td><input type="text" data-ng-model="portfoliosCtrl.newPortfolio.name"></td>
 				<td>Owner</td>
 				<td class="th">
-					<button data-ng-click="addPortfolio()">+</button>
+					<button data-ng-click="portfoliosCtrl.addPortfolio()">+</button>
 					<div class="error-block" data-ng-show="portAddError">
 						<p class="message error no-margin">{{portAddError}}</p>
 					</div>

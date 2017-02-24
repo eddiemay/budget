@@ -1,54 +1,34 @@
-com.digitald4.budget.PortfoliosCtrl = function($scope, sharedData, portfolioService) {
-	this.scope = $scope;
-	this.scope.sharedData = sharedData;
+com.digitald4.budget.PortfoliosCtrl = function(sharedData, portfolioService) {
+	this.sharedData = sharedData;
 	this.portfolioService = portfolioService;
-	this.scope.addPortfolio = this.addPortfolio.bind(this);
-	this.scope.updatePortfolio = this.updatePortfolio.bind(this);
 	var UserRoleUI = proto.budget.UserRoleUI;
-	this.scope.getUserRoleName = function(userRole) {
-		switch (userRole) {
-			case UserRoleUI.UR_OWNER: return 'Owner';
-			case UserRoleUI.UR_READONLY: return 'Read Only';
-		}
-		return 'Unknown';
+	this.UserRoleName = {
+	    12: 'Owner',
+	    2: 'Can Edit',
+	    3: 'Read Only'
 	};
 	this.refresh();
 };
 
-com.digitald4.budget.PortfoliosCtrl.prototype.scope;
 com.digitald4.budget.PortfoliosCtrl.prototype.portfolioService;
 
 com.digitald4.budget.PortfoliosCtrl.prototype.refresh = function() {
-	var scope = this.scope;
-	this.portfolioService.getPortfolios(scope.sharedData.getSelectedPortfolioId(), function(portfolioData) {
-		scope.sharedData.setPortfolioData(portfolioData);
-		// scope.$apply();
-	}, function(error) {
-		notify(error);
-	});
-	this.scope.newPortfolio = {};
+	this.portfolioService.list([], function(portfolios) {
+		this.sharedData.setPortfolioData(portfolios);
+	}.bind(this), notify);
+	this.newPortfolio = {};
 };
 
 com.digitald4.budget.PortfoliosCtrl.prototype.addPortfolio = function() {
-	var scope = this.scope;
-	scope.addError = undefined;
-	this.portfolioService.addPortfolio(scope.newPortfolio, function(portfolioData) {
-		scope.sharedData.setPortfolioData(portfolioData);
-		scope.newPortfolio = {};
-		scope.$apply();
-	}, function(error) {
-		scope.addError = error;
-		scope.$apply();
-	});
+	this.portfolioService.create(this.newPortfolio, function(portfolio) {
+		this.sharedData.portfolios.push(portfolio);
+		this.newPortfolio = {};
+	}.bind(this), notify);
 };
 
 com.digitald4.budget.PortfoliosCtrl.prototype.updatePortfolio = function(portfolio, property) {
-	var scope = this.scope;
-	scope.updateError = undefined;
-	this.portfolioService.updatePortfolio(portfolio, property, function(portfolio) {
-		scope.$apply();
-	}, function(error) {
-		scope.updateError = error;
-		scope.$apply();
-	});
+	var index = this.sharedData.portfolios.indexOf(portfolio);
+	this.portfolioService.update(portfolio, [property], function(portfolio) {
+	  this.sharedData.portfolios.splice(index, 1, portfolio);
+	}.bind(this), notify);
 };

@@ -5,40 +5,44 @@
 				<th>Name</th><th>Parent Account</th><th>Payment Account</th><th>Action</th>
 		</tr></thead>
 		<tbody>
-			<tr data-ng-repeat="account in accounts | orderBy:'name'">
+			<tr data-ng-repeat="account in accountsCtrl.accounts | orderBy:'name'">
 				<td class="th table-check-cell">
 					<input type="checkbox" data-ng-model="account.selected">
 				</td>
-				<td><input type="text" data-ng-model="account.name" data-on-change="updateAccount(account, 'name')"></td>
 				<td>
-					<select data-ng-model="account.parent_account_id" data-ng-change="updateAccount(account, 'parent_account_id')"
-							data-ng-options="parent.id as parent.name for parent in accounts">
+          <input type="text" data-ng-model="account.name" data-on-change="accountsCtrl.updateAccount(account, 'name')">
+        </td>
+				<td>
+					<select data-ng-model="account.parent_account_id"
+                  data-ng-options="parent.id as parent.name for parent in accountsCtrl.accounts"
+                  data-ng-change="accountsCtrl.updateAccount(account, 'parent_account_id')">
 					</select>
 				</td>
 				<td class="th table-check-cell">
 					<input type="checkbox" data-ng-model="account.payment_account"
-							data-ng-change="updateAccount(account, 'payment_account')">
+							data-ng-change="accountsCtrl.updateAccount(account, 'payment_account')">
 				</td>
 			</tr>
 			<tr>
 				<td class="th">
-					<button data-ng-click="addAccount()">+</button>
-					<div class="error-block" data-ng-show="addError">
-						<p class="message error no-margin">{{addError}}</p>
+					<button data-ng-click="accountsCtrl.addAccount()">+</button>
+					<div class="error-block" data-ng-show="accountsCtrl.addError">
+						<p class="message error no-margin">{{accountsCtrl.addError}}</p>
 					</div>
 				</td>
-				<td><input type="text" data-ng-model="newAccount.name"></td>
+				<td><input type="text" data-ng-model="accountsCtrl.newAccount.name"></td>
 				<td>
-					<select data-ng-model="newAccount.parent_account_id" data-ng-options="parent.id as parent.name for parent in accounts">
+					<select data-ng-model="accountsCtrl.newAccount.parent_account_id"
+                  data-ng-options="parent.id as parent.name for parent in accountsCtrl.accounts">
 					</select>
 				</td>
 				<td class="th table-check-cell">
-					<input type="checkbox" data-ng-model="newAccount.payment_account">
+					<input type="checkbox" data-ng-model="accountsCtrl.newAccount.payment_account">
 				</td>
 				<td class="th">
-					<button data-ng-click="addAccount()">+</button>
-					<div class="error-block" data-ng-show="addError">
-						<p class="message error no-margin">{{addError}}</p>
+					<button data-ng-click="accountsCtrl.addAccount()">+</button>
+					<div class="error-block" data-ng-show="accountsCtrl.addError">
+						<p class="message error no-margin">{{accountsCtrl.addError}}</p>
 					</div>
 				</td>
 			</tr>
