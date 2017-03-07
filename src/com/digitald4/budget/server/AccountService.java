@@ -113,7 +113,7 @@ public class AccountService extends DualProtoService<AccountUI, Account> {
 	}
 
 	@Override
-	public Object performAction(String action, String jsonRequest)
+	public Object performAction(String action, JSONObject jsonRequest)
 			throws DD4StorageException, JSONException, JsonFormat.ParseException {
 		switch (action) {
 			case "list":

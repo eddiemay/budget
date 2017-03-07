@@ -142,7 +142,7 @@
 			<filelist dir="src/conf" files="web.xml,dev_web.xml"/>
 		</concat>
 		<javac destdir="webapps/${app.name}/WEB-INF/classes" 
-				includes="com/digitald4/${app.name}/server/JSONServiceServlet.java"
+				includes="com/digitald4/${app.name}/server/JSONServiceServlet.java,com/digitald4/${app.name}/server/ApiServiceServlet.java"
 				target="1.8" source="1.8" optimize="yes">
 			<src path="../common/src" />
 			<src path="../common/src-gen" />

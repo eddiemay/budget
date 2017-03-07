@@ -91,7 +91,7 @@ public class TemplateService extends DualProtoService<TemplateUI, Template> {
 	}
 
 	@Override
-	public Object performAction(String action, String jsonRequest)
+	public Object performAction(String action, JSONObject jsonRequest)
 			throws DD4StorageException, JSONException, JsonFormat.ParseException {
 		switch (action) {
 			case "list":

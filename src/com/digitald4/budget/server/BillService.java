@@ -17,6 +17,7 @@ import com.digitald4.common.server.JSONService;
 import com.googlecode.protobuf.format.JsonFormat;
 import org.joda.time.DateTime;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 import java.util.function.Function;
@@ -145,7 +146,7 @@ public class BillService extends DualProtoService<BillUI, Bill> {
 	}
 
 	@Override
-	public Object performAction(String action, String jsonRequest)
+	public Object performAction(String action, JSONObject jsonRequest)
 			throws DD4StorageException, JSONException, JsonFormat.ParseException {
 		switch (action) {
 			case "list":
