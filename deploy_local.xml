@@ -125,9 +125,6 @@
 			<fileset dir="../common/src/js">
 				<include name="**/*.js"/>
 			</fileset>
-			<fileset dir="../common/src-gen/js">
-				<include name="**/*.js"/>
-			</fileset>
 		</copy>
 		<copy todir="webapps/${app.name}/js/gen" flatten="true">
 			<fileset dir="src-gen/js">
