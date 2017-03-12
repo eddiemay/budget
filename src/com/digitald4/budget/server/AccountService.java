@@ -122,7 +122,7 @@ public class AccountService extends DualProtoService<AccountUI, Account> {
 			case "get":
 				return JSONService.convertToJSON(get(
 						JSONService.transformJSONRequest(AccountGetRequest.getDefaultInstance(), jsonRequest)));
-			case "getSummary":
+			case "summary":
 				return JSONService.convertToJSON(getSummary(
 						JSONService.transformJSONRequest(AccountSummaryRequest.getDefaultInstance(), jsonRequest)));
 			default: return super.performAction(action, jsonRequest);

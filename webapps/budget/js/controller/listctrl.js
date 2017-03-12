@@ -124,8 +124,7 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 		this.makeNew();
 	}.bind(this), notify);
 
-	this.billService.getBills(this.sharedData.getSelectedPortfolioId(),
-			this.sharedData.getStartDate().getTime(), proto.common.DateRange.MONTH,
+	this.billService.getBills(this.sharedData.getSelectedPortfolioId(), this.sharedData.getStartDate().getTime(), 'MONTH',
 			function(bills) {
 				var sortedBills = [];
 				for (var b = 0; b < bills.length; b++) {
@@ -138,7 +137,7 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 				}
 			}.bind(this), notify);
 
-	this.templateService.list(this.sharedData.getSelectedPortfolioId(), function(templates) {
+	this.templateService.list(this.sharedData.getSelectedPortfolioId(), {}, function(templates) {
 		this.templates = templates;
 	}.bind(this), notify);
 };
@@ -218,8 +217,8 @@ com.digitald4.budget.ListCtrl.prototype.updateBillTrans = function(bill) {
 
 com.digitald4.budget.ListCtrl.prototype.applyTemplate = function() {
 	this.applyTemplateError = undefined;
-	this.billService.applyTemplate(this.selectedTemplate, this.sharedData.getMonth().getTime(),
-			proto.common.DateRange.MONTH, function(bills) {
+	this.billService.applyTemplate(this.selectedTemplate, this.sharedData.getMonth().getTime(), 'MONTH',
+			function(bills) {
 		    var sortedBills = [];
         for (var b = 0; b < bills.length; b++) {
           this.insertBill(sortedBills, bills[b]);

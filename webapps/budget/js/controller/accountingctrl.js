@@ -28,8 +28,7 @@ com.digitald4.budget.AccountingCtrl.prototype.refresh = function() {
 				}
 			}.bind(this), notify);
 	
-	this.billService.getBills(this.sharedData.getSelectedPortfolioId(),
-			this.sharedData.getStartDate().getTime(), proto.common.DateRange.MONTH,
+	this.billService.getBills(this.sharedData.getSelectedPortfolioId(), this.sharedData.getStartDate().getTime(), 'MONTH',
 			function(bills) {
 				this.transactions = [];
 				for (var b = 0; b < bills.length; b++) {

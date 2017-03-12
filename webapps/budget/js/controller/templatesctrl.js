@@ -37,7 +37,7 @@ com.digitald4.budget.TemplatesCtrl.prototype.refresh = function() {
 				this.makeNew();
 			}.bind(this), notify);
 	
-	this.templateService.list(this.sharedData.getSelectedPortfolioId(), function(templates) {
+	this.templateService.list(this.sharedData.getSelectedPortfolioId(), {}, function(templates) {
 		this.templates = templates;
 	}.bind(this), notify);
 };

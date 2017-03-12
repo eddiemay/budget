@@ -1,32 +1,36 @@
 com.digitald4.budget.module = angular.module('budget', ['DD4Common', 'ngRoute', 'ui.date'])
     .config(com.digitald4.budget.router)
-    .service('accountService', function(restService) {
-      var accountService = new com.digitald4.common.ProtoService("account", restService);
+    .service('accountService', function(apiConnector) {
+      var accountService = new com.digitald4.common.JSONService("account", apiConnector);
       accountService.getAccounts = function(portfolioId, refDate, successCallback, errorCallback) {
-        this.performRequest('list', {portfolio_id: portfolioId, ref_date: refDate}, successCallback, errorCallback);
+        this.performRequest('GET', {portfolios: portfolioId, ref_date: refDate}, undefined, successCallback, errorCallback);
       };
       accountService.getSummaryData = function(portfolioId, year, successCallback, errorCallback) {
-        this.performRequest('getSummary', {portfolio_id: portfolioId, year: year}, successCallback, errorCallback);
+        this.performRequest(['summary'], {portfolios: portfolioId, year: year}, undefined, successCallback, errorCallback);
       };
       return accountService;
     })
-    .service('billService', function(restService) {
-      var billService = new com.digitald4.common.ProtoService("bill", restService);
+    .service('billService', function(apiConnector) {
+      var billService = new com.digitald4.common.JSONService("bill", apiConnector);
       billService.getBills = function(portfolioId, refDate, dateRange, successCallback, errorCallback) {
-        this.performRequest('list', {portfolio_id: portfolioId, ref_date: refDate, date_range: dateRange},
+        this.performRequest('GET', {portfolio_id: portfolioId, ref_date: refDate, date_range: dateRange}, undefined,
             successCallback, errorCallback);
       };
       billService.applyTemplate = function(template, refDate, dateRange, successCallback, errorCallback) {
-        this.performRequest('applyTemplate', {template_id: template.id, ref_date: refDate},
+        this.performRequest(['applyTemplate', 'POST'], undefined, {template_id: template.id, ref_date: refDate},
             successCallback, errorCallback);
       };
       return billService;
     })
-    .service('portfolioService', function(restService) {
-      return new com.digitald4.common.ProtoService("portfolio", restService);
+    .service('portfolioService', function(apiConnector) {
+      return new com.digitald4.common.JSONService("portfolio", apiConnector);
     })
-    .service('templateService', function(restService) {
-      return new com.digitald4.common.ProtoService("template", restService);
+    .service('templateService', function(apiConnector) {
+      var templateService = new com.digitald4.common.JSONService("template", apiConnector);
+      templateService.list = function(portfolioId, filter, successCallback, errorCallback) {
+        this.performRequest('GET', {portfolio_id: portfolioId}, filter, successCallback, errorCallback);
+      };
+      return templateService;
     })
     .factory('sharedData', function() {
       return new com.digitald4.budget.SharedData();

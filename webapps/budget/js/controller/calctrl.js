@@ -65,12 +65,9 @@ addDay = function(date) {
 
 com.digitald4.budget.CalCtrl.prototype.refresh = function() {
 	this.setupCalendar();
-	
-	this.billService.getBills(this.sharedData.getSelectedPortfolioId(),
-			this.sharedData.getStartDate().getTime(), proto.common.DateRange.CAL_MONTH,
-			this.billsSuccessCallback.bind(this), function(error) {
-		notify(error);
-	});
+
+	this.billService.getBills(this.sharedData.getSelectedPortfolioId(), this.sharedData.getStartDate().getTime(),
+	    'CAL_MONTH', this.billsSuccessCallback.bind(this), notify);
 };
 
 com.digitald4.budget.CalCtrl.prototype.billsSuccessCallback = function(bills) {
