@@ -121,6 +121,14 @@
 				<include name="protobuf-java-3.0.0-beta-2.jar" />
 			</fileset>
 		</copy>
+        <copy todir="webapps/${app.name}/js/html" flatten="true">
+            <fileset dir="../common/src/js/html">
+                <include name="*.html"/>
+            </fileset>
+            <fileset dir="src/js/html">
+                <include name="*.html"/>
+            </fileset>
+        </copy>
         <concat destfile="webapps/${app.name}/js/dd4common.js">
             <fileset dir="../common/src/js">
                 <include name="*.js"/>
@@ -140,7 +148,7 @@
 			<filelist dir="src/conf" files="web.xml,dev_web.xml"/>
 		</concat>
 		<javac destdir="webapps/${app.name}/WEB-INF/classes" 
-				includes="com/digitald4/${app.name}/server/JSONServiceServlet.java,com/digitald4/${app.name}/server/ApiServiceServlet.java"
+				includes="com/digitald4/${app.name}/server/ApiServiceServlet.java"
 				target="1.8" source="1.8" optimize="yes">
 			<src path="../common/src" />
 			<src path="../common/src-gen" />
