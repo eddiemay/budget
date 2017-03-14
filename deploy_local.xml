@@ -121,19 +121,20 @@
 				<include name="protobuf-java-3.0.0-beta-2.jar" />
 			</fileset>
 		</copy>
-		<copy todir="webapps/${app.name}/js/common" flatten="true">
-			<fileset dir="../common/src/js">
-				<include name="**/*.js"/>
-			</fileset>
-		</copy>
-		<copy todir="webapps/${app.name}/js/gen" flatten="true">
-			<fileset dir="src-gen/js">
-				<include name="**/*.js"/>
-			</fileset>
-		</copy>
-		<concat destfile="webapps/${app.name}/js/bootstrap.js">
-			<filelist dir="../common/src/js" files="bootstrap.js"/>
-			<filelist dir="src/js" files="bootstrap.js"/>
+        <concat destfile="webapps/${app.name}/js/dd4common.js">
+            <fileset dir="../common/src/js">
+                <include name="*.js"/>
+            </fileset>
+        </concat>
+		<concat destfile="webapps/${app.name}/js/budget.js">
+			<filelist dir="src/js" files="_bootstrap.js"/>
+            <fileset dir="src-gen/js">
+                <include name="*.js"/>
+            </fileset>
+            <fileset dir="src/js">
+                <include name="*.js"/>
+                <exclude name="_bootstrap.js"/>
+            </fileset>
 		</concat>
 		<concat destfile="webapps/${app.name}/WEB-INF/web.xml">
 			<filelist dir="src/conf" files="web.xml,dev_web.xml"/>
