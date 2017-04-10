@@ -13,8 +13,7 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet(name = "API Service Servlet", urlPatterns = {"/api/*"})
 public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceServlet {
 
-	public void init() throws ServletException {
-		super.init();
+	public ApiServiceServlet() throws ServletException {
 		DBConnector dbConnector = getDBConnector();
 
 		PortfolioStore portfolioStore = new PortfolioStore(new PortfolioSQLDao(dbConnector));
