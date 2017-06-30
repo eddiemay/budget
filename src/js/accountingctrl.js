@@ -1,40 +1,34 @@
 com.digitald4.budget.AccountingCtrl = function(sharedData, billService, accountService) {
+	sharedData.refresh = this.refresh.bind(this);
+	sharedData.setControlType(sharedData.CONTROL_TYPE.MONTH);
 	this.sharedData = sharedData;
-	this.sharedData.refresh = this.refresh.bind(this);
 	this.billService = billService;
 	this.accountService = accountService;
 	this.refresh();
 };
 
-com.digitald4.budget.AccountingCtrl.prototype.billService;
-com.digitald4.budget.AccountingCtrl.prototype.accountService;
-
-com.digitald4.budget.Transaction = function(bill, index) {
-	this.bill = bill;
-	this.trans = bill.transaction[index];
-	this.index = index;
-};
-
 com.digitald4.budget.AccountingCtrl.prototype.refresh = function() {
-	this.accountService.getAccounts(this.sharedData.getSelectedPortfolioId(),
-			this.sharedData.getStartDate().getTime(), function(accounts) {
-				this.accounts = accounts;
-				this.paymentAccounts = [];
-				for (var a = 0; a < accounts.length; a++) {
-					var account = accounts[a];
-					if (account.payment_account) {
-						this.paymentAccounts.push(account);
-					}
-				}
-			}.bind(this), notify);
+	this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(accounts) {
+    this.accounts = accounts;
+    this.paymentAccounts = [];
+    for (var a = 0; a < accounts.length; a++) {
+      var account = accounts[a];
+      if (account.payment_account) {
+        this.paymentAccounts.push(account);
+      }
+    }
+  }.bind(this), notify);
 	
-	this.billService.getBills(this.sharedData.getSelectedPortfolioId(), this.sharedData.getStartDate().getTime(), 'MONTH',
+	this.billService.list(this.sharedData.getSelectedPortfolioId(), this.sharedData.getYear(), this.sharedData.getMonth(),
 			function(bills) {
 				this.transactions = [];
 				for (var b = 0; b < bills.length; b++) {
 					var bill = bills[b];
-					for (var t = 0; t < bill.transaction.length; t++) {
-						this.transactions.push(new com.digitald4.budget.Transaction(bill, t));
+					bill.name = bill.name || bill.account_name;
+					for (var id in bill.transaction) {
+					  bill.transaction[id].payment_date = bill.transaction[id].payment_date ||
+					      new Date(bill.year, bill.month - 1, bill.day);
+						this.transactions.push({bill: bill, trans: bill.transaction[id], debitAccountId: parseInt(id, 10)});
 					}
 				}
 			}.bind(this), notify);
@@ -53,11 +47,20 @@ com.digitald4.budget.AccountingCtrl.prototype.addTransaction = function() {
 			}.bind(this));
 };
 
-com.digitald4.budget.AccountingCtrl.prototype.updateTransaction = function(trans, property) {
-	this.transUpdateError = undefined;
-	this.billService.updateBill(trans, property, function(transactions) {
-		this.transactions = transactions;
+com.digitald4.budget.AccountingCtrl.prototype.updateBill = function(bill, property) {
+	var index = this.bills.indexOf(bill);
+	this.billService.update(bill, [property], function(bill) {
+		this.bills.splice(index, 1);
+		this.insertBill(this.bills, bill);
+		this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills);
 	}.bind(this), function(error) {
-		this.transUpdateError = error;
+		this.billUpdateError = error;
 	}.bind(this));
+};
+
+com.digitald4.budget.AccountingCtrl.prototype.updateTransaction = function(trans, property) {
+	var index = this.transactions.indexOf(trans);
+	this.billService.update(trans.bill, [property], function(bill) {
+		this.transactions.splice(index, 1, {bill: bill, trans: bill.transaction[id]});
+	}.bind(this), notify);
 };

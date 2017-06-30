@@ -2,31 +2,24 @@ package com.digitald4.budget.server;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
-import org.junit.Test;
-
 import com.digitald4.budget.proto.BudgetProtos.Template;
-import com.digitald4.budget.proto.BudgetUIProtos.TemplateListRequest;
-import com.digitald4.budget.proto.BudgetUIProtos.TemplateUI;
-import com.digitald4.budget.storage.TemplateStore;
 import com.digitald4.budget.test.TestCase;
-import com.digitald4.common.storage.DAOProtoSQLImpl;
 import com.digitald4.common.exception.DD4StorageException;
+import com.digitald4.common.storage.DAOProtoSQLImpl;
+import com.digitald4.common.storage.GenericStore;
+import com.digitald4.common.storage.Store;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.junit.Test;
 
 public class TemplateServiceTest extends TestCase {
 
 	@Test
 	public void testGetTemplates() throws DD4StorageException {
-		TemplateStore store = new TemplateStore(
-				new DAOProtoSQLImpl<>(Template.class, dbConnector));
+		Store<Template> store = new GenericStore<>(new DAOProtoSQLImpl<>(Template.class, dbConnector));
 		TemplateService service = new TemplateService(store);
 		
-		List<TemplateUI> templates = service.list(TemplateListRequest.newBuilder()
-				.setPortfolioId(3)
-				.build());
-		assertTrue(templates.size() > 0);
-		assertTrue(templates.get(0).getBillCount() > 3);
-		assertTrue(templates.get(0).getBill(0).getTransactionCount() > 0);
+		JSONArray templates = service.list(new JSONObject().put("portfolio_id", 3));
+		assertTrue(templates.length() > 0);
 	}
 }

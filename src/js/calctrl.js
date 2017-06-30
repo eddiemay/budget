@@ -3,29 +3,24 @@ var ONE_DAY = ONE_HOUR * 24;
 
 com.digitald4.budget.CalCtrl = function($filter, sharedData, billService, accountService) {
 	this.dateFilter = $filter('date');
+	sharedData.refresh = this.refresh.bind(this);
+	sharedData.setControlType(sharedData.CONTROL_TYPE.MONTH);
 	this.sharedData = sharedData;
-	this.sharedData.refresh = this.refresh.bind(this);
 	this.billService = billService;
 	this.accountService = accountService;
-	this.accountService.getAccounts(this.sharedData.activePortfolioId,
-			this.sharedData.getStartDate().getTime(), function(accounts) {
+	this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(accounts) {
 		var accountHash = {};
 		for (var a = 0; a < accounts.length; a++) {
 		  var account = accounts[a];
 		  accountHash[account.id] = account;
 		}
 		this.accounts = accountHash;
-	}.bind(this), function(error) {
-		notify(error);
-	});
+	}.bind(this), notify);
 	this.refresh();
 };
 
-com.digitald4.budget.CalCtrl.prototype.billService;
-com.digitald4.budget.CalCtrl.prototype.accountService;
-
 com.digitald4.budget.CalCtrl.prototype.setupCalendar = function() {
-	var month = this.sharedData.getMonth();
+	var month = this.sharedData.getStartDate().getMonth();
 	var currDay = new Date(this.sharedData.getStartDateCal());
 	var weeks = [];
 	var woy = 1;
@@ -39,7 +34,7 @@ com.digitald4.budget.CalCtrl.prototype.setupCalendar = function() {
 			var day = {
 				date: currDay,
 				weekend: (d == 0 || d == 6),
-				otherMonth: currDay.getMonth() != month.getMonth(),
+				otherMonth: currDay.getMonth() != month,
 				bills: []
 			};
 			weekdays.push(day);
@@ -48,7 +43,7 @@ com.digitald4.budget.CalCtrl.prototype.setupCalendar = function() {
 		}
 		week.days = weekdays;
 		weeks.push(week);
-	} while (currDay.getMonth() == month.getMonth());
+	} while (currDay.getMonth() == month);
 	this.days = days;
 	this.weeks = weeks;
 };
@@ -66,8 +61,8 @@ addDay = function(date) {
 com.digitald4.budget.CalCtrl.prototype.refresh = function() {
 	this.setupCalendar();
 
-	this.billService.getBills(this.sharedData.getSelectedPortfolioId(), this.sharedData.getStartDate().getTime(),
-	    'CAL_MONTH', this.billsSuccessCallback.bind(this), notify);
+	this.billService.list(this.sharedData.getSelectedPortfolioId(), this.sharedData.getYear(),
+	    this.sharedData.getMonth(), this.billsSuccessCallback.bind(this), notify);
 };
 
 com.digitald4.budget.CalCtrl.prototype.billsSuccessCallback = function(bills) {
@@ -77,11 +72,12 @@ com.digitald4.budget.CalCtrl.prototype.billsSuccessCallback = function(bills) {
 	this.bills = bills;
 	for (var t = 0; t < bills.length; t++) {
 		var bill = bills[t];
+		bill.dueDate = new Date(bill.year, bill.month - 1, bill.day);
 		var account = this.accounts['' + bill.account_id];
     if (account) {
       bill.name = bill.name || account.name;
     }
-		var day = this.days[this.dateFilter(bill.due_date, 'MMdd')];
+		var day = this.days[this.dateFilter(bill.dueDate, 'MMdd')];
 		if (day) {
 			day.bills.push(bill);
 		}
@@ -99,6 +95,11 @@ com.digitald4.budget.CalCtrl.prototype.closeAddBillDialog = function() {
 };
 
 com.digitald4.budget.CalCtrl.prototype.addBill = function() {
+  var date = new Date(this.newBill.dueDate);
+  this.newBill.year = date.getFullYear();
+  this.newBill.month = date.getMonth() + 1;
+  this.newBill.day = date.getDate();
+  this.newBill.dueDate = undefined;
 	this.billService.create(this.newBill, function(bill) {
 	  this.bills.push(bill);
 	  this.billsSuccessCallback(this.bills);
@@ -115,9 +116,16 @@ com.digitald4.budget.CalCtrl.prototype.closeEditBillDialog = function() {
 };
 
 com.digitald4.budget.CalCtrl.prototype.updateBill = function(property) {
-	this.billUpdateError = undefined;
 	var index = this.bills.indexOf(this.eBill);
-	this.billService.update(this.eBill, [property], function(bill) {
+  var props = [property];
+  if (property == 'dueDate') {
+    var date = new Date(this.eBill.dueDate);
+    this.eBill.year = date.getFullYear();
+    this.eBill.month = date.getMonth() + 1;
+    this.eBill.day = date.getDate();
+    props = ['year', 'month', 'day'];
+  }
+	this.billService.update(this.eBill, props, function(bill) {
 		this.bills.splice(index, 1, bill);
 	  this.billsSuccessCallback(this.bills);
 	}.bind(this), notify);

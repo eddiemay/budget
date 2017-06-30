@@ -30,7 +30,7 @@
 					{{trans.creditAcctBalPost}}
 				</td>
 				<td>
-					<select data-ng-model="trans.trans.debit_account_id"
+					<select data-ng-model="trans.debitAccountId"
                   data-ng-options="acct.id as acct.name for acct in accountingCtrl.paymentAccounts | orderBy:'name'"
                   data-ng-change="accountingCtrl.updateTransaction(trans, 'debit_account_id')">
 					</select>

@@ -4,111 +4,107 @@ import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Bill.PaymentStatus;
 import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
 import com.digitald4.budget.proto.BudgetProtos.Template;
-import com.digitald4.budget.proto.BudgetProtos.Template.TemplateBill;
-import com.digitald4.budget.proto.BudgetProtos.Template.TemplateBill.TemplateTransaction;
-import com.digitald4.common.exception.DD4StorageException;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest.QueryParam;
+import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
+import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.storage.DAO;
-import com.digitald4.common.storage.GenericDAOStore;
+import com.digitald4.common.storage.GenericStore;
 
+import com.digitald4.common.storage.Store;
+import com.digitald4.common.util.Pair;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
+import java.util.stream.Collectors;
 import org.joda.time.DateTime;
 
-public class BillStore extends GenericDAOStore<Bill> {
+public class BillStore extends GenericStore<Bill> {
 	
-	private final AccountStore accountStore;
-	public BillStore(DAO<Bill> dao, AccountStore accountStore) {
+	private final BalanceStore balanceStore;
+	private final Store<TemplateBill> templateBillStore;
+
+	public BillStore(DAO<Bill> dao, BalanceStore balanceStore, Store<TemplateBill> templateBillStore) {
 		super(dao);
-		this.accountStore = accountStore;
-	}
-	
-	public List<Bill> getByDateRange(int portfolioId, DateTime start, DateTime end)
-			throws DD4StorageException {
-		return get(
-				QueryParam.newBuilder().setColumn("portfolio_id").setOperan("=").setValue(String.valueOf(portfolioId)).build(),
-				QueryParam.newBuilder().setColumn("due_date").setOperan(">=").setValue(String.valueOf(start.getMillis())).build(),
-				QueryParam.newBuilder().setColumn("due_date").setOperan("<").setValue(String.valueOf(end.getMillis())).build());
+		this.balanceStore = balanceStore;
+		this.templateBillStore = templateBillStore;
 	}
 	
 	@Override
-	public Bill create(Bill bill) throws DD4StorageException {
-		bill = super.create(bill);
-		accountStore.updateBalance(bill.getAccountId(), bill.getDueDate(), bill.getAmountDue());
-		for (Transaction trans : bill.getTransactionList()) {
-			accountStore.updateBalance(trans.getDebitAccountId(), bill.getDueDate(), -trans.getAmount());
-		}
+	public Bill create(Bill bill_) {
+		Bill bill = super.create(bill_);
+		balanceStore.applyUpdate(bill.getAccountId(), bill.getYear(), bill.getMonth(), bill.getAmountDue());
+		bill.getTransactionMap()
+				.forEach((acctId, trans) -> balanceStore.applyUpdate(acctId, bill.getYear(), bill.getMonth(), -trans.getAmount()));
 		return bill;
 	}
 	
 	@Override
-	public Bill update(int id, final UnaryOperator<Bill> updater) throws DD4StorageException {
+	public Bill update(int id, final UnaryOperator<Bill> updater) {
 		Bill orig = get(id);
-		Bill bill = super.update(id, new UnaryOperator<Bill>() {
-			@Override
-			public Bill apply(Bill bill) {
-				Bill updated = updater.apply(bill);
-				// If the amount due changed and there is a transaction that is of the same amount
-				// as the original amount due, update that transaction to the new value.
-				if (bill.getAmountDue() != updated.getAmountDue()) {
-					for (int t = 0; t < updated.getTransactionCount(); t++) {
-						Transaction trans = updated.getTransaction(t);
-						if (bill.getAmountDue() == trans.getAmount()) {
-							updated = updated.toBuilder()
-									.setTransaction(t, trans.toBuilder().setAmount(updated.getAmountDue()))
-									.build();
-						}
-					}
-				}
-				return updated;
+		Bill bill = super.update(id, latest -> {
+			Bill updated = updater.apply(latest);
+			// If the amount due changed and there is a transaction that is of the same amount
+			// as the original amount due, update that transaction to the new value.
+			if (latest.getAmountDue() != updated.getAmountDue()) {
+				double newAmount = updated.getAmountDue();
+				updated = updated.toBuilder()
+						.clearField(Bill.getDescriptor().findFieldByName("transaction"))
+						.putAllTransaction(updated.getTransactionMap().entrySet().stream()
+								.map(entry -> Pair.of(entry.getKey(), latest.getAmountDue() == entry.getValue().getAmount()
+										? entry.getValue().toBuilder().setAmount(newAmount).build() : entry.getValue()))
+								.collect(Collectors.toMap(Pair::getLeft, Pair::getRight)))
+						.build();
 			}
+			return updated;
 		});
 		// The best way to keep everything synced is to minus off the transaction from the balance...
-		accountStore.updateBalance(orig.getAccountId(), orig.getDueDate(), -orig.getAmountDue());
-		for (Transaction trans : orig.getTransactionList()) {
-			accountStore.updateBalance(trans.getDebitAccountId(), orig.getDueDate(), trans.getAmount());
-		}
+		balanceStore.applyUpdate(orig.getAccountId(), orig.getYear(), orig.getMonth(), -orig.getAmountDue());
+		orig.getTransactionMap()
+				.forEach((acctId, trans) -> balanceStore.applyUpdate(acctId, orig.getYear(), orig.getMonth(), trans.getAmount()));
 
 		// and then add it back to the balance. This approch handles amount due, date and account changes.
-		accountStore.updateBalance(bill.getAccountId(), bill.getDueDate(), bill.getAmountDue());
-		for (Transaction trans : bill.getTransactionList()) {
-			accountStore.updateBalance(trans.getDebitAccountId(), bill.getDueDate(), -trans.getAmount());
-		}
+		balanceStore.applyUpdate(bill.getAccountId(), bill.getYear(), bill.getMonth(), bill.getAmountDue());
+		bill.getTransactionMap()
+				.forEach((acctId, trans) -> balanceStore.applyUpdate(acctId, bill.getYear(), bill.getMonth(), -trans.getAmount()));
 		return bill;
 	}
 	
 	@Override
-	public boolean delete(int id) throws DD4StorageException {
+	public boolean delete(int id) {
 		Bill bill = get(id);
 		boolean ret = super.delete(id);
-		accountStore.updateBalance(bill.getAccountId(), bill.getDueDate(), -bill.getAmountDue());
-		for (Transaction trans : bill.getTransactionList()) {
-			accountStore.updateBalance(trans.getDebitAccountId(), bill.getDueDate(), trans.getAmount());
-		}
+		balanceStore.applyUpdate(bill.getAccountId(), bill.getYear(), bill.getMonth(), -bill.getAmountDue());
+		bill.getTransactionMap()
+				.forEach((acctId, trans) -> balanceStore.applyUpdate(acctId, bill.getYear(), bill.getMonth(), trans.getAmount()));
 		return ret;
 	}
 	
-	public List<Bill> applyTemplate(Template template, DateTime refDate) throws DD4StorageException {
-		for (TemplateBill tempBill : template.getBillList()) {
-			Bill.Builder bill = Bill.newBuilder()
-					.setPortfolioId(template.getPortfolioId())
-					.setAccountId(tempBill.getAccountId())
-					.setTemplateId(template.getId())
-					.setDueDate(refDate.plusDays(tempBill.getDueDay() - 1).getMillis())
-					.setAmountDue(tempBill.getAmountDue())
-					.setName(tempBill.getName())
-					.setStatus(PaymentStatus.PS_ESTIMATED_AMOUNT)
-					.setActive(true);
-			for (TemplateTransaction tempTrans : tempBill.getTransactionList()) {
-				bill.addTransaction(Transaction.newBuilder()
-						.setDebitAccountId(tempTrans.getDebitAccountId())
-						.setAmount(tempTrans.getAmount())
-						.setStatus(PaymentStatus.PS_ESTIMATED_AMOUNT)
-						.setActive(true));
-			}
-			create(bill.build());
-		}
-		return getByDateRange(template.getPortfolioId(), refDate, refDate.plusMonths(1));
+	public List<Bill> applyTemplate(Template template, DateTime refDate) {
+		templateBillStore
+				.get(Filter.newBuilder().setColumn("template_id").setOperan("=").setValue("" + template.getId()).build())
+				.forEach(tempBill -> {
+					DateTime date = refDate.plusDays(tempBill.getDueDay() - 1);
+					create(Bill.newBuilder()
+							.setPortfolioId(template.getPortfolioId())
+							.setAccountId(tempBill.getAccountId())
+							.setTemplateId(template.getId())
+							.setYear(date.getYear())
+							.setMonth(date.getMonthOfYear())
+							.setDay(date.getDayOfMonth())
+							.setAmountDue(tempBill.getAmountDue())
+							.setName(tempBill.getName())
+							.setStatus(PaymentStatus.PS_ESTIMATED_AMOUNT)
+							.setInActive(false)
+							.putAllTransaction(tempBill.getTransactionMap().entrySet().stream()
+									.map(entry -> Pair.of(entry.getKey(), Transaction.newBuilder()
+											.setAmount(entry.getValue())
+											.setStatus(PaymentStatus.PS_ESTIMATED_AMOUNT)
+											.build()))
+									.collect(Collectors.toMap(Pair::getLeft, Pair::getRight)))
+							.build());
+				});
+		return get(
+				Filter.newBuilder().setColumn("PORTFOLIO_ID").setOperan("=").setValue(String.valueOf(template.getPortfolioId())).build(),
+				Filter.newBuilder().setColumn("YEAR").setOperan("=").setValue(String.valueOf(refDate.getYear())).build(),
+				Filter.newBuilder().setColumn("MONTH").setOperan("=").setValue(String.valueOf(refDate.getMonthOfYear())).build());
 	}
 }

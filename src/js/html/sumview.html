@@ -12,14 +12,14 @@
 					<input type="checkbox" data-ng-model="topLevel.selected">
 				</th>
 				<th>+Total</th>
-				<th data-ng-repeat="summary in topLevel.summary">{{summary.total | currency}}</th>
+				<th data-ng-repeat="summary in topLevel.summary">{{summary | currency}}</th>
 			</tr>
 			<tr data-ng-repeat="account in topLevel.accounts | orderBy:'name'">
 				<td class="th table-check-cell">
 					<input type="checkbox" data-ng-model="account.selected">
 				</td>
 				<td> -{{account.name}}</td>
-				<td data-ng-repeat="summary in account.summary"> {{summary.total | currency}}</td>
+				<td data-ng-repeat="summary in account.summary"> {{summary | currency}}</td>
 			</tr>
 		</tbody>
 	</table>

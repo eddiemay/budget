@@ -1,15 +1,19 @@
 com.digitald4.budget.AccountsCtrl = function(sharedData, accountService) {
+	sharedData.refresh = this.refresh.bind(this);
+	sharedData.setControlType(sharedData.CONTROL_TYPE.NONE);
 	this.sharedData = sharedData;
-	this.sharedData.refresh = this.refresh.bind(this);
 	this.accountService = accountService;
 	this.refresh();
 };
 
 com.digitald4.budget.AccountsCtrl.prototype.refresh = function() {
-	this.accountService.getAccounts(this.sharedData.getSelectedPortfolioId(), this.sharedData.getStartDate().getTime(),
-	    function(accounts) {
-		    this.accounts = accounts;
-	    }.bind(this), notify);
+	this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(accounts) {
+	  this.accounts = accounts;
+	  this.listAccounts = [{name: '', id: 0}];
+	  for (var a = 0; a < accounts.length; a++) {
+	    this.listAccounts.push(accounts[a]);
+	  }
+	}.bind(this), notify);
 	this.newAccount = {portfolio_id: this.sharedData.getSelectedPortfolioId()};
 };
 
@@ -29,6 +33,7 @@ com.digitald4.budget.AccountsCtrl.prototype.showAddDialog = function() {
 com.digitald4.budget.AccountsCtrl.prototype.addAccount = function() {
 	this.accountService.create(this.newAccount, function(account) {
 		this.accounts.push(account);
+		this.listAccounts.push(account);
 		this.newAccount = {portfolio_id: this.sharedData.getSelectedPortfolioId()};
 	}.bind(this), notify);
 };
@@ -37,5 +42,6 @@ com.digitald4.budget.AccountsCtrl.prototype.updateAccount = function(account, pr
   var index = this.accounts.indexOf(account);
 	this.accountService.update(account, [property], function(account) {
 		this.accounts.splice(index, 1, account);
+		this.listAccounts.splice(index + 1, 1, account);
 	}.bind(this), notify);
 };

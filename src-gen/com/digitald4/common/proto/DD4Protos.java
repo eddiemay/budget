@@ -6,95 +6,69 @@ package com.digitald4.common.proto;
 public final class DD4Protos {
   private DD4Protos() {}
   public static void registerAllExtensions(
+      com.google.protobuf.ExtensionRegistryLite registry) {
+  }
+
+  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
+    registerAllExtensions(
+        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface GeneralDataOrBuilder extends
       // @@protoc_insertion_point(interface_extends:common.GeneralData)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 id = 1;</code>
-     */
-    boolean hasId();
-    /**
-     * <code>optional int32 id = 1;</code>
+     * <code>int32 id = 1;</code>
      */
     int getId();
 
     /**
-     * <code>optional int32 group_id = 2;</code>
-     */
-    boolean hasGroupId();
-    /**
-     * <code>optional int32 group_id = 2;</code>
+     * <code>int32 group_id = 2;</code>
      */
     int getGroupId();
 
     /**
-     * <code>optional int32 in_group_id = 3;</code>
-     */
-    boolean hasInGroupId();
-    /**
-     * <code>optional int32 in_group_id = 3;</code>
+     * <code>int32 in_group_id = 3;</code>
      */
     int getInGroupId();
 
     /**
-     * <code>optional string name = 4;</code>
-     */
-    boolean hasName();
-    /**
-     * <code>optional string name = 4;</code>
+     * <code>string name = 4;</code>
      */
     java.lang.String getName();
     /**
-     * <code>optional string name = 4;</code>
+     * <code>string name = 4;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
 
     /**
-     * <code>optional double rank = 5;</code>
-     */
-    boolean hasRank();
-    /**
-     * <code>optional double rank = 5;</code>
+     * <code>double rank = 5;</code>
      */
     double getRank();
 
     /**
-     * <code>optional bool active = 6;</code>
-     */
-    boolean hasActive();
-    /**
-     * <code>optional bool active = 6;</code>
+     * <code>bool active = 6;</code>
      */
     boolean getActive();
 
     /**
-     * <code>optional string description = 7;</code>
-     */
-    boolean hasDescription();
-    /**
-     * <code>optional string description = 7;</code>
+     * <code>string description = 7;</code>
      */
     java.lang.String getDescription();
     /**
-     * <code>optional string description = 7;</code>
+     * <code>string description = 7;</code>
      */
     com.google.protobuf.ByteString
         getDescriptionBytes();
 
     /**
-     * <code>optional string data = 8;</code>
-     */
-    boolean hasData();
-    /**
-     * <code>optional string data = 8;</code>
+     * <code>string data = 8;</code>
      */
     java.lang.String getData();
     /**
-     * <code>optional string data = 8;</code>
+     * <code>string data = 8;</code>
      */
     com.google.protobuf.ByteString
         getDataBytes();
@@ -103,11 +77,11 @@ public final class DD4Protos {
    * Protobuf type {@code common.GeneralData}
    */
   public  static final class GeneralData extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:common.GeneralData)
       GeneralDataOrBuilder {
     // Use GeneralData.newBuilder() to construct.
-    private GeneralData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private GeneralData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private GeneralData() {
@@ -124,15 +98,14 @@ public final class DD4Protos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return this.unknownFields;
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private GeneralData(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -142,65 +115,62 @@ public final class DD4Protos {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+              if (!input.skipField(tag)) {
                 done = true;
               }
               break;
             }
             case 8: {
-              bitField0_ |= 0x00000001;
+
               id_ = input.readInt32();
               break;
             }
             case 16: {
-              bitField0_ |= 0x00000002;
+
               groupId_ = input.readInt32();
               break;
             }
             case 24: {
-              bitField0_ |= 0x00000004;
+
               inGroupId_ = input.readInt32();
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
-              name_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              name_ = s;
               break;
             }
             case 41: {
-              bitField0_ |= 0x00000010;
+
               rank_ = input.readDouble();
               break;
             }
             case 48: {
-              bitField0_ |= 0x00000020;
+
               active_ = input.readBool();
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000040;
-              description_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              description_ = s;
               break;
             }
             case 66: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000080;
-              data_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              data_ = s;
               break;
             }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
+        throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
       } finally {
-        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -209,24 +179,17 @@ public final class DD4Protos {
       return com.digitald4.common.proto.DD4Protos.internal_static_common_GeneralData_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.digitald4.common.proto.DD4Protos.internal_static_common_GeneralData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.digitald4.common.proto.DD4Protos.GeneralData.class, com.digitald4.common.proto.DD4Protos.GeneralData.Builder.class);
     }
 
-    private int bitField0_;
     public static final int ID_FIELD_NUMBER = 1;
     private int id_;
     /**
-     * <code>optional int32 id = 1;</code>
-     */
-    public boolean hasId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 id = 1;</code>
+     * <code>int32 id = 1;</code>
      */
     public int getId() {
       return id_;
@@ -235,13 +198,7 @@ public final class DD4Protos {
     public static final int GROUP_ID_FIELD_NUMBER = 2;
     private int groupId_;
     /**
-     * <code>optional int32 group_id = 2;</code>
-     */
-    public boolean hasGroupId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 group_id = 2;</code>
+     * <code>int32 group_id = 2;</code>
      */
     public int getGroupId() {
       return groupId_;
@@ -250,13 +207,7 @@ public final class DD4Protos {
     public static final int IN_GROUP_ID_FIELD_NUMBER = 3;
     private int inGroupId_;
     /**
-     * <code>optional int32 in_group_id = 3;</code>
-     */
-    public boolean hasInGroupId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int32 in_group_id = 3;</code>
+     * <code>int32 in_group_id = 3;</code>
      */
     public int getInGroupId() {
       return inGroupId_;
@@ -265,13 +216,7 @@ public final class DD4Protos {
     public static final int NAME_FIELD_NUMBER = 4;
     private volatile java.lang.Object name_;
     /**
-     * <code>optional string name = 4;</code>
-     */
-    public boolean hasName() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional string name = 4;</code>
+     * <code>string name = 4;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -281,14 +226,12 @@ public final class DD4Protos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          name_ = s;
-        }
+        name_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string name = 4;</code>
+     * <code>string name = 4;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -307,13 +250,7 @@ public final class DD4Protos {
     public static final int RANK_FIELD_NUMBER = 5;
     private double rank_;
     /**
-     * <code>optional double rank = 5;</code>
-     */
-    public boolean hasRank() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional double rank = 5;</code>
+     * <code>double rank = 5;</code>
      */
     public double getRank() {
       return rank_;
@@ -322,13 +259,7 @@ public final class DD4Protos {
     public static final int ACTIVE_FIELD_NUMBER = 6;
     private boolean active_;
     /**
-     * <code>optional bool active = 6;</code>
-     */
-    public boolean hasActive() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional bool active = 6;</code>
+     * <code>bool active = 6;</code>
      */
     public boolean getActive() {
       return active_;
@@ -337,13 +268,7 @@ public final class DD4Protos {
     public static final int DESCRIPTION_FIELD_NUMBER = 7;
     private volatile java.lang.Object description_;
     /**
-     * <code>optional string description = 7;</code>
-     */
-    public boolean hasDescription() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional string description = 7;</code>
+     * <code>string description = 7;</code>
      */
     public java.lang.String getDescription() {
       java.lang.Object ref = description_;
@@ -353,14 +278,12 @@ public final class DD4Protos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          description_ = s;
-        }
+        description_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string description = 7;</code>
+     * <code>string description = 7;</code>
      */
     public com.google.protobuf.ByteString
         getDescriptionBytes() {
@@ -379,13 +302,7 @@ public final class DD4Protos {
     public static final int DATA_FIELD_NUMBER = 8;
     private volatile java.lang.Object data_;
     /**
-     * <code>optional string data = 8;</code>
-     */
-    public boolean hasData() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional string data = 8;</code>
+     * <code>string data = 8;</code>
      */
     public java.lang.String getData() {
       java.lang.Object ref = data_;
@@ -395,14 +312,12 @@ public final class DD4Protos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          data_ = s;
-        }
+        data_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string data = 8;</code>
+     * <code>string data = 8;</code>
      */
     public com.google.protobuf.ByteString
         getDataBytes() {
@@ -430,31 +345,30 @@ public final class DD4Protos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (id_ != 0) {
         output.writeInt32(1, id_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (groupId_ != 0) {
         output.writeInt32(2, groupId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (inGroupId_ != 0) {
         output.writeInt32(3, inGroupId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 4, name_);
+      if (!getNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, name_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (rank_ != 0D) {
         output.writeDouble(5, rank_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (active_ != false) {
         output.writeBool(6, active_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 7, description_);
+      if (!getDescriptionBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, description_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 8, data_);
+      if (!getDataBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, data_);
       }
-      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -462,41 +376,113 @@ public final class DD4Protos {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (id_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, id_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (groupId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, groupId_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (inGroupId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, inGroupId_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(4, name_);
+      if (!getNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, name_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (rank_ != 0D) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(5, rank_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (active_ != false) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(6, active_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(7, description_);
+      if (!getDescriptionBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, description_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(8, data_);
+      if (!getDataBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, data_);
       }
-      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.digitald4.common.proto.DD4Protos.GeneralData)) {
+        return super.equals(obj);
+      }
+      com.digitald4.common.proto.DD4Protos.GeneralData other = (com.digitald4.common.proto.DD4Protos.GeneralData) obj;
+
+      boolean result = true;
+      result = result && (getId()
+          == other.getId());
+      result = result && (getGroupId()
+          == other.getGroupId());
+      result = result && (getInGroupId()
+          == other.getInGroupId());
+      result = result && getName()
+          .equals(other.getName());
+      result = result && (
+          java.lang.Double.doubleToLongBits(getRank())
+          == java.lang.Double.doubleToLongBits(
+              other.getRank()));
+      result = result && (getActive()
+          == other.getActive());
+      result = result && getDescription()
+          .equals(other.getDescription());
+      result = result && getData()
+          .equals(other.getData());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId();
+      hash = (37 * hash) + GROUP_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getGroupId();
+      hash = (37 * hash) + IN_GROUP_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getInGroupId();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + RANK_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getRank()));
+      hash = (37 * hash) + ACTIVE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getActive());
+      hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
+      hash = (53 * hash) + getDescription().hashCode();
+      hash = (37 * hash) + DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getData().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.digitald4.common.proto.DD4Protos.GeneralData parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.common.proto.DD4Protos.GeneralData parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.digitald4.common.proto.DD4Protos.GeneralData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -520,34 +506,40 @@ public final class DD4Protos {
     }
     public static com.digitald4.common.proto.DD4Protos.GeneralData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.digitald4.common.proto.DD4Protos.GeneralData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.digitald4.common.proto.DD4Protos.GeneralData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.digitald4.common.proto.DD4Protos.GeneralData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.digitald4.common.proto.DD4Protos.GeneralData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.digitald4.common.proto.DD4Protos.GeneralData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -564,7 +556,7 @@ public final class DD4Protos {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -572,7 +564,7 @@ public final class DD4Protos {
      * Protobuf type {@code common.GeneralData}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:common.GeneralData)
         com.digitald4.common.proto.DD4Protos.GeneralDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -580,7 +572,7 @@ public final class DD4Protos {
         return com.digitald4.common.proto.DD4Protos.internal_static_common_GeneralData_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.digitald4.common.proto.DD4Protos.internal_static_common_GeneralData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -593,32 +585,33 @@ public final class DD4Protos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
         super.clear();
         id_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
+
         groupId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
+
         inGroupId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
+
         name_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
+
         rank_ = 0D;
-        bitField0_ = (bitField0_ & ~0x00000010);
+
         active_ = false;
-        bitField0_ = (bitField0_ & ~0x00000020);
+
         description_ = "";
-        bitField0_ = (bitField0_ & ~0x00000040);
+
         data_ = "";
-        bitField0_ = (bitField0_ & ~0x00000080);
+
         return this;
       }
 
@@ -641,45 +634,44 @@ public final class DD4Protos {
 
       public com.digitald4.common.proto.DD4Protos.GeneralData buildPartial() {
         com.digitald4.common.proto.DD4Protos.GeneralData result = new com.digitald4.common.proto.DD4Protos.GeneralData(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
         result.id_ = id_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
         result.groupId_ = groupId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
         result.inGroupId_ = inGroupId_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
         result.name_ = name_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
         result.rank_ = rank_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
         result.active_ = active_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
         result.description_ = description_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
         result.data_ = data_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.digitald4.common.proto.DD4Protos.GeneralData) {
           return mergeFrom((com.digitald4.common.proto.DD4Protos.GeneralData)other);
@@ -691,37 +683,33 @@ public final class DD4Protos {
 
       public Builder mergeFrom(com.digitald4.common.proto.DD4Protos.GeneralData other) {
         if (other == com.digitald4.common.proto.DD4Protos.GeneralData.getDefaultInstance()) return this;
-        if (other.hasId()) {
+        if (other.getId() != 0) {
           setId(other.getId());
         }
-        if (other.hasGroupId()) {
+        if (other.getGroupId() != 0) {
           setGroupId(other.getGroupId());
         }
-        if (other.hasInGroupId()) {
+        if (other.getInGroupId() != 0) {
           setInGroupId(other.getInGroupId());
         }
-        if (other.hasName()) {
-          bitField0_ |= 0x00000008;
+        if (!other.getName().isEmpty()) {
           name_ = other.name_;
           onChanged();
         }
-        if (other.hasRank()) {
+        if (other.getRank() != 0D) {
           setRank(other.getRank());
         }
-        if (other.hasActive()) {
+        if (other.getActive() != false) {
           setActive(other.getActive());
         }
-        if (other.hasDescription()) {
-          bitField0_ |= 0x00000040;
+        if (!other.getDescription().isEmpty()) {
           description_ = other.description_;
           onChanged();
         }
-        if (other.hasData()) {
-          bitField0_ |= 0x00000080;
+        if (!other.getData().isEmpty()) {
           data_ = other.data_;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -739,7 +727,7 @@ public final class DD4Protos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.digitald4.common.proto.DD4Protos.GeneralData) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -747,35 +735,28 @@ public final class DD4Protos {
         }
         return this;
       }
-      private int bitField0_;
 
       private int id_ ;
       /**
-       * <code>optional int32 id = 1;</code>
-       */
-      public boolean hasId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public int getId() {
         return id_;
       }
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public Builder setId(int value) {
-        bitField0_ |= 0x00000001;
+        
         id_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public Builder clearId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        
         id_ = 0;
         onChanged();
         return this;
@@ -783,31 +764,25 @@ public final class DD4Protos {
 
       private int groupId_ ;
       /**
-       * <code>optional int32 group_id = 2;</code>
-       */
-      public boolean hasGroupId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 group_id = 2;</code>
+       * <code>int32 group_id = 2;</code>
        */
       public int getGroupId() {
         return groupId_;
       }
       /**
-       * <code>optional int32 group_id = 2;</code>
+       * <code>int32 group_id = 2;</code>
        */
       public Builder setGroupId(int value) {
-        bitField0_ |= 0x00000002;
+        
         groupId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 group_id = 2;</code>
+       * <code>int32 group_id = 2;</code>
        */
       public Builder clearGroupId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        
         groupId_ = 0;
         onChanged();
         return this;
@@ -815,31 +790,25 @@ public final class DD4Protos {
 
       private int inGroupId_ ;
       /**
-       * <code>optional int32 in_group_id = 3;</code>
-       */
-      public boolean hasInGroupId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 in_group_id = 3;</code>
+       * <code>int32 in_group_id = 3;</code>
        */
       public int getInGroupId() {
         return inGroupId_;
       }
       /**
-       * <code>optional int32 in_group_id = 3;</code>
+       * <code>int32 in_group_id = 3;</code>
        */
       public Builder setInGroupId(int value) {
-        bitField0_ |= 0x00000004;
+        
         inGroupId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 in_group_id = 3;</code>
+       * <code>int32 in_group_id = 3;</code>
        */
       public Builder clearInGroupId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        
         inGroupId_ = 0;
         onChanged();
         return this;
@@ -847,13 +816,7 @@ public final class DD4Protos {
 
       private java.lang.Object name_ = "";
       /**
-       * <code>optional string name = 4;</code>
-       */
-      public boolean hasName() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional string name = 4;</code>
+       * <code>string name = 4;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -861,16 +824,14 @@ public final class DD4Protos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string name = 4;</code>
+       * <code>string name = 4;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -886,36 +847,37 @@ public final class DD4Protos {
         }
       }
       /**
-       * <code>optional string name = 4;</code>
+       * <code>string name = 4;</code>
        */
       public Builder setName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  
         name_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string name = 4;</code>
+       * <code>string name = 4;</code>
        */
       public Builder clearName() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        
         name_ = getDefaultInstance().getName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string name = 4;</code>
+       * <code>string name = 4;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  checkByteStringIsUtf8(value);
+        
         name_ = value;
         onChanged();
         return this;
@@ -923,31 +885,25 @@ public final class DD4Protos {
 
       private double rank_ ;
       /**
-       * <code>optional double rank = 5;</code>
-       */
-      public boolean hasRank() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional double rank = 5;</code>
+       * <code>double rank = 5;</code>
        */
       public double getRank() {
         return rank_;
       }
       /**
-       * <code>optional double rank = 5;</code>
+       * <code>double rank = 5;</code>
        */
       public Builder setRank(double value) {
-        bitField0_ |= 0x00000010;
+        
         rank_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional double rank = 5;</code>
+       * <code>double rank = 5;</code>
        */
       public Builder clearRank() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        
         rank_ = 0D;
         onChanged();
         return this;
@@ -955,31 +911,25 @@ public final class DD4Protos {
 
       private boolean active_ ;
       /**
-       * <code>optional bool active = 6;</code>
-       */
-      public boolean hasActive() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional bool active = 6;</code>
+       * <code>bool active = 6;</code>
        */
       public boolean getActive() {
         return active_;
       }
       /**
-       * <code>optional bool active = 6;</code>
+       * <code>bool active = 6;</code>
        */
       public Builder setActive(boolean value) {
-        bitField0_ |= 0x00000020;
+        
         active_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool active = 6;</code>
+       * <code>bool active = 6;</code>
        */
       public Builder clearActive() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        
         active_ = false;
         onChanged();
         return this;
@@ -987,13 +937,7 @@ public final class DD4Protos {
 
       private java.lang.Object description_ = "";
       /**
-       * <code>optional string description = 7;</code>
-       */
-      public boolean hasDescription() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional string description = 7;</code>
+       * <code>string description = 7;</code>
        */
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
@@ -1001,16 +945,14 @@ public final class DD4Protos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            description_ = s;
-          }
+          description_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string description = 7;</code>
+       * <code>string description = 7;</code>
        */
       public com.google.protobuf.ByteString
           getDescriptionBytes() {
@@ -1026,36 +968,37 @@ public final class DD4Protos {
         }
       }
       /**
-       * <code>optional string description = 7;</code>
+       * <code>string description = 7;</code>
        */
       public Builder setDescription(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  
         description_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string description = 7;</code>
+       * <code>string description = 7;</code>
        */
       public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string description = 7;</code>
+       * <code>string description = 7;</code>
        */
       public Builder setDescriptionBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  checkByteStringIsUtf8(value);
+        
         description_ = value;
         onChanged();
         return this;
@@ -1063,13 +1006,7 @@ public final class DD4Protos {
 
       private java.lang.Object data_ = "";
       /**
-       * <code>optional string data = 8;</code>
-       */
-      public boolean hasData() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional string data = 8;</code>
+       * <code>string data = 8;</code>
        */
       public java.lang.String getData() {
         java.lang.Object ref = data_;
@@ -1077,16 +1014,14 @@ public final class DD4Protos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            data_ = s;
-          }
+          data_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string data = 8;</code>
+       * <code>string data = 8;</code>
        */
       public com.google.protobuf.ByteString
           getDataBytes() {
@@ -1102,40 +1037,51 @@ public final class DD4Protos {
         }
       }
       /**
-       * <code>optional string data = 8;</code>
+       * <code>string data = 8;</code>
        */
       public Builder setData(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  
         data_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string data = 8;</code>
+       * <code>string data = 8;</code>
        */
       public Builder clearData() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        
         data_ = getDefaultInstance().getData();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string data = 8;</code>
+       * <code>string data = 8;</code>
        */
       public Builder setDataBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  checkByteStringIsUtf8(value);
+        
         data_ = value;
         onChanged();
         return this;
       }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
 
       // @@protoc_insertion_point(builder_scope:common.GeneralData)
     }
@@ -1150,22 +1096,13 @@ public final class DD4Protos {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<GeneralData>
+    private static final com.google.protobuf.Parser<GeneralData>
         PARSER = new com.google.protobuf.AbstractParser<GeneralData>() {
       public GeneralData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
           return new GeneralData(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
       }
     };
 
@@ -1189,52 +1126,37 @@ public final class DD4Protos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required int32 id = 1;</code>
-     */
-    boolean hasId();
-    /**
-     * <code>required int32 id = 1;</code>
+     * <code>int32 id = 1;</code>
      */
     int getId();
 
     /**
-     * <code>required string name = 2;</code>
-     */
-    boolean hasName();
-    /**
-     * <code>required string name = 2;</code>
+     * <code>string name = 2;</code>
      */
     java.lang.String getName();
     /**
-     * <code>required string name = 2;</code>
+     * <code>string name = 2;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
 
     /**
-     * <code>required .common.DataFile.FileType type = 3;</code>
+     * <code>string type = 3;</code>
      */
-    boolean hasType();
+    java.lang.String getType();
     /**
-     * <code>required .common.DataFile.FileType type = 3;</code>
+     * <code>string type = 3;</code>
      */
-    com.digitald4.common.proto.DD4Protos.DataFile.FileType getType();
+    com.google.protobuf.ByteString
+        getTypeBytes();
 
     /**
-     * <code>optional int32 size = 4;</code>
-     */
-    boolean hasSize();
-    /**
-     * <code>optional int32 size = 4;</code>
+     * <code>int32 size = 4;</code>
      */
     int getSize();
 
     /**
-     * <code>optional bytes data = 5;</code>
-     */
-    boolean hasData();
-    /**
-     * <code>optional bytes data = 5;</code>
+     * <code>bytes data = 5;</code>
      */
     com.google.protobuf.ByteString getData();
   }
@@ -1242,17 +1164,17 @@ public final class DD4Protos {
    * Protobuf type {@code common.DataFile}
    */
   public  static final class DataFile extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:common.DataFile)
       DataFileOrBuilder {
     // Use DataFile.newBuilder() to construct.
-    private DataFile(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private DataFile(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private DataFile() {
       id_ = 0;
       name_ = "";
-      type_ = 0;
+      type_ = "";
       size_ = 0;
       data_ = com.google.protobuf.ByteString.EMPTY;
     }
@@ -1260,15 +1182,14 @@ public final class DD4Protos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return this.unknownFields;
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private DataFile(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1278,54 +1199,46 @@ public final class DD4Protos {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+              if (!input.skipField(tag)) {
                 done = true;
               }
               break;
             }
             case 8: {
-              bitField0_ |= 0x00000001;
+
               id_ = input.readInt32();
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              name_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              name_ = s;
               break;
             }
-            case 24: {
-              int rawValue = input.readEnum();
-              com.digitald4.common.proto.DD4Protos.DataFile.FileType value = com.digitald4.common.proto.DD4Protos.DataFile.FileType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
-              } else {
-                bitField0_ |= 0x00000004;
-                type_ = rawValue;
-              }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              type_ = s;
               break;
             }
             case 32: {
-              bitField0_ |= 0x00000008;
+
               size_ = input.readInt32();
               break;
             }
             case 42: {
-              bitField0_ |= 0x00000010;
+
               data_ = input.readBytes();
               break;
             }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
+        throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
       } finally {
-        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1334,117 +1247,17 @@ public final class DD4Protos {
       return com.digitald4.common.proto.DD4Protos.internal_static_common_DataFile_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.digitald4.common.proto.DD4Protos.internal_static_common_DataFile_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.digitald4.common.proto.DD4Protos.DataFile.class, com.digitald4.common.proto.DD4Protos.DataFile.Builder.class);
     }
 
-    /**
-     * Protobuf enum {@code common.DataFile.FileType}
-     */
-    public enum FileType
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>UNSPECIFIED = 0;</code>
-       */
-      UNSPECIFIED(0, 0),
-      /**
-       * <code>MISC = 1;</code>
-       */
-      MISC(1, 1),
-      /**
-       * <code>PDF = 2;</code>
-       */
-      PDF(2, 2),
-      ;
-
-      /**
-       * <code>UNSPECIFIED = 0;</code>
-       */
-      public static final int UNSPECIFIED_VALUE = 0;
-      /**
-       * <code>MISC = 1;</code>
-       */
-      public static final int MISC_VALUE = 1;
-      /**
-       * <code>PDF = 2;</code>
-       */
-      public static final int PDF_VALUE = 2;
-
-
-      public final int getNumber() {
-        return value;
-      }
-
-      public static FileType valueOf(int value) {
-        switch (value) {
-          case 0: return UNSPECIFIED;
-          case 1: return MISC;
-          case 2: return PDF;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<FileType>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static final com.google.protobuf.Internal.EnumLiteMap<
-          FileType> internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<FileType>() {
-              public FileType findValueByNumber(int number) {
-                return FileType.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.digitald4.common.proto.DD4Protos.DataFile.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final FileType[] VALUES = values();
-
-      public static FileType valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private FileType(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:common.DataFile.FileType)
-    }
-
-    private int bitField0_;
     public static final int ID_FIELD_NUMBER = 1;
     private int id_;
     /**
-     * <code>required int32 id = 1;</code>
-     */
-    public boolean hasId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required int32 id = 1;</code>
+     * <code>int32 id = 1;</code>
      */
     public int getId() {
       return id_;
@@ -1453,13 +1266,7 @@ public final class DD4Protos {
     public static final int NAME_FIELD_NUMBER = 2;
     private volatile java.lang.Object name_;
     /**
-     * <code>required string name = 2;</code>
-     */
-    public boolean hasName() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required string name = 2;</code>
+     * <code>string name = 2;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -1469,14 +1276,12 @@ public final class DD4Protos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          name_ = s;
-        }
+        name_ = s;
         return s;
       }
     }
     /**
-     * <code>required string name = 2;</code>
+     * <code>string name = 2;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -1493,31 +1298,43 @@ public final class DD4Protos {
     }
 
     public static final int TYPE_FIELD_NUMBER = 3;
-    private int type_;
+    private volatile java.lang.Object type_;
     /**
-     * <code>required .common.DataFile.FileType type = 3;</code>
+     * <code>string type = 3;</code>
      */
-    public boolean hasType() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+    public java.lang.String getType() {
+      java.lang.Object ref = type_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        type_ = s;
+        return s;
+      }
     }
     /**
-     * <code>required .common.DataFile.FileType type = 3;</code>
+     * <code>string type = 3;</code>
      */
-    public com.digitald4.common.proto.DD4Protos.DataFile.FileType getType() {
-      com.digitald4.common.proto.DD4Protos.DataFile.FileType result = com.digitald4.common.proto.DD4Protos.DataFile.FileType.valueOf(type_);
-      return result == null ? com.digitald4.common.proto.DD4Protos.DataFile.FileType.UNSPECIFIED : result;
+    public com.google.protobuf.ByteString
+        getTypeBytes() {
+      java.lang.Object ref = type_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        type_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int SIZE_FIELD_NUMBER = 4;
     private int size_;
     /**
-     * <code>optional int32 size = 4;</code>
-     */
-    public boolean hasSize() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 size = 4;</code>
+     * <code>int32 size = 4;</code>
      */
     public int getSize() {
       return size_;
@@ -1526,13 +1343,7 @@ public final class DD4Protos {
     public static final int DATA_FIELD_NUMBER = 5;
     private com.google.protobuf.ByteString data_;
     /**
-     * <code>optional bytes data = 5;</code>
-     */
-    public boolean hasData() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional bytes data = 5;</code>
+     * <code>bytes data = 5;</code>
      */
     public com.google.protobuf.ByteString getData() {
       return data_;
@@ -1544,40 +1355,27 @@ public final class DD4Protos {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasName()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasType()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       memoizedIsInitialized = 1;
       return true;
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (id_ != 0) {
         output.writeInt32(1, id_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 2, name_);
+      if (!getNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(3, type_);
+      if (!getTypeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, type_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (size_ != 0) {
         output.writeInt32(4, size_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (!data_.isEmpty()) {
         output.writeBytes(5, data_);
       }
-      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -1585,31 +1383,86 @@ public final class DD4Protos {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (id_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, id_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(2, name_);
+      if (!getNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, type_);
+      if (!getTypeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, type_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (size_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, size_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (!data_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, data_);
       }
-      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.digitald4.common.proto.DD4Protos.DataFile)) {
+        return super.equals(obj);
+      }
+      com.digitald4.common.proto.DD4Protos.DataFile other = (com.digitald4.common.proto.DD4Protos.DataFile) obj;
+
+      boolean result = true;
+      result = result && (getId()
+          == other.getId());
+      result = result && getName()
+          .equals(other.getName());
+      result = result && getType()
+          .equals(other.getType());
+      result = result && (getSize()
+          == other.getSize());
+      result = result && getData()
+          .equals(other.getData());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getType().hashCode();
+      hash = (37 * hash) + SIZE_FIELD_NUMBER;
+      hash = (53 * hash) + getSize();
+      hash = (37 * hash) + DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getData().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.digitald4.common.proto.DD4Protos.DataFile parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.common.proto.DD4Protos.DataFile parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.digitald4.common.proto.DD4Protos.DataFile parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1633,34 +1486,40 @@ public final class DD4Protos {
     }
     public static com.digitald4.common.proto.DD4Protos.DataFile parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.digitald4.common.proto.DD4Protos.DataFile parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.digitald4.common.proto.DD4Protos.DataFile parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.digitald4.common.proto.DD4Protos.DataFile parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.digitald4.common.proto.DD4Protos.DataFile parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.digitald4.common.proto.DD4Protos.DataFile parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -1677,7 +1536,7 @@ public final class DD4Protos {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1685,7 +1544,7 @@ public final class DD4Protos {
      * Protobuf type {@code common.DataFile}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:common.DataFile)
         com.digitald4.common.proto.DD4Protos.DataFileOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -1693,7 +1552,7 @@ public final class DD4Protos {
         return com.digitald4.common.proto.DD4Protos.internal_static_common_DataFile_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.digitald4.common.proto.DD4Protos.internal_static_common_DataFile_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -1706,26 +1565,27 @@ public final class DD4Protos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
         super.clear();
         id_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
+
         name_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        type_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
+
+        type_ = "";
+
         size_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
+
         data_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000010);
+
         return this;
       }
 
@@ -1748,33 +1608,41 @@ public final class DD4Protos {
 
       public com.digitald4.common.proto.DD4Protos.DataFile buildPartial() {
         com.digitald4.common.proto.DD4Protos.DataFile result = new com.digitald4.common.proto.DD4Protos.DataFile(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
         result.id_ = id_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
         result.name_ = name_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
         result.type_ = type_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
         result.size_ = size_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
         result.data_ = data_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.digitald4.common.proto.DD4Protos.DataFile) {
           return mergeFrom((com.digitald4.common.proto.DD4Protos.DataFile)other);
@@ -1786,38 +1654,28 @@ public final class DD4Protos {
 
       public Builder mergeFrom(com.digitald4.common.proto.DD4Protos.DataFile other) {
         if (other == com.digitald4.common.proto.DD4Protos.DataFile.getDefaultInstance()) return this;
-        if (other.hasId()) {
+        if (other.getId() != 0) {
           setId(other.getId());
         }
-        if (other.hasName()) {
-          bitField0_ |= 0x00000002;
+        if (!other.getName().isEmpty()) {
           name_ = other.name_;
           onChanged();
         }
-        if (other.hasType()) {
-          setType(other.getType());
+        if (!other.getType().isEmpty()) {
+          type_ = other.type_;
+          onChanged();
         }
-        if (other.hasSize()) {
+        if (other.getSize() != 0) {
           setSize(other.getSize());
         }
-        if (other.hasData()) {
+        if (other.getData() != com.google.protobuf.ByteString.EMPTY) {
           setData(other.getData());
         }
-        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasId()) {
-          return false;
-        }
-        if (!hasName()) {
-          return false;
-        }
-        if (!hasType()) {
-          return false;
-        }
         return true;
       }
 
@@ -1830,7 +1688,7 @@ public final class DD4Protos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.digitald4.common.proto.DD4Protos.DataFile) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -1838,35 +1696,28 @@ public final class DD4Protos {
         }
         return this;
       }
-      private int bitField0_;
 
       private int id_ ;
       /**
-       * <code>required int32 id = 1;</code>
-       */
-      public boolean hasId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public int getId() {
         return id_;
       }
       /**
-       * <code>required int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public Builder setId(int value) {
-        bitField0_ |= 0x00000001;
+        
         id_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public Builder clearId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        
         id_ = 0;
         onChanged();
         return this;
@@ -1874,13 +1725,7 @@ public final class DD4Protos {
 
       private java.lang.Object name_ = "";
       /**
-       * <code>required string name = 2;</code>
-       */
-      public boolean hasName() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -1888,16 +1733,14 @@ public final class DD4Protos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>required string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -1913,104 +1756,132 @@ public final class DD4Protos {
         }
       }
       /**
-       * <code>required string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public Builder setName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  
         name_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public Builder clearName() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        
         name_ = getDefaultInstance().getName();
         onChanged();
         return this;
       }
       /**
-       * <code>required string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  checkByteStringIsUtf8(value);
+        
         name_ = value;
         onChanged();
         return this;
       }
 
-      private int type_ = 0;
+      private java.lang.Object type_ = "";
       /**
-       * <code>required .common.DataFile.FileType type = 3;</code>
+       * <code>string type = 3;</code>
        */
-      public boolean hasType() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>required .common.DataFile.FileType type = 3;</code>
-       */
-      public com.digitald4.common.proto.DD4Protos.DataFile.FileType getType() {
-        com.digitald4.common.proto.DD4Protos.DataFile.FileType result = com.digitald4.common.proto.DD4Protos.DataFile.FileType.valueOf(type_);
-        return result == null ? com.digitald4.common.proto.DD4Protos.DataFile.FileType.UNSPECIFIED : result;
-      }
-      /**
-       * <code>required .common.DataFile.FileType type = 3;</code>
-       */
-      public Builder setType(com.digitald4.common.proto.DD4Protos.DataFile.FileType value) {
-        if (value == null) {
-          throw new NullPointerException();
+      public java.lang.String getType() {
+        java.lang.Object ref = type_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          type_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
         }
-        bitField0_ |= 0x00000004;
-        type_ = value.getNumber();
+      }
+      /**
+       * <code>string type = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTypeBytes() {
+        java.lang.Object ref = type_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          type_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string type = 3;</code>
+       */
+      public Builder setType(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        type_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required .common.DataFile.FileType type = 3;</code>
+       * <code>string type = 3;</code>
        */
       public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        type_ = 0;
+        
+        type_ = getDefaultInstance().getType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string type = 3;</code>
+       */
+      public Builder setTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        type_ = value;
         onChanged();
         return this;
       }
 
       private int size_ ;
       /**
-       * <code>optional int32 size = 4;</code>
-       */
-      public boolean hasSize() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 size = 4;</code>
+       * <code>int32 size = 4;</code>
        */
       public int getSize() {
         return size_;
       }
       /**
-       * <code>optional int32 size = 4;</code>
+       * <code>int32 size = 4;</code>
        */
       public Builder setSize(int value) {
-        bitField0_ |= 0x00000008;
+        
         size_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 size = 4;</code>
+       * <code>int32 size = 4;</code>
        */
       public Builder clearSize() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        
         size_ = 0;
         onChanged();
         return this;
@@ -2018,38 +1889,42 @@ public final class DD4Protos {
 
       private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>optional bytes data = 5;</code>
-       */
-      public boolean hasData() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional bytes data = 5;</code>
+       * <code>bytes data = 5;</code>
        */
       public com.google.protobuf.ByteString getData() {
         return data_;
       }
       /**
-       * <code>optional bytes data = 5;</code>
+       * <code>bytes data = 5;</code>
        */
       public Builder setData(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  
         data_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bytes data = 5;</code>
+       * <code>bytes data = 5;</code>
        */
       public Builder clearData() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        
         data_ = getDefaultInstance().getData();
         onChanged();
         return this;
       }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
 
       // @@protoc_insertion_point(builder_scope:common.DataFile)
     }
@@ -2064,22 +1939,13 @@ public final class DD4Protos {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<DataFile>
+    private static final com.google.protobuf.Parser<DataFile>
         PARSER = new com.google.protobuf.AbstractParser<DataFile>() {
       public DataFile parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
           return new DataFile(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
       }
     };
 
@@ -2103,156 +1969,108 @@ public final class DD4Protos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 id = 1;</code>
-     */
-    boolean hasId();
-    /**
-     * <code>optional int32 id = 1;</code>
+     * <code>int32 id = 1;</code>
      */
     int getId();
 
     /**
-     * <code>optional .common.User.UserType type = 2;</code>
+     * <code>.common.User.UserType type = 2;</code>
      */
-    boolean hasType();
+    int getTypeValue();
     /**
-     * <code>optional .common.User.UserType type = 2;</code>
+     * <code>.common.User.UserType type = 2;</code>
      */
     com.digitald4.common.proto.DD4Protos.User.UserType getType();
 
     /**
-     * <code>optional string user_name = 3;</code>
-     */
-    boolean hasUserName();
-    /**
-     * <code>optional string user_name = 3;</code>
+     * <code>string user_name = 3;</code>
      */
     java.lang.String getUserName();
     /**
-     * <code>optional string user_name = 3;</code>
+     * <code>string user_name = 3;</code>
      */
     com.google.protobuf.ByteString
         getUserNameBytes();
 
     /**
-     * <code>optional string email = 4;</code>
-     */
-    boolean hasEmail();
-    /**
-     * <code>optional string email = 4;</code>
+     * <code>string email = 4;</code>
      */
     java.lang.String getEmail();
     /**
-     * <code>optional string email = 4;</code>
+     * <code>string email = 4;</code>
      */
     com.google.protobuf.ByteString
         getEmailBytes();
 
     /**
-     * <code>optional string first_name = 5;</code>
-     */
-    boolean hasFirstName();
-    /**
-     * <code>optional string first_name = 5;</code>
+     * <code>string first_name = 5;</code>
      */
     java.lang.String getFirstName();
     /**
-     * <code>optional string first_name = 5;</code>
+     * <code>string first_name = 5;</code>
      */
     com.google.protobuf.ByteString
         getFirstNameBytes();
 
     /**
-     * <code>optional string last_name = 6;</code>
-     */
-    boolean hasLastName();
-    /**
-     * <code>optional string last_name = 6;</code>
+     * <code>string last_name = 6;</code>
      */
     java.lang.String getLastName();
     /**
-     * <code>optional string last_name = 6;</code>
+     * <code>string last_name = 6;</code>
      */
     com.google.protobuf.ByteString
         getLastNameBytes();
 
     /**
-     * <code>optional string full_name = 7;</code>
-     */
-    boolean hasFullName();
-    /**
-     * <code>optional string full_name = 7;</code>
+     * <code>string full_name = 7;</code>
      */
     java.lang.String getFullName();
     /**
-     * <code>optional string full_name = 7;</code>
+     * <code>string full_name = 7;</code>
      */
     com.google.protobuf.ByteString
         getFullNameBytes();
 
     /**
-     * <code>optional bool disabled = 8;</code>
-     */
-    boolean hasDisabled();
-    /**
-     * <code>optional bool disabled = 8;</code>
+     * <code>bool disabled = 8;</code>
      */
     boolean getDisabled();
 
     /**
-     * <code>optional bool read_only = 9;</code>
-     */
-    boolean hasReadOnly();
-    /**
-     * <code>optional bool read_only = 9;</code>
+     * <code>bool read_only = 9;</code>
      */
     boolean getReadOnly();
 
     /**
-     * <code>optional string notes = 10;</code>
-     */
-    boolean hasNotes();
-    /**
-     * <code>optional string notes = 10;</code>
+     * <code>string notes = 10;</code>
      */
     java.lang.String getNotes();
     /**
-     * <code>optional string notes = 10;</code>
+     * <code>string notes = 10;</code>
      */
     com.google.protobuf.ByteString
         getNotesBytes();
 
     /**
-     * <code>optional int64 last_login = 11;</code>
-     */
-    boolean hasLastLogin();
-    /**
-     * <code>optional int64 last_login = 11;</code>
+     * <code>int64 last_login = 11;</code>
      */
     long getLastLogin();
 
     /**
-     * <code>optional string password = 12;</code>
-     *
      * <pre>
      * This should not be put into the UI model.
      * </pre>
-     */
-    boolean hasPassword();
-    /**
-     * <code>optional string password = 12;</code>
      *
-     * <pre>
-     * This should not be put into the UI model.
-     * </pre>
+     * <code>string password = 12;</code>
      */
     java.lang.String getPassword();
     /**
-     * <code>optional string password = 12;</code>
-     *
      * <pre>
      * This should not be put into the UI model.
      * </pre>
+     *
+     * <code>string password = 12;</code>
      */
     com.google.protobuf.ByteString
         getPasswordBytes();
@@ -2261,11 +2079,11 @@ public final class DD4Protos {
    * Protobuf type {@code common.User}
    */
   public  static final class User extends
-      com.google.protobuf.GeneratedMessage implements
+      com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:common.User)
       UserOrBuilder {
     // Use User.newBuilder() to construct.
-    private User(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private User(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private User() {
@@ -2286,15 +2104,14 @@ public final class DD4Protos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return this.unknownFields;
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private User(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2304,95 +2121,87 @@ public final class DD4Protos {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+              if (!input.skipField(tag)) {
                 done = true;
               }
               break;
             }
             case 8: {
-              bitField0_ |= 0x00000001;
+
               id_ = input.readInt32();
               break;
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.digitald4.common.proto.DD4Protos.User.UserType value = com.digitald4.common.proto.DD4Protos.User.UserType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(2, rawValue);
-              } else {
-                bitField0_ |= 0x00000002;
-                type_ = rawValue;
-              }
+
+              type_ = rawValue;
               break;
             }
             case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
-              userName_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              userName_ = s;
               break;
             }
             case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
-              email_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              email_ = s;
               break;
             }
             case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000010;
-              firstName_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              firstName_ = s;
               break;
             }
             case 50: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000020;
-              lastName_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              lastName_ = s;
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000040;
-              fullName_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              fullName_ = s;
               break;
             }
             case 64: {
-              bitField0_ |= 0x00000080;
+
               disabled_ = input.readBool();
               break;
             }
             case 72: {
-              bitField0_ |= 0x00000100;
+
               readOnly_ = input.readBool();
               break;
             }
             case 82: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000200;
-              notes_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              notes_ = s;
               break;
             }
             case 88: {
-              bitField0_ |= 0x00000400;
+
               lastLogin_ = input.readInt64();
               break;
             }
             case 98: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000800;
-              password_ = bs;
+              java.lang.String s = input.readStringRequireUtf8();
+
+              password_ = s;
               break;
             }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
+        throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
       } finally {
-        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2401,7 +2210,7 @@ public final class DD4Protos {
       return com.digitald4.common.proto.DD4Protos.internal_static_common_User_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.digitald4.common.proto.DD4Protos.internal_static_common_User_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -2416,15 +2225,16 @@ public final class DD4Protos {
       /**
        * <code>UNSPECIFIED = 0;</code>
        */
-      UNSPECIFIED(0, 0),
+      UNSPECIFIED(0),
       /**
        * <code>ADMIN = 1;</code>
        */
-      ADMIN(1, 1),
+      ADMIN(1),
       /**
        * <code>STANDARD = 2;</code>
        */
-      STANDARD(2, 2),
+      STANDARD(2),
+      UNRECOGNIZED(-1),
       ;
 
       /**
@@ -2442,10 +2252,22 @@ public final class DD4Protos {
 
 
       public final int getNumber() {
+        if (this == UNRECOGNIZED) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
         return value;
       }
 
+      /**
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
       public static UserType valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static UserType forNumber(int value) {
         switch (value) {
           case 0: return UNSPECIFIED;
           case 1: return ADMIN;
@@ -2462,13 +2284,13 @@ public final class DD4Protos {
           UserType> internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<UserType>() {
               public UserType findValueByNumber(int number) {
-                return UserType.valueOf(number);
+                return UserType.forNumber(number);
               }
             };
 
       public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
+        return getDescriptor().getValues().get(ordinal());
       }
       public final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptorForType() {
@@ -2487,31 +2309,25 @@ public final class DD4Protos {
           throw new java.lang.IllegalArgumentException(
             "EnumValueDescriptor is not for this type.");
         }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
         return VALUES[desc.getIndex()];
       }
 
-      private final int index;
       private final int value;
 
-      private UserType(int index, int value) {
-        this.index = index;
+      private UserType(int value) {
         this.value = value;
       }
 
       // @@protoc_insertion_point(enum_scope:common.User.UserType)
     }
 
-    private int bitField0_;
     public static final int ID_FIELD_NUMBER = 1;
     private int id_;
     /**
-     * <code>optional int32 id = 1;</code>
-     */
-    public boolean hasId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 id = 1;</code>
+     * <code>int32 id = 1;</code>
      */
     public int getId() {
       return id_;
@@ -2520,29 +2336,23 @@ public final class DD4Protos {
     public static final int TYPE_FIELD_NUMBER = 2;
     private int type_;
     /**
-     * <code>optional .common.User.UserType type = 2;</code>
+     * <code>.common.User.UserType type = 2;</code>
      */
-    public boolean hasType() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+    public int getTypeValue() {
+      return type_;
     }
     /**
-     * <code>optional .common.User.UserType type = 2;</code>
+     * <code>.common.User.UserType type = 2;</code>
      */
     public com.digitald4.common.proto.DD4Protos.User.UserType getType() {
       com.digitald4.common.proto.DD4Protos.User.UserType result = com.digitald4.common.proto.DD4Protos.User.UserType.valueOf(type_);
-      return result == null ? com.digitald4.common.proto.DD4Protos.User.UserType.UNSPECIFIED : result;
+      return result == null ? com.digitald4.common.proto.DD4Protos.User.UserType.UNRECOGNIZED : result;
     }
 
     public static final int USER_NAME_FIELD_NUMBER = 3;
     private volatile java.lang.Object userName_;
     /**
-     * <code>optional string user_name = 3;</code>
-     */
-    public boolean hasUserName() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional string user_name = 3;</code>
+     * <code>string user_name = 3;</code>
      */
     public java.lang.String getUserName() {
       java.lang.Object ref = userName_;
@@ -2552,14 +2362,12 @@ public final class DD4Protos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          userName_ = s;
-        }
+        userName_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string user_name = 3;</code>
+     * <code>string user_name = 3;</code>
      */
     public com.google.protobuf.ByteString
         getUserNameBytes() {
@@ -2578,13 +2386,7 @@ public final class DD4Protos {
     public static final int EMAIL_FIELD_NUMBER = 4;
     private volatile java.lang.Object email_;
     /**
-     * <code>optional string email = 4;</code>
-     */
-    public boolean hasEmail() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional string email = 4;</code>
+     * <code>string email = 4;</code>
      */
     public java.lang.String getEmail() {
       java.lang.Object ref = email_;
@@ -2594,14 +2396,12 @@ public final class DD4Protos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          email_ = s;
-        }
+        email_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string email = 4;</code>
+     * <code>string email = 4;</code>
      */
     public com.google.protobuf.ByteString
         getEmailBytes() {
@@ -2620,13 +2420,7 @@ public final class DD4Protos {
     public static final int FIRST_NAME_FIELD_NUMBER = 5;
     private volatile java.lang.Object firstName_;
     /**
-     * <code>optional string first_name = 5;</code>
-     */
-    public boolean hasFirstName() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional string first_name = 5;</code>
+     * <code>string first_name = 5;</code>
      */
     public java.lang.String getFirstName() {
       java.lang.Object ref = firstName_;
@@ -2636,14 +2430,12 @@ public final class DD4Protos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          firstName_ = s;
-        }
+        firstName_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string first_name = 5;</code>
+     * <code>string first_name = 5;</code>
      */
     public com.google.protobuf.ByteString
         getFirstNameBytes() {
@@ -2662,13 +2454,7 @@ public final class DD4Protos {
     public static final int LAST_NAME_FIELD_NUMBER = 6;
     private volatile java.lang.Object lastName_;
     /**
-     * <code>optional string last_name = 6;</code>
-     */
-    public boolean hasLastName() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional string last_name = 6;</code>
+     * <code>string last_name = 6;</code>
      */
     public java.lang.String getLastName() {
       java.lang.Object ref = lastName_;
@@ -2678,14 +2464,12 @@ public final class DD4Protos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          lastName_ = s;
-        }
+        lastName_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string last_name = 6;</code>
+     * <code>string last_name = 6;</code>
      */
     public com.google.protobuf.ByteString
         getLastNameBytes() {
@@ -2704,13 +2488,7 @@ public final class DD4Protos {
     public static final int FULL_NAME_FIELD_NUMBER = 7;
     private volatile java.lang.Object fullName_;
     /**
-     * <code>optional string full_name = 7;</code>
-     */
-    public boolean hasFullName() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional string full_name = 7;</code>
+     * <code>string full_name = 7;</code>
      */
     public java.lang.String getFullName() {
       java.lang.Object ref = fullName_;
@@ -2720,14 +2498,12 @@ public final class DD4Protos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          fullName_ = s;
-        }
+        fullName_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string full_name = 7;</code>
+     * <code>string full_name = 7;</code>
      */
     public com.google.protobuf.ByteString
         getFullNameBytes() {
@@ -2746,13 +2522,7 @@ public final class DD4Protos {
     public static final int DISABLED_FIELD_NUMBER = 8;
     private boolean disabled_;
     /**
-     * <code>optional bool disabled = 8;</code>
-     */
-    public boolean hasDisabled() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional bool disabled = 8;</code>
+     * <code>bool disabled = 8;</code>
      */
     public boolean getDisabled() {
       return disabled_;
@@ -2761,13 +2531,7 @@ public final class DD4Protos {
     public static final int READ_ONLY_FIELD_NUMBER = 9;
     private boolean readOnly_;
     /**
-     * <code>optional bool read_only = 9;</code>
-     */
-    public boolean hasReadOnly() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <code>optional bool read_only = 9;</code>
+     * <code>bool read_only = 9;</code>
      */
     public boolean getReadOnly() {
       return readOnly_;
@@ -2776,13 +2540,7 @@ public final class DD4Protos {
     public static final int NOTES_FIELD_NUMBER = 10;
     private volatile java.lang.Object notes_;
     /**
-     * <code>optional string notes = 10;</code>
-     */
-    public boolean hasNotes() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
-    }
-    /**
-     * <code>optional string notes = 10;</code>
+     * <code>string notes = 10;</code>
      */
     public java.lang.String getNotes() {
       java.lang.Object ref = notes_;
@@ -2792,14 +2550,12 @@ public final class DD4Protos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          notes_ = s;
-        }
+        notes_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string notes = 10;</code>
+     * <code>string notes = 10;</code>
      */
     public com.google.protobuf.ByteString
         getNotesBytes() {
@@ -2818,13 +2574,7 @@ public final class DD4Protos {
     public static final int LAST_LOGIN_FIELD_NUMBER = 11;
     private long lastLogin_;
     /**
-     * <code>optional int64 last_login = 11;</code>
-     */
-    public boolean hasLastLogin() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
-    }
-    /**
-     * <code>optional int64 last_login = 11;</code>
+     * <code>int64 last_login = 11;</code>
      */
     public long getLastLogin() {
       return lastLogin_;
@@ -2833,21 +2583,11 @@ public final class DD4Protos {
     public static final int PASSWORD_FIELD_NUMBER = 12;
     private volatile java.lang.Object password_;
     /**
-     * <code>optional string password = 12;</code>
-     *
      * <pre>
      * This should not be put into the UI model.
      * </pre>
-     */
-    public boolean hasPassword() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
-    }
-    /**
-     * <code>optional string password = 12;</code>
      *
-     * <pre>
-     * This should not be put into the UI model.
-     * </pre>
+     * <code>string password = 12;</code>
      */
     public java.lang.String getPassword() {
       java.lang.Object ref = password_;
@@ -2857,18 +2597,16 @@ public final class DD4Protos {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          password_ = s;
-        }
+        password_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string password = 12;</code>
-     *
      * <pre>
      * This should not be put into the UI model.
      * </pre>
+     *
+     * <code>string password = 12;</code>
      */
     public com.google.protobuf.ByteString
         getPasswordBytes() {
@@ -2896,43 +2634,42 @@ public final class DD4Protos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (id_ != 0) {
         output.writeInt32(1, id_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (type_ != com.digitald4.common.proto.DD4Protos.User.UserType.UNSPECIFIED.getNumber()) {
         output.writeEnum(2, type_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 3, userName_);
+      if (!getUserNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, userName_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 4, email_);
+      if (!getEmailBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, email_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 5, firstName_);
+      if (!getFirstNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, firstName_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 6, lastName_);
+      if (!getLastNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, lastName_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 7, fullName_);
+      if (!getFullNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, fullName_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (disabled_ != false) {
         output.writeBool(8, disabled_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (readOnly_ != false) {
         output.writeBool(9, readOnly_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 10, notes_);
+      if (!getNotesBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, notes_);
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (lastLogin_ != 0L) {
         output.writeInt64(11, lastLogin_);
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 12, password_);
+      if (!getPasswordBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 12, password_);
       }
-      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -2940,53 +2677,139 @@ public final class DD4Protos {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (id_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, id_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (type_ != com.digitald4.common.proto.DD4Protos.User.UserType.UNSPECIFIED.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, type_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(3, userName_);
+      if (!getUserNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, userName_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(4, email_);
+      if (!getEmailBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, email_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(5, firstName_);
+      if (!getFirstNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, firstName_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(6, lastName_);
+      if (!getLastNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, lastName_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(7, fullName_);
+      if (!getFullNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, fullName_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (disabled_ != false) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(8, disabled_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (readOnly_ != false) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(9, readOnly_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(10, notes_);
+      if (!getNotesBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, notes_);
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (lastLogin_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(11, lastLogin_);
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(12, password_);
+      if (!getPasswordBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, password_);
       }
-      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.digitald4.common.proto.DD4Protos.User)) {
+        return super.equals(obj);
+      }
+      com.digitald4.common.proto.DD4Protos.User other = (com.digitald4.common.proto.DD4Protos.User) obj;
+
+      boolean result = true;
+      result = result && (getId()
+          == other.getId());
+      result = result && type_ == other.type_;
+      result = result && getUserName()
+          .equals(other.getUserName());
+      result = result && getEmail()
+          .equals(other.getEmail());
+      result = result && getFirstName()
+          .equals(other.getFirstName());
+      result = result && getLastName()
+          .equals(other.getLastName());
+      result = result && getFullName()
+          .equals(other.getFullName());
+      result = result && (getDisabled()
+          == other.getDisabled());
+      result = result && (getReadOnly()
+          == other.getReadOnly());
+      result = result && getNotes()
+          .equals(other.getNotes());
+      result = result && (getLastLogin()
+          == other.getLastLogin());
+      result = result && getPassword()
+          .equals(other.getPassword());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId();
+      hash = (37 * hash) + TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + type_;
+      hash = (37 * hash) + USER_NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getUserName().hashCode();
+      hash = (37 * hash) + EMAIL_FIELD_NUMBER;
+      hash = (53 * hash) + getEmail().hashCode();
+      hash = (37 * hash) + FIRST_NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getFirstName().hashCode();
+      hash = (37 * hash) + LAST_NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getLastName().hashCode();
+      hash = (37 * hash) + FULL_NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getFullName().hashCode();
+      hash = (37 * hash) + DISABLED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getDisabled());
+      hash = (37 * hash) + READ_ONLY_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getReadOnly());
+      hash = (37 * hash) + NOTES_FIELD_NUMBER;
+      hash = (53 * hash) + getNotes().hashCode();
+      hash = (37 * hash) + LAST_LOGIN_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getLastLogin());
+      hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
+      hash = (53 * hash) + getPassword().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.digitald4.common.proto.DD4Protos.User parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.common.proto.DD4Protos.User parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.digitald4.common.proto.DD4Protos.User parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3010,34 +2833,40 @@ public final class DD4Protos {
     }
     public static com.digitald4.common.proto.DD4Protos.User parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.digitald4.common.proto.DD4Protos.User parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.digitald4.common.proto.DD4Protos.User parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.digitald4.common.proto.DD4Protos.User parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.digitald4.common.proto.DD4Protos.User parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static com.digitald4.common.proto.DD4Protos.User parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -3054,7 +2883,7 @@ public final class DD4Protos {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3062,7 +2891,7 @@ public final class DD4Protos {
      * Protobuf type {@code common.User}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:common.User)
         com.digitald4.common.proto.DD4Protos.UserOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -3070,7 +2899,7 @@ public final class DD4Protos {
         return com.digitald4.common.proto.DD4Protos.internal_static_common_User_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.digitald4.common.proto.DD4Protos.internal_static_common_User_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -3083,40 +2912,41 @@ public final class DD4Protos {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
         super.clear();
         id_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
+
         type_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
+
         userName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
+
         email_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
+
         firstName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000010);
+
         lastName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000020);
+
         fullName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000040);
+
         disabled_ = false;
-        bitField0_ = (bitField0_ & ~0x00000080);
+
         readOnly_ = false;
-        bitField0_ = (bitField0_ & ~0x00000100);
+
         notes_ = "";
-        bitField0_ = (bitField0_ & ~0x00000200);
+
         lastLogin_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000400);
+
         password_ = "";
-        bitField0_ = (bitField0_ & ~0x00000800);
+
         return this;
       }
 
@@ -3139,61 +2969,48 @@ public final class DD4Protos {
 
       public com.digitald4.common.proto.DD4Protos.User buildPartial() {
         com.digitald4.common.proto.DD4Protos.User result = new com.digitald4.common.proto.DD4Protos.User(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
         result.id_ = id_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
         result.type_ = type_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
         result.userName_ = userName_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
         result.email_ = email_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
         result.firstName_ = firstName_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
         result.lastName_ = lastName_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
         result.fullName_ = fullName_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
         result.disabled_ = disabled_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
         result.readOnly_ = readOnly_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
         result.notes_ = notes_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
-        }
         result.lastLogin_ = lastLogin_;
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
-          to_bitField0_ |= 0x00000800;
-        }
         result.password_ = password_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.digitald4.common.proto.DD4Protos.User) {
           return mergeFrom((com.digitald4.common.proto.DD4Protos.User)other);
@@ -3205,57 +3022,49 @@ public final class DD4Protos {
 
       public Builder mergeFrom(com.digitald4.common.proto.DD4Protos.User other) {
         if (other == com.digitald4.common.proto.DD4Protos.User.getDefaultInstance()) return this;
-        if (other.hasId()) {
+        if (other.getId() != 0) {
           setId(other.getId());
         }
-        if (other.hasType()) {
-          setType(other.getType());
+        if (other.type_ != 0) {
+          setTypeValue(other.getTypeValue());
         }
-        if (other.hasUserName()) {
-          bitField0_ |= 0x00000004;
+        if (!other.getUserName().isEmpty()) {
           userName_ = other.userName_;
           onChanged();
         }
-        if (other.hasEmail()) {
-          bitField0_ |= 0x00000008;
+        if (!other.getEmail().isEmpty()) {
           email_ = other.email_;
           onChanged();
         }
-        if (other.hasFirstName()) {
-          bitField0_ |= 0x00000010;
+        if (!other.getFirstName().isEmpty()) {
           firstName_ = other.firstName_;
           onChanged();
         }
-        if (other.hasLastName()) {
-          bitField0_ |= 0x00000020;
+        if (!other.getLastName().isEmpty()) {
           lastName_ = other.lastName_;
           onChanged();
         }
-        if (other.hasFullName()) {
-          bitField0_ |= 0x00000040;
+        if (!other.getFullName().isEmpty()) {
           fullName_ = other.fullName_;
           onChanged();
         }
-        if (other.hasDisabled()) {
+        if (other.getDisabled() != false) {
           setDisabled(other.getDisabled());
         }
-        if (other.hasReadOnly()) {
+        if (other.getReadOnly() != false) {
           setReadOnly(other.getReadOnly());
         }
-        if (other.hasNotes()) {
-          bitField0_ |= 0x00000200;
+        if (!other.getNotes().isEmpty()) {
           notes_ = other.notes_;
           onChanged();
         }
-        if (other.hasLastLogin()) {
+        if (other.getLastLogin() != 0L) {
           setLastLogin(other.getLastLogin());
         }
-        if (other.hasPassword()) {
-          bitField0_ |= 0x00000800;
+        if (!other.getPassword().isEmpty()) {
           password_ = other.password_;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -3273,7 +3082,7 @@ public final class DD4Protos {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (com.digitald4.common.proto.DD4Protos.User) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -3281,35 +3090,28 @@ public final class DD4Protos {
         }
         return this;
       }
-      private int bitField0_;
 
       private int id_ ;
       /**
-       * <code>optional int32 id = 1;</code>
-       */
-      public boolean hasId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public int getId() {
         return id_;
       }
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public Builder setId(int value) {
-        bitField0_ |= 0x00000001;
+        
         id_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 id = 1;</code>
+       * <code>int32 id = 1;</code>
        */
       public Builder clearId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        
         id_ = 0;
         onChanged();
         return this;
@@ -3317,35 +3119,43 @@ public final class DD4Protos {
 
       private int type_ = 0;
       /**
-       * <code>optional .common.User.UserType type = 2;</code>
+       * <code>.common.User.UserType type = 2;</code>
        */
-      public boolean hasType() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+      public int getTypeValue() {
+        return type_;
       }
       /**
-       * <code>optional .common.User.UserType type = 2;</code>
+       * <code>.common.User.UserType type = 2;</code>
+       */
+      public Builder setTypeValue(int value) {
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.common.User.UserType type = 2;</code>
        */
       public com.digitald4.common.proto.DD4Protos.User.UserType getType() {
         com.digitald4.common.proto.DD4Protos.User.UserType result = com.digitald4.common.proto.DD4Protos.User.UserType.valueOf(type_);
-        return result == null ? com.digitald4.common.proto.DD4Protos.User.UserType.UNSPECIFIED : result;
+        return result == null ? com.digitald4.common.proto.DD4Protos.User.UserType.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .common.User.UserType type = 2;</code>
+       * <code>.common.User.UserType type = 2;</code>
        */
       public Builder setType(com.digitald4.common.proto.DD4Protos.User.UserType value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000002;
+        
         type_ = value.getNumber();
         onChanged();
         return this;
       }
       /**
-       * <code>optional .common.User.UserType type = 2;</code>
+       * <code>.common.User.UserType type = 2;</code>
        */
       public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        
         type_ = 0;
         onChanged();
         return this;
@@ -3353,13 +3163,7 @@ public final class DD4Protos {
 
       private java.lang.Object userName_ = "";
       /**
-       * <code>optional string user_name = 3;</code>
-       */
-      public boolean hasUserName() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional string user_name = 3;</code>
+       * <code>string user_name = 3;</code>
        */
       public java.lang.String getUserName() {
         java.lang.Object ref = userName_;
@@ -3367,16 +3171,14 @@ public final class DD4Protos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userName_ = s;
-          }
+          userName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string user_name = 3;</code>
+       * <code>string user_name = 3;</code>
        */
       public com.google.protobuf.ByteString
           getUserNameBytes() {
@@ -3392,36 +3194,37 @@ public final class DD4Protos {
         }
       }
       /**
-       * <code>optional string user_name = 3;</code>
+       * <code>string user_name = 3;</code>
        */
       public Builder setUserName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  
         userName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string user_name = 3;</code>
+       * <code>string user_name = 3;</code>
        */
       public Builder clearUserName() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        
         userName_ = getDefaultInstance().getUserName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string user_name = 3;</code>
+       * <code>string user_name = 3;</code>
        */
       public Builder setUserNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  checkByteStringIsUtf8(value);
+        
         userName_ = value;
         onChanged();
         return this;
@@ -3429,13 +3232,7 @@ public final class DD4Protos {
 
       private java.lang.Object email_ = "";
       /**
-       * <code>optional string email = 4;</code>
-       */
-      public boolean hasEmail() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional string email = 4;</code>
+       * <code>string email = 4;</code>
        */
       public java.lang.String getEmail() {
         java.lang.Object ref = email_;
@@ -3443,16 +3240,14 @@ public final class DD4Protos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            email_ = s;
-          }
+          email_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string email = 4;</code>
+       * <code>string email = 4;</code>
        */
       public com.google.protobuf.ByteString
           getEmailBytes() {
@@ -3468,36 +3263,37 @@ public final class DD4Protos {
         }
       }
       /**
-       * <code>optional string email = 4;</code>
+       * <code>string email = 4;</code>
        */
       public Builder setEmail(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  
         email_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string email = 4;</code>
+       * <code>string email = 4;</code>
        */
       public Builder clearEmail() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        
         email_ = getDefaultInstance().getEmail();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string email = 4;</code>
+       * <code>string email = 4;</code>
        */
       public Builder setEmailBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  checkByteStringIsUtf8(value);
+        
         email_ = value;
         onChanged();
         return this;
@@ -3505,13 +3301,7 @@ public final class DD4Protos {
 
       private java.lang.Object firstName_ = "";
       /**
-       * <code>optional string first_name = 5;</code>
-       */
-      public boolean hasFirstName() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional string first_name = 5;</code>
+       * <code>string first_name = 5;</code>
        */
       public java.lang.String getFirstName() {
         java.lang.Object ref = firstName_;
@@ -3519,16 +3309,14 @@ public final class DD4Protos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            firstName_ = s;
-          }
+          firstName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string first_name = 5;</code>
+       * <code>string first_name = 5;</code>
        */
       public com.google.protobuf.ByteString
           getFirstNameBytes() {
@@ -3544,36 +3332,37 @@ public final class DD4Protos {
         }
       }
       /**
-       * <code>optional string first_name = 5;</code>
+       * <code>string first_name = 5;</code>
        */
       public Builder setFirstName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  
         firstName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string first_name = 5;</code>
+       * <code>string first_name = 5;</code>
        */
       public Builder clearFirstName() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        
         firstName_ = getDefaultInstance().getFirstName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string first_name = 5;</code>
+       * <code>string first_name = 5;</code>
        */
       public Builder setFirstNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  checkByteStringIsUtf8(value);
+        
         firstName_ = value;
         onChanged();
         return this;
@@ -3581,13 +3370,7 @@ public final class DD4Protos {
 
       private java.lang.Object lastName_ = "";
       /**
-       * <code>optional string last_name = 6;</code>
-       */
-      public boolean hasLastName() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional string last_name = 6;</code>
+       * <code>string last_name = 6;</code>
        */
       public java.lang.String getLastName() {
         java.lang.Object ref = lastName_;
@@ -3595,16 +3378,14 @@ public final class DD4Protos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            lastName_ = s;
-          }
+          lastName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string last_name = 6;</code>
+       * <code>string last_name = 6;</code>
        */
       public com.google.protobuf.ByteString
           getLastNameBytes() {
@@ -3620,36 +3401,37 @@ public final class DD4Protos {
         }
       }
       /**
-       * <code>optional string last_name = 6;</code>
+       * <code>string last_name = 6;</code>
        */
       public Builder setLastName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  
         lastName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string last_name = 6;</code>
+       * <code>string last_name = 6;</code>
        */
       public Builder clearLastName() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        
         lastName_ = getDefaultInstance().getLastName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string last_name = 6;</code>
+       * <code>string last_name = 6;</code>
        */
       public Builder setLastNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  checkByteStringIsUtf8(value);
+        
         lastName_ = value;
         onChanged();
         return this;
@@ -3657,13 +3439,7 @@ public final class DD4Protos {
 
       private java.lang.Object fullName_ = "";
       /**
-       * <code>optional string full_name = 7;</code>
-       */
-      public boolean hasFullName() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional string full_name = 7;</code>
+       * <code>string full_name = 7;</code>
        */
       public java.lang.String getFullName() {
         java.lang.Object ref = fullName_;
@@ -3671,16 +3447,14 @@ public final class DD4Protos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            fullName_ = s;
-          }
+          fullName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string full_name = 7;</code>
+       * <code>string full_name = 7;</code>
        */
       public com.google.protobuf.ByteString
           getFullNameBytes() {
@@ -3696,36 +3470,37 @@ public final class DD4Protos {
         }
       }
       /**
-       * <code>optional string full_name = 7;</code>
+       * <code>string full_name = 7;</code>
        */
       public Builder setFullName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  
         fullName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string full_name = 7;</code>
+       * <code>string full_name = 7;</code>
        */
       public Builder clearFullName() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        
         fullName_ = getDefaultInstance().getFullName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string full_name = 7;</code>
+       * <code>string full_name = 7;</code>
        */
       public Builder setFullNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  checkByteStringIsUtf8(value);
+        
         fullName_ = value;
         onChanged();
         return this;
@@ -3733,31 +3508,25 @@ public final class DD4Protos {
 
       private boolean disabled_ ;
       /**
-       * <code>optional bool disabled = 8;</code>
-       */
-      public boolean hasDisabled() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional bool disabled = 8;</code>
+       * <code>bool disabled = 8;</code>
        */
       public boolean getDisabled() {
         return disabled_;
       }
       /**
-       * <code>optional bool disabled = 8;</code>
+       * <code>bool disabled = 8;</code>
        */
       public Builder setDisabled(boolean value) {
-        bitField0_ |= 0x00000080;
+        
         disabled_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool disabled = 8;</code>
+       * <code>bool disabled = 8;</code>
        */
       public Builder clearDisabled() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        
         disabled_ = false;
         onChanged();
         return this;
@@ -3765,31 +3534,25 @@ public final class DD4Protos {
 
       private boolean readOnly_ ;
       /**
-       * <code>optional bool read_only = 9;</code>
-       */
-      public boolean hasReadOnly() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional bool read_only = 9;</code>
+       * <code>bool read_only = 9;</code>
        */
       public boolean getReadOnly() {
         return readOnly_;
       }
       /**
-       * <code>optional bool read_only = 9;</code>
+       * <code>bool read_only = 9;</code>
        */
       public Builder setReadOnly(boolean value) {
-        bitField0_ |= 0x00000100;
+        
         readOnly_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool read_only = 9;</code>
+       * <code>bool read_only = 9;</code>
        */
       public Builder clearReadOnly() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        
         readOnly_ = false;
         onChanged();
         return this;
@@ -3797,13 +3560,7 @@ public final class DD4Protos {
 
       private java.lang.Object notes_ = "";
       /**
-       * <code>optional string notes = 10;</code>
-       */
-      public boolean hasNotes() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
-      }
-      /**
-       * <code>optional string notes = 10;</code>
+       * <code>string notes = 10;</code>
        */
       public java.lang.String getNotes() {
         java.lang.Object ref = notes_;
@@ -3811,16 +3568,14 @@ public final class DD4Protos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            notes_ = s;
-          }
+          notes_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string notes = 10;</code>
+       * <code>string notes = 10;</code>
        */
       public com.google.protobuf.ByteString
           getNotesBytes() {
@@ -3836,36 +3591,37 @@ public final class DD4Protos {
         }
       }
       /**
-       * <code>optional string notes = 10;</code>
+       * <code>string notes = 10;</code>
        */
       public Builder setNotes(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  
         notes_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string notes = 10;</code>
+       * <code>string notes = 10;</code>
        */
       public Builder clearNotes() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        
         notes_ = getDefaultInstance().getNotes();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string notes = 10;</code>
+       * <code>string notes = 10;</code>
        */
       public Builder setNotesBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  checkByteStringIsUtf8(value);
+        
         notes_ = value;
         onChanged();
         return this;
@@ -3873,31 +3629,25 @@ public final class DD4Protos {
 
       private long lastLogin_ ;
       /**
-       * <code>optional int64 last_login = 11;</code>
-       */
-      public boolean hasLastLogin() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      /**
-       * <code>optional int64 last_login = 11;</code>
+       * <code>int64 last_login = 11;</code>
        */
       public long getLastLogin() {
         return lastLogin_;
       }
       /**
-       * <code>optional int64 last_login = 11;</code>
+       * <code>int64 last_login = 11;</code>
        */
       public Builder setLastLogin(long value) {
-        bitField0_ |= 0x00000400;
+        
         lastLogin_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 last_login = 11;</code>
+       * <code>int64 last_login = 11;</code>
        */
       public Builder clearLastLogin() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        
         lastLogin_ = 0L;
         onChanged();
         return this;
@@ -3905,21 +3655,11 @@ public final class DD4Protos {
 
       private java.lang.Object password_ = "";
       /**
-       * <code>optional string password = 12;</code>
-       *
        * <pre>
        * This should not be put into the UI model.
        * </pre>
-       */
-      public boolean hasPassword() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
-      }
-      /**
-       * <code>optional string password = 12;</code>
        *
-       * <pre>
-       * This should not be put into the UI model.
-       * </pre>
+       * <code>string password = 12;</code>
        */
       public java.lang.String getPassword() {
         java.lang.Object ref = password_;
@@ -3927,20 +3667,18 @@ public final class DD4Protos {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            password_ = s;
-          }
+          password_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string password = 12;</code>
-       *
        * <pre>
        * This should not be put into the UI model.
        * </pre>
+       *
+       * <code>string password = 12;</code>
        */
       public com.google.protobuf.ByteString
           getPasswordBytes() {
@@ -3956,52 +3694,63 @@ public final class DD4Protos {
         }
       }
       /**
-       * <code>optional string password = 12;</code>
-       *
        * <pre>
        * This should not be put into the UI model.
        * </pre>
+       *
+       * <code>string password = 12;</code>
        */
       public Builder setPassword(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  
         password_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string password = 12;</code>
-       *
        * <pre>
        * This should not be put into the UI model.
        * </pre>
+       *
+       * <code>string password = 12;</code>
        */
       public Builder clearPassword() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        
         password_ = getDefaultInstance().getPassword();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string password = 12;</code>
-       *
        * <pre>
        * This should not be put into the UI model.
        * </pre>
+       *
+       * <code>string password = 12;</code>
        */
       public Builder setPasswordBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  checkByteStringIsUtf8(value);
+        
         password_ = value;
         onChanged();
         return this;
       }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
 
       // @@protoc_insertion_point(builder_scope:common.User)
     }
@@ -4016,22 +3765,13 @@ public final class DD4Protos {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<User>
+    private static final com.google.protobuf.Parser<User>
         PARSER = new com.google.protobuf.AbstractParser<User>() {
       public User parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
           return new User(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
       }
     };
 
@@ -4050,27 +3790,2327 @@ public final class DD4Protos {
 
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  public interface CompanyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:common.Company)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string name = 1;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>string name = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>string website = 2;</code>
+     */
+    java.lang.String getWebsite();
+    /**
+     * <code>string website = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getWebsiteBytes();
+
+    /**
+     * <code>string slogan = 3;</code>
+     */
+    java.lang.String getSlogan();
+    /**
+     * <code>string slogan = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getSloganBytes();
+
+    /**
+     * <code>string description = 4;</code>
+     */
+    java.lang.String getDescription();
+    /**
+     * <code>string description = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getDescriptionBytes();
+
+    /**
+     * <code>string ipAddress = 5;</code>
+     */
+    java.lang.String getIpAddress();
+    /**
+     * <code>string ipAddress = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getIpAddressBytes();
+
+    /**
+     * <code>string email = 6;</code>
+     */
+    java.lang.String getEmail();
+    /**
+     * <code>string email = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getEmailBytes();
+
+    /**
+     * <code>string paypal = 7;</code>
+     */
+    java.lang.String getPaypal();
+    /**
+     * <code>string paypal = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getPaypalBytes();
+
+    /**
+     * <code>string statCounterID = 8;</code>
+     */
+    java.lang.String getStatCounterID();
+    /**
+     * <code>string statCounterID = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getStatCounterIDBytes();
+
+    /**
+     * <code>string statCounterPart = 9;</code>
+     */
+    java.lang.String getStatCounterPart();
+    /**
+     * <code>string statCounterPart = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getStatCounterPartBytes();
+
+    /**
+     * <code>string container = 10;</code>
+     */
+    java.lang.String getContainer();
+    /**
+     * <code>string container = 10;</code>
+     */
+    com.google.protobuf.ByteString
+        getContainerBytes();
+
+    /**
+     * <code>string address = 11;</code>
+     */
+    java.lang.String getAddress();
+    /**
+     * <code>string address = 11;</code>
+     */
+    com.google.protobuf.ByteString
+        getAddressBytes();
+
+    /**
+     * <code>string phone = 12;</code>
+     */
+    java.lang.String getPhone();
+    /**
+     * <code>string phone = 12;</code>
+     */
+    com.google.protobuf.ByteString
+        getPhoneBytes();
+
+    /**
+     * <code>string fax = 13;</code>
+     */
+    java.lang.String getFax();
+    /**
+     * <code>string fax = 13;</code>
+     */
+    com.google.protobuf.ByteString
+        getFaxBytes();
+
+    /**
+     * <code>string reportFooter = 14;</code>
+     */
+    java.lang.String getReportFooter();
+    /**
+     * <code>string reportFooter = 14;</code>
+     */
+    com.google.protobuf.ByteString
+        getReportFooterBytes();
+  }
+  /**
+   * Protobuf type {@code common.Company}
+   */
+  public  static final class Company extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:common.Company)
+      CompanyOrBuilder {
+    // Use Company.newBuilder() to construct.
+    private Company(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Company() {
+      name_ = "";
+      website_ = "";
+      slogan_ = "";
+      description_ = "";
+      ipAddress_ = "";
+      email_ = "";
+      paypal_ = "";
+      statCounterID_ = "";
+      statCounterPart_ = "";
+      container_ = "";
+      address_ = "";
+      phone_ = "";
+      fax_ = "";
+      reportFooter_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private Company(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              name_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              website_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              slogan_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              description_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              ipAddress_ = s;
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              email_ = s;
+              break;
+            }
+            case 58: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              paypal_ = s;
+              break;
+            }
+            case 66: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              statCounterID_ = s;
+              break;
+            }
+            case 74: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              statCounterPart_ = s;
+              break;
+            }
+            case 82: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              container_ = s;
+              break;
+            }
+            case 90: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              address_ = s;
+              break;
+            }
+            case 98: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              phone_ = s;
+              break;
+            }
+            case 106: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              fax_ = s;
+              break;
+            }
+            case 114: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              reportFooter_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.digitald4.common.proto.DD4Protos.internal_static_common_Company_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.digitald4.common.proto.DD4Protos.internal_static_common_Company_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.digitald4.common.proto.DD4Protos.Company.class, com.digitald4.common.proto.DD4Protos.Company.Builder.class);
+    }
+
+    public static final int NAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object name_;
+    /**
+     * <code>string name = 1;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string name = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int WEBSITE_FIELD_NUMBER = 2;
+    private volatile java.lang.Object website_;
+    /**
+     * <code>string website = 2;</code>
+     */
+    public java.lang.String getWebsite() {
+      java.lang.Object ref = website_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        website_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string website = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getWebsiteBytes() {
+      java.lang.Object ref = website_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        website_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SLOGAN_FIELD_NUMBER = 3;
+    private volatile java.lang.Object slogan_;
+    /**
+     * <code>string slogan = 3;</code>
+     */
+    public java.lang.String getSlogan() {
+      java.lang.Object ref = slogan_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        slogan_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string slogan = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSloganBytes() {
+      java.lang.Object ref = slogan_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        slogan_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DESCRIPTION_FIELD_NUMBER = 4;
+    private volatile java.lang.Object description_;
+    /**
+     * <code>string description = 4;</code>
+     */
+    public java.lang.String getDescription() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        description_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string description = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int IPADDRESS_FIELD_NUMBER = 5;
+    private volatile java.lang.Object ipAddress_;
+    /**
+     * <code>string ipAddress = 5;</code>
+     */
+    public java.lang.String getIpAddress() {
+      java.lang.Object ref = ipAddress_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ipAddress_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string ipAddress = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIpAddressBytes() {
+      java.lang.Object ref = ipAddress_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ipAddress_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int EMAIL_FIELD_NUMBER = 6;
+    private volatile java.lang.Object email_;
+    /**
+     * <code>string email = 6;</code>
+     */
+    public java.lang.String getEmail() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        email_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string email = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getEmailBytes() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        email_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PAYPAL_FIELD_NUMBER = 7;
+    private volatile java.lang.Object paypal_;
+    /**
+     * <code>string paypal = 7;</code>
+     */
+    public java.lang.String getPaypal() {
+      java.lang.Object ref = paypal_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        paypal_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string paypal = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPaypalBytes() {
+      java.lang.Object ref = paypal_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        paypal_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int STATCOUNTERID_FIELD_NUMBER = 8;
+    private volatile java.lang.Object statCounterID_;
+    /**
+     * <code>string statCounterID = 8;</code>
+     */
+    public java.lang.String getStatCounterID() {
+      java.lang.Object ref = statCounterID_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        statCounterID_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string statCounterID = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStatCounterIDBytes() {
+      java.lang.Object ref = statCounterID_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        statCounterID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int STATCOUNTERPART_FIELD_NUMBER = 9;
+    private volatile java.lang.Object statCounterPart_;
+    /**
+     * <code>string statCounterPart = 9;</code>
+     */
+    public java.lang.String getStatCounterPart() {
+      java.lang.Object ref = statCounterPart_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        statCounterPart_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string statCounterPart = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStatCounterPartBytes() {
+      java.lang.Object ref = statCounterPart_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        statCounterPart_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CONTAINER_FIELD_NUMBER = 10;
+    private volatile java.lang.Object container_;
+    /**
+     * <code>string container = 10;</code>
+     */
+    public java.lang.String getContainer() {
+      java.lang.Object ref = container_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        container_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string container = 10;</code>
+     */
+    public com.google.protobuf.ByteString
+        getContainerBytes() {
+      java.lang.Object ref = container_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        container_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ADDRESS_FIELD_NUMBER = 11;
+    private volatile java.lang.Object address_;
+    /**
+     * <code>string address = 11;</code>
+     */
+    public java.lang.String getAddress() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        address_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string address = 11;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAddressBytes() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        address_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PHONE_FIELD_NUMBER = 12;
+    private volatile java.lang.Object phone_;
+    /**
+     * <code>string phone = 12;</code>
+     */
+    public java.lang.String getPhone() {
+      java.lang.Object ref = phone_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        phone_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string phone = 12;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPhoneBytes() {
+      java.lang.Object ref = phone_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        phone_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FAX_FIELD_NUMBER = 13;
+    private volatile java.lang.Object fax_;
+    /**
+     * <code>string fax = 13;</code>
+     */
+    public java.lang.String getFax() {
+      java.lang.Object ref = fax_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        fax_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string fax = 13;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFaxBytes() {
+      java.lang.Object ref = fax_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fax_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int REPORTFOOTER_FIELD_NUMBER = 14;
+    private volatile java.lang.Object reportFooter_;
+    /**
+     * <code>string reportFooter = 14;</code>
+     */
+    public java.lang.String getReportFooter() {
+      java.lang.Object ref = reportFooter_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        reportFooter_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string reportFooter = 14;</code>
+     */
+    public com.google.protobuf.ByteString
+        getReportFooterBytes() {
+      java.lang.Object ref = reportFooter_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        reportFooter_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+      }
+      if (!getWebsiteBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, website_);
+      }
+      if (!getSloganBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, slogan_);
+      }
+      if (!getDescriptionBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, description_);
+      }
+      if (!getIpAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, ipAddress_);
+      }
+      if (!getEmailBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, email_);
+      }
+      if (!getPaypalBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, paypal_);
+      }
+      if (!getStatCounterIDBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, statCounterID_);
+      }
+      if (!getStatCounterPartBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, statCounterPart_);
+      }
+      if (!getContainerBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, container_);
+      }
+      if (!getAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, address_);
+      }
+      if (!getPhoneBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 12, phone_);
+      }
+      if (!getFaxBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 13, fax_);
+      }
+      if (!getReportFooterBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, reportFooter_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+      }
+      if (!getWebsiteBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, website_);
+      }
+      if (!getSloganBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, slogan_);
+      }
+      if (!getDescriptionBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, description_);
+      }
+      if (!getIpAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, ipAddress_);
+      }
+      if (!getEmailBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, email_);
+      }
+      if (!getPaypalBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, paypal_);
+      }
+      if (!getStatCounterIDBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, statCounterID_);
+      }
+      if (!getStatCounterPartBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, statCounterPart_);
+      }
+      if (!getContainerBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, container_);
+      }
+      if (!getAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, address_);
+      }
+      if (!getPhoneBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, phone_);
+      }
+      if (!getFaxBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(13, fax_);
+      }
+      if (!getReportFooterBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, reportFooter_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.digitald4.common.proto.DD4Protos.Company)) {
+        return super.equals(obj);
+      }
+      com.digitald4.common.proto.DD4Protos.Company other = (com.digitald4.common.proto.DD4Protos.Company) obj;
+
+      boolean result = true;
+      result = result && getName()
+          .equals(other.getName());
+      result = result && getWebsite()
+          .equals(other.getWebsite());
+      result = result && getSlogan()
+          .equals(other.getSlogan());
+      result = result && getDescription()
+          .equals(other.getDescription());
+      result = result && getIpAddress()
+          .equals(other.getIpAddress());
+      result = result && getEmail()
+          .equals(other.getEmail());
+      result = result && getPaypal()
+          .equals(other.getPaypal());
+      result = result && getStatCounterID()
+          .equals(other.getStatCounterID());
+      result = result && getStatCounterPart()
+          .equals(other.getStatCounterPart());
+      result = result && getContainer()
+          .equals(other.getContainer());
+      result = result && getAddress()
+          .equals(other.getAddress());
+      result = result && getPhone()
+          .equals(other.getPhone());
+      result = result && getFax()
+          .equals(other.getFax());
+      result = result && getReportFooter()
+          .equals(other.getReportFooter());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + WEBSITE_FIELD_NUMBER;
+      hash = (53 * hash) + getWebsite().hashCode();
+      hash = (37 * hash) + SLOGAN_FIELD_NUMBER;
+      hash = (53 * hash) + getSlogan().hashCode();
+      hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
+      hash = (53 * hash) + getDescription().hashCode();
+      hash = (37 * hash) + IPADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getIpAddress().hashCode();
+      hash = (37 * hash) + EMAIL_FIELD_NUMBER;
+      hash = (53 * hash) + getEmail().hashCode();
+      hash = (37 * hash) + PAYPAL_FIELD_NUMBER;
+      hash = (53 * hash) + getPaypal().hashCode();
+      hash = (37 * hash) + STATCOUNTERID_FIELD_NUMBER;
+      hash = (53 * hash) + getStatCounterID().hashCode();
+      hash = (37 * hash) + STATCOUNTERPART_FIELD_NUMBER;
+      hash = (53 * hash) + getStatCounterPart().hashCode();
+      hash = (37 * hash) + CONTAINER_FIELD_NUMBER;
+      hash = (53 * hash) + getContainer().hashCode();
+      hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getAddress().hashCode();
+      hash = (37 * hash) + PHONE_FIELD_NUMBER;
+      hash = (53 * hash) + getPhone().hashCode();
+      hash = (37 * hash) + FAX_FIELD_NUMBER;
+      hash = (53 * hash) + getFax().hashCode();
+      hash = (37 * hash) + REPORTFOOTER_FIELD_NUMBER;
+      hash = (53 * hash) + getReportFooter().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.digitald4.common.proto.DD4Protos.Company parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.common.proto.DD4Protos.Company parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.digitald4.common.proto.DD4Protos.Company parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.common.proto.DD4Protos.Company parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.digitald4.common.proto.DD4Protos.Company parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.common.proto.DD4Protos.Company parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.digitald4.common.proto.DD4Protos.Company parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.digitald4.common.proto.DD4Protos.Company parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.digitald4.common.proto.DD4Protos.Company parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.digitald4.common.proto.DD4Protos.Company parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.digitald4.common.proto.DD4Protos.Company parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.digitald4.common.proto.DD4Protos.Company parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.digitald4.common.proto.DD4Protos.Company prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code common.Company}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:common.Company)
+        com.digitald4.common.proto.DD4Protos.CompanyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.digitald4.common.proto.DD4Protos.internal_static_common_Company_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.digitald4.common.proto.DD4Protos.internal_static_common_Company_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.digitald4.common.proto.DD4Protos.Company.class, com.digitald4.common.proto.DD4Protos.Company.Builder.class);
+      }
+
+      // Construct using com.digitald4.common.proto.DD4Protos.Company.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        name_ = "";
+
+        website_ = "";
+
+        slogan_ = "";
+
+        description_ = "";
+
+        ipAddress_ = "";
+
+        email_ = "";
+
+        paypal_ = "";
+
+        statCounterID_ = "";
+
+        statCounterPart_ = "";
+
+        container_ = "";
+
+        address_ = "";
+
+        phone_ = "";
+
+        fax_ = "";
+
+        reportFooter_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.digitald4.common.proto.DD4Protos.internal_static_common_Company_descriptor;
+      }
+
+      public com.digitald4.common.proto.DD4Protos.Company getDefaultInstanceForType() {
+        return com.digitald4.common.proto.DD4Protos.Company.getDefaultInstance();
+      }
+
+      public com.digitald4.common.proto.DD4Protos.Company build() {
+        com.digitald4.common.proto.DD4Protos.Company result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.digitald4.common.proto.DD4Protos.Company buildPartial() {
+        com.digitald4.common.proto.DD4Protos.Company result = new com.digitald4.common.proto.DD4Protos.Company(this);
+        result.name_ = name_;
+        result.website_ = website_;
+        result.slogan_ = slogan_;
+        result.description_ = description_;
+        result.ipAddress_ = ipAddress_;
+        result.email_ = email_;
+        result.paypal_ = paypal_;
+        result.statCounterID_ = statCounterID_;
+        result.statCounterPart_ = statCounterPart_;
+        result.container_ = container_;
+        result.address_ = address_;
+        result.phone_ = phone_;
+        result.fax_ = fax_;
+        result.reportFooter_ = reportFooter_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.digitald4.common.proto.DD4Protos.Company) {
+          return mergeFrom((com.digitald4.common.proto.DD4Protos.Company)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.digitald4.common.proto.DD4Protos.Company other) {
+        if (other == com.digitald4.common.proto.DD4Protos.Company.getDefaultInstance()) return this;
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          onChanged();
+        }
+        if (!other.getWebsite().isEmpty()) {
+          website_ = other.website_;
+          onChanged();
+        }
+        if (!other.getSlogan().isEmpty()) {
+          slogan_ = other.slogan_;
+          onChanged();
+        }
+        if (!other.getDescription().isEmpty()) {
+          description_ = other.description_;
+          onChanged();
+        }
+        if (!other.getIpAddress().isEmpty()) {
+          ipAddress_ = other.ipAddress_;
+          onChanged();
+        }
+        if (!other.getEmail().isEmpty()) {
+          email_ = other.email_;
+          onChanged();
+        }
+        if (!other.getPaypal().isEmpty()) {
+          paypal_ = other.paypal_;
+          onChanged();
+        }
+        if (!other.getStatCounterID().isEmpty()) {
+          statCounterID_ = other.statCounterID_;
+          onChanged();
+        }
+        if (!other.getStatCounterPart().isEmpty()) {
+          statCounterPart_ = other.statCounterPart_;
+          onChanged();
+        }
+        if (!other.getContainer().isEmpty()) {
+          container_ = other.container_;
+          onChanged();
+        }
+        if (!other.getAddress().isEmpty()) {
+          address_ = other.address_;
+          onChanged();
+        }
+        if (!other.getPhone().isEmpty()) {
+          phone_ = other.phone_;
+          onChanged();
+        }
+        if (!other.getFax().isEmpty()) {
+          fax_ = other.fax_;
+          onChanged();
+        }
+        if (!other.getReportFooter().isEmpty()) {
+          reportFooter_ = other.reportFooter_;
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.digitald4.common.proto.DD4Protos.Company parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.digitald4.common.proto.DD4Protos.Company) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>string name = 1;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string name = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string name = 1;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string name = 1;</code>
+       */
+      public Builder clearName() {
+        
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string name = 1;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object website_ = "";
+      /**
+       * <code>string website = 2;</code>
+       */
+      public java.lang.String getWebsite() {
+        java.lang.Object ref = website_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          website_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string website = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getWebsiteBytes() {
+        java.lang.Object ref = website_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          website_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string website = 2;</code>
+       */
+      public Builder setWebsite(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        website_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string website = 2;</code>
+       */
+      public Builder clearWebsite() {
+        
+        website_ = getDefaultInstance().getWebsite();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string website = 2;</code>
+       */
+      public Builder setWebsiteBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        website_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object slogan_ = "";
+      /**
+       * <code>string slogan = 3;</code>
+       */
+      public java.lang.String getSlogan() {
+        java.lang.Object ref = slogan_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          slogan_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string slogan = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSloganBytes() {
+        java.lang.Object ref = slogan_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          slogan_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string slogan = 3;</code>
+       */
+      public Builder setSlogan(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        slogan_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string slogan = 3;</code>
+       */
+      public Builder clearSlogan() {
+        
+        slogan_ = getDefaultInstance().getSlogan();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string slogan = 3;</code>
+       */
+      public Builder setSloganBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        slogan_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object description_ = "";
+      /**
+       * <code>string description = 4;</code>
+       */
+      public java.lang.String getDescription() {
+        java.lang.Object ref = description_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          description_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string description = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDescriptionBytes() {
+        java.lang.Object ref = description_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          description_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string description = 4;</code>
+       */
+      public Builder setDescription(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        description_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string description = 4;</code>
+       */
+      public Builder clearDescription() {
+        
+        description_ = getDefaultInstance().getDescription();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string description = 4;</code>
+       */
+      public Builder setDescriptionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        description_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object ipAddress_ = "";
+      /**
+       * <code>string ipAddress = 5;</code>
+       */
+      public java.lang.String getIpAddress() {
+        java.lang.Object ref = ipAddress_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ipAddress_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string ipAddress = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIpAddressBytes() {
+        java.lang.Object ref = ipAddress_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ipAddress_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string ipAddress = 5;</code>
+       */
+      public Builder setIpAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        ipAddress_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ipAddress = 5;</code>
+       */
+      public Builder clearIpAddress() {
+        
+        ipAddress_ = getDefaultInstance().getIpAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ipAddress = 5;</code>
+       */
+      public Builder setIpAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        ipAddress_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object email_ = "";
+      /**
+       * <code>string email = 6;</code>
+       */
+      public java.lang.String getEmail() {
+        java.lang.Object ref = email_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          email_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string email = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getEmailBytes() {
+        java.lang.Object ref = email_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          email_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string email = 6;</code>
+       */
+      public Builder setEmail(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        email_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string email = 6;</code>
+       */
+      public Builder clearEmail() {
+        
+        email_ = getDefaultInstance().getEmail();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string email = 6;</code>
+       */
+      public Builder setEmailBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        email_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object paypal_ = "";
+      /**
+       * <code>string paypal = 7;</code>
+       */
+      public java.lang.String getPaypal() {
+        java.lang.Object ref = paypal_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          paypal_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string paypal = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPaypalBytes() {
+        java.lang.Object ref = paypal_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          paypal_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string paypal = 7;</code>
+       */
+      public Builder setPaypal(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        paypal_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string paypal = 7;</code>
+       */
+      public Builder clearPaypal() {
+        
+        paypal_ = getDefaultInstance().getPaypal();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string paypal = 7;</code>
+       */
+      public Builder setPaypalBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        paypal_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object statCounterID_ = "";
+      /**
+       * <code>string statCounterID = 8;</code>
+       */
+      public java.lang.String getStatCounterID() {
+        java.lang.Object ref = statCounterID_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          statCounterID_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string statCounterID = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getStatCounterIDBytes() {
+        java.lang.Object ref = statCounterID_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          statCounterID_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string statCounterID = 8;</code>
+       */
+      public Builder setStatCounterID(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        statCounterID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string statCounterID = 8;</code>
+       */
+      public Builder clearStatCounterID() {
+        
+        statCounterID_ = getDefaultInstance().getStatCounterID();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string statCounterID = 8;</code>
+       */
+      public Builder setStatCounterIDBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        statCounterID_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object statCounterPart_ = "";
+      /**
+       * <code>string statCounterPart = 9;</code>
+       */
+      public java.lang.String getStatCounterPart() {
+        java.lang.Object ref = statCounterPart_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          statCounterPart_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string statCounterPart = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+          getStatCounterPartBytes() {
+        java.lang.Object ref = statCounterPart_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          statCounterPart_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string statCounterPart = 9;</code>
+       */
+      public Builder setStatCounterPart(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        statCounterPart_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string statCounterPart = 9;</code>
+       */
+      public Builder clearStatCounterPart() {
+        
+        statCounterPart_ = getDefaultInstance().getStatCounterPart();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string statCounterPart = 9;</code>
+       */
+      public Builder setStatCounterPartBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        statCounterPart_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object container_ = "";
+      /**
+       * <code>string container = 10;</code>
+       */
+      public java.lang.String getContainer() {
+        java.lang.Object ref = container_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          container_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string container = 10;</code>
+       */
+      public com.google.protobuf.ByteString
+          getContainerBytes() {
+        java.lang.Object ref = container_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          container_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string container = 10;</code>
+       */
+      public Builder setContainer(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        container_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string container = 10;</code>
+       */
+      public Builder clearContainer() {
+        
+        container_ = getDefaultInstance().getContainer();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string container = 10;</code>
+       */
+      public Builder setContainerBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        container_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object address_ = "";
+      /**
+       * <code>string address = 11;</code>
+       */
+      public java.lang.String getAddress() {
+        java.lang.Object ref = address_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          address_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string address = 11;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAddressBytes() {
+        java.lang.Object ref = address_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          address_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string address = 11;</code>
+       */
+      public Builder setAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        address_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 11;</code>
+       */
+      public Builder clearAddress() {
+        
+        address_ = getDefaultInstance().getAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string address = 11;</code>
+       */
+      public Builder setAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        address_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object phone_ = "";
+      /**
+       * <code>string phone = 12;</code>
+       */
+      public java.lang.String getPhone() {
+        java.lang.Object ref = phone_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          phone_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string phone = 12;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPhoneBytes() {
+        java.lang.Object ref = phone_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          phone_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string phone = 12;</code>
+       */
+      public Builder setPhone(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        phone_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string phone = 12;</code>
+       */
+      public Builder clearPhone() {
+        
+        phone_ = getDefaultInstance().getPhone();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string phone = 12;</code>
+       */
+      public Builder setPhoneBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        phone_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object fax_ = "";
+      /**
+       * <code>string fax = 13;</code>
+       */
+      public java.lang.String getFax() {
+        java.lang.Object ref = fax_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          fax_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string fax = 13;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFaxBytes() {
+        java.lang.Object ref = fax_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fax_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string fax = 13;</code>
+       */
+      public Builder setFax(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        fax_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string fax = 13;</code>
+       */
+      public Builder clearFax() {
+        
+        fax_ = getDefaultInstance().getFax();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string fax = 13;</code>
+       */
+      public Builder setFaxBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        fax_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object reportFooter_ = "";
+      /**
+       * <code>string reportFooter = 14;</code>
+       */
+      public java.lang.String getReportFooter() {
+        java.lang.Object ref = reportFooter_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          reportFooter_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string reportFooter = 14;</code>
+       */
+      public com.google.protobuf.ByteString
+          getReportFooterBytes() {
+        java.lang.Object ref = reportFooter_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          reportFooter_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string reportFooter = 14;</code>
+       */
+      public Builder setReportFooter(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        reportFooter_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string reportFooter = 14;</code>
+       */
+      public Builder clearReportFooter() {
+        
+        reportFooter_ = getDefaultInstance().getReportFooter();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string reportFooter = 14;</code>
+       */
+      public Builder setReportFooterBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        reportFooter_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:common.Company)
+    }
+
+    // @@protoc_insertion_point(class_scope:common.Company)
+    private static final com.digitald4.common.proto.DD4Protos.Company DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.digitald4.common.proto.DD4Protos.Company();
+    }
+
+    public static com.digitald4.common.proto.DD4Protos.Company getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Company>
+        PARSER = new com.google.protobuf.AbstractParser<Company>() {
+      public Company parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Company(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Company> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Company> getParserForType() {
+      return PARSER;
+    }
+
+    public com.digitald4.common.proto.DD4Protos.Company getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_common_GeneralData_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_common_GeneralData_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_common_DataFile_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_common_DataFile_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_common_User_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_common_User_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_common_Company_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_common_Company_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static com.google.protobuf.Descriptors.FileDescriptor
+  private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -4078,19 +6118,24 @@ public final class DD4Protos {
       "\n\002id\030\001 \001(\005\022\020\n\010group_id\030\002 \001(\005\022\023\n\013in_group" +
       "_id\030\003 \001(\005\022\014\n\004name\030\004 \001(\t\022\014\n\004rank\030\005 \001(\001\022\016\n" +
       "\006active\030\006 \001(\010\022\023\n\013description\030\007 \001(\t\022\014\n\004da" +
-      "ta\030\010 \001(\t\"\231\001\n\010DataFile\022\n\n\002id\030\001 \002(\005\022\014\n\004nam" +
-      "e\030\002 \002(\t\022\'\n\004type\030\003 \002(\0162\031.common.DataFile." +
-      "FileType\022\014\n\004size\030\004 \001(\005\022\014\n\004data\030\005 \001(\014\".\n\010" +
-      "FileType\022\017\n\013UNSPECIFIED\020\000\022\010\n\004MISC\020\001\022\007\n\003P" +
-      "DF\020\002\"\243\002\n\004User\022\n\n\002id\030\001 \001(\005\022#\n\004type\030\002 \001(\0162" +
-      "\025.common.User.UserType\022\021\n\tuser_name\030\003 \001(",
-      "\t\022\r\n\005email\030\004 \001(\t\022\022\n\nfirst_name\030\005 \001(\t\022\021\n\t" +
-      "last_name\030\006 \001(\t\022\021\n\tfull_name\030\007 \001(\t\022\020\n\010di" +
-      "sabled\030\010 \001(\010\022\021\n\tread_only\030\t \001(\010\022\r\n\005notes" +
-      "\030\n \001(\t\022\022\n\nlast_login\030\013 \001(\003\022\020\n\010password\030\014" +
-      " \001(\t\"4\n\010UserType\022\017\n\013UNSPECIFIED\020\000\022\t\n\005ADM" +
-      "IN\020\001\022\014\n\010STANDARD\020\002B\'\n\032com.digitald4.comm" +
-      "on.protoB\tDD4Protos"
+      "ta\030\010 \001(\t\"N\n\010DataFile\022\n\n\002id\030\001 \001(\005\022\014\n\004name" +
+      "\030\002 \001(\t\022\014\n\004type\030\003 \001(\t\022\014\n\004size\030\004 \001(\005\022\014\n\004da" +
+      "ta\030\005 \001(\014\"\243\002\n\004User\022\n\n\002id\030\001 \001(\005\022#\n\004type\030\002 " +
+      "\001(\0162\025.common.User.UserType\022\021\n\tuser_name\030" +
+      "\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\022\n\nfirst_name\030\005 \001(\t" +
+      "\022\021\n\tlast_name\030\006 \001(\t\022\021\n\tfull_name\030\007 \001(\t\022\020",
+      "\n\010disabled\030\010 \001(\010\022\021\n\tread_only\030\t \001(\010\022\r\n\005n" +
+      "otes\030\n \001(\t\022\022\n\nlast_login\030\013 \001(\003\022\020\n\010passwo" +
+      "rd\030\014 \001(\t\"4\n\010UserType\022\017\n\013UNSPECIFIED\020\000\022\t\n" +
+      "\005ADMIN\020\001\022\014\n\010STANDARD\020\002\"\205\002\n\007Company\022\014\n\004na" +
+      "me\030\001 \001(\t\022\017\n\007website\030\002 \001(\t\022\016\n\006slogan\030\003 \001(" +
+      "\t\022\023\n\013description\030\004 \001(\t\022\021\n\tipAddress\030\005 \001(" +
+      "\t\022\r\n\005email\030\006 \001(\t\022\016\n\006paypal\030\007 \001(\t\022\025\n\rstat" +
+      "CounterID\030\010 \001(\t\022\027\n\017statCounterPart\030\t \001(\t" +
+      "\022\021\n\tcontainer\030\n \001(\t\022\017\n\007address\030\013 \001(\t\022\r\n\005" +
+      "phone\030\014 \001(\t\022\013\n\003fax\030\r \001(\t\022\024\n\014reportFooter",
+      "\030\016 \001(\tB\'\n\032com.digitald4.common.protoB\tDD" +
+      "4Protosb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4107,21 +6152,27 @@ public final class DD4Protos {
     internal_static_common_GeneralData_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_common_GeneralData_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_common_GeneralData_descriptor,
         new java.lang.String[] { "Id", "GroupId", "InGroupId", "Name", "Rank", "Active", "Description", "Data", });
     internal_static_common_DataFile_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_common_DataFile_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_common_DataFile_descriptor,
         new java.lang.String[] { "Id", "Name", "Type", "Size", "Data", });
     internal_static_common_User_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_common_User_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_common_User_descriptor,
         new java.lang.String[] { "Id", "Type", "UserName", "Email", "FirstName", "LastName", "FullName", "Disabled", "ReadOnly", "Notes", "LastLogin", "Password", });
+    internal_static_common_Company_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_common_Company_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_common_Company_descriptor,
+        new java.lang.String[] { "Name", "Website", "Slogan", "Description", "IpAddress", "Email", "Paypal", "StatCounterID", "StatCounterPart", "Container", "Address", "Phone", "Fax", "ReportFooter", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

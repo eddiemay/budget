@@ -14,7 +14,7 @@
         </td>
 				<td>
 					<select data-ng-model="account.parent_account_id"
-                  data-ng-options="parent.id as parent.name for parent in accountsCtrl.accounts"
+                  data-ng-options="parent.id as parent.name for parent in accountsCtrl.listAccounts"
                   data-ng-change="accountsCtrl.updateAccount(account, 'parent_account_id')">
 					</select>
 				</td>
@@ -33,7 +33,7 @@
 				<td><input type="text" data-ng-model="accountsCtrl.newAccount.name"></td>
 				<td>
 					<select data-ng-model="accountsCtrl.newAccount.parent_account_id"
-                  data-ng-options="parent.id as parent.name for parent in accountsCtrl.accounts">
+                  data-ng-options="parent.id as parent.name for parent in accountsCtrl.listAccounts">
 					</select>
 				</td>
 				<td class="th table-check-cell">

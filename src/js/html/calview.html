@@ -4,13 +4,13 @@
 		
 		<div class="block-controls">
 			<ul class="controls-buttons">
-				<li><a data-ng-click="calCtrl.sharedData.prevMonth()" title="Previous month">
+				<li><a data-ng-click="calCtrl.sharedData.prev()" title="Previous month">
           <img src="images/icons/fugue/navigation-180.png" width="16" height="16">
         </a></li>
 				<li class="sep"></li>
-				<li class="controls-block"><strong>{{calCtrl.sharedData.getMonth() | date:'MMM yyyy'}}</strong></li>
+				<li class="controls-block"><strong>{{calCtrl.sharedData.getStartDate() | date:'MMM yyyy'}}</strong></li>
 				<li class="sep"></li>
-				<li><a data-ng-click="calCtrl.sharedData.nextMonth()" title="Next month">
+				<li><a data-ng-click="calCtrl.sharedData.next()" title="Next month">
           <img src="images/icons/fugue/navigation.png" width="16" height="16">
         </a></li>
 			</ul>
@@ -72,7 +72,7 @@
 						<div class="columns">
 							<div class="colx2-left">
 								<label>Date</label>
-                <input class="datepicker" type="text" data-ng-model="calCtrl.newBill.due_date">
+                <input class="datepicker" type="text" data-ng-model="calCtrl.newBill.dueDate">
                 <img src="images/icons/fugue/calendar-month.png" width="16" height="16">
 							</div>
 							<div class="colx2-right">
@@ -123,7 +123,7 @@
 						<div class="columns">
 							<div class="colx2-left">
 								<label>Date</label>
-                <div data-dd4-datepicker="calCtrl.updateBill('due_date')" data-ng-model="calCtrl.eBill.due_date">
+                <div data-dd4-datepicker="calCtrl.updateBill('dueDate')" data-ng-model="calCtrl.eBill.dueDate">
                 </div>
 							</div>
 							<div class="colx2-right">

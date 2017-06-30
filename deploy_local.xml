@@ -118,7 +118,7 @@
 				<include name="javax.mail.jar" />
 				<include name="joda-time*.jar" />
 				<include name="mysql-connector*.jar" />
-				<include name="protobuf-java-3.0.0-beta-2.jar" />
+				<include name="protobuf-java-3.3.0.jar" />
 			</fileset>
 		</copy>
         <copy todir="webapps/${app.name}/js/html" flatten="true">

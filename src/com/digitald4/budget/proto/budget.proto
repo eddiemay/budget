@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package budget;
+
+// import "common_ui.proto";
+
+option java_package = "com.digitald4.budget.proto";
+option java_outer_classname = "BudgetProtos";
+
+enum UserRole {
+	UR_UNKNOWN = 0;
+	UR_OWNER = 12;
+  UR_CAN_EDIT = 2;
+	UR_READONLY = 3;
+}
+
+message Portfolio {
+	int32 id = 1;
+	string name = 2;
+
+	message PortfolioUser {
+		int32 user_id = 1;
+		UserRole role = 2;
+	}
+	repeated PortfolioUser portfolio_user = 4;
+}
+
+message Account {
+  int32 id = 1;
+  int32 portfolio_id = 2;
+  string name = 3;
+  bool payment_account = 4;
+  int32 parent_account_id = 5;
+}
+
+message Balance {
+  int32 id = 1;
+  int32 account_id = 2;
+  string account_name = 3;
+  int32 portfolio_id = 4;
+  int32 year = 5;
+  int32 month = 6;
+  double balance = 7;
+  double balance_y_t_d = 8;
+}
+
+message Bill {
+	int32 id = 1;
+  int32 portfolio_id = 2;
+	int32 account_id = 3;
+  string account_name = 4;
+	int32 template_id = 5;
+  int32 year = 6;
+  int32 month = 7;
+  int32 day = 8;
+	double amount_due = 9;
+	string name = 10;
+	int64 payment_date = 11;
+
+	enum PaymentStatus {
+		PS_UNKNOWN = 0;
+		PS_ESTIMATED_AMOUNT = 1;
+		PS_BILLED_AMOUNT = 2;
+		PS_SCHEDULED = 3;
+		PS_PENDING = 4;
+		PS_PAID = 5;
+	}
+	PaymentStatus status = 12;
+	int32 rank = 13;
+	bool in_active = 14;
+	string description = 15;
+
+	message Transaction {
+		double amount = 1;
+		int64 payment_date = 2;
+		PaymentStatus status = 3;
+    bool in_active = 4;
+	}
+  map<int32, Transaction> transaction = 16;
+}
+
+message Template {
+  int32 id = 1;
+  int32 portfolio_id = 2;
+  string name = 3;
+}
+
+message TemplateBill {
+  int32 id = 1;
+  int32 template_id = 2;
+  int32 account_id = 3;
+  int32 due_day = 4;
+  string name = 5;
+  string account_name = 6;
+  double amount_due = 7;
+  map<int32, double> transaction = 8;
+}

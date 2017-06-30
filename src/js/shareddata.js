@@ -1,6 +1,21 @@
 com.digitald4.budget.SharedData = function() {
 	var today = new Date();
-	this.month = new Date(today.getFullYear(), today.getMonth(), 1);
+	this.startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+	this.controlType = this.CONTROL_TYPE.NONE;
+};
+
+com.digitald4.budget.SharedData.prototype.CONTROL_TYPE = {
+  NONE: 0,
+  MONTH: 1,
+  YEAR: 2,
+};
+
+com.digitald4.budget.SharedData.prototype.setControlType = function(controlType) {
+  this.controlType = controlType;
+};
+
+com.digitald4.budget.SharedData.prototype.getControlType = function() {
+  return this.controlType;
 };
 
 com.digitald4.budget.SharedData.prototype.refresh = function() {
@@ -21,30 +36,45 @@ com.digitald4.budget.SharedData.prototype.getSelectedPortfolioId = function() {
 };
 
 com.digitald4.budget.SharedData.prototype.getMonth = function() {
-	return this.month;
+	return this.startDate.getMonth() + 1;
 };
 
-com.digitald4.budget.SharedData.prototype.setMonth =
-		function(year, month) {
-	this.month = new Date(year, month, 1);
+com.digitald4.budget.SharedData.prototype.setMonth = function(year, month) {
+	this.startDate = new Date(year, month, 1);
 	this.refresh();
 };
 
-com.digitald4.budget.SharedData.prototype.prevMonth = function() {
-	this.month.setDate(0);
-	this.month.setDate(1);
+com.digitald4.budget.SharedData.prototype.getYear = function() {
+	return this.startDate.getFullYear();
+};
+
+com.digitald4.budget.SharedData.prototype.setYear = function(year) {
+	this.startDate.setYear(year);
 	this.refresh();
 };
 
-com.digitald4.budget.SharedData.prototype.nextMonth = function() {
-	this.month.setDate(32);
-	this.month.setDate(1);
-	this.refresh();
+com.digitald4.budget.SharedData.prototype.prev = function() {
+  if (this.controlType == this.CONTROL_TYPE.MONTH) {
+    this.startDate.setDate(0);
+    this.startDate.setDate(1);
+    this.refresh();
+  } else if (this.controlType == this.CONTROL_TYPE.YEAR) {
+    this.setYear(this.getYear() - 1);
+  }
+};
+
+com.digitald4.budget.SharedData.prototype.next = function() {
+  if (this.controlType == this.CONTROL_TYPE.MONTH) {
+    this.startDate.setDate(32);
+    this.startDate.setDate(1);
+    this.refresh();
+  } else if (this.controlType == this.CONTROL_TYPE.YEAR) {
+    this.setYear(this.getYear() + 1);
+  }
 };
 
 com.digitald4.budget.SharedData.prototype.getStartDate = function() {
-	var startDate = new Date(this.month.getFullYear(), this.month.getMonth(), 1);
-	return startDate;
+	return this.startDate;
 };
 
 com.digitald4.budget.SharedData.prototype.getEndDate = function() {

@@ -8,8 +8,8 @@
 		<thead><tr>
 				<th class="black-cell"><span class="loading"></span></th>
 				<th>Date</th><th>Bill</th><th>Name</th><th>Amount Due</th>
-				<th data-ng-repeat="ba in listCtrl.bankAccounts">
-					{{ba.name}}
+				<th data-ng-repeat="pa in listCtrl.paymentAccounts">
+					{{pa.name}}
 				</th>
 				<th>Status</th>
 		</tr></thead>
@@ -20,7 +20,7 @@
 					<a data-ng-show="bill.selected" data-ng-click="listCtrl.deleteBill(bill)"><button>Delete</button></a>
 				</td>
 				<td>
-					<div data-dd4-datepicker="listCtrl.updateBill(bill, 'due_date')" data-ng-model="bill.due_date">
+					<div data-dd4-datepicker="listCtrl.updateBill(bill, 'dueDate')" data-ng-model="bill.dueDate">
 					</div>
 				</td>
 				<td>
@@ -36,10 +36,10 @@
 							data-on-change="listCtrl.updateBill(bill, 'amount_due')">
 					{{bill.balancePost | currency}}
 				</td>
-				<td data-ng-repeat="tran in bill.trans">
-					<input type="text" data-ng-model="tran.amount" size="8"
-							data-on-change="listCtrl.updateBillTrans(bill)">
-					{{tran.balancePost | currency}}
+				<td data-ng-repeat="pa in listCtrl.paymentAccounts">
+					<input type="text" data-ng-model="bill.transaction[pa.id].amount" size="8"
+                 data-on-change="listCtrl.updateBill(bill, 'transaction')">
+					{{bill.balancesPost[pa.id] | currency}}
 				</td>
 				<td>
 					<select data-ng-model="bill.status" data-ng-change="listCtrl.updateBill(bill, 'status')"
@@ -55,7 +55,7 @@
 					</div>
 				</td>
 				<td>
-					<div data-dd4-datepicker data-ng-model="listCtrl.newBill.due_date"></div>
+					<div data-dd4-datepicker data-ng-model="listCtrl.newBill.dueDate"></div>
 				</td>
 				<td>
 					<select data-ng-model="listCtrl.newBill.account_id"
@@ -64,8 +64,8 @@
 				</td>
 				<td><input type="text" data-ng-model="listCtrl.newBill.name"></td>
 				<td><input type="text" data-ng-model="listCtrl.newBill.amount_due" size="8"></td>
-				<td data-ng-repeat="tran in listCtrl.newBill.trans">
-					<input type="text" data-ng-model="tran.amount" size="8">
+				<td data-ng-repeat="pa in listCtrl.paymentAccounts">
+					<input type="text" data-ng-model="listCtrl.newBill.transaction[pa.id].amount" size="8">
 				</td>
 				<td>
 					<select data-ng-model="listCtrl.newBill.status"
