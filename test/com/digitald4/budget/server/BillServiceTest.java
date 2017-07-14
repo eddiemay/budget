@@ -16,6 +16,7 @@ import com.digitald4.budget.storage.BalanceStore;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.test.TestCase;
 import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
+import com.digitald4.common.server.DualProtoService;
 import com.digitald4.common.storage.DAOProtoSQLImpl;
 import com.digitald4.common.exception.DD4StorageException;
 
@@ -26,6 +27,8 @@ import java.util.List;
 
 import com.googlecode.protobuf.format.JsonFormat;
 import java.util.Map;
+import java.util.stream.Collectors;
+import org.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -71,11 +74,16 @@ public class BillServiceTest extends TestCase {
 		BillStore store = new BillStore(new DAOProtoSQLImpl<>(Bill.class, dbConnector), null,null);
 		BillService service = new BillService(store, null);
 		
-		List<Bill> bills = service.list(BillListRequest.newBuilder()
-				.setPortfolioId(3)
-				.setYear(2016)
-				.setMonth(6)
-				.build());
+		List<Bill> bills = service
+				.list(BillListRequest.newBuilder()
+						.setPortfolioId(3)
+						.setYear(2016)
+						.setMonth(6)
+						.build())
+				.getItemsList()
+				.stream()
+				.map(json -> DualProtoService.transformJSONRequest(Bill.getDefaultInstance(), new JSONObject(json)))
+				.collect(Collectors.toList());
 		assertTrue(bills.size() > 0);
 		assertTrue(bills.get(0).getTransactionMap().size() > 0);
 		assertTrue(bills.get(0).getTransactionMap().values().iterator().next().getAmount() != 0);
@@ -89,18 +97,23 @@ public class BillServiceTest extends TestCase {
 		Store<Template> templateStore = new GenericStore<>(new DAOProtoSQLImpl<>(Template.class, dbConnector));
 		BillService service = new BillService(store, templateStore);
 		
-		List<Bill> bills = service.list(BillListRequest.newBuilder()
-				.setPortfolioId(3)
-				.setYear(2017)
-				.setMonth(7)
-				.build());
+		List<Bill> bills = service
+				.list(BillListRequest.newBuilder()
+					.setPortfolioId(3)
+					.setYear(2017)
+					.setMonth(7)
+					.build())
+				.getItemsList()
+				.stream()
+				.map(json -> DualProtoService.transformJSONRequest(Bill.getDefaultInstance(), new JSONObject(json)))
+				.collect(Collectors.toList());
 		assertTrue(bills.isEmpty());
 		
 		bills = service.applyTemplate(ApplyTemplateRequest.newBuilder()
 				.setTemplateId(1)
 				.setYear(2017)
 				.setMonth(6)
-				.build());
+				.build()).getItemsList();
 		assertTrue(bills.size() > 0);
 		assertTrue(bills.get(0).getTransactionMap().size() > 0);
 		assertTrue(bills.get(0).getTransactionMap().values().iterator().next().getAmount() != 0);

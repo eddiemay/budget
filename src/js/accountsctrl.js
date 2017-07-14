@@ -7,11 +7,11 @@ com.digitald4.budget.AccountsCtrl = function(sharedData, accountService) {
 };
 
 com.digitald4.budget.AccountsCtrl.prototype.refresh = function() {
-	this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(accounts) {
-	  this.accounts = accounts;
+	this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(response) {
+	  this.accounts = response.items;
 	  this.listAccounts = [{name: '', id: 0}];
-	  for (var a = 0; a < accounts.length; a++) {
-	    this.listAccounts.push(accounts[a]);
+	  for (var a = 0; a < this.accounts.length; a++) {
+	    this.listAccounts.push(this.accounts[a]);
 	  }
 	}.bind(this), notify);
 	this.newAccount = {portfolio_id: this.sharedData.getSelectedPortfolioId()};

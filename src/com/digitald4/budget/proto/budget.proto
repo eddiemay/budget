@@ -19,8 +19,9 @@ message Portfolio {
 	string name = 2;
 
 	message PortfolioUser {
-		int32 user_id = 1;
-		UserRole role = 2;
+    int32 portfolio_id = 1;
+		int32 user_id = 2;
+		UserRole role = 3;
 	}
 	repeated PortfolioUser portfolio_user = 4;
 }

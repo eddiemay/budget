@@ -6,6 +6,8 @@ com.digitald4.budget.ListCtrl = function($filter, sharedData, billService, balan
 	this.sharedData = sharedData;
 	this.billService = billService;
 	this.balanceService = balanceService;
+	this.accountService = accountService;
+	this.templateService = templateService;
 	this.statuses = [
 	    {id: 0, name: 'Unknown'},
 	    {id: 1, name: 'Estimated'},
@@ -13,23 +15,6 @@ com.digitald4.budget.ListCtrl = function($filter, sharedData, billService, balan
 	    {id: 3, name: 'Scheduled'},
 	    {id: 4, name: 'Pending'},
 	    {id: 5, name: 'Paided'}];
-	    
-	accountService.list(this.sharedData.getSelectedPortfolioId(), function(accounts) {
-		this.accounts = accounts;
-    if (this.balances && this.bills) {
-      this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills, this.balances);
-    }
-		this.paymentAccounts = [];
-		for (var a = 0; a < accounts.length; a++) {
-			if (accounts[a].payment_account) {
-				this.paymentAccounts.push(accounts[a]);
-			}
-		}
-	}.bind(this), notify);
-
-	templateService.list(this.sharedData.getSelectedPortfolioId(), function(templates) {
-		this.templates = templates;
-	}.bind(this), notify);
 	this.makeNew();
 	this.refresh();
 };
@@ -119,17 +104,37 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 	this.bills = undefined;
 	this.balances = undefined;
 
+	if (this.selectedPortfolioId != this.sharedData.getSelectedPortfolioId()) {
+	  this.selectedPortfolioId = this.sharedData.getSelectedPortfolioId();
+    this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(response) {
+      this.accounts = response.items;
+      if (this.balances && this.bills) {
+        this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills, this.balances);
+      }
+      this.paymentAccounts = [];
+      for (var a = 0; a < this.accounts.length; a++) {
+        if (this.accounts[a].payment_account) {
+          this.paymentAccounts.push(this.accounts[a]);
+        }
+      }
+    }.bind(this), notify);
+
+    this.templateService.list(this.sharedData.getSelectedPortfolioId(), function(templates) {
+      this.templates = templates;
+    }.bind(this), notify);
+  }
+
 	this.balanceService.list(this.sharedData.getSelectedPortfolioId(), this.sharedData.getYear(),
-	    this.sharedData.getMonth(), function(balances) {
-    this.balances = balances;
+	    this.sharedData.getMonth(), function(response) {
+    this.balances = response.items;
     if (this.accounts && this.bills) {
       this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills, this.balances);
     }
   }.bind(this), notify);
 
 	this.billService.list(this.sharedData.getSelectedPortfolioId(), this.sharedData.getYear(), this.sharedData.getMonth(),
-	    function(bills) {
-    var sorted = com.digitald4.budget.ListCtrl.sortBills(bills);
+	    function(response) {
+    var sorted = com.digitald4.budget.ListCtrl.sortBills(response.items);
     if (this.accounts && this.balances) {
       this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sorted, this.balances);
     } else {
@@ -191,20 +196,18 @@ com.digitald4.budget.ListCtrl.prototype.updateBill = function(bill, property) {
 com.digitald4.budget.ListCtrl.prototype.deleteBill = function(bill) {
 	var index = this.bills.indexOf(bill);
 	this.billService.Delete(bill.id, function(success) {
-		if (success) {
-			this.bills.splice(index, 1);
-			com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills, this.balances);
-		}
+    this.bills.splice(index, 1);
+    com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills, this.balances);
 	}.bind(this), notify);
 };
 
 com.digitald4.budget.ListCtrl.prototype.applyTemplate = function() {
 	this.applyTemplateError = undefined;
 	this.billService.applyTemplate(this.selectedTemplate, this.sharedData.getYear(), this.sharedData.getMonth(),
-	    function(bills) {
+	    function(response) {
     var sortedBills = [];
     for (var b = 0; b < bills.length; b++) {
-      com.digitald4.budget.ListCtrl.insertBill(sortedBills, bills[b]);
+      com.digitald4.budget.ListCtrl.insertBill(sortedBills, response.items[b]);
     }
     this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sortedBills, this.balances);
   }.bind(this), notify);

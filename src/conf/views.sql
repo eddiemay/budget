@@ -1,7 +1,7 @@
 CREATE OR REPLACE VIEW V_PORTFOLIO AS
-		SELECT Portfolio.*, UserPortfolio.*
+		SELECT Portfolio.*, PortfolioUser.*
 		FROM Portfolio
-		LEFT JOIN UserPortfolio ON Portfolio.ID = UserPortfolio.PORTFOLIO_ID;
+		LEFT JOIN PortfolioUser ON Portfolio.ID = PortfolioUser.PORTFOLIO_ID;
 
 CREATE OR REPLACE VIEW V_BILL AS
     SELECT BILL.*, ACCOUNT.NAME AS ACCOUNT_NAME

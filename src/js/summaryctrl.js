@@ -10,7 +10,8 @@ com.digitald4.budget.SummaryCtrl = function(sharedData, accountService, balanceS
 com.digitald4.budget.SummaryCtrl.prototype.refresh = function() {
   this.balances = undefined;
   this.nextJan = undefined;
-	this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(accounts) {
+	this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(response) {
+	  var accounts = response.items;
 		var topLevelAccounts = [];
 		var accountHash = {};
 		for (var a = 0; a < accounts.length; a++) {
@@ -36,7 +37,7 @@ com.digitald4.budget.SummaryCtrl.prototype.refresh = function() {
 
 	this.balanceService.list(this.sharedData.getSelectedPortfolioId(), this.sharedData.getYear(), undefined,
 	    function(balances) {
-	  this.balances = balances[0];
+	  this.balances = balances;
 	  if (this.topLevelAccounts && this.nextJan) {
 	    this.buildSummary();
 	  }

@@ -19,7 +19,9 @@ public class TemplateServiceTest extends TestCase {
 		Store<Template> store = new GenericStore<>(new DAOProtoSQLImpl<>(Template.class, dbConnector));
 		TemplateService service = new TemplateService(store);
 		
-		JSONArray templates = service.list(new JSONObject().put("portfolio_id", 3));
-		assertTrue(templates.length() > 0);
+		JSONObject templates = service.list(new JSONObject().put("portfolio_id", 3));
+		assertTrue(templates.getJSONArray("item").length() > 0);
+		assertTrue(templates.getInt("total_size") > 0);
+		assertEquals(templates.getInt("total_size"), templates.getJSONArray("item").length() );
 	}
 }

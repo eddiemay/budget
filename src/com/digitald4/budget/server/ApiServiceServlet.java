@@ -3,6 +3,7 @@ package com.digitald4.budget.server;
 import com.digitald4.budget.proto.BudgetProtos.Account;
 import com.digitald4.budget.proto.BudgetProtos.Balance;
 import com.digitald4.budget.proto.BudgetProtos.Bill;
+import com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser;
 import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
 import com.digitald4.budget.storage.*;
@@ -19,7 +20,9 @@ public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceSer
 	public ApiServiceServlet() throws ServletException {
 		DBConnector dbConnector = getDBConnector();
 
-		PortfolioStore portfolioStore = new PortfolioStore(new PortfolioSQLDao(dbConnector));
+		PortfolioStore portfolioStore = new PortfolioStore(
+				new PortfolioSQLDao(dbConnector),
+				new GenericStore<>(new DAOProtoSQLImpl<>(PortfolioUser.class, dbConnector)));
 		addService("portfolio", new PortfolioService(portfolioStore, userProvider));
 
 		GenericStore<Account> accountStore = new GenericStore<>(new DAOProtoSQLImpl<>(Account.class, dbConnector));

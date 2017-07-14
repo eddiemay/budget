@@ -266,16 +266,21 @@ public final class BudgetProtos {
         com.google.protobuf.MessageOrBuilder {
 
       /**
-       * <code>int32 user_id = 1;</code>
+       * <code>int32 portfolio_id = 1;</code>
+       */
+      int getPortfolioId();
+
+      /**
+       * <code>int32 user_id = 2;</code>
        */
       int getUserId();
 
       /**
-       * <code>.budget.UserRole role = 2;</code>
+       * <code>.budget.UserRole role = 3;</code>
        */
       int getRoleValue();
       /**
-       * <code>.budget.UserRole role = 2;</code>
+       * <code>.budget.UserRole role = 3;</code>
        */
       com.digitald4.budget.proto.BudgetProtos.UserRole getRole();
     }
@@ -291,6 +296,7 @@ public final class BudgetProtos {
         super(builder);
       }
       private PortfolioUser() {
+        portfolioId_ = 0;
         userId_ = 0;
         role_ = 0;
       }
@@ -322,10 +328,15 @@ public final class BudgetProtos {
               }
               case 8: {
 
-                userId_ = input.readInt32();
+                portfolioId_ = input.readInt32();
                 break;
               }
               case 16: {
+
+                userId_ = input.readInt32();
+                break;
+              }
+              case 24: {
                 int rawValue = input.readEnum();
 
                 role_ = rawValue;
@@ -354,25 +365,34 @@ public final class BudgetProtos {
                 com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.class, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder.class);
       }
 
-      public static final int USER_ID_FIELD_NUMBER = 1;
+      public static final int PORTFOLIO_ID_FIELD_NUMBER = 1;
+      private int portfolioId_;
+      /**
+       * <code>int32 portfolio_id = 1;</code>
+       */
+      public int getPortfolioId() {
+        return portfolioId_;
+      }
+
+      public static final int USER_ID_FIELD_NUMBER = 2;
       private int userId_;
       /**
-       * <code>int32 user_id = 1;</code>
+       * <code>int32 user_id = 2;</code>
        */
       public int getUserId() {
         return userId_;
       }
 
-      public static final int ROLE_FIELD_NUMBER = 2;
+      public static final int ROLE_FIELD_NUMBER = 3;
       private int role_;
       /**
-       * <code>.budget.UserRole role = 2;</code>
+       * <code>.budget.UserRole role = 3;</code>
        */
       public int getRoleValue() {
         return role_;
       }
       /**
-       * <code>.budget.UserRole role = 2;</code>
+       * <code>.budget.UserRole role = 3;</code>
        */
       public com.digitald4.budget.proto.BudgetProtos.UserRole getRole() {
         com.digitald4.budget.proto.BudgetProtos.UserRole result = com.digitald4.budget.proto.BudgetProtos.UserRole.valueOf(role_);
@@ -391,11 +411,14 @@ public final class BudgetProtos {
 
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
+        if (portfolioId_ != 0) {
+          output.writeInt32(1, portfolioId_);
+        }
         if (userId_ != 0) {
-          output.writeInt32(1, userId_);
+          output.writeInt32(2, userId_);
         }
         if (role_ != com.digitald4.budget.proto.BudgetProtos.UserRole.UR_UNKNOWN.getNumber()) {
-          output.writeEnum(2, role_);
+          output.writeEnum(3, role_);
         }
       }
 
@@ -404,13 +427,17 @@ public final class BudgetProtos {
         if (size != -1) return size;
 
         size = 0;
+        if (portfolioId_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(1, portfolioId_);
+        }
         if (userId_ != 0) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(1, userId_);
+            .computeInt32Size(2, userId_);
         }
         if (role_ != com.digitald4.budget.proto.BudgetProtos.UserRole.UR_UNKNOWN.getNumber()) {
           size += com.google.protobuf.CodedOutputStream
-            .computeEnumSize(2, role_);
+            .computeEnumSize(3, role_);
         }
         memoizedSize = size;
         return size;
@@ -428,6 +455,8 @@ public final class BudgetProtos {
         com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser other = (com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser) obj;
 
         boolean result = true;
+        result = result && (getPortfolioId()
+            == other.getPortfolioId());
         result = result && (getUserId()
             == other.getUserId());
         result = result && role_ == other.role_;
@@ -441,6 +470,8 @@ public final class BudgetProtos {
         }
         int hash = 41;
         hash = (19 * hash) + getDescriptor().hashCode();
+        hash = (37 * hash) + PORTFOLIO_ID_FIELD_NUMBER;
+        hash = (53 * hash) + getPortfolioId();
         hash = (37 * hash) + USER_ID_FIELD_NUMBER;
         hash = (53 * hash) + getUserId();
         hash = (37 * hash) + ROLE_FIELD_NUMBER;
@@ -574,6 +605,8 @@ public final class BudgetProtos {
         }
         public Builder clear() {
           super.clear();
+          portfolioId_ = 0;
+
           userId_ = 0;
 
           role_ = 0;
@@ -600,6 +633,7 @@ public final class BudgetProtos {
 
         public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser buildPartial() {
           com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser result = new com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser(this);
+          result.portfolioId_ = portfolioId_;
           result.userId_ = userId_;
           result.role_ = role_;
           onBuilt();
@@ -643,6 +677,9 @@ public final class BudgetProtos {
 
         public Builder mergeFrom(com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser other) {
           if (other == com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.getDefaultInstance()) return this;
+          if (other.getPortfolioId() != 0) {
+            setPortfolioId(other.getPortfolioId());
+          }
           if (other.getUserId() != 0) {
             setUserId(other.getUserId());
           }
@@ -675,15 +712,41 @@ public final class BudgetProtos {
           return this;
         }
 
+        private int portfolioId_ ;
+        /**
+         * <code>int32 portfolio_id = 1;</code>
+         */
+        public int getPortfolioId() {
+          return portfolioId_;
+        }
+        /**
+         * <code>int32 portfolio_id = 1;</code>
+         */
+        public Builder setPortfolioId(int value) {
+          
+          portfolioId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>int32 portfolio_id = 1;</code>
+         */
+        public Builder clearPortfolioId() {
+          
+          portfolioId_ = 0;
+          onChanged();
+          return this;
+        }
+
         private int userId_ ;
         /**
-         * <code>int32 user_id = 1;</code>
+         * <code>int32 user_id = 2;</code>
          */
         public int getUserId() {
           return userId_;
         }
         /**
-         * <code>int32 user_id = 1;</code>
+         * <code>int32 user_id = 2;</code>
          */
         public Builder setUserId(int value) {
           
@@ -692,7 +755,7 @@ public final class BudgetProtos {
           return this;
         }
         /**
-         * <code>int32 user_id = 1;</code>
+         * <code>int32 user_id = 2;</code>
          */
         public Builder clearUserId() {
           
@@ -703,13 +766,13 @@ public final class BudgetProtos {
 
         private int role_ = 0;
         /**
-         * <code>.budget.UserRole role = 2;</code>
+         * <code>.budget.UserRole role = 3;</code>
          */
         public int getRoleValue() {
           return role_;
         }
         /**
-         * <code>.budget.UserRole role = 2;</code>
+         * <code>.budget.UserRole role = 3;</code>
          */
         public Builder setRoleValue(int value) {
           role_ = value;
@@ -717,14 +780,14 @@ public final class BudgetProtos {
           return this;
         }
         /**
-         * <code>.budget.UserRole role = 2;</code>
+         * <code>.budget.UserRole role = 3;</code>
          */
         public com.digitald4.budget.proto.BudgetProtos.UserRole getRole() {
           com.digitald4.budget.proto.BudgetProtos.UserRole result = com.digitald4.budget.proto.BudgetProtos.UserRole.valueOf(role_);
           return result == null ? com.digitald4.budget.proto.BudgetProtos.UserRole.UNRECOGNIZED : result;
         }
         /**
-         * <code>.budget.UserRole role = 2;</code>
+         * <code>.budget.UserRole role = 3;</code>
          */
         public Builder setRole(com.digitald4.budget.proto.BudgetProtos.UserRole value) {
           if (value == null) {
@@ -736,7 +799,7 @@ public final class BudgetProtos {
           return this;
         }
         /**
-         * <code>.budget.UserRole role = 2;</code>
+         * <code>.budget.UserRole role = 3;</code>
          */
         public Builder clearRole() {
           
@@ -8004,46 +8067,46 @@ public final class BudgetProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014budget.proto\022\006budget\"\240\001\n\tPortfolio\022\n\n\002" +
+      "\n\014budget.proto\022\006budget\"\266\001\n\tPortfolio\022\n\n\002" +
       "id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0227\n\016portfolio_user" +
       "\030\004 \003(\0132\037.budget.Portfolio.PortfolioUser\032" +
-      "@\n\rPortfolioUser\022\017\n\007user_id\030\001 \001(\005\022\036\n\004rol" +
-      "e\030\002 \001(\0162\020.budget.UserRole\"m\n\007Account\022\n\n\002" +
-      "id\030\001 \001(\005\022\024\n\014portfolio_id\030\002 \001(\005\022\014\n\004name\030\003" +
-      " \001(\t\022\027\n\017payment_account\030\004 \001(\010\022\031\n\021parent_" +
-      "account_id\030\005 \001(\005\"\232\001\n\007Balance\022\n\n\002id\030\001 \001(\005" +
-      "\022\022\n\naccount_id\030\002 \001(\005\022\024\n\014account_name\030\003 \001" +
-      "(\t\022\024\n\014portfolio_id\030\004 \001(\005\022\014\n\004year\030\005 \001(\005\022\r",
-      "\n\005month\030\006 \001(\005\022\017\n\007balance\030\007 \001(\001\022\025\n\rbalanc" +
-      "e_y_t_d\030\010 \001(\001\"\240\005\n\004Bill\022\n\n\002id\030\001 \001(\005\022\024\n\014po" +
-      "rtfolio_id\030\002 \001(\005\022\022\n\naccount_id\030\003 \001(\005\022\024\n\014" +
-      "account_name\030\004 \001(\t\022\023\n\013template_id\030\005 \001(\005\022" +
-      "\014\n\004year\030\006 \001(\005\022\r\n\005month\030\007 \001(\005\022\013\n\003day\030\010 \001(" +
-      "\005\022\022\n\namount_due\030\t \001(\001\022\014\n\004name\030\n \001(\t\022\024\n\014p" +
-      "ayment_date\030\013 \001(\003\022*\n\006status\030\014 \001(\0162\032.budg" +
-      "et.Bill.PaymentStatus\022\014\n\004rank\030\r \001(\005\022\021\n\ti" +
-      "n_active\030\016 \001(\010\022\023\n\013description\030\017 \001(\t\0222\n\013t" +
-      "ransaction\030\020 \003(\0132\035.budget.Bill.Transacti",
-      "onEntry\032r\n\013Transaction\022\016\n\006amount\030\001 \001(\001\022\024" +
-      "\n\014payment_date\030\002 \001(\003\022*\n\006status\030\003 \001(\0162\032.b" +
-      "udget.Bill.PaymentStatus\022\021\n\tin_active\030\004 " +
-      "\001(\010\032L\n\020TransactionEntry\022\013\n\003key\030\001 \001(\005\022\'\n\005" +
-      "value\030\002 \001(\0132\030.budget.Bill.Transaction:\0028" +
-      "\001\"}\n\rPaymentStatus\022\016\n\nPS_UNKNOWN\020\000\022\027\n\023PS" +
-      "_ESTIMATED_AMOUNT\020\001\022\024\n\020PS_BILLED_AMOUNT\020" +
-      "\002\022\020\n\014PS_SCHEDULED\020\003\022\016\n\nPS_PENDING\020\004\022\013\n\007P" +
-      "S_PAID\020\005\":\n\010Template\022\n\n\002id\030\001 \001(\005\022\024\n\014port" +
-      "folio_id\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\"\374\001\n\014Templat",
-      "eBill\022\n\n\002id\030\001 \001(\005\022\023\n\013template_id\030\002 \001(\005\022\022" +
-      "\n\naccount_id\030\003 \001(\005\022\017\n\007due_day\030\004 \001(\005\022\014\n\004n" +
-      "ame\030\005 \001(\t\022\024\n\014account_name\030\006 \001(\t\022\022\n\namoun" +
-      "t_due\030\007 \001(\001\022:\n\013transaction\030\010 \003(\0132%.budge" +
-      "t.TemplateBill.TransactionEntry\0322\n\020Trans" +
-      "actionEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\001:" +
-      "\0028\001*J\n\010UserRole\022\016\n\nUR_UNKNOWN\020\000\022\014\n\010UR_OW" +
-      "NER\020\014\022\017\n\013UR_CAN_EDIT\020\002\022\017\n\013UR_READONLY\020\003B" +
-      "*\n\032com.digitald4.budget.protoB\014BudgetPro" +
-      "tosb\006proto3"
+      "V\n\rPortfolioUser\022\024\n\014portfolio_id\030\001 \001(\005\022\017" +
+      "\n\007user_id\030\002 \001(\005\022\036\n\004role\030\003 \001(\0162\020.budget.U" +
+      "serRole\"m\n\007Account\022\n\n\002id\030\001 \001(\005\022\024\n\014portfo" +
+      "lio_id\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\027\n\017payment_ac" +
+      "count\030\004 \001(\010\022\031\n\021parent_account_id\030\005 \001(\005\"\232" +
+      "\001\n\007Balance\022\n\n\002id\030\001 \001(\005\022\022\n\naccount_id\030\002 \001" +
+      "(\005\022\024\n\014account_name\030\003 \001(\t\022\024\n\014portfolio_id",
+      "\030\004 \001(\005\022\014\n\004year\030\005 \001(\005\022\r\n\005month\030\006 \001(\005\022\017\n\007b" +
+      "alance\030\007 \001(\001\022\025\n\rbalance_y_t_d\030\010 \001(\001\"\240\005\n\004" +
+      "Bill\022\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id\030\002 \001(\005\022\022" +
+      "\n\naccount_id\030\003 \001(\005\022\024\n\014account_name\030\004 \001(\t" +
+      "\022\023\n\013template_id\030\005 \001(\005\022\014\n\004year\030\006 \001(\005\022\r\n\005m" +
+      "onth\030\007 \001(\005\022\013\n\003day\030\010 \001(\005\022\022\n\namount_due\030\t " +
+      "\001(\001\022\014\n\004name\030\n \001(\t\022\024\n\014payment_date\030\013 \001(\003\022" +
+      "*\n\006status\030\014 \001(\0162\032.budget.Bill.PaymentSta" +
+      "tus\022\014\n\004rank\030\r \001(\005\022\021\n\tin_active\030\016 \001(\010\022\023\n\013" +
+      "description\030\017 \001(\t\0222\n\013transaction\030\020 \003(\0132\035",
+      ".budget.Bill.TransactionEntry\032r\n\013Transac" +
+      "tion\022\016\n\006amount\030\001 \001(\001\022\024\n\014payment_date\030\002 \001" +
+      "(\003\022*\n\006status\030\003 \001(\0162\032.budget.Bill.Payment" +
+      "Status\022\021\n\tin_active\030\004 \001(\010\032L\n\020Transaction" +
+      "Entry\022\013\n\003key\030\001 \001(\005\022\'\n\005value\030\002 \001(\0132\030.budg" +
+      "et.Bill.Transaction:\0028\001\"}\n\rPaymentStatus" +
+      "\022\016\n\nPS_UNKNOWN\020\000\022\027\n\023PS_ESTIMATED_AMOUNT\020" +
+      "\001\022\024\n\020PS_BILLED_AMOUNT\020\002\022\020\n\014PS_SCHEDULED\020" +
+      "\003\022\016\n\nPS_PENDING\020\004\022\013\n\007PS_PAID\020\005\":\n\010Templa" +
+      "te\022\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id\030\002 \001(\005\022\014\n\004",
+      "name\030\003 \001(\t\"\374\001\n\014TemplateBill\022\n\n\002id\030\001 \001(\005\022" +
+      "\023\n\013template_id\030\002 \001(\005\022\022\n\naccount_id\030\003 \001(\005" +
+      "\022\017\n\007due_day\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022\024\n\014accou" +
+      "nt_name\030\006 \001(\t\022\022\n\namount_due\030\007 \001(\001\022:\n\013tra" +
+      "nsaction\030\010 \003(\0132%.budget.TemplateBill.Tra" +
+      "nsactionEntry\0322\n\020TransactionEntry\022\013\n\003key" +
+      "\030\001 \001(\005\022\r\n\005value\030\002 \001(\001:\0028\001*J\n\010UserRole\022\016\n" +
+      "\nUR_UNKNOWN\020\000\022\014\n\010UR_OWNER\020\014\022\017\n\013UR_CAN_ED" +
+      "IT\020\002\022\017\n\013UR_READONLY\020\003B*\n\032com.digitald4.b" +
+      "udget.protoB\014BudgetProtosb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8068,7 +8131,7 @@ public final class BudgetProtos {
     internal_static_budget_Portfolio_PortfolioUser_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_budget_Portfolio_PortfolioUser_descriptor,
-        new java.lang.String[] { "UserId", "Role", });
+        new java.lang.String[] { "PortfolioId", "UserId", "Role", });
     internal_static_budget_Account_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_budget_Account_fieldAccessorTable = new

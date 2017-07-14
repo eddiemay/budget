@@ -9,8 +9,8 @@ import com.digitald4.budget.test.TestCase;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
+import com.digitald4.common.storage.ListResponse;
 import com.digitald4.common.util.Provider;
-import java.util.List;
 import org.junit.Test;
 
 public class PortfolioServiceTest extends TestCase {
@@ -19,12 +19,13 @@ public class PortfolioServiceTest extends TestCase {
 
 	@Test
 	public void testGetPortfolios() throws DD4StorageException {
-		PortfolioStore store = new PortfolioStore(new PortfolioSQLDao(dbConnector));
+		PortfolioStore store = new PortfolioStore(new PortfolioSQLDao(dbConnector), null);
 		PortfolioService service = new PortfolioService(store, userProvider);
 
-		List<Portfolio> results = service.list(ListRequest.newBuilder().build());
-		assertTrue(results.size() > 0);
-		assertTrue(results.get(0).getPortfolioUserCount() > 0);
-		assertTrue(results.get(0).getPortfolioUser(0).getUserId() == 1);
+		ListResponse<Portfolio> response = service.list(ListRequest.newBuilder().build());
+		assertTrue(response.getItemsList().size() > 0);
+		Portfolio portfolio = response.getItemsList().get(0);
+		assertTrue(portfolio.getPortfolioUserCount() > 0);
+		assertTrue(portfolio.getPortfolioUser(0).getUserId() == 1);
 	}
 }

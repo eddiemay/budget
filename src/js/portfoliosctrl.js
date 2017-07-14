@@ -13,13 +13,15 @@ com.digitald4.budget.PortfoliosCtrl = function(sharedData, portfolioService) {
 com.digitald4.budget.PortfoliosCtrl.prototype.portfolioService;
 
 com.digitald4.budget.PortfoliosCtrl.prototype.refresh = function() {
-	this.portfolioService.list([], function(portfolios) {
-		this.sharedData.setPortfolioData(portfolios);
+	this.portfolioService.list({}, function(response) {
+		this.sharedData.setPortfolioData(response.items);
 	}.bind(this), notify);
 	this.newPortfolio = {};
 };
 
 com.digitald4.budget.PortfoliosCtrl.prototype.addPortfolio = function() {
+  var userId = this.sharedData.user.id;
+  this.newPortfolio.portfolio_user = [{user_id: userId, role: 12}];
 	this.portfolioService.create(this.newPortfolio, function(portfolio) {
 		this.sharedData.portfolios.push(portfolio);
 		this.newPortfolio = {};

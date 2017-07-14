@@ -8,14 +8,6 @@ com.digitald4.budget.CalCtrl = function($filter, sharedData, billService, accoun
 	this.sharedData = sharedData;
 	this.billService = billService;
 	this.accountService = accountService;
-	this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(accounts) {
-		var accountHash = {};
-		for (var a = 0; a < accounts.length; a++) {
-		  var account = accounts[a];
-		  accountHash[account.id] = account;
-		}
-		this.accounts = accountHash;
-	}.bind(this), notify);
 	this.refresh();
 };
 
@@ -61,17 +53,30 @@ addDay = function(date) {
 com.digitald4.budget.CalCtrl.prototype.refresh = function() {
 	this.setupCalendar();
 
+	if (this.selectedPortfolioId != this.sharedData.getSelectedPortfolioId()) {
+	  this.selectedPortfolioId = this.sharedData.getSelectedPortfolioId();
+    this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(response) {
+      var accounts = response.items;
+      var accountHash = {};
+      for (var a = 0; a < accounts.length; a++) {
+        var account = accounts[a];
+        accountHash[account.id] = account;
+      }
+      this.accounts = accountHash;
+    }.bind(this), notify);
+  }
+
 	this.billService.list(this.sharedData.getSelectedPortfolioId(), this.sharedData.getYear(),
 	    this.sharedData.getMonth(), this.billsSuccessCallback.bind(this), notify);
 };
 
-com.digitald4.budget.CalCtrl.prototype.billsSuccessCallback = function(bills) {
+com.digitald4.budget.CalCtrl.prototype.billsSuccessCallback = function(response) {
 	for (var d in this.days) {
 		this.days[d].bills = [];
 	}
-	this.bills = bills;
-	for (var t = 0; t < bills.length; t++) {
-		var bill = bills[t];
+	this.bills = response.items;
+	for (var t = 0; t < this.bills.length; t++) {
+		var bill = this.bills[t];
 		bill.dueDate = new Date(bill.year, bill.month - 1, bill.day);
 		var account = this.accounts['' + bill.account_id];
     if (account) {

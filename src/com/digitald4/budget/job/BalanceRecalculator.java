@@ -5,6 +5,7 @@ import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
 import com.digitald4.budget.storage.BalanceStore;
 import com.digitald4.budget.storage.BillStore;
+import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.storage.DAOProtoSQLImpl;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.common.jdbc.DBConnector;
@@ -21,7 +22,8 @@ public class BalanceRecalculator {
 				new DAOProtoSQLImpl<>(Balance.class, dbConnector, "V_Balance"));
 		final BillStore billStore = new BillStore(
 				new DAOProtoSQLImpl<>(Bill.class, dbConnector), balanceStore, null);
-		PortfolioStore portfolioStore = new PortfolioStore(new DAOProtoSQLImpl<>(Portfolio.class, dbConnector));
-		portfolioStore.getAll().forEach(portfolio -> balanceStore.recalculateBalance(portfolio.getId(), billStore));
+		PortfolioStore portfolioStore = new PortfolioStore(new DAOProtoSQLImpl<>(Portfolio.class, dbConnector), null);
+		portfolioStore.list(ListRequest.getDefaultInstance()).getItemsList()
+				.forEach(portfolio -> balanceStore.recalculateBalance(portfolio.getId(), billStore));
 	}
 }

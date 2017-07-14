@@ -33,7 +33,7 @@ public class End2EndServiceTest extends TestCase {
 
 	@Test
 	public void testEnd2End() throws Exception {
-		PortfolioStore portfolioStore = new PortfolioStore(new PortfolioSQLDao(dbConnector));
+		PortfolioStore portfolioStore = new PortfolioStore(new PortfolioSQLDao(dbConnector), null);
 		PortfolioService portfolioService = new PortfolioService(portfolioStore, userProvider);
 		
 		Store<Account> accountStore = new GenericStore<>(new DAOProtoSQLImpl<>(Account.class, dbConnector));
@@ -143,11 +143,13 @@ public class End2EndServiceTest extends TestCase {
 			assertTrue(payCreditCard.getId() > 0);
 			bills.add(payCreditCard);
 			
-			bills = billService.applyTemplate(ApplyTemplateRequest.newBuilder()
-					.setTemplateId(template.getId())
-					.setYear(2016)
-					.setMonth(7)
-					.build());
+			bills = billService.applyTemplate(
+					ApplyTemplateRequest.newBuilder()
+							.setTemplateId(template.getId())
+							.setYear(2016)
+							.setMonth(7)
+							.build())
+					.getItemsList();
 			// Should return the 3 bills from the template and the 1 I created.
 			assertEquals(4, bills.size());
 			
@@ -212,27 +214,23 @@ public class End2EndServiceTest extends TestCase {
 					.build());
 			assertEquals(520.25, payCreditCard.getTransactionMap().values().iterator().next().getAmount(), .001);
 		} finally {
-			for (Bill bill : bills) {
-				assertTrue(billService.delete(DeleteRequest.newBuilder()
-						.setId(bill.getId())
-						.build()));
-			}
+			bills.forEach(bill -> billService.delete(DeleteRequest.newBuilder()
+					.setId(bill.getId())
+					.build()));
 
 			if (template != null) {
-				assertTrue(templateService.delete(DeleteRequest.newBuilder()
+				templateService.delete(DeleteRequest.newBuilder()
 						.setId(template.getId())
-						.build()));
+						.build());
 			}
-			
-			for (Account account : accounts) {
-				assertTrue(accountService.delete(DeleteRequest.newBuilder()
-						.setId(account.getId())
-						.build()));
-			}
-			
-			assertTrue(portfolioService.delete(DeleteRequest.newBuilder()
-					.setId(portfolio.getId())
+
+			accounts.forEach(account -> accountService.delete(DeleteRequest.newBuilder()
+					.setId(account.getId())
 					.build()));
+
+			portfolioService.delete(DeleteRequest.newBuilder()
+					.setId(portfolio.getId())
+					.build());
 		}
 	}
 }

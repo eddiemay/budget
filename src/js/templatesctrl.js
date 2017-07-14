@@ -9,25 +9,25 @@ com.digitald4.budget.TemplatesCtrl = function(sharedData, templateService, accou
 };
 
 com.digitald4.budget.TemplatesCtrl.prototype.refresh = function() {
-  this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(accounts) {
-    this.accounts = accounts;
+  this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(response) {
+    this.accounts = response.items;
     this.paymentAccounts = [];
-    for (var a = 0; a < accounts.length; a++) {
-      accounts[a].balance = {balance: 0, balance_year_to_date: 0};
-      if (accounts[a].payment_account) {
-        this.paymentAccounts.push(accounts[a]);
+    for (var a = 0; a < this.accounts.length; a++) {
+      this.accounts[a].balance = {balance: 0, balance_year_to_date: 0};
+      if (this.accounts[a].payment_account) {
+        this.paymentAccounts.push(this.accounts[a]);
       }
     }
   }.bind(this), notify);
 	
-	this.templateService.list(this.sharedData.getSelectedPortfolioId(), function(templates) {
-		this.templates = templates;
+	this.templateService.list(this.sharedData.getSelectedPortfolioId(), function(response) {
+		this.templates = response.items;
 	}.bind(this), notify);
 };
 
 com.digitald4.budget.TemplatesCtrl.prototype.selectionChanged = function() {
-  this.templateBillService.list(this.selectedTemplate.id, function(bills) {
-    var sorted = com.digitald4.budget.ListCtrl.sortBills(bills);
+  this.templateBillService.list(this.selectedTemplate.id, function(response) {
+    var sorted = com.digitald4.budget.ListCtrl.sortBills(response.items);
     this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sorted, []);
   }.bind(this), notify);
 };

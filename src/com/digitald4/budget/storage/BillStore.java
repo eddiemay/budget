@@ -5,13 +5,13 @@ import com.digitald4.budget.proto.BudgetProtos.Bill.PaymentStatus;
 import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
 import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
+import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
-
+import com.digitald4.common.storage.ListResponse;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.Pair;
-import java.util.List;
 import java.util.function.UnaryOperator;
 
 import java.util.stream.Collectors;
@@ -69,18 +69,20 @@ public class BillStore extends GenericStore<Bill> {
 	}
 	
 	@Override
-	public boolean delete(int id) {
+	public void delete(int id) {
 		Bill bill = get(id);
-		boolean ret = super.delete(id);
+		super.delete(id);
 		balanceStore.applyUpdate(bill.getAccountId(), bill.getYear(), bill.getMonth(), -bill.getAmountDue());
 		bill.getTransactionMap()
 				.forEach((acctId, trans) -> balanceStore.applyUpdate(acctId, bill.getYear(), bill.getMonth(), trans.getAmount()));
-		return ret;
 	}
 	
-	public List<Bill> applyTemplate(Template template, DateTime refDate) {
+	public ListResponse<Bill> applyTemplate(Template template, DateTime refDate) {
 		templateBillStore
-				.get(Filter.newBuilder().setColumn("template_id").setOperan("=").setValue("" + template.getId()).build())
+				.list(ListRequest.newBuilder()
+						.addFilter(Filter.newBuilder().setColumn("template_id").setOperan("=").setValue("" + template.getId()))
+						.build())
+				.getItemsList()
 				.forEach(tempBill -> {
 					DateTime date = refDate.plusDays(tempBill.getDueDay() - 1);
 					create(Bill.newBuilder()
@@ -102,9 +104,10 @@ public class BillStore extends GenericStore<Bill> {
 									.collect(Collectors.toMap(Pair::getLeft, Pair::getRight)))
 							.build());
 				});
-		return get(
-				Filter.newBuilder().setColumn("PORTFOLIO_ID").setOperan("=").setValue(String.valueOf(template.getPortfolioId())).build(),
-				Filter.newBuilder().setColumn("YEAR").setOperan("=").setValue(String.valueOf(refDate.getYear())).build(),
-				Filter.newBuilder().setColumn("MONTH").setOperan("=").setValue(String.valueOf(refDate.getMonthOfYear())).build());
+		return list(ListRequest.newBuilder()
+				.addFilter(Filter.newBuilder().setColumn("PORTFOLIO_ID").setOperan("=").setValue(String.valueOf(template.getPortfolioId())))
+				.addFilter(Filter.newBuilder().setColumn("YEAR").setOperan("=").setValue(String.valueOf(refDate.getYear())))
+				.addFilter(Filter.newBuilder().setColumn("MONTH").setOperan("=").setValue(String.valueOf(refDate.getMonthOfYear())))
+				.build());
 	}
 }
