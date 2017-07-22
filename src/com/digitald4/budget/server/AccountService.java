@@ -6,8 +6,8 @@ import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.OrderBy;
+import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.server.SingleProtoService;
-import com.digitald4.common.storage.ListResponse;
 import com.digitald4.common.storage.Store;
 import org.json.JSONObject;
 
@@ -19,10 +19,10 @@ public class AccountService extends SingleProtoService<Account> {
 
 	@Override
 	public JSONObject list(JSONObject request) throws DD4StorageException {
-		return listToJSON.apply(list(transformJSONRequest(AccountListRequest.getDefaultInstance(), request)));
+		return convertToJSON(list(transformJSONRequest(AccountListRequest.getDefaultInstance(), request)));
 	}
 
-	public ListResponse<Account> list(AccountListRequest request) {
+	public ListResponse list(AccountListRequest request) {
 		return list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder()
 						.setColumn("portfolio_id")

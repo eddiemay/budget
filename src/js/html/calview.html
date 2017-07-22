@@ -42,7 +42,7 @@
 							<a data-ng-click="calCtrl.showAddBillDialog(day.date)" class="add-event">Add</a>
 							<ul class="events">
 								<li data-ng-repeat="bill in day.bills">
-                  <a data-ng-click="calCtrl.editBill(bill)"><b>{{bill.amount_due}}</b> {{bill.name}}</a>
+                  <a data-ng-click="calCtrl.editBill(bill)"><b>{{bill.amountDue}}</b> {{bill.name}}</a>
                 </li>
 							</ul>
 						</td>
@@ -77,7 +77,7 @@
 							</div>
 							<div class="colx2-right">
 								<label>Account</label>
-                <select data-ng-model="calCtrl.newBill.account_id"
+                <select data-ng-model="calCtrl.newBill.accountId"
                         data-ng-options="account.id as account.name for account in calCtrl.accounts"></select>
 							</div>
 						</div>
@@ -86,7 +86,7 @@
 								<label>Name</label><input type="text" data-ng-model="calCtrl.newBill.name">
 							</div>
 							<div class="colx2-right">
-								<label>Amount Due</label><input type="text" data-ng-model="calCtrl.newBill.amount_due">
+								<label>Amount Due</label><input type="text" data-ng-model="calCtrl.newBill.amountDue">
 							</div>
 						</div>
 					</fieldset>
@@ -139,8 +139,8 @@
 							</div>
 							<div class="colx2-right">
 								<label>Amount Due</label>
-                <input type="text" data-ng-model="calCtrl.eBill.amount_due"
-                       data-on-change="calCtrl.updateBill('amount_due')">
+                <input type="text" data-ng-model="calCtrl.eBill.amountDue"
+                       data-on-change="calCtrl.updateBill('amountDue')">
 							</div>
 						</div>
 					</fieldset>

@@ -2481,12 +2481,22 @@ public final class BudgetProtos {
     int getMonth();
 
     /**
-     * <code>double balance = 7;</code>
+     * <code>string bal_date = 7;</code>
+     */
+    java.lang.String getBalDate();
+    /**
+     * <code>string bal_date = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getBalDateBytes();
+
+    /**
+     * <code>double balance = 8;</code>
      */
     double getBalance();
 
     /**
-     * <code>double balance_y_t_d = 8;</code>
+     * <code>double balance_y_t_d = 9;</code>
      */
     double getBalanceYTD();
   }
@@ -2508,6 +2518,7 @@ public final class BudgetProtos {
       portfolioId_ = 0;
       year_ = 0;
       month_ = 0;
+      balDate_ = "";
       balance_ = 0D;
       balanceYTD_ = 0D;
     }
@@ -2568,12 +2579,18 @@ public final class BudgetProtos {
               month_ = input.readInt32();
               break;
             }
-            case 57: {
+            case 58: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              balDate_ = s;
+              break;
+            }
+            case 65: {
 
               balance_ = input.readDouble();
               break;
             }
-            case 65: {
+            case 73: {
 
               balanceYTD_ = input.readDouble();
               break;
@@ -2680,19 +2697,53 @@ public final class BudgetProtos {
       return month_;
     }
 
-    public static final int BALANCE_FIELD_NUMBER = 7;
+    public static final int BAL_DATE_FIELD_NUMBER = 7;
+    private volatile java.lang.Object balDate_;
+    /**
+     * <code>string bal_date = 7;</code>
+     */
+    public java.lang.String getBalDate() {
+      java.lang.Object ref = balDate_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        balDate_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string bal_date = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBalDateBytes() {
+      java.lang.Object ref = balDate_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        balDate_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int BALANCE_FIELD_NUMBER = 8;
     private double balance_;
     /**
-     * <code>double balance = 7;</code>
+     * <code>double balance = 8;</code>
      */
     public double getBalance() {
       return balance_;
     }
 
-    public static final int BALANCE_Y_T_D_FIELD_NUMBER = 8;
+    public static final int BALANCE_Y_T_D_FIELD_NUMBER = 9;
     private double balanceYTD_;
     /**
-     * <code>double balance_y_t_d = 8;</code>
+     * <code>double balance_y_t_d = 9;</code>
      */
     public double getBalanceYTD() {
       return balanceYTD_;
@@ -2728,11 +2779,14 @@ public final class BudgetProtos {
       if (month_ != 0) {
         output.writeInt32(6, month_);
       }
+      if (!getBalDateBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, balDate_);
+      }
       if (balance_ != 0D) {
-        output.writeDouble(7, balance_);
+        output.writeDouble(8, balance_);
       }
       if (balanceYTD_ != 0D) {
-        output.writeDouble(8, balanceYTD_);
+        output.writeDouble(9, balanceYTD_);
       }
     }
 
@@ -2764,13 +2818,16 @@ public final class BudgetProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, month_);
       }
+      if (!getBalDateBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, balDate_);
+      }
       if (balance_ != 0D) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(7, balance_);
+          .computeDoubleSize(8, balance_);
       }
       if (balanceYTD_ != 0D) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(8, balanceYTD_);
+          .computeDoubleSize(9, balanceYTD_);
       }
       memoizedSize = size;
       return size;
@@ -2800,6 +2857,8 @@ public final class BudgetProtos {
           == other.getYear());
       result = result && (getMonth()
           == other.getMonth());
+      result = result && getBalDate()
+          .equals(other.getBalDate());
       result = result && (
           java.lang.Double.doubleToLongBits(getBalance())
           == java.lang.Double.doubleToLongBits(
@@ -2830,6 +2889,8 @@ public final class BudgetProtos {
       hash = (53 * hash) + getYear();
       hash = (37 * hash) + MONTH_FIELD_NUMBER;
       hash = (53 * hash) + getMonth();
+      hash = (37 * hash) + BAL_DATE_FIELD_NUMBER;
+      hash = (53 * hash) + getBalDate().hashCode();
       hash = (37 * hash) + BALANCE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           java.lang.Double.doubleToLongBits(getBalance()));
@@ -2977,6 +3038,8 @@ public final class BudgetProtos {
 
         month_ = 0;
 
+        balDate_ = "";
+
         balance_ = 0D;
 
         balanceYTD_ = 0D;
@@ -3009,6 +3072,7 @@ public final class BudgetProtos {
         result.portfolioId_ = portfolioId_;
         result.year_ = year_;
         result.month_ = month_;
+        result.balDate_ = balDate_;
         result.balance_ = balance_;
         result.balanceYTD_ = balanceYTD_;
         onBuilt();
@@ -3070,6 +3134,10 @@ public final class BudgetProtos {
         }
         if (other.getMonth() != 0) {
           setMonth(other.getMonth());
+        }
+        if (!other.getBalDate().isEmpty()) {
+          balDate_ = other.balDate_;
+          onChanged();
         }
         if (other.getBalance() != 0D) {
           setBalance(other.getBalance());
@@ -3302,15 +3370,84 @@ public final class BudgetProtos {
         return this;
       }
 
+      private java.lang.Object balDate_ = "";
+      /**
+       * <code>string bal_date = 7;</code>
+       */
+      public java.lang.String getBalDate() {
+        java.lang.Object ref = balDate_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          balDate_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string bal_date = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBalDateBytes() {
+        java.lang.Object ref = balDate_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          balDate_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string bal_date = 7;</code>
+       */
+      public Builder setBalDate(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        balDate_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string bal_date = 7;</code>
+       */
+      public Builder clearBalDate() {
+        
+        balDate_ = getDefaultInstance().getBalDate();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string bal_date = 7;</code>
+       */
+      public Builder setBalDateBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        balDate_ = value;
+        onChanged();
+        return this;
+      }
+
       private double balance_ ;
       /**
-       * <code>double balance = 7;</code>
+       * <code>double balance = 8;</code>
        */
       public double getBalance() {
         return balance_;
       }
       /**
-       * <code>double balance = 7;</code>
+       * <code>double balance = 8;</code>
        */
       public Builder setBalance(double value) {
         
@@ -3319,7 +3456,7 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>double balance = 7;</code>
+       * <code>double balance = 8;</code>
        */
       public Builder clearBalance() {
         
@@ -3330,13 +3467,13 @@ public final class BudgetProtos {
 
       private double balanceYTD_ ;
       /**
-       * <code>double balance_y_t_d = 8;</code>
+       * <code>double balance_y_t_d = 9;</code>
        */
       public double getBalanceYTD() {
         return balanceYTD_;
       }
       /**
-       * <code>double balance_y_t_d = 8;</code>
+       * <code>double balance_y_t_d = 9;</code>
        */
       public Builder setBalanceYTD(double value) {
         
@@ -3345,7 +3482,7 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>double balance_y_t_d = 8;</code>
+       * <code>double balance_y_t_d = 9;</code>
        */
       public Builder clearBalanceYTD() {
         
@@ -3724,13 +3861,13 @@ public final class BudgetProtos {
        */
       PS_UNKNOWN(0),
       /**
-       * <code>PS_ESTIMATED_AMOUNT = 1;</code>
+       * <code>PS_ESTIMATED = 1;</code>
        */
-      PS_ESTIMATED_AMOUNT(1),
+      PS_ESTIMATED(1),
       /**
-       * <code>PS_BILLED_AMOUNT = 2;</code>
+       * <code>PS_BILLED = 2;</code>
        */
-      PS_BILLED_AMOUNT(2),
+      PS_BILLED(2),
       /**
        * <code>PS_SCHEDULED = 3;</code>
        */
@@ -3751,13 +3888,13 @@ public final class BudgetProtos {
        */
       public static final int PS_UNKNOWN_VALUE = 0;
       /**
-       * <code>PS_ESTIMATED_AMOUNT = 1;</code>
+       * <code>PS_ESTIMATED = 1;</code>
        */
-      public static final int PS_ESTIMATED_AMOUNT_VALUE = 1;
+      public static final int PS_ESTIMATED_VALUE = 1;
       /**
-       * <code>PS_BILLED_AMOUNT = 2;</code>
+       * <code>PS_BILLED = 2;</code>
        */
-      public static final int PS_BILLED_AMOUNT_VALUE = 2;
+      public static final int PS_BILLED_VALUE = 2;
       /**
        * <code>PS_SCHEDULED = 3;</code>
        */
@@ -3791,8 +3928,8 @@ public final class BudgetProtos {
       public static PaymentStatus forNumber(int value) {
         switch (value) {
           case 0: return PS_UNKNOWN;
-          case 1: return PS_ESTIMATED_AMOUNT;
-          case 2: return PS_BILLED_AMOUNT;
+          case 1: return PS_ESTIMATED;
+          case 2: return PS_BILLED;
           case 3: return PS_SCHEDULED;
           case 4: return PS_PENDING;
           case 5: return PS_PAID;
@@ -8074,39 +8211,39 @@ public final class BudgetProtos {
       "\n\007user_id\030\002 \001(\005\022\036\n\004role\030\003 \001(\0162\020.budget.U" +
       "serRole\"m\n\007Account\022\n\n\002id\030\001 \001(\005\022\024\n\014portfo" +
       "lio_id\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\027\n\017payment_ac" +
-      "count\030\004 \001(\010\022\031\n\021parent_account_id\030\005 \001(\005\"\232" +
+      "count\030\004 \001(\010\022\031\n\021parent_account_id\030\005 \001(\005\"\254" +
       "\001\n\007Balance\022\n\n\002id\030\001 \001(\005\022\022\n\naccount_id\030\002 \001" +
       "(\005\022\024\n\014account_name\030\003 \001(\t\022\024\n\014portfolio_id",
-      "\030\004 \001(\005\022\014\n\004year\030\005 \001(\005\022\r\n\005month\030\006 \001(\005\022\017\n\007b" +
-      "alance\030\007 \001(\001\022\025\n\rbalance_y_t_d\030\010 \001(\001\"\240\005\n\004" +
-      "Bill\022\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id\030\002 \001(\005\022\022" +
-      "\n\naccount_id\030\003 \001(\005\022\024\n\014account_name\030\004 \001(\t" +
-      "\022\023\n\013template_id\030\005 \001(\005\022\014\n\004year\030\006 \001(\005\022\r\n\005m" +
-      "onth\030\007 \001(\005\022\013\n\003day\030\010 \001(\005\022\022\n\namount_due\030\t " +
-      "\001(\001\022\014\n\004name\030\n \001(\t\022\024\n\014payment_date\030\013 \001(\003\022" +
-      "*\n\006status\030\014 \001(\0162\032.budget.Bill.PaymentSta" +
-      "tus\022\014\n\004rank\030\r \001(\005\022\021\n\tin_active\030\016 \001(\010\022\023\n\013" +
-      "description\030\017 \001(\t\0222\n\013transaction\030\020 \003(\0132\035",
-      ".budget.Bill.TransactionEntry\032r\n\013Transac" +
-      "tion\022\016\n\006amount\030\001 \001(\001\022\024\n\014payment_date\030\002 \001" +
-      "(\003\022*\n\006status\030\003 \001(\0162\032.budget.Bill.Payment" +
-      "Status\022\021\n\tin_active\030\004 \001(\010\032L\n\020Transaction" +
-      "Entry\022\013\n\003key\030\001 \001(\005\022\'\n\005value\030\002 \001(\0132\030.budg" +
-      "et.Bill.Transaction:\0028\001\"}\n\rPaymentStatus" +
-      "\022\016\n\nPS_UNKNOWN\020\000\022\027\n\023PS_ESTIMATED_AMOUNT\020" +
-      "\001\022\024\n\020PS_BILLED_AMOUNT\020\002\022\020\n\014PS_SCHEDULED\020" +
-      "\003\022\016\n\nPS_PENDING\020\004\022\013\n\007PS_PAID\020\005\":\n\010Templa" +
-      "te\022\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id\030\002 \001(\005\022\014\n\004",
-      "name\030\003 \001(\t\"\374\001\n\014TemplateBill\022\n\n\002id\030\001 \001(\005\022" +
-      "\023\n\013template_id\030\002 \001(\005\022\022\n\naccount_id\030\003 \001(\005" +
-      "\022\017\n\007due_day\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022\024\n\014accou" +
-      "nt_name\030\006 \001(\t\022\022\n\namount_due\030\007 \001(\001\022:\n\013tra" +
-      "nsaction\030\010 \003(\0132%.budget.TemplateBill.Tra" +
-      "nsactionEntry\0322\n\020TransactionEntry\022\013\n\003key" +
-      "\030\001 \001(\005\022\r\n\005value\030\002 \001(\001:\0028\001*J\n\010UserRole\022\016\n" +
-      "\nUR_UNKNOWN\020\000\022\014\n\010UR_OWNER\020\014\022\017\n\013UR_CAN_ED" +
-      "IT\020\002\022\017\n\013UR_READONLY\020\003B*\n\032com.digitald4.b" +
-      "udget.protoB\014BudgetProtosb\006proto3"
+      "\030\004 \001(\005\022\014\n\004year\030\005 \001(\005\022\r\n\005month\030\006 \001(\005\022\020\n\010b" +
+      "al_date\030\007 \001(\t\022\017\n\007balance\030\010 \001(\001\022\025\n\rbalanc" +
+      "e_y_t_d\030\t \001(\001\"\222\005\n\004Bill\022\n\n\002id\030\001 \001(\005\022\024\n\014po" +
+      "rtfolio_id\030\002 \001(\005\022\022\n\naccount_id\030\003 \001(\005\022\024\n\014" +
+      "account_name\030\004 \001(\t\022\023\n\013template_id\030\005 \001(\005\022" +
+      "\014\n\004year\030\006 \001(\005\022\r\n\005month\030\007 \001(\005\022\013\n\003day\030\010 \001(" +
+      "\005\022\022\n\namount_due\030\t \001(\001\022\014\n\004name\030\n \001(\t\022\024\n\014p" +
+      "ayment_date\030\013 \001(\003\022*\n\006status\030\014 \001(\0162\032.budg" +
+      "et.Bill.PaymentStatus\022\014\n\004rank\030\r \001(\005\022\021\n\ti" +
+      "n_active\030\016 \001(\010\022\023\n\013description\030\017 \001(\t\0222\n\013t",
+      "ransaction\030\020 \003(\0132\035.budget.Bill.Transacti" +
+      "onEntry\032r\n\013Transaction\022\016\n\006amount\030\001 \001(\001\022\024" +
+      "\n\014payment_date\030\002 \001(\003\022*\n\006status\030\003 \001(\0162\032.b" +
+      "udget.Bill.PaymentStatus\022\021\n\tin_active\030\004 " +
+      "\001(\010\032L\n\020TransactionEntry\022\013\n\003key\030\001 \001(\005\022\'\n\005" +
+      "value\030\002 \001(\0132\030.budget.Bill.Transaction:\0028" +
+      "\001\"o\n\rPaymentStatus\022\016\n\nPS_UNKNOWN\020\000\022\020\n\014PS" +
+      "_ESTIMATED\020\001\022\r\n\tPS_BILLED\020\002\022\020\n\014PS_SCHEDU" +
+      "LED\020\003\022\016\n\nPS_PENDING\020\004\022\013\n\007PS_PAID\020\005\":\n\010Te" +
+      "mplate\022\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id\030\002 \001(\005",
+      "\022\014\n\004name\030\003 \001(\t\"\374\001\n\014TemplateBill\022\n\n\002id\030\001 " +
+      "\001(\005\022\023\n\013template_id\030\002 \001(\005\022\022\n\naccount_id\030\003" +
+      " \001(\005\022\017\n\007due_day\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022\024\n\014a" +
+      "ccount_name\030\006 \001(\t\022\022\n\namount_due\030\007 \001(\001\022:\n" +
+      "\013transaction\030\010 \003(\0132%.budget.TemplateBill" +
+      ".TransactionEntry\0322\n\020TransactionEntry\022\013\n" +
+      "\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\001:\0028\001*J\n\010UserRol" +
+      "e\022\016\n\nUR_UNKNOWN\020\000\022\014\n\010UR_OWNER\020\014\022\017\n\013UR_CA" +
+      "N_EDIT\020\002\022\017\n\013UR_READONLY\020\003B*\n\032com.digital" +
+      "d4.budget.protoB\014BudgetProtosb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8143,7 +8280,7 @@ public final class BudgetProtos {
     internal_static_budget_Balance_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_budget_Balance_descriptor,
-        new java.lang.String[] { "Id", "AccountId", "AccountName", "PortfolioId", "Year", "Month", "Balance", "BalanceYTD", });
+        new java.lang.String[] { "Id", "AccountId", "AccountName", "PortfolioId", "Year", "Month", "BalDate", "Balance", "BalanceYTD", });
     internal_static_budget_Bill_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_budget_Bill_fieldAccessorTable = new

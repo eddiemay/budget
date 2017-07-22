@@ -7,8 +7,8 @@ import com.digitald4.budget.proto.BudgetUIProtos.BillListRequest;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
+import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.server.SingleProtoService;
-import com.digitald4.common.storage.ListResponse;
 import com.digitald4.common.storage.Store;
 import org.joda.time.DateTime;
 import org.json.JSONObject;
@@ -25,10 +25,10 @@ public class BillService extends SingleProtoService<Bill> {
 	}
 
 	public JSONObject list(JSONObject request) {
-		return listToJSON.apply(list(transformJSONRequest(BillListRequest.getDefaultInstance(), request)));
+		return convertToJSON(list(transformJSONRequest(BillListRequest.getDefaultInstance(), request)));
 	}
 	
-	public ListResponse<Bill> list(BillListRequest request) {
+	public ListResponse list(BillListRequest request) {
 		return super.list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder().setColumn("PORTFOLIO_ID").setOperan("=").setValue(String.valueOf(request.getPortfolioId())))
 				.addFilter(Filter.newBuilder().setColumn("YEAR").setOperan("=").setValue(String.valueOf(request.getYear())))
@@ -37,12 +37,12 @@ public class BillService extends SingleProtoService<Bill> {
 	}
 
 	private JSONObject applyTemplate(JSONObject request) {
-		return listToJSON.apply(applyTemplate(transformJSONRequest(ApplyTemplateRequest.getDefaultInstance(), request)));
+		return convertToJSON(applyTemplate(transformJSONRequest(ApplyTemplateRequest.getDefaultInstance(), request)));
 	}
 	
-	ListResponse<Bill> applyTemplate(ApplyTemplateRequest request) {
-		return store.applyTemplate(templateStore.get(request.getTemplateId()),
-				DateTime.parse(request.getYear() + "-" + request.getMonth() + "-01"));
+	ListResponse applyTemplate(ApplyTemplateRequest request) {
+		return toListResponse(store.applyTemplate(templateStore.get(request.getTemplateId()),
+				DateTime.parse(request.getYear() + "-" + request.getMonth() + "-01")));
 	}
 
 	@Override

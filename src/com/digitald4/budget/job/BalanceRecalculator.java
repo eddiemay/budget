@@ -21,9 +21,9 @@ public class BalanceRecalculator {
 		final BalanceStore balanceStore = new BalanceStore(
 				new DAOProtoSQLImpl<>(Balance.class, dbConnector, "V_Balance"));
 		final BillStore billStore = new BillStore(
-				new DAOProtoSQLImpl<>(Bill.class, dbConnector), balanceStore, null);
+				new DAOProtoSQLImpl<>(Bill.class, dbConnector, "V_BILL"), balanceStore, null);
 		PortfolioStore portfolioStore = new PortfolioStore(new DAOProtoSQLImpl<>(Portfolio.class, dbConnector), null);
-		portfolioStore.list(ListRequest.getDefaultInstance()).getItemsList()
+		portfolioStore.list(ListRequest.getDefaultInstance()).getResultList()
 				.forEach(portfolio -> balanceStore.recalculateBalance(portfolio.getId(), billStore));
 	}
 }

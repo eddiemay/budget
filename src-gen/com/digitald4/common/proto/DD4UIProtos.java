@@ -1708,6 +1708,577 @@ public final class DD4UIProtos {
 
   }
 
+  public interface CreateRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:common.CreateRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.google.protobuf.Any proto = 1;</code>
+     */
+    boolean hasProto();
+    /**
+     * <code>.google.protobuf.Any proto = 1;</code>
+     */
+    com.google.protobuf.Any getProto();
+    /**
+     * <code>.google.protobuf.Any proto = 1;</code>
+     */
+    com.google.protobuf.AnyOrBuilder getProtoOrBuilder();
+  }
+  /**
+   * Protobuf type {@code common.CreateRequest}
+   */
+  public  static final class CreateRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:common.CreateRequest)
+      CreateRequestOrBuilder {
+    // Use CreateRequest.newBuilder() to construct.
+    private CreateRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CreateRequest() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private CreateRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.Any.Builder subBuilder = null;
+              if (proto_ != null) {
+                subBuilder = proto_.toBuilder();
+              }
+              proto_ = input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(proto_);
+                proto_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.digitald4.common.proto.DD4UIProtos.internal_static_common_CreateRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.digitald4.common.proto.DD4UIProtos.internal_static_common_CreateRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.digitald4.common.proto.DD4UIProtos.CreateRequest.class, com.digitald4.common.proto.DD4UIProtos.CreateRequest.Builder.class);
+    }
+
+    public static final int PROTO_FIELD_NUMBER = 1;
+    private com.google.protobuf.Any proto_;
+    /**
+     * <code>.google.protobuf.Any proto = 1;</code>
+     */
+    public boolean hasProto() {
+      return proto_ != null;
+    }
+    /**
+     * <code>.google.protobuf.Any proto = 1;</code>
+     */
+    public com.google.protobuf.Any getProto() {
+      return proto_ == null ? com.google.protobuf.Any.getDefaultInstance() : proto_;
+    }
+    /**
+     * <code>.google.protobuf.Any proto = 1;</code>
+     */
+    public com.google.protobuf.AnyOrBuilder getProtoOrBuilder() {
+      return getProto();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (proto_ != null) {
+        output.writeMessage(1, getProto());
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (proto_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getProto());
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.digitald4.common.proto.DD4UIProtos.CreateRequest)) {
+        return super.equals(obj);
+      }
+      com.digitald4.common.proto.DD4UIProtos.CreateRequest other = (com.digitald4.common.proto.DD4UIProtos.CreateRequest) obj;
+
+      boolean result = true;
+      result = result && (hasProto() == other.hasProto());
+      if (hasProto()) {
+        result = result && getProto()
+            .equals(other.getProto());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasProto()) {
+        hash = (37 * hash) + PROTO_FIELD_NUMBER;
+        hash = (53 * hash) + getProto().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.digitald4.common.proto.DD4UIProtos.CreateRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code common.CreateRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:common.CreateRequest)
+        com.digitald4.common.proto.DD4UIProtos.CreateRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.digitald4.common.proto.DD4UIProtos.internal_static_common_CreateRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.digitald4.common.proto.DD4UIProtos.internal_static_common_CreateRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.digitald4.common.proto.DD4UIProtos.CreateRequest.class, com.digitald4.common.proto.DD4UIProtos.CreateRequest.Builder.class);
+      }
+
+      // Construct using com.digitald4.common.proto.DD4UIProtos.CreateRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (protoBuilder_ == null) {
+          proto_ = null;
+        } else {
+          proto_ = null;
+          protoBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.digitald4.common.proto.DD4UIProtos.internal_static_common_CreateRequest_descriptor;
+      }
+
+      public com.digitald4.common.proto.DD4UIProtos.CreateRequest getDefaultInstanceForType() {
+        return com.digitald4.common.proto.DD4UIProtos.CreateRequest.getDefaultInstance();
+      }
+
+      public com.digitald4.common.proto.DD4UIProtos.CreateRequest build() {
+        com.digitald4.common.proto.DD4UIProtos.CreateRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.digitald4.common.proto.DD4UIProtos.CreateRequest buildPartial() {
+        com.digitald4.common.proto.DD4UIProtos.CreateRequest result = new com.digitald4.common.proto.DD4UIProtos.CreateRequest(this);
+        if (protoBuilder_ == null) {
+          result.proto_ = proto_;
+        } else {
+          result.proto_ = protoBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.digitald4.common.proto.DD4UIProtos.CreateRequest) {
+          return mergeFrom((com.digitald4.common.proto.DD4UIProtos.CreateRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.digitald4.common.proto.DD4UIProtos.CreateRequest other) {
+        if (other == com.digitald4.common.proto.DD4UIProtos.CreateRequest.getDefaultInstance()) return this;
+        if (other.hasProto()) {
+          mergeProto(other.getProto());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.digitald4.common.proto.DD4UIProtos.CreateRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.digitald4.common.proto.DD4UIProtos.CreateRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private com.google.protobuf.Any proto_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> protoBuilder_;
+      /**
+       * <code>.google.protobuf.Any proto = 1;</code>
+       */
+      public boolean hasProto() {
+        return protoBuilder_ != null || proto_ != null;
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 1;</code>
+       */
+      public com.google.protobuf.Any getProto() {
+        if (protoBuilder_ == null) {
+          return proto_ == null ? com.google.protobuf.Any.getDefaultInstance() : proto_;
+        } else {
+          return protoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 1;</code>
+       */
+      public Builder setProto(com.google.protobuf.Any value) {
+        if (protoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          proto_ = value;
+          onChanged();
+        } else {
+          protoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 1;</code>
+       */
+      public Builder setProto(
+          com.google.protobuf.Any.Builder builderForValue) {
+        if (protoBuilder_ == null) {
+          proto_ = builderForValue.build();
+          onChanged();
+        } else {
+          protoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 1;</code>
+       */
+      public Builder mergeProto(com.google.protobuf.Any value) {
+        if (protoBuilder_ == null) {
+          if (proto_ != null) {
+            proto_ =
+              com.google.protobuf.Any.newBuilder(proto_).mergeFrom(value).buildPartial();
+          } else {
+            proto_ = value;
+          }
+          onChanged();
+        } else {
+          protoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 1;</code>
+       */
+      public Builder clearProto() {
+        if (protoBuilder_ == null) {
+          proto_ = null;
+          onChanged();
+        } else {
+          proto_ = null;
+          protoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 1;</code>
+       */
+      public com.google.protobuf.Any.Builder getProtoBuilder() {
+        
+        onChanged();
+        return getProtoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 1;</code>
+       */
+      public com.google.protobuf.AnyOrBuilder getProtoOrBuilder() {
+        if (protoBuilder_ != null) {
+          return protoBuilder_.getMessageOrBuilder();
+        } else {
+          return proto_ == null ?
+              com.google.protobuf.Any.getDefaultInstance() : proto_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
+          getProtoFieldBuilder() {
+        if (protoBuilder_ == null) {
+          protoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
+                  getProto(),
+                  getParentForChildren(),
+                  isClean());
+          proto_ = null;
+        }
+        return protoBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:common.CreateRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:common.CreateRequest)
+    private static final com.digitald4.common.proto.DD4UIProtos.CreateRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.digitald4.common.proto.DD4UIProtos.CreateRequest();
+    }
+
+    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CreateRequest>
+        PARSER = new com.google.protobuf.AbstractParser<CreateRequest>() {
+      public CreateRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new CreateRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CreateRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CreateRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public com.digitald4.common.proto.DD4UIProtos.CreateRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface GetRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:common.GetRequest)
       com.google.protobuf.MessageOrBuilder {
@@ -4761,23 +5332,28 @@ public final class DD4UIProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated string item = 1;</code>
+     * <code>repeated .google.protobuf.Any result = 1;</code>
      */
-    java.util.List<java.lang.String>
-        getItemList();
+    java.util.List<com.google.protobuf.Any> 
+        getResultList();
     /**
-     * <code>repeated string item = 1;</code>
+     * <code>repeated .google.protobuf.Any result = 1;</code>
      */
-    int getItemCount();
+    com.google.protobuf.Any getResult(int index);
     /**
-     * <code>repeated string item = 1;</code>
+     * <code>repeated .google.protobuf.Any result = 1;</code>
      */
-    java.lang.String getItem(int index);
+    int getResultCount();
     /**
-     * <code>repeated string item = 1;</code>
+     * <code>repeated .google.protobuf.Any result = 1;</code>
      */
-    com.google.protobuf.ByteString
-        getItemBytes(int index);
+    java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
+        getResultOrBuilderList();
+    /**
+     * <code>repeated .google.protobuf.Any result = 1;</code>
+     */
+    com.google.protobuf.AnyOrBuilder getResultOrBuilder(
+        int index);
 
     /**
      * <code>int32 total_size = 2;</code>
@@ -4796,7 +5372,7 @@ public final class DD4UIProtos {
       super(builder);
     }
     private ListResponse() {
-      item_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      result_ = java.util.Collections.emptyList();
       totalSize_ = 0;
     }
 
@@ -4826,12 +5402,12 @@ public final class DD4UIProtos {
               break;
             }
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                item_ = new com.google.protobuf.LazyStringArrayList();
+                result_ = new java.util.ArrayList<com.google.protobuf.Any>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              item_.add(s);
+              result_.add(
+                  input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry));
               break;
             }
             case 16: {
@@ -4848,7 +5424,7 @@ public final class DD4UIProtos {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          item_ = item_.getUnmodifiableView();
+          result_ = java.util.Collections.unmodifiableList(result_);
         }
         makeExtensionsImmutable();
       }
@@ -4866,33 +5442,39 @@ public final class DD4UIProtos {
     }
 
     private int bitField0_;
-    public static final int ITEM_FIELD_NUMBER = 1;
-    private com.google.protobuf.LazyStringList item_;
+    public static final int RESULT_FIELD_NUMBER = 1;
+    private java.util.List<com.google.protobuf.Any> result_;
     /**
-     * <code>repeated string item = 1;</code>
+     * <code>repeated .google.protobuf.Any result = 1;</code>
      */
-    public com.google.protobuf.ProtocolStringList
-        getItemList() {
-      return item_;
+    public java.util.List<com.google.protobuf.Any> getResultList() {
+      return result_;
     }
     /**
-     * <code>repeated string item = 1;</code>
+     * <code>repeated .google.protobuf.Any result = 1;</code>
      */
-    public int getItemCount() {
-      return item_.size();
+    public java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
+        getResultOrBuilderList() {
+      return result_;
     }
     /**
-     * <code>repeated string item = 1;</code>
+     * <code>repeated .google.protobuf.Any result = 1;</code>
      */
-    public java.lang.String getItem(int index) {
-      return item_.get(index);
+    public int getResultCount() {
+      return result_.size();
     }
     /**
-     * <code>repeated string item = 1;</code>
+     * <code>repeated .google.protobuf.Any result = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getItemBytes(int index) {
-      return item_.getByteString(index);
+    public com.google.protobuf.Any getResult(int index) {
+      return result_.get(index);
+    }
+    /**
+     * <code>repeated .google.protobuf.Any result = 1;</code>
+     */
+    public com.google.protobuf.AnyOrBuilder getResultOrBuilder(
+        int index) {
+      return result_.get(index);
     }
 
     public static final int TOTAL_SIZE_FIELD_NUMBER = 2;
@@ -4916,8 +5498,8 @@ public final class DD4UIProtos {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < item_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, item_.getRaw(i));
+      for (int i = 0; i < result_.size(); i++) {
+        output.writeMessage(1, result_.get(i));
       }
       if (totalSize_ != 0) {
         output.writeInt32(2, totalSize_);
@@ -4929,13 +5511,9 @@ public final class DD4UIProtos {
       if (size != -1) return size;
 
       size = 0;
-      {
-        int dataSize = 0;
-        for (int i = 0; i < item_.size(); i++) {
-          dataSize += computeStringSizeNoTag(item_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getItemList().size();
+      for (int i = 0; i < result_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, result_.get(i));
       }
       if (totalSize_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -4957,8 +5535,8 @@ public final class DD4UIProtos {
       com.digitald4.common.proto.DD4UIProtos.ListResponse other = (com.digitald4.common.proto.DD4UIProtos.ListResponse) obj;
 
       boolean result = true;
-      result = result && getItemList()
-          .equals(other.getItemList());
+      result = result && getResultList()
+          .equals(other.getResultList());
       result = result && (getTotalSize()
           == other.getTotalSize());
       return result;
@@ -4971,9 +5549,9 @@ public final class DD4UIProtos {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getItemCount() > 0) {
-        hash = (37 * hash) + ITEM_FIELD_NUMBER;
-        hash = (53 * hash) + getItemList().hashCode();
+      if (getResultCount() > 0) {
+        hash = (37 * hash) + RESULT_FIELD_NUMBER;
+        hash = (53 * hash) + getResultList().hashCode();
       }
       hash = (37 * hash) + TOTAL_SIZE_FIELD_NUMBER;
       hash = (53 * hash) + getTotalSize();
@@ -5102,12 +5680,17 @@ public final class DD4UIProtos {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getResultFieldBuilder();
         }
       }
       public Builder clear() {
         super.clear();
-        item_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
+        if (resultBuilder_ == null) {
+          result_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          resultBuilder_.clear();
+        }
         totalSize_ = 0;
 
         return this;
@@ -5134,11 +5717,15 @@ public final class DD4UIProtos {
         com.digitald4.common.proto.DD4UIProtos.ListResponse result = new com.digitald4.common.proto.DD4UIProtos.ListResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          item_ = item_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000001);
+        if (resultBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            result_ = java.util.Collections.unmodifiableList(result_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.result_ = result_;
+        } else {
+          result.result_ = resultBuilder_.build();
         }
-        result.item_ = item_;
         result.totalSize_ = totalSize_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -5182,15 +5769,31 @@ public final class DD4UIProtos {
 
       public Builder mergeFrom(com.digitald4.common.proto.DD4UIProtos.ListResponse other) {
         if (other == com.digitald4.common.proto.DD4UIProtos.ListResponse.getDefaultInstance()) return this;
-        if (!other.item_.isEmpty()) {
-          if (item_.isEmpty()) {
-            item_ = other.item_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureItemIsMutable();
-            item_.addAll(other.item_);
+        if (resultBuilder_ == null) {
+          if (!other.result_.isEmpty()) {
+            if (result_.isEmpty()) {
+              result_ = other.result_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureResultIsMutable();
+              result_.addAll(other.result_);
+            }
+            onChanged();
           }
-          onChanged();
+        } else {
+          if (!other.result_.isEmpty()) {
+            if (resultBuilder_.isEmpty()) {
+              resultBuilder_.dispose();
+              resultBuilder_ = null;
+              result_ = other.result_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              resultBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getResultFieldBuilder() : null;
+            } else {
+              resultBuilder_.addAllMessages(other.result_);
+            }
+          }
         }
         if (other.getTotalSize() != 0) {
           setTotalSize(other.getTotalSize());
@@ -5222,98 +5825,244 @@ public final class DD4UIProtos {
       }
       private int bitField0_;
 
-      private com.google.protobuf.LazyStringList item_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureItemIsMutable() {
+      private java.util.List<com.google.protobuf.Any> result_ =
+        java.util.Collections.emptyList();
+      private void ensureResultIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          item_ = new com.google.protobuf.LazyStringArrayList(item_);
+          result_ = new java.util.ArrayList<com.google.protobuf.Any>(result_);
           bitField0_ |= 0x00000001;
          }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> resultBuilder_;
+
       /**
-       * <code>repeated string item = 1;</code>
+       * <code>repeated .google.protobuf.Any result = 1;</code>
        */
-      public com.google.protobuf.ProtocolStringList
-          getItemList() {
-        return item_.getUnmodifiableView();
+      public java.util.List<com.google.protobuf.Any> getResultList() {
+        if (resultBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(result_);
+        } else {
+          return resultBuilder_.getMessageList();
+        }
       }
       /**
-       * <code>repeated string item = 1;</code>
+       * <code>repeated .google.protobuf.Any result = 1;</code>
        */
-      public int getItemCount() {
-        return item_.size();
+      public int getResultCount() {
+        if (resultBuilder_ == null) {
+          return result_.size();
+        } else {
+          return resultBuilder_.getCount();
+        }
       }
       /**
-       * <code>repeated string item = 1;</code>
+       * <code>repeated .google.protobuf.Any result = 1;</code>
        */
-      public java.lang.String getItem(int index) {
-        return item_.get(index);
+      public com.google.protobuf.Any getResult(int index) {
+        if (resultBuilder_ == null) {
+          return result_.get(index);
+        } else {
+          return resultBuilder_.getMessage(index);
+        }
       }
       /**
-       * <code>repeated string item = 1;</code>
+       * <code>repeated .google.protobuf.Any result = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getItemBytes(int index) {
-        return item_.getByteString(index);
-      }
-      /**
-       * <code>repeated string item = 1;</code>
-       */
-      public Builder setItem(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureItemIsMutable();
-        item_.set(index, value);
-        onChanged();
+      public Builder setResult(
+          int index, com.google.protobuf.Any value) {
+        if (resultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResultIsMutable();
+          result_.set(index, value);
+          onChanged();
+        } else {
+          resultBuilder_.setMessage(index, value);
+        }
         return this;
       }
       /**
-       * <code>repeated string item = 1;</code>
+       * <code>repeated .google.protobuf.Any result = 1;</code>
        */
-      public Builder addItem(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureItemIsMutable();
-        item_.add(value);
-        onChanged();
+      public Builder setResult(
+          int index, com.google.protobuf.Any.Builder builderForValue) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          resultBuilder_.setMessage(index, builderForValue.build());
+        }
         return this;
       }
       /**
-       * <code>repeated string item = 1;</code>
+       * <code>repeated .google.protobuf.Any result = 1;</code>
        */
-      public Builder addAllItem(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureItemIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, item_);
-        onChanged();
+      public Builder addResult(com.google.protobuf.Any value) {
+        if (resultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResultIsMutable();
+          result_.add(value);
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(value);
+        }
         return this;
       }
       /**
-       * <code>repeated string item = 1;</code>
+       * <code>repeated .google.protobuf.Any result = 1;</code>
        */
-      public Builder clearItem() {
-        item_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
+      public Builder addResult(
+          int index, com.google.protobuf.Any value) {
+        if (resultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResultIsMutable();
+          result_.add(index, value);
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(index, value);
+        }
         return this;
       }
       /**
-       * <code>repeated string item = 1;</code>
+       * <code>repeated .google.protobuf.Any result = 1;</code>
        */
-      public Builder addItemBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureItemIsMutable();
-        item_.add(value);
-        onChanged();
+      public Builder addResult(
+          com.google.protobuf.Any.Builder builderForValue) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.add(builderForValue.build());
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(builderForValue.build());
+        }
         return this;
+      }
+      /**
+       * <code>repeated .google.protobuf.Any result = 1;</code>
+       */
+      public Builder addResult(
+          int index, com.google.protobuf.Any.Builder builderForValue) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .google.protobuf.Any result = 1;</code>
+       */
+      public Builder addAllResult(
+          java.lang.Iterable<? extends com.google.protobuf.Any> values) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, result_);
+          onChanged();
+        } else {
+          resultBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .google.protobuf.Any result = 1;</code>
+       */
+      public Builder clearResult() {
+        if (resultBuilder_ == null) {
+          result_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          resultBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .google.protobuf.Any result = 1;</code>
+       */
+      public Builder removeResult(int index) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.remove(index);
+          onChanged();
+        } else {
+          resultBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .google.protobuf.Any result = 1;</code>
+       */
+      public com.google.protobuf.Any.Builder getResultBuilder(
+          int index) {
+        return getResultFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .google.protobuf.Any result = 1;</code>
+       */
+      public com.google.protobuf.AnyOrBuilder getResultOrBuilder(
+          int index) {
+        if (resultBuilder_ == null) {
+          return result_.get(index);  } else {
+          return resultBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .google.protobuf.Any result = 1;</code>
+       */
+      public java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
+           getResultOrBuilderList() {
+        if (resultBuilder_ != null) {
+          return resultBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(result_);
+        }
+      }
+      /**
+       * <code>repeated .google.protobuf.Any result = 1;</code>
+       */
+      public com.google.protobuf.Any.Builder addResultBuilder() {
+        return getResultFieldBuilder().addBuilder(
+            com.google.protobuf.Any.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .google.protobuf.Any result = 1;</code>
+       */
+      public com.google.protobuf.Any.Builder addResultBuilder(
+          int index) {
+        return getResultFieldBuilder().addBuilder(
+            index, com.google.protobuf.Any.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .google.protobuf.Any result = 1;</code>
+       */
+      public java.util.List<com.google.protobuf.Any.Builder> 
+           getResultBuilderList() {
+        return getResultFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
+          getResultFieldBuilder() {
+        if (resultBuilder_ == null) {
+          resultBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
+                  result_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          result_ = null;
+        }
+        return resultBuilder_;
       }
 
       private int totalSize_ ;
@@ -5390,520 +6139,6 @@ public final class DD4UIProtos {
 
   }
 
-  public interface CreateRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:common.CreateRequest)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string proto = 1;</code>
-     */
-    java.lang.String getProto();
-    /**
-     * <code>string proto = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getProtoBytes();
-  }
-  /**
-   * Protobuf type {@code common.CreateRequest}
-   */
-  public  static final class CreateRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:common.CreateRequest)
-      CreateRequestOrBuilder {
-    // Use CreateRequest.newBuilder() to construct.
-    private CreateRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private CreateRequest() {
-      proto_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private CreateRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              proto_ = s;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.digitald4.common.proto.DD4UIProtos.internal_static_common_CreateRequest_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.digitald4.common.proto.DD4UIProtos.internal_static_common_CreateRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.digitald4.common.proto.DD4UIProtos.CreateRequest.class, com.digitald4.common.proto.DD4UIProtos.CreateRequest.Builder.class);
-    }
-
-    public static final int PROTO_FIELD_NUMBER = 1;
-    private volatile java.lang.Object proto_;
-    /**
-     * <code>string proto = 1;</code>
-     */
-    public java.lang.String getProto() {
-      java.lang.Object ref = proto_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        proto_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string proto = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getProtoBytes() {
-      java.lang.Object ref = proto_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        proto_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getProtoBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, proto_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getProtoBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, proto_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.digitald4.common.proto.DD4UIProtos.CreateRequest)) {
-        return super.equals(obj);
-      }
-      com.digitald4.common.proto.DD4UIProtos.CreateRequest other = (com.digitald4.common.proto.DD4UIProtos.CreateRequest) obj;
-
-      boolean result = true;
-      result = result && getProto()
-          .equals(other.getProto());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + PROTO_FIELD_NUMBER;
-      hash = (53 * hash) + getProto().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.digitald4.common.proto.DD4UIProtos.CreateRequest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code common.CreateRequest}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:common.CreateRequest)
-        com.digitald4.common.proto.DD4UIProtos.CreateRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.digitald4.common.proto.DD4UIProtos.internal_static_common_CreateRequest_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.digitald4.common.proto.DD4UIProtos.internal_static_common_CreateRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.digitald4.common.proto.DD4UIProtos.CreateRequest.class, com.digitald4.common.proto.DD4UIProtos.CreateRequest.Builder.class);
-      }
-
-      // Construct using com.digitald4.common.proto.DD4UIProtos.CreateRequest.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        proto_ = "";
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.digitald4.common.proto.DD4UIProtos.internal_static_common_CreateRequest_descriptor;
-      }
-
-      public com.digitald4.common.proto.DD4UIProtos.CreateRequest getDefaultInstanceForType() {
-        return com.digitald4.common.proto.DD4UIProtos.CreateRequest.getDefaultInstance();
-      }
-
-      public com.digitald4.common.proto.DD4UIProtos.CreateRequest build() {
-        com.digitald4.common.proto.DD4UIProtos.CreateRequest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.digitald4.common.proto.DD4UIProtos.CreateRequest buildPartial() {
-        com.digitald4.common.proto.DD4UIProtos.CreateRequest result = new com.digitald4.common.proto.DD4UIProtos.CreateRequest(this);
-        result.proto_ = proto_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.digitald4.common.proto.DD4UIProtos.CreateRequest) {
-          return mergeFrom((com.digitald4.common.proto.DD4UIProtos.CreateRequest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.digitald4.common.proto.DD4UIProtos.CreateRequest other) {
-        if (other == com.digitald4.common.proto.DD4UIProtos.CreateRequest.getDefaultInstance()) return this;
-        if (!other.getProto().isEmpty()) {
-          proto_ = other.proto_;
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.digitald4.common.proto.DD4UIProtos.CreateRequest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.digitald4.common.proto.DD4UIProtos.CreateRequest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object proto_ = "";
-      /**
-       * <code>string proto = 1;</code>
-       */
-      public java.lang.String getProto() {
-        java.lang.Object ref = proto_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          proto_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string proto = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getProtoBytes() {
-        java.lang.Object ref = proto_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          proto_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string proto = 1;</code>
-       */
-      public Builder setProto(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        proto_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string proto = 1;</code>
-       */
-      public Builder clearProto() {
-        
-        proto_ = getDefaultInstance().getProto();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string proto = 1;</code>
-       */
-      public Builder setProtoBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        proto_ = value;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:common.CreateRequest)
-    }
-
-    // @@protoc_insertion_point(class_scope:common.CreateRequest)
-    private static final com.digitald4.common.proto.DD4UIProtos.CreateRequest DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.digitald4.common.proto.DD4UIProtos.CreateRequest();
-    }
-
-    public static com.digitald4.common.proto.DD4UIProtos.CreateRequest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<CreateRequest>
-        PARSER = new com.google.protobuf.AbstractParser<CreateRequest>() {
-      public CreateRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CreateRequest(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<CreateRequest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<CreateRequest> getParserForType() {
-      return PARSER;
-    }
-
-    public com.digitald4.common.proto.DD4UIProtos.CreateRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface UpdateRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:common.UpdateRequest)
       com.google.protobuf.MessageOrBuilder {
@@ -5914,14 +6149,30 @@ public final class DD4UIProtos {
     int getId();
 
     /**
-     * <code>string proto = 2;</code>
+     * <code>.google.protobuf.Any proto = 2;</code>
      */
-    java.lang.String getProto();
+    boolean hasProto();
     /**
-     * <code>string proto = 2;</code>
+     * <code>.google.protobuf.Any proto = 2;</code>
      */
-    com.google.protobuf.ByteString
-        getProtoBytes();
+    com.google.protobuf.Any getProto();
+    /**
+     * <code>.google.protobuf.Any proto = 2;</code>
+     */
+    com.google.protobuf.AnyOrBuilder getProtoOrBuilder();
+
+    /**
+     * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+     */
+    boolean hasUpdateMask();
+    /**
+     * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+     */
+    com.google.protobuf.FieldMask getUpdateMask();
+    /**
+     * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+     */
+    com.google.protobuf.FieldMaskOrBuilder getUpdateMaskOrBuilder();
   }
   /**
    * Protobuf type {@code common.UpdateRequest}
@@ -5936,7 +6187,6 @@ public final class DD4UIProtos {
     }
     private UpdateRequest() {
       id_ = 0;
-      proto_ = "";
     }
 
     @java.lang.Override
@@ -5970,9 +6220,29 @@ public final class DD4UIProtos {
               break;
             }
             case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
+              com.google.protobuf.Any.Builder subBuilder = null;
+              if (proto_ != null) {
+                subBuilder = proto_.toBuilder();
+              }
+              proto_ = input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(proto_);
+                proto_ = subBuilder.buildPartial();
+              }
 
-              proto_ = s;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.FieldMask.Builder subBuilder = null;
+              if (updateMask_ != null) {
+                subBuilder = updateMask_.toBuilder();
+              }
+              updateMask_ = input.readMessage(com.google.protobuf.FieldMask.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(updateMask_);
+                updateMask_ = subBuilder.buildPartial();
+              }
+
               break;
             }
           }
@@ -6008,37 +6278,45 @@ public final class DD4UIProtos {
     }
 
     public static final int PROTO_FIELD_NUMBER = 2;
-    private volatile java.lang.Object proto_;
+    private com.google.protobuf.Any proto_;
     /**
-     * <code>string proto = 2;</code>
+     * <code>.google.protobuf.Any proto = 2;</code>
      */
-    public java.lang.String getProto() {
-      java.lang.Object ref = proto_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        proto_ = s;
-        return s;
-      }
+    public boolean hasProto() {
+      return proto_ != null;
     }
     /**
-     * <code>string proto = 2;</code>
+     * <code>.google.protobuf.Any proto = 2;</code>
      */
-    public com.google.protobuf.ByteString
-        getProtoBytes() {
-      java.lang.Object ref = proto_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        proto_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.Any getProto() {
+      return proto_ == null ? com.google.protobuf.Any.getDefaultInstance() : proto_;
+    }
+    /**
+     * <code>.google.protobuf.Any proto = 2;</code>
+     */
+    public com.google.protobuf.AnyOrBuilder getProtoOrBuilder() {
+      return getProto();
+    }
+
+    public static final int UPDATE_MASK_FIELD_NUMBER = 3;
+    private com.google.protobuf.FieldMask updateMask_;
+    /**
+     * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+     */
+    public boolean hasUpdateMask() {
+      return updateMask_ != null;
+    }
+    /**
+     * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+     */
+    public com.google.protobuf.FieldMask getUpdateMask() {
+      return updateMask_ == null ? com.google.protobuf.FieldMask.getDefaultInstance() : updateMask_;
+    }
+    /**
+     * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+     */
+    public com.google.protobuf.FieldMaskOrBuilder getUpdateMaskOrBuilder() {
+      return getUpdateMask();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -6056,8 +6334,11 @@ public final class DD4UIProtos {
       if (id_ != 0) {
         output.writeInt32(1, id_);
       }
-      if (!getProtoBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, proto_);
+      if (proto_ != null) {
+        output.writeMessage(2, getProto());
+      }
+      if (updateMask_ != null) {
+        output.writeMessage(3, getUpdateMask());
       }
     }
 
@@ -6070,8 +6351,13 @@ public final class DD4UIProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, id_);
       }
-      if (!getProtoBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, proto_);
+      if (proto_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getProto());
+      }
+      if (updateMask_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getUpdateMask());
       }
       memoizedSize = size;
       return size;
@@ -6091,8 +6377,16 @@ public final class DD4UIProtos {
       boolean result = true;
       result = result && (getId()
           == other.getId());
-      result = result && getProto()
-          .equals(other.getProto());
+      result = result && (hasProto() == other.hasProto());
+      if (hasProto()) {
+        result = result && getProto()
+            .equals(other.getProto());
+      }
+      result = result && (hasUpdateMask() == other.hasUpdateMask());
+      if (hasUpdateMask()) {
+        result = result && getUpdateMask()
+            .equals(other.getUpdateMask());
+      }
       return result;
     }
 
@@ -6105,8 +6399,14 @@ public final class DD4UIProtos {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId();
-      hash = (37 * hash) + PROTO_FIELD_NUMBER;
-      hash = (53 * hash) + getProto().hashCode();
+      if (hasProto()) {
+        hash = (37 * hash) + PROTO_FIELD_NUMBER;
+        hash = (53 * hash) + getProto().hashCode();
+      }
+      if (hasUpdateMask()) {
+        hash = (37 * hash) + UPDATE_MASK_FIELD_NUMBER;
+        hash = (53 * hash) + getUpdateMask().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -6238,8 +6538,18 @@ public final class DD4UIProtos {
         super.clear();
         id_ = 0;
 
-        proto_ = "";
-
+        if (protoBuilder_ == null) {
+          proto_ = null;
+        } else {
+          proto_ = null;
+          protoBuilder_ = null;
+        }
+        if (updateMaskBuilder_ == null) {
+          updateMask_ = null;
+        } else {
+          updateMask_ = null;
+          updateMaskBuilder_ = null;
+        }
         return this;
       }
 
@@ -6263,7 +6573,16 @@ public final class DD4UIProtos {
       public com.digitald4.common.proto.DD4UIProtos.UpdateRequest buildPartial() {
         com.digitald4.common.proto.DD4UIProtos.UpdateRequest result = new com.digitald4.common.proto.DD4UIProtos.UpdateRequest(this);
         result.id_ = id_;
-        result.proto_ = proto_;
+        if (protoBuilder_ == null) {
+          result.proto_ = proto_;
+        } else {
+          result.proto_ = protoBuilder_.build();
+        }
+        if (updateMaskBuilder_ == null) {
+          result.updateMask_ = updateMask_;
+        } else {
+          result.updateMask_ = updateMaskBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -6308,9 +6627,11 @@ public final class DD4UIProtos {
         if (other.getId() != 0) {
           setId(other.getId());
         }
-        if (!other.getProto().isEmpty()) {
-          proto_ = other.proto_;
-          onChanged();
+        if (other.hasProto()) {
+          mergeProto(other.getProto());
+        }
+        if (other.hasUpdateMask()) {
+          mergeUpdateMask(other.getUpdateMask());
         }
         onChanged();
         return this;
@@ -6364,73 +6685,238 @@ public final class DD4UIProtos {
         return this;
       }
 
-      private java.lang.Object proto_ = "";
+      private com.google.protobuf.Any proto_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> protoBuilder_;
       /**
-       * <code>string proto = 2;</code>
+       * <code>.google.protobuf.Any proto = 2;</code>
        */
-      public java.lang.String getProto() {
-        java.lang.Object ref = proto_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          proto_ = s;
-          return s;
+      public boolean hasProto() {
+        return protoBuilder_ != null || proto_ != null;
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 2;</code>
+       */
+      public com.google.protobuf.Any getProto() {
+        if (protoBuilder_ == null) {
+          return proto_ == null ? com.google.protobuf.Any.getDefaultInstance() : proto_;
         } else {
-          return (java.lang.String) ref;
+          return protoBuilder_.getMessage();
         }
       }
       /**
-       * <code>string proto = 2;</code>
+       * <code>.google.protobuf.Any proto = 2;</code>
        */
-      public com.google.protobuf.ByteString
-          getProtoBytes() {
-        java.lang.Object ref = proto_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          proto_ = b;
-          return b;
+      public Builder setProto(com.google.protobuf.Any value) {
+        if (protoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          proto_ = value;
+          onChanged();
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          protoBuilder_.setMessage(value);
         }
+
+        return this;
       }
       /**
-       * <code>string proto = 2;</code>
+       * <code>.google.protobuf.Any proto = 2;</code>
        */
       public Builder setProto(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        proto_ = value;
-        onChanged();
+          com.google.protobuf.Any.Builder builderForValue) {
+        if (protoBuilder_ == null) {
+          proto_ = builderForValue.build();
+          onChanged();
+        } else {
+          protoBuilder_.setMessage(builderForValue.build());
+        }
+
         return this;
       }
       /**
-       * <code>string proto = 2;</code>
+       * <code>.google.protobuf.Any proto = 2;</code>
+       */
+      public Builder mergeProto(com.google.protobuf.Any value) {
+        if (protoBuilder_ == null) {
+          if (proto_ != null) {
+            proto_ =
+              com.google.protobuf.Any.newBuilder(proto_).mergeFrom(value).buildPartial();
+          } else {
+            proto_ = value;
+          }
+          onChanged();
+        } else {
+          protoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 2;</code>
        */
       public Builder clearProto() {
-        
-        proto_ = getDefaultInstance().getProto();
-        onChanged();
+        if (protoBuilder_ == null) {
+          proto_ = null;
+          onChanged();
+        } else {
+          proto_ = null;
+          protoBuilder_ = null;
+        }
+
         return this;
       }
       /**
-       * <code>string proto = 2;</code>
+       * <code>.google.protobuf.Any proto = 2;</code>
        */
-      public Builder setProtoBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+      public com.google.protobuf.Any.Builder getProtoBuilder() {
         
-        proto_ = value;
         onChanged();
+        return getProtoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 2;</code>
+       */
+      public com.google.protobuf.AnyOrBuilder getProtoOrBuilder() {
+        if (protoBuilder_ != null) {
+          return protoBuilder_.getMessageOrBuilder();
+        } else {
+          return proto_ == null ?
+              com.google.protobuf.Any.getDefaultInstance() : proto_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.Any proto = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
+          getProtoFieldBuilder() {
+        if (protoBuilder_ == null) {
+          protoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
+                  getProto(),
+                  getParentForChildren(),
+                  isClean());
+          proto_ = null;
+        }
+        return protoBuilder_;
+      }
+
+      private com.google.protobuf.FieldMask updateMask_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.FieldMask, com.google.protobuf.FieldMask.Builder, com.google.protobuf.FieldMaskOrBuilder> updateMaskBuilder_;
+      /**
+       * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+       */
+      public boolean hasUpdateMask() {
+        return updateMaskBuilder_ != null || updateMask_ != null;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+       */
+      public com.google.protobuf.FieldMask getUpdateMask() {
+        if (updateMaskBuilder_ == null) {
+          return updateMask_ == null ? com.google.protobuf.FieldMask.getDefaultInstance() : updateMask_;
+        } else {
+          return updateMaskBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+       */
+      public Builder setUpdateMask(com.google.protobuf.FieldMask value) {
+        if (updateMaskBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          updateMask_ = value;
+          onChanged();
+        } else {
+          updateMaskBuilder_.setMessage(value);
+        }
+
         return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+       */
+      public Builder setUpdateMask(
+          com.google.protobuf.FieldMask.Builder builderForValue) {
+        if (updateMaskBuilder_ == null) {
+          updateMask_ = builderForValue.build();
+          onChanged();
+        } else {
+          updateMaskBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+       */
+      public Builder mergeUpdateMask(com.google.protobuf.FieldMask value) {
+        if (updateMaskBuilder_ == null) {
+          if (updateMask_ != null) {
+            updateMask_ =
+              com.google.protobuf.FieldMask.newBuilder(updateMask_).mergeFrom(value).buildPartial();
+          } else {
+            updateMask_ = value;
+          }
+          onChanged();
+        } else {
+          updateMaskBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+       */
+      public Builder clearUpdateMask() {
+        if (updateMaskBuilder_ == null) {
+          updateMask_ = null;
+          onChanged();
+        } else {
+          updateMask_ = null;
+          updateMaskBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+       */
+      public com.google.protobuf.FieldMask.Builder getUpdateMaskBuilder() {
+        
+        onChanged();
+        return getUpdateMaskFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+       */
+      public com.google.protobuf.FieldMaskOrBuilder getUpdateMaskOrBuilder() {
+        if (updateMaskBuilder_ != null) {
+          return updateMaskBuilder_.getMessageOrBuilder();
+        } else {
+          return updateMask_ == null ?
+              com.google.protobuf.FieldMask.getDefaultInstance() : updateMask_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.FieldMask update_mask = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.FieldMask, com.google.protobuf.FieldMask.Builder, com.google.protobuf.FieldMaskOrBuilder> 
+          getUpdateMaskFieldBuilder() {
+        if (updateMaskBuilder_ == null) {
+          updateMaskBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.FieldMask, com.google.protobuf.FieldMask.Builder, com.google.protobuf.FieldMaskOrBuilder>(
+                  getUpdateMask(),
+                  getParentForChildren(),
+                  isClean());
+          updateMask_ = null;
+        }
+        return updateMaskBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -9236,6 +9722,11 @@ public final class DD4UIProtos {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_common_DataFile_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_common_CreateRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_common_CreateRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_common_GetRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -9260,11 +9751,6 @@ public final class DD4UIProtos {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_common_ListResponse_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_common_CreateRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_common_CreateRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_common_UpdateRequest_descriptor;
   private static final 
@@ -9294,33 +9780,37 @@ public final class DD4UIProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017common_ui.proto\022\006common\"P\n\nGPSAddress\022" +
-      "\017\n\007address\030\001 \001(\t\022\020\n\010latitude\030\002 \001(\001\022\021\n\tlo" +
-      "ngitude\030\003 \001(\001\022\014\n\004unit\030\004 \001(\t\"@\n\010DataFile\022" +
-      "\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\014\n\004type\030\003 \001(\t\022" +
-      "\014\n\004size\030\004 \001(\005\"\030\n\nGetRequest\022\n\n\002id\030\001 \001(\005\"" +
-      "\361\001\n\013ListRequest\022\021\n\tpage_size\030\001 \001(\005\022\022\n\npa" +
-      "ge_token\030\002 \001(\005\022*\n\006filter\030\003 \003(\0132\032.common." +
-      "ListRequest.Filter\022-\n\010order_by\030\004 \003(\0132\033.c" +
-      "ommon.ListRequest.OrderBy\0327\n\006Filter\022\016\n\006c" +
-      "olumn\030\001 \001(\t\022\016\n\006operan\030\002 \001(\t\022\r\n\005value\030\003 \001",
-      "(\t\032\'\n\007OrderBy\022\016\n\006column\030\001 \001(\t\022\014\n\004desc\030\002 " +
-      "\001(\010\"0\n\014ListResponse\022\014\n\004item\030\001 \003(\t\022\022\n\ntot" +
-      "al_size\030\002 \001(\005\"\036\n\rCreateRequest\022\r\n\005proto\030" +
-      "\001 \001(\t\"*\n\rUpdateRequest\022\n\n\002id\030\001 \001(\005\022\r\n\005pr" +
-      "oto\030\002 \001(\t\"\033\n\rDeleteRequest\022\n\n\002id\030\001 \001(\005\"2" +
-      "\n\014LoginRequest\022\020\n\010username\030\001 \001(\t\022\020\n\010pass" +
-      "word\030\002 \001(\t\"\221\002\n\004User\022\n\n\002id\030\001 \001(\005\022#\n\004type\030" +
-      "\002 \001(\0162\025.common.User.UserType\022\021\n\tuser_nam" +
-      "e\030\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\022\n\nfirst_name\030\005 \001" +
-      "(\t\022\021\n\tlast_name\030\006 \001(\t\022\021\n\tfull_name\030\007 \001(\t",
-      "\022\020\n\010disabled\030\010 \001(\010\022\021\n\tread_only\030\t \001(\010\022\r\n" +
-      "\005notes\030\n \001(\t\022\022\n\nlast_login\030\013 \001(\003\"4\n\010User" +
-      "Type\022\017\n\013UNSPECIFIED\020\000\022\t\n\005ADMIN\020\001\022\014\n\010STAN" +
-      "DARD\020\002*S\n\tDateRange\022\017\n\013UNSPECIFIED\020\000\022\007\n\003" +
-      "DAY\020\001\022\010\n\004WEEK\020\002\022\t\n\005MONTH\020\003\022\r\n\tCAL_MONTH\020" +
-      "\004\022\010\n\004YEAR\020\005B)\n\032com.digitald4.common.prot" +
-      "oB\013DD4UIProtosb\006proto3"
+      "\n\017common_ui.proto\022\006common\032\031google/protob" +
+      "uf/any.proto\032 google/protobuf/field_mask" +
+      ".proto\"P\n\nGPSAddress\022\017\n\007address\030\001 \001(\t\022\020\n" +
+      "\010latitude\030\002 \001(\001\022\021\n\tlongitude\030\003 \001(\001\022\014\n\004un" +
+      "it\030\004 \001(\t\"@\n\010DataFile\022\n\n\002id\030\001 \001(\005\022\014\n\004name" +
+      "\030\002 \001(\t\022\014\n\004type\030\003 \001(\t\022\014\n\004size\030\004 \001(\005\"4\n\rCr" +
+      "eateRequest\022#\n\005proto\030\001 \001(\0132\024.google.prot" +
+      "obuf.Any\"\030\n\nGetRequest\022\n\n\002id\030\001 \001(\005\"\361\001\n\013L" +
+      "istRequest\022\021\n\tpage_size\030\001 \001(\005\022\022\n\npage_to" +
+      "ken\030\002 \001(\005\022*\n\006filter\030\003 \003(\0132\032.common.ListR",
+      "equest.Filter\022-\n\010order_by\030\004 \003(\0132\033.common" +
+      ".ListRequest.OrderBy\0327\n\006Filter\022\016\n\006column" +
+      "\030\001 \001(\t\022\016\n\006operan\030\002 \001(\t\022\r\n\005value\030\003 \001(\t\032\'\n" +
+      "\007OrderBy\022\016\n\006column\030\001 \001(\t\022\014\n\004desc\030\002 \001(\010\"H" +
+      "\n\014ListResponse\022$\n\006result\030\001 \003(\0132\024.google." +
+      "protobuf.Any\022\022\n\ntotal_size\030\002 \001(\005\"q\n\rUpda" +
+      "teRequest\022\n\n\002id\030\001 \001(\005\022#\n\005proto\030\002 \001(\0132\024.g" +
+      "oogle.protobuf.Any\022/\n\013update_mask\030\003 \001(\0132" +
+      "\032.google.protobuf.FieldMask\"\033\n\rDeleteReq" +
+      "uest\022\n\n\002id\030\001 \001(\005\"2\n\014LoginRequest\022\020\n\010user",
+      "name\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\221\002\n\004User\022\n\n" +
+      "\002id\030\001 \001(\005\022#\n\004type\030\002 \001(\0162\025.common.User.Us" +
+      "erType\022\021\n\tuser_name\030\003 \001(\t\022\r\n\005email\030\004 \001(\t" +
+      "\022\022\n\nfirst_name\030\005 \001(\t\022\021\n\tlast_name\030\006 \001(\t\022" +
+      "\021\n\tfull_name\030\007 \001(\t\022\020\n\010disabled\030\010 \001(\010\022\021\n\t" +
+      "read_only\030\t \001(\010\022\r\n\005notes\030\n \001(\t\022\022\n\nlast_l" +
+      "ogin\030\013 \001(\003\"4\n\010UserType\022\017\n\013UNSPECIFIED\020\000\022" +
+      "\t\n\005ADMIN\020\001\022\014\n\010STANDARD\020\002*S\n\tDateRange\022\017\n" +
+      "\013UNSPECIFIED\020\000\022\007\n\003DAY\020\001\022\010\n\004WEEK\020\002\022\t\n\005MON" +
+      "TH\020\003\022\r\n\tCAL_MONTH\020\004\022\010\n\004YEAR\020\005B)\n\032com.dig",
+      "itald4.common.protoB\013DD4UIProtosb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9333,6 +9823,8 @@ public final class DD4UIProtos {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.google.protobuf.AnyProto.getDescriptor(),
+          com.google.protobuf.FieldMaskProto.getDescriptor(),
         }, assigner);
     internal_static_common_GPSAddress_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -9346,14 +9838,20 @@ public final class DD4UIProtos {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_common_DataFile_descriptor,
         new java.lang.String[] { "Id", "Name", "Type", "Size", });
-    internal_static_common_GetRequest_descriptor =
+    internal_static_common_CreateRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_common_CreateRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_common_CreateRequest_descriptor,
+        new java.lang.String[] { "Proto", });
+    internal_static_common_GetRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_common_GetRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_common_GetRequest_descriptor,
         new java.lang.String[] { "Id", });
     internal_static_common_ListRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_common_ListRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_common_ListRequest_descriptor,
@@ -9371,23 +9869,17 @@ public final class DD4UIProtos {
         internal_static_common_ListRequest_OrderBy_descriptor,
         new java.lang.String[] { "Column", "Desc", });
     internal_static_common_ListResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_common_ListResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_common_ListResponse_descriptor,
-        new java.lang.String[] { "Item", "TotalSize", });
-    internal_static_common_CreateRequest_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_common_CreateRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_common_CreateRequest_descriptor,
-        new java.lang.String[] { "Proto", });
+        new java.lang.String[] { "Result", "TotalSize", });
     internal_static_common_UpdateRequest_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_common_UpdateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_common_UpdateRequest_descriptor,
-        new java.lang.String[] { "Id", "Proto", });
+        new java.lang.String[] { "Id", "Proto", "UpdateMask", });
     internal_static_common_DeleteRequest_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_common_DeleteRequest_fieldAccessorTable = new
@@ -9406,6 +9898,8 @@ public final class DD4UIProtos {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_common_User_descriptor,
         new java.lang.String[] { "Id", "Type", "UserName", "Email", "FirstName", "LastName", "FullName", "Disabled", "ReadOnly", "Notes", "LastLogin", });
+    com.google.protobuf.AnyProto.getDescriptor();
+    com.google.protobuf.FieldMaskProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -16,16 +16,15 @@ import com.digitald4.budget.storage.BalanceStore;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.test.TestCase;
 import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
-import com.digitald4.common.server.DualProtoService;
 import com.digitald4.common.storage.DAOProtoSQLImpl;
 import com.digitald4.common.exception.DD4StorageException;
 
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.Store;
+import com.google.protobuf.Any;
+import com.google.protobuf.util.JsonFormat;
 import java.util.HashMap;
 import java.util.List;
-
-import com.googlecode.protobuf.format.JsonFormat;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.json.JSONObject;
@@ -43,7 +42,7 @@ public class BillServiceTest extends TestCase {
 		BillService service = new BillService(mockStore, null);
 
 		service.create(CreateRequest.newBuilder()
-				.setProto(JsonFormat.printToString(Bill.newBuilder()
+				.setProto(Any.pack(Bill.newBuilder()
 						.setName("Test")
 						.setAccountId(5)
 						.setAmountDue(500)
@@ -56,17 +55,17 @@ public class BillServiceTest extends TestCase {
 						.build()))
 				.build());
 
-		service.create(CreateRequest.newBuilder()
-			.setProto("{\"trans\":[{\"debit_account_id\":87,\"amount\":null},{\"debit_account_id\":71,\"amount\":500},{\"debit_account_id\":106,\"amount\":null}],\"year\":2015,\"month\":12,\"day\":15,\"portfolio_id\":3,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":[{\"debit_account_id\":71,\"amount\":500}]}")
-			.build());
+		service.create(new JSONObject()
+				.put("proto",
+						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"portfolio_id\":3,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
 
-		service.create(CreateRequest.newBuilder()
-				.setProto("{\"trans\":[{\"debit_account_id\":87,\"amount\":null},{\"debit_account_id\":71,\"amount\":500},{\"debit_account_id\":106,\"amount\":null}],\"year\":2015,\"month\":12,\"day\":15,\"portfolio_id\":3,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":[{\"debit_account_id\":71,\"amount\":500}]}")
-				.build());
+		service.create(new JSONObject()
+				.put("proto",
+						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"portfolio_id\":3,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
 
-		service.create(CreateRequest.newBuilder()
-				.setProto("{\"trans\":[],\"year\":2016,\"month\":1,\"day\":1,\"portfolio_id\":11,\"account_id\":185,\"amount_due\":1,\"status\":1,\"transaction\":[]}")
-				.build());
+		service.create(new JSONObject()
+				.put("proto",
+						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2016,\"month\":1,\"day\":1,\"portfolio_id\":11,\"account_id\":185,\"amount_due\":1,\"status\":1,\"transaction\":{}}")));
 	}
 
 	@Test
@@ -80,9 +79,9 @@ public class BillServiceTest extends TestCase {
 						.setYear(2016)
 						.setMonth(6)
 						.build())
-				.getItemsList()
+				.getResultList()
 				.stream()
-				.map(json -> DualProtoService.transformJSONRequest(Bill.getDefaultInstance(), new JSONObject(json)))
+				.map(any -> any.unpack(Bill.class))
 				.collect(Collectors.toList());
 		assertTrue(bills.size() > 0);
 		assertTrue(bills.get(0).getTransactionMap().size() > 0);
@@ -103,17 +102,22 @@ public class BillServiceTest extends TestCase {
 					.setYear(2017)
 					.setMonth(7)
 					.build())
-				.getItemsList()
+				.getResultList()
 				.stream()
-				.map(json -> DualProtoService.transformJSONRequest(Bill.getDefaultInstance(), new JSONObject(json)))
+				.map(any -> any.unpack(Bill.class))
 				.collect(Collectors.toList());
 		assertTrue(bills.isEmpty());
 		
-		bills = service.applyTemplate(ApplyTemplateRequest.newBuilder()
-				.setTemplateId(1)
-				.setYear(2017)
-				.setMonth(6)
-				.build()).getItemsList();
+		bills = service
+				.applyTemplate(ApplyTemplateRequest.newBuilder()
+					.setTemplateId(1)
+					.setYear(2017)
+					.setMonth(6)
+					.build())
+				.getResultList()
+				.stream()
+				.map(any -> any.unpack(Bill.class))
+				.collect(Collectors.toList());
 		assertTrue(bills.size() > 0);
 		assertTrue(bills.get(0).getTransactionMap().size() > 0);
 		assertTrue(bills.get(0).getTransactionMap().values().iterator().next().getAmount() != 0);
@@ -135,10 +139,10 @@ public class BillServiceTest extends TestCase {
 				.build();
 		bill.getTransactionMap().forEach((acctId, trans) -> System.out.println(acctId + " " + trans));
 
-		String json = JsonFormat.printToString(bill);
+		String json = JsonFormat.printer().print(bill);
 		System.out.println(json);
 		Bill.Builder builder = Bill.newBuilder();
-		JsonFormat.merge(json, builder);
+		JsonFormat.parser().merge(json, builder);
 		bill = builder.build();
 		bill.getTransactionMap();
 		bill.getTransactionMap().entrySet();

@@ -11,19 +11,19 @@ com.digitald4.budget.SummaryCtrl.prototype.refresh = function() {
   this.balances = undefined;
   this.nextJan = undefined;
 	this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(response) {
-	  var accounts = response.items;
+	  var accounts = response.result;
 		var topLevelAccounts = [];
 		var accountHash = {};
 		for (var a = 0; a < accounts.length; a++) {
-			if (!accounts[a].parent_account_id || accounts[a].parent_account_id == 0) {
+			if (!accounts[a].parentAccountId || accounts[a].parentAccountId == 0) {
 				accounts[a].accounts = [];
 				accountHash[accounts[a].id] = accounts[a];
 				topLevelAccounts.push(accounts[a]);
 			}
 		}
 		for (var a = 0; a < accounts.length; a++) {
-			if (accounts[a].parent_account_id || accounts[a].parent_account_id != 0) {
-				var topLevel = accountHash[accounts[a].parent_account_id];
+			if (accounts[a].parentAccountId || accounts[a].parentAccountId != 0) {
+				var topLevel = accountHash[accounts[a].parentAccountId];
 				if (topLevel) {
 				  topLevel.accounts.push(accounts[a]);
 				}
@@ -48,7 +48,7 @@ com.digitald4.budget.SummaryCtrl.prototype.refresh = function() {
 	  var nextJan = {};
 	  for (var b = 0; b < balances.length; b++) {
 	    var balance = balances[b];
-	    nextJan[balance.account_id] = balance;
+	    nextJan[balance.accountId] = balance;
 	  }
 	  this.nextJan = nextJan;
 	  if (this.topLevelAccounts && this.balances) {
@@ -64,7 +64,7 @@ com.digitald4.budget.SummaryCtrl.prototype.buildSummary = function() {
     for (var a = 0; a < topLevel.accounts.length; a++) {
       var account = topLevel.accounts[a];
       account.summary = {};
-      var prevBalance = {balance: 0, balance_y_t_d: 0};
+      var prevBalance = {balance: 0, balanceYTD: 0};
       if (this.balances['1'] && this.balances['1'][account.id]) {
         prevBalance.balance = this.balances['1'][account.id].balance;
       }
@@ -75,7 +75,7 @@ com.digitald4.budget.SummaryCtrl.prototype.buildSummary = function() {
         }
         var i = parseInt(s, 10) - 1;
         if (this.balances[s] && this.balances[s][account.id]) {
-          account.summary[i] = this.balances[s][account.id].balance_y_t_d - prevBalance.balance_y_t_d;
+          account.summary[i] = this.balances[s][account.id].balanceYTD - prevBalance.balanceYTD;
           prevBalance = this.balances[s][account.id];
         } else {
           account.summary[i] = 0;

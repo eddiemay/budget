@@ -41,8 +41,9 @@ message Balance {
   int32 portfolio_id = 4;
   int32 year = 5;
   int32 month = 6;
-  double balance = 7;
-  double balance_y_t_d = 8;
+  string bal_date = 7;
+  double balance = 8;
+  double balance_y_t_d = 9;
 }
 
 message Bill {
@@ -60,8 +61,8 @@ message Bill {
 
 	enum PaymentStatus {
 		PS_UNKNOWN = 0;
-		PS_ESTIMATED_AMOUNT = 1;
-		PS_BILLED_AMOUNT = 2;
+		PS_ESTIMATED = 1;
+		PS_BILLED = 2;
 		PS_SCHEDULED = 3;
 		PS_PENDING = 4;
 		PS_PAID = 5;

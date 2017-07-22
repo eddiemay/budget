@@ -35,10 +35,12 @@ public class BalanceService extends SingleProtoService<Balance> {
 			throw new IllegalArgumentException("Year is required");
 		}
 		if (request.getMonth() != 0) {
-			return listToJSON.apply(store.getByPortfolioId(request.getPortfolioId(), request.getYear(), request.getMonth()));
+			return convertToJSON(
+					toListResponse(store.list(request.getPortfolioId(), request.getYear(), request.getMonth())));
 		} else {
 			JSONObject months = new JSONObject();
-			store.getByPortfolioId(request.getPortfolioId(), request.getYear()).getItemsList().stream()
+			store.list(request.getPortfolioId(), request.getYear()).getResultList()
+					.stream()
 					.collect(Collectors.groupingBy(Balance::getMonth))
 					.forEach((month, balances) -> {
 						JSONObject json = new JSONObject();

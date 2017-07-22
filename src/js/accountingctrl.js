@@ -11,11 +11,11 @@ com.digitald4.budget.AccountingCtrl.prototype.refresh = function() {
   if (this.selectedPortfolioId != this.sharedData.getSelectedPortfolioId()) {
     this.selectedPortfolioId = this.sharedData.getSelectedPortfolioId();
     this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(response) {
-      this.accounts = response.items;
+      this.accounts = response.result;
       this.paymentAccounts = [];
       for (var a = 0; a < this.accounts.length; a++) {
         var account = this.accounts[a];
-        if (account.payment_account) {
+        if (account.paymentAccount) {
           this.paymentAccounts.push(account);
         }
       }
@@ -25,11 +25,11 @@ com.digitald4.budget.AccountingCtrl.prototype.refresh = function() {
 	this.billService.list(this.sharedData.getSelectedPortfolioId(), this.sharedData.getYear(), this.sharedData.getMonth(),
 			function(response) {
 				this.transactions = [];
-				for (var b = 0; b < response.items.length; b++) {
-					var bill = response.items[b];
-					bill.name = bill.name || bill.account_name;
+				for (var b = 0; b < response.result.length; b++) {
+					var bill = response.result[b];
+					bill.name = bill.name || bill.accountName;
 					for (var id in bill.transaction) {
-					  bill.transaction[id].payment_date = bill.transaction[id].payment_date ||
+					  bill.transaction[id].paymentDate = bill.transaction[id].paymentDate ||
 					      new Date(bill.year, bill.month - 1, bill.day);
 						this.transactions.push({bill: bill, trans: bill.transaction[id], debitAccountId: parseInt(id, 10)});
 					}

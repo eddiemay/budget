@@ -24,7 +24,7 @@
 					</div>
 				</td>
 				<td>
-					<select data-ng-model="bill.account_id" data-ng-change="listCtrl.updateBill(bill, 'account_id')"
+					<select data-ng-model="bill.accountId" data-ng-change="listCtrl.updateBill(bill, 'accountId')"
 							data-ng-options="account.id as account.name for account in listCtrl.accounts">
 					</select>
 				</td>
@@ -32,8 +32,8 @@
 					<input type="text" data-ng-model="bill.name" data-on-change="listCtrl.updateBill(bill, 'name')">
 				</td>
 				<td>
-					<input type="text" data-ng-model="bill.amount_due" size="8"
-							data-on-change="listCtrl.updateBill(bill, 'amount_due')">
+					<input type="text" data-ng-model="bill.amountDue" size="8"
+							data-on-change="listCtrl.updateBill(bill, 'amountDue')">
 					{{bill.balancePost | currency}}
 				</td>
 				<td data-ng-repeat="pa in listCtrl.paymentAccounts">
@@ -58,12 +58,12 @@
 					<div data-dd4-datepicker data-ng-model="listCtrl.newBill.dueDate"></div>
 				</td>
 				<td>
-					<select data-ng-model="listCtrl.newBill.account_id"
+					<select data-ng-model="listCtrl.newBill.accountId"
 							data-ng-options="account.id as account.name for account in listCtrl.accounts">
 					</select>
 				</td>
 				<td><input type="text" data-ng-model="listCtrl.newBill.name"></td>
-				<td><input type="text" data-ng-model="listCtrl.newBill.amount_due" size="8"></td>
+				<td><input type="text" data-ng-model="listCtrl.newBill.amountDue" size="8"></td>
 				<td data-ng-repeat="pa in listCtrl.paymentAccounts">
 					<input type="text" data-ng-model="listCtrl.newBill.transaction[pa.id].amount" size="8">
 				</td>

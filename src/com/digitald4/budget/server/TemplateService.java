@@ -4,8 +4,8 @@ import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
+import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.server.SingleProtoService;
-import com.digitald4.common.storage.ListResponse;
 import com.digitald4.common.storage.Store;
 import org.json.JSONObject;
 
@@ -17,10 +17,10 @@ public class TemplateService extends SingleProtoService<Template> {
 
 	@Override
 	public JSONObject list(JSONObject request) {
-		return listToJSON.apply(list(transformJSONRequest(TemplateListRequest.getDefaultInstance(), request)));
+		return convertToJSON(list(transformJSONRequest(TemplateListRequest.getDefaultInstance(), request)));
 	}
 
-	public ListResponse<Template> list(TemplateListRequest request) {
+	public ListResponse list(TemplateListRequest request) {
 		return list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder()
 						.setColumn("PORTFOLIO_ID").setOperan("=").setValue(String.valueOf(request.getPortfolioId())))

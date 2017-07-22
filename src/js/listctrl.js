@@ -9,46 +9,38 @@ com.digitald4.budget.ListCtrl = function($filter, sharedData, billService, balan
 	this.accountService = accountService;
 	this.templateService = templateService;
 	this.statuses = [
-	    {id: 0, name: 'Unknown'},
-	    {id: 1, name: 'Estimated'},
-	    {id: 2, name: 'Billed'},
-	    {id: 3, name: 'Scheduled'},
-	    {id: 4, name: 'Pending'},
-	    {id: 5, name: 'Paided'}];
-	this.makeNew();
+	    {id: 'PS_UNKNOWN', name: 'Unknown'},
+	    {id: 'PS_ESTIMATED', name: 'Estimated'},
+	    {id: 'PS_BILLED', name: 'Billed'},
+	    {id: 'PS_SCHEDULED', name: 'Scheduled'},
+	    {id: 'PS_PENDING', name: 'Pending'},
+	    {id: 'PS_PAID', name: 'Paided'}];
 	this.refresh();
-};
-
-com.digitald4.budget.ListCtrl.prototype.makeNew = function() {
-	var baseDate = this.sharedData.getStartDate();
-	this.newBill = {
-	  'dueDate': new Date(baseDate.getFullYear(), baseDate.getMonth(), 15).getTime(),
-		'portfolio_id': this.sharedData.getSelectedPortfolioId()};
 };
 
 com.digitald4.budget.ListCtrl.calcBalances = function(accounts, bills, balances) {
 	var rollingBalances = {};
 	for (var a = 0; a < balances.length; a++) {
-		rollingBalances[balances[a].account_id] = {
+		rollingBalances[balances[a].accountId] = {
       balance: balances[a].balance || 0,
-      balanceYTD: balances[a].balance_y_t_d || 0
+      balanceYTD: balances[a].balanceYTD || 0
 		};
 	}
 
 	var paymentAccountIds = [];
   for (var a = 0; a < accounts.length; a++) {
-    if (accounts[a].payment_account) {
+    if (accounts[a].paymentAccount) {
       paymentAccountIds.push(accounts[a].id);
     }
   }
 
 	for (var b = 0; b < bills.length; b++) {
 		var bill = bills[b];
-		rollingBalances[bill.account_id] = rollingBalances[bill.account_id] || {balance: 0, balanceYTD: 0};
-		var rollingBalance = rollingBalances[bill.account_id];
-    bill.name = bill.name || bill.account_name;
-    rollingBalance.balance += bill.amount_due;
-    rollingBalance.balanceYTD += bill.amount_due;
+		rollingBalances[bill.accountId] = rollingBalances[bill.accountId] || {balance: 0, balanceYTD: 0};
+		var rollingBalance = rollingBalances[bill.accountId];
+    bill.name = bill.name || bill.accountName;
+    rollingBalance.balance += bill.amountDue;
+    rollingBalance.balanceYTD += bill.amountDue;
     bill.balancePost = rollingBalance.balanceYTD;
 
 		bill.transaction = bill.transaction || {};
@@ -66,8 +58,8 @@ com.digitald4.budget.ListCtrl.calcBalances = function(accounts, bills, balances)
         rollingBalance.balance -= transaction;
         rollingBalance.balanceYTD -= transaction;
 			}
-			/*if (bill.account_id == acctId) {
-        transaction.amount = bill.amount_due;
+			/*if (bill.accountId == acctId) {
+        transaction.amount = bill.amountDue;
       }*/
 			bill.balancesPost[acctId] = rollingBalance.balance;
 		}
@@ -80,17 +72,17 @@ com.digitald4.budget.ListCtrl.compare = function(bill, bill2) {
 		return -1;
 	} else if (bill.dueDate > bill2.dueDate) {
 		return 1;
-	} else if (bill.due_day < bill2.due_day) {
+	} else if (bill.dueDay < bill2.dueDay) {
     return -1;
-  } else if (bill.due_day > bill2.due_day) {
+  } else if (bill.dueDay > bill2.dueDay) {
     return 1;
 	} else if (bill.rank > bill2.rank) {
 		return -1;
 	} else if (bill.rank < bill2.rank) {
 		return 1;
-	} else if (bill.amount_due < bill2.amount_due) {
+	} else if (bill.amountDue < bill2.amountDue) {
 		return -1;
-	} else if (bill.amount_due > bill2.amount_due) {
+	} else if (bill.amountDue > bill2.amountDue) {
 		return 1;
 	} else if (bill.id < bill2.id) {
 		return -1;
@@ -103,17 +95,21 @@ com.digitald4.budget.ListCtrl.compare = function(bill, bill2) {
 com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 	this.bills = undefined;
 	this.balances = undefined;
+	var baseDate = this.sharedData.getStartDate();
 
 	if (this.selectedPortfolioId != this.sharedData.getSelectedPortfolioId()) {
 	  this.selectedPortfolioId = this.sharedData.getSelectedPortfolioId();
+    this.newBill = {
+      dueDate: new Date(baseDate.getFullYear(), baseDate.getMonth(), 15).getTime(),
+    };
     this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(response) {
-      this.accounts = response.items;
+      this.accounts = response.result;
       if (this.balances && this.bills) {
         this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills, this.balances);
       }
       this.paymentAccounts = [];
       for (var a = 0; a < this.accounts.length; a++) {
-        if (this.accounts[a].payment_account) {
+        if (this.accounts[a].paymentAccount) {
           this.paymentAccounts.push(this.accounts[a]);
         }
       }
@@ -122,11 +118,13 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
     this.templateService.list(this.sharedData.getSelectedPortfolioId(), function(templates) {
       this.templates = templates;
     }.bind(this), notify);
+  } else if (!this.newBill.dateEdited) {
+    this.newBill.dueDate = new Date(baseDate.getFullYear(), baseDate.getMonth(), 15).getTime();
   }
 
 	this.balanceService.list(this.sharedData.getSelectedPortfolioId(), this.sharedData.getYear(),
 	    this.sharedData.getMonth(), function(response) {
-    this.balances = response.items;
+    this.balances = response.result;
     if (this.accounts && this.bills) {
       this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills, this.balances);
     }
@@ -134,7 +132,7 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
 
 	this.billService.list(this.sharedData.getSelectedPortfolioId(), this.sharedData.getYear(), this.sharedData.getMonth(),
 	    function(response) {
-    var sorted = com.digitald4.budget.ListCtrl.sortBills(response.items);
+    var sorted = com.digitald4.budget.ListCtrl.sortBills(response.result);
     if (this.accounts && this.balances) {
       this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sorted, this.balances);
     } else {
@@ -164,7 +162,8 @@ com.digitald4.budget.ListCtrl.insertBill = function(bills, bill) {
 };
 
 com.digitald4.budget.ListCtrl.prototype.addBill = function() {
-  var date = new Date(this.newBill.dueDate);
+  var dueDate = this.newBill.dueDate;
+  var date = new Date(dueDate);
   this.newBill.year = date.getFullYear();
   this.newBill.month = date.getMonth() + 1;
   this.newBill.day = date.getDate();
@@ -172,7 +171,7 @@ com.digitald4.budget.ListCtrl.prototype.addBill = function() {
 	this.billService.create(this.newBill, function(bill) {
 		com.digitald4.budget.ListCtrl.insertBill(this.bills, bill);
 		com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills, this.balances);
-		this.makeNew();
+		this.newBill = {dueDate: dueDate};
 	}.bind(this), notify);
 };
 
@@ -207,7 +206,7 @@ com.digitald4.budget.ListCtrl.prototype.applyTemplate = function() {
 	    function(response) {
     var sortedBills = [];
     for (var b = 0; b < bills.length; b++) {
-      com.digitald4.budget.ListCtrl.insertBill(sortedBills, response.items[b]);
+      com.digitald4.budget.ListCtrl.insertBill(sortedBills, response.result[b]);
     }
     this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sortedBills, this.balances);
   }.bind(this), notify);

@@ -82,7 +82,7 @@ public class BillStore extends GenericStore<Bill> {
 				.list(ListRequest.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("template_id").setOperan("=").setValue("" + template.getId()))
 						.build())
-				.getItemsList()
+				.getResultList()
 				.forEach(tempBill -> {
 					DateTime date = refDate.plusDays(tempBill.getDueDay() - 1);
 					create(Bill.newBuilder()
@@ -94,12 +94,12 @@ public class BillStore extends GenericStore<Bill> {
 							.setDay(date.getDayOfMonth())
 							.setAmountDue(tempBill.getAmountDue())
 							.setName(tempBill.getName())
-							.setStatus(PaymentStatus.PS_ESTIMATED_AMOUNT)
+							.setStatus(PaymentStatus.PS_ESTIMATED)
 							.setInActive(false)
 							.putAllTransaction(tempBill.getTransactionMap().entrySet().stream()
 									.map(entry -> Pair.of(entry.getKey(), Transaction.newBuilder()
 											.setAmount(entry.getValue())
-											.setStatus(PaymentStatus.PS_ESTIMATED_AMOUNT)
+											.setStatus(PaymentStatus.PS_ESTIMATED)
 											.build()))
 									.collect(Collectors.toMap(Pair::getLeft, Pair::getRight)))
 							.build());

@@ -8,13 +8,13 @@ com.digitald4.budget.AccountsCtrl = function(sharedData, accountService) {
 
 com.digitald4.budget.AccountsCtrl.prototype.refresh = function() {
 	this.accountService.list(this.sharedData.getSelectedPortfolioId(), function(response) {
-	  this.accounts = response.items;
+	  this.accounts = response.result;
 	  this.listAccounts = [{name: '', id: 0}];
 	  for (var a = 0; a < this.accounts.length; a++) {
 	    this.listAccounts.push(this.accounts[a]);
 	  }
 	}.bind(this), notify);
-	this.newAccount = {portfolio_id: this.sharedData.getSelectedPortfolioId()};
+	this.newAccount = {portfolioId: this.sharedData.getSelectedPortfolioId()};
 };
 
 com.digitald4.budget.AccountsCtrl.prototype.showAddDialog = function() {
@@ -34,7 +34,7 @@ com.digitald4.budget.AccountsCtrl.prototype.addAccount = function() {
 	this.accountService.create(this.newAccount, function(account) {
 		this.accounts.push(account);
 		this.listAccounts.push(account);
-		this.newAccount = {portfolio_id: this.sharedData.getSelectedPortfolioId()};
+		this.newAccount = {portfolioId: this.sharedData.getSelectedPortfolioId()};
 	}.bind(this), notify);
 };
 

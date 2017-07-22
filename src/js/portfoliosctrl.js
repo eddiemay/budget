@@ -14,14 +14,14 @@ com.digitald4.budget.PortfoliosCtrl.prototype.portfolioService;
 
 com.digitald4.budget.PortfoliosCtrl.prototype.refresh = function() {
 	this.portfolioService.list({}, function(response) {
-		this.sharedData.setPortfolioData(response.items);
+		this.sharedData.setPortfolioData(response.result);
 	}.bind(this), notify);
 	this.newPortfolio = {};
 };
 
 com.digitald4.budget.PortfoliosCtrl.prototype.addPortfolio = function() {
   var userId = this.sharedData.user.id;
-  this.newPortfolio.portfolio_user = [{user_id: userId, role: 12}];
+  this.newPortfolio.portfolioUser = [{userId: userId, role: 12}];
 	this.portfolioService.create(this.newPortfolio, function(portfolio) {
 		this.sharedData.portfolios.push(portfolio);
 		this.newPortfolio = {};

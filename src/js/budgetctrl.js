@@ -7,7 +7,7 @@ com.digitald4.budget.BudgetCtrl = function(sharedData, userService, portfolioSer
 	}, notify);
 	
 	portfolioService.list({}, function(response) {
-		sharedData.setPortfolioData(response.items);
+		sharedData.setPortfolioData(response.result);
 	}, notify);
 };
 
