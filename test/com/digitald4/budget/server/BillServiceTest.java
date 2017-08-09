@@ -5,6 +5,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.digitald4.budget.proto.BudgetProtos.Account;
 import com.digitald4.budget.proto.BudgetProtos.Balance;
 import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
@@ -14,6 +15,7 @@ import com.digitald4.budget.proto.BudgetUIProtos.ApplyTemplateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.BillListRequest;
 import com.digitald4.budget.storage.BalanceStore;
 import com.digitald4.budget.storage.BillStore;
+import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.budget.test.TestCase;
 import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
 import com.digitald4.common.storage.DAOProtoSQLImpl;
@@ -21,6 +23,7 @@ import com.digitald4.common.exception.DD4StorageException;
 
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.Store;
+import com.digitald4.common.util.Provider;
 import com.google.protobuf.Any;
 import com.google.protobuf.util.JsonFormat;
 import java.util.HashMap;
@@ -34,12 +37,15 @@ import org.mockito.Mock;
 
 public class BillServiceTest extends TestCase {
 	@Mock private BillStore mockStore = mock(BillStore.class);
+	@Mock private Store<Account> accountStore = mock(Store.class);
+	@Mock private SecurityManager securityManager = mock(SecurityManager.class);
+	private Provider<SecurityManager> securityManagerProvider = () -> securityManager;
 
 	@Test
 	public void testCreateBill() throws Exception {
 		when(mockStore.getType()).thenReturn(Bill.getDefaultInstance());
 		when(mockStore.create(any(Bill.class))).thenAnswer(i -> i.getArguments()[0]);
-		BillService service = new BillService(mockStore, null);
+		BillService service = new BillService(mockStore, securityManagerProvider, null, accountStore);
 
 		service.create(CreateRequest.newBuilder()
 				.setProto(Any.pack(Bill.newBuilder()
@@ -57,21 +63,21 @@ public class BillServiceTest extends TestCase {
 
 		service.create(new JSONObject()
 				.put("proto",
-						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"portfolio_id\":3,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
+						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
 
 		service.create(new JSONObject()
 				.put("proto",
-						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"portfolio_id\":3,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
+						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
 
 		service.create(new JSONObject()
 				.put("proto",
-						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2016,\"month\":1,\"day\":1,\"portfolio_id\":11,\"account_id\":185,\"amount_due\":1,\"status\":1,\"transaction\":{}}")));
+						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2016,\"month\":1,\"day\":1,\"account_id\":185,\"amount_due\":1,\"status\":1,\"transaction\":{}}")));
 	}
 
 	@Test
 	public void testGetBills() throws DD4StorageException {
 		BillStore store = new BillStore(new DAOProtoSQLImpl<>(Bill.class, dbConnector), null,null);
-		BillService service = new BillService(store, null);
+		BillService service = new BillService(store, securityManagerProvider, null, null);
 		
 		List<Bill> bills = service
 				.list(BillListRequest.newBuilder()
@@ -94,7 +100,7 @@ public class BillServiceTest extends TestCase {
 		Store<TemplateBill> templateBillStore = new GenericStore<>(new DAOProtoSQLImpl<>(TemplateBill.class, dbConnector));
 		BillStore store = new BillStore(new DAOProtoSQLImpl<>(Bill.class, dbConnector), balanceStore, templateBillStore);
 		Store<Template> templateStore = new GenericStore<>(new DAOProtoSQLImpl<>(Template.class, dbConnector));
-		BillService service = new BillService(store, templateStore);
+		BillService service = new BillService(store, securityManagerProvider, templateStore, null);
 		
 		List<Bill> bills = service
 				.list(BillListRequest.newBuilder()

@@ -7,16 +7,19 @@ import com.digitald4.budget.proto.BudgetProtos.Balance;
 import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
+import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
 import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
-import com.digitald4.budget.proto.BudgetUIProtos.AccountListRequest;
+import com.digitald4.budget.proto.BudgetProtos.UserRole;
 import com.digitald4.budget.proto.BudgetUIProtos.ApplyTemplateRequest;
+import com.digitald4.budget.proto.BudgetUIProtos.BudgetListRequest;
 import com.digitald4.budget.storage.BalanceStore;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.PortfolioSQLDao;
 import com.digitald4.budget.storage.PortfolioStore;
+import com.digitald4.budget.storage.PortfolioUserStore;
+import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.budget.test.TestCase;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.storage.DAOProtoSQLImpl;
 import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
@@ -35,30 +38,38 @@ import org.json.JSONObject;
 import org.junit.Test;
 
 public class End2EndServiceTest extends TestCase {
-	private final User user = User.newBuilder().setId(1).build();
+	private final User user = User.newBuilder().setId(962).build();
 	private final Provider<User> userProvider = () -> user;
 
 	@Test
 	public void testEnd2End() throws Exception {
-		PortfolioStore portfolioStore = new PortfolioStore(new PortfolioSQLDao(dbConnector), null);
-		PortfolioService portfolioService = new PortfolioService(portfolioStore, userProvider);
+		SecurityManager securityManager = new SecurityManager(user, new PortfolioUserStore(
+				new DAOProtoSQLImpl<>(PortfolioUser.class, dbConnector), null));
+		Provider<SecurityManager> securityManagerProvider = () -> securityManager;
+		PortfolioUserStore portfolioUserStore = new PortfolioUserStore(
+				new DAOProtoSQLImpl<>(PortfolioUser.class, dbConnector), securityManagerProvider);
+		PortfolioStore portfolioStore = new PortfolioStore(new PortfolioSQLDao(dbConnector), portfolioUserStore);
+		PortfolioService portfolioService = new PortfolioService(portfolioStore, securityManagerProvider, userProvider);
 		
 		Store<Account> accountStore = new GenericStore<>(new DAOProtoSQLImpl<>(Account.class, dbConnector));
-		AccountService accountService = new AccountService(accountStore);
+		AccountService accountService = new AccountService(accountStore, securityManagerProvider);
 
 		BalanceStore balanceStore = new BalanceStore(new DAOProtoSQLImpl<>(Balance.class, dbConnector));
 		
 		Store<Template> templateStore = new GenericStore<>(new DAOProtoSQLImpl<>(Template.class, dbConnector));
-		TemplateService templateService = new TemplateService(templateStore);
+		BudgetService<Template> templateService = new BudgetService<>(templateStore, securityManagerProvider);
 
 		Store<TemplateBill> templateBillStore = new GenericStore<>(new DAOProtoSQLImpl<>(TemplateBill.class, dbConnector));
 		
-		BillStore billStore = new BillStore(new DAOProtoSQLImpl<>(Bill.class, dbConnector), balanceStore, templateBillStore);
-		BillService billService = new BillService(billStore, templateStore);
+		BillStore billStore = new BillStore(new DAOProtoSQLImpl<>(Bill.class, dbConnector, "V_BILL"), balanceStore, templateBillStore);
+		BillService billService = new BillService(billStore, securityManagerProvider, templateStore, accountStore);
 		
 		Portfolio portfolio = portfolioService.create(CreateRequest.newBuilder()
 				.setProto(Any.pack(Portfolio.newBuilder()
 						.setName("Test Portfolio")
+						.addPortfolioUser(PortfolioUser.newBuilder()
+								.setUserId(user.getId())
+								.setRole(UserRole.UR_OWNER))
 						.build()))
 				.build());
 		assertTrue(portfolio.getId() > 0);
@@ -88,7 +99,7 @@ public class End2EndServiceTest extends TestCase {
 			accounts.add(bankAccount);
 			assertTrue(bankAccount.getId() > 0);
 
-			
+
 			Account rent = accountService.create(CreateRequest.newBuilder()
 					.setProto(Any.pack(Account.newBuilder()
 							.setPortfolioId(portfolio.getId())
@@ -113,7 +124,7 @@ public class End2EndServiceTest extends TestCase {
 
 
 			accounts = accountService
-					.list(AccountListRequest.newBuilder()
+					.list(BudgetListRequest.newBuilder()
 							.setPortfolioId(portfolio.getId())
 							.build())
 					.getResultList()
@@ -127,7 +138,7 @@ public class End2EndServiceTest extends TestCase {
 					.put("portfolio_id", portfolio.getId()));
 			assertEquals(4, json.getJSONArray("result").length());
 
-			
+
 			template = templateService.create(CreateRequest.newBuilder()
 					.setProto(Any.pack(Template.newBuilder()
 							.setPortfolioId(portfolio.getId())
@@ -160,7 +171,6 @@ public class End2EndServiceTest extends TestCase {
 
 			Bill payCreditCard = billService.create(CreateRequest.newBuilder()
 					.setProto(Any.pack(Bill.newBuilder()
-							.setPortfolioId(portfolio.getId())
 							.setAccountId(creditCard.getId())
 							.setYear(2016)
 							.setMonth(7)
@@ -186,14 +196,14 @@ public class End2EndServiceTest extends TestCase {
 					.collect(Collectors.toList());
 			// Should return the 3 bills from the template and the 1 I created.
 			assertEquals(4, bills.size());
-			
+
 			portfolio = portfolioService.update(UpdateRequest.newBuilder()
 					.setId(portfolio.getId())
 					.setProto(Any.pack(Portfolio.newBuilder().setName("Delete me").build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("name"))
 					.build());
 			assertEquals("Delete me", portfolio.getName());
-			
+
 			creditCard = accountService.update(UpdateRequest.newBuilder()
 					.setId(creditCard.getId())
 					.setProto(Any.pack(Account.newBuilder().setName("HOH").build()))
@@ -201,7 +211,7 @@ public class End2EndServiceTest extends TestCase {
 					.build());
 			assertEquals("HOH", creditCard.getName());
 			assertEquals(0, creditCard.getParentAccountId());
-			
+
 			creditCard = accountService.update(UpdateRequest.newBuilder()
 					.setId(creditCard.getId())
 					.setProto(Any.pack(Account.newBuilder().setParentAccountId(rent.getId()).build()))
@@ -210,7 +220,7 @@ public class End2EndServiceTest extends TestCase {
 			assertEquals("HOH", creditCard.getName());
 			assertEquals(rent.getId(), creditCard.getParentAccountId());
 			assertFalse(rent.getPaymentAccount());
-			
+
 			creditCard = accountService.update(UpdateRequest.newBuilder()
 					.setId(creditCard.getId())
 					.setProto(Any.pack(Account.newBuilder().setPaymentAccount(true).build()))
@@ -219,28 +229,28 @@ public class End2EndServiceTest extends TestCase {
 			assertEquals("HOH", creditCard.getName());
 			assertEquals(rent.getId(), creditCard.getParentAccountId());
 			assertTrue(creditCard.getPaymentAccount());
-			
+
 			template = templateService.update(UpdateRequest.newBuilder()
 					.setId(template.getId())
 					.setProto(Any.pack(Template.newBuilder().setName("Normal Monthly Flow").build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("name"))
 					.build());
 			assertEquals("Normal Monthly Flow", template.getName());
-			
+
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
 					.setProto(Any.pack(Bill.newBuilder().setName("July Payment").build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("name"))
 					.build());
 			assertEquals("July Payment", payCreditCard.getName());
-			
+
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
 					.setProto(Any.pack(Bill.newBuilder().setAmountDue(520.25).build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("amount_due"))
 					.build());
 			assertEquals(520.25, payCreditCard.getAmountDue(), .001);
-			
+
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
 					.setProto(Any.pack(Bill.newBuilder().setDay(22).build()))
@@ -257,6 +267,14 @@ public class End2EndServiceTest extends TestCase {
 					.setUpdateMask(FieldMask.newBuilder().addPaths("transaction"))
 					.build());
 			assertEquals(520.25, payCreditCard.getTransactionMap().values().iterator().next().getAmount(), .001);
+
+			payCreditCard = billService.update(UpdateRequest.newBuilder()
+					.setId(payCreditCard.getId())
+					.setProto(Any.pack(Bill.newBuilder()
+							.putTransaction(bankAccount.getId(), Transaction.newBuilder().setAmount(102).build()).build()))
+					.setUpdateMask(FieldMask.newBuilder().addPaths("transaction"))
+					.build());
+			assertEquals(102, payCreditCard.getTransactionMap().values().iterator().next().getAmount(), .001);
 		} finally {
 			bills.forEach(bill -> billService.delete(DeleteRequest.newBuilder()
 					.setId(bill.getId())
@@ -274,9 +292,13 @@ public class End2EndServiceTest extends TestCase {
 					.setId(account.getId())
 					.build()));
 
-			portfolioService.delete(DeleteRequest.newBuilder()
-					.setId(portfolio.getId())
-					.build());
+			try {
+				portfolioService.delete(DeleteRequest.newBuilder()
+						.setId(portfolio.getId())
+						.build());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

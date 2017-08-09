@@ -130,6 +130,601 @@ public final class BudgetProtos {
     // @@protoc_insertion_point(enum_scope:budget.UserRole)
   }
 
+  public interface PortfolioUserOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:budget.PortfolioUser)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 portfolio_id = 1;</code>
+     */
+    int getPortfolioId();
+
+    /**
+     * <code>int32 user_id = 2;</code>
+     */
+    int getUserId();
+
+    /**
+     * <code>.budget.UserRole role = 3;</code>
+     */
+    int getRoleValue();
+    /**
+     * <code>.budget.UserRole role = 3;</code>
+     */
+    com.digitald4.budget.proto.BudgetProtos.UserRole getRole();
+  }
+  /**
+   * Protobuf type {@code budget.PortfolioUser}
+   */
+  public  static final class PortfolioUser extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:budget.PortfolioUser)
+      PortfolioUserOrBuilder {
+    // Use PortfolioUser.newBuilder() to construct.
+    private PortfolioUser(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private PortfolioUser() {
+      portfolioId_ = 0;
+      userId_ = 0;
+      role_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private PortfolioUser(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              portfolioId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              userId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+
+              role_ = rawValue;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.digitald4.budget.proto.BudgetProtos.internal_static_budget_PortfolioUser_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.digitald4.budget.proto.BudgetProtos.internal_static_budget_PortfolioUser_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.digitald4.budget.proto.BudgetProtos.PortfolioUser.class, com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder.class);
+    }
+
+    public static final int PORTFOLIO_ID_FIELD_NUMBER = 1;
+    private int portfolioId_;
+    /**
+     * <code>int32 portfolio_id = 1;</code>
+     */
+    public int getPortfolioId() {
+      return portfolioId_;
+    }
+
+    public static final int USER_ID_FIELD_NUMBER = 2;
+    private int userId_;
+    /**
+     * <code>int32 user_id = 2;</code>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int ROLE_FIELD_NUMBER = 3;
+    private int role_;
+    /**
+     * <code>.budget.UserRole role = 3;</code>
+     */
+    public int getRoleValue() {
+      return role_;
+    }
+    /**
+     * <code>.budget.UserRole role = 3;</code>
+     */
+    public com.digitald4.budget.proto.BudgetProtos.UserRole getRole() {
+      com.digitald4.budget.proto.BudgetProtos.UserRole result = com.digitald4.budget.proto.BudgetProtos.UserRole.valueOf(role_);
+      return result == null ? com.digitald4.budget.proto.BudgetProtos.UserRole.UNRECOGNIZED : result;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (portfolioId_ != 0) {
+        output.writeInt32(1, portfolioId_);
+      }
+      if (userId_ != 0) {
+        output.writeInt32(2, userId_);
+      }
+      if (role_ != com.digitald4.budget.proto.BudgetProtos.UserRole.UR_UNKNOWN.getNumber()) {
+        output.writeEnum(3, role_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (portfolioId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, portfolioId_);
+      }
+      if (userId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, userId_);
+      }
+      if (role_ != com.digitald4.budget.proto.BudgetProtos.UserRole.UR_UNKNOWN.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, role_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.digitald4.budget.proto.BudgetProtos.PortfolioUser)) {
+        return super.equals(obj);
+      }
+      com.digitald4.budget.proto.BudgetProtos.PortfolioUser other = (com.digitald4.budget.proto.BudgetProtos.PortfolioUser) obj;
+
+      boolean result = true;
+      result = result && (getPortfolioId()
+          == other.getPortfolioId());
+      result = result && (getUserId()
+          == other.getUserId());
+      result = result && role_ == other.role_;
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + PORTFOLIO_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getPortfolioId();
+      hash = (37 * hash) + USER_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId();
+      hash = (37 * hash) + ROLE_FIELD_NUMBER;
+      hash = (53 * hash) + role_;
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.digitald4.budget.proto.BudgetProtos.PortfolioUser prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code budget.PortfolioUser}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:budget.PortfolioUser)
+        com.digitald4.budget.proto.BudgetProtos.PortfolioUserOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.digitald4.budget.proto.BudgetProtos.internal_static_budget_PortfolioUser_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.digitald4.budget.proto.BudgetProtos.internal_static_budget_PortfolioUser_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.digitald4.budget.proto.BudgetProtos.PortfolioUser.class, com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder.class);
+      }
+
+      // Construct using com.digitald4.budget.proto.BudgetProtos.PortfolioUser.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        portfolioId_ = 0;
+
+        userId_ = 0;
+
+        role_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.digitald4.budget.proto.BudgetProtos.internal_static_budget_PortfolioUser_descriptor;
+      }
+
+      public com.digitald4.budget.proto.BudgetProtos.PortfolioUser getDefaultInstanceForType() {
+        return com.digitald4.budget.proto.BudgetProtos.PortfolioUser.getDefaultInstance();
+      }
+
+      public com.digitald4.budget.proto.BudgetProtos.PortfolioUser build() {
+        com.digitald4.budget.proto.BudgetProtos.PortfolioUser result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.digitald4.budget.proto.BudgetProtos.PortfolioUser buildPartial() {
+        com.digitald4.budget.proto.BudgetProtos.PortfolioUser result = new com.digitald4.budget.proto.BudgetProtos.PortfolioUser(this);
+        result.portfolioId_ = portfolioId_;
+        result.userId_ = userId_;
+        result.role_ = role_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.digitald4.budget.proto.BudgetProtos.PortfolioUser) {
+          return mergeFrom((com.digitald4.budget.proto.BudgetProtos.PortfolioUser)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.digitald4.budget.proto.BudgetProtos.PortfolioUser other) {
+        if (other == com.digitald4.budget.proto.BudgetProtos.PortfolioUser.getDefaultInstance()) return this;
+        if (other.getPortfolioId() != 0) {
+          setPortfolioId(other.getPortfolioId());
+        }
+        if (other.getUserId() != 0) {
+          setUserId(other.getUserId());
+        }
+        if (other.role_ != 0) {
+          setRoleValue(other.getRoleValue());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.digitald4.budget.proto.BudgetProtos.PortfolioUser parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.digitald4.budget.proto.BudgetProtos.PortfolioUser) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int portfolioId_ ;
+      /**
+       * <code>int32 portfolio_id = 1;</code>
+       */
+      public int getPortfolioId() {
+        return portfolioId_;
+      }
+      /**
+       * <code>int32 portfolio_id = 1;</code>
+       */
+      public Builder setPortfolioId(int value) {
+        
+        portfolioId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 portfolio_id = 1;</code>
+       */
+      public Builder clearPortfolioId() {
+        
+        portfolioId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int userId_ ;
+      /**
+       * <code>int32 user_id = 2;</code>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>int32 user_id = 2;</code>
+       */
+      public Builder setUserId(int value) {
+        
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 user_id = 2;</code>
+       */
+      public Builder clearUserId() {
+        
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int role_ = 0;
+      /**
+       * <code>.budget.UserRole role = 3;</code>
+       */
+      public int getRoleValue() {
+        return role_;
+      }
+      /**
+       * <code>.budget.UserRole role = 3;</code>
+       */
+      public Builder setRoleValue(int value) {
+        role_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.budget.UserRole role = 3;</code>
+       */
+      public com.digitald4.budget.proto.BudgetProtos.UserRole getRole() {
+        com.digitald4.budget.proto.BudgetProtos.UserRole result = com.digitald4.budget.proto.BudgetProtos.UserRole.valueOf(role_);
+        return result == null ? com.digitald4.budget.proto.BudgetProtos.UserRole.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.budget.UserRole role = 3;</code>
+       */
+      public Builder setRole(com.digitald4.budget.proto.BudgetProtos.UserRole value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        role_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.budget.UserRole role = 3;</code>
+       */
+      public Builder clearRole() {
+        
+        role_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:budget.PortfolioUser)
+    }
+
+    // @@protoc_insertion_point(class_scope:budget.PortfolioUser)
+    private static final com.digitald4.budget.proto.BudgetProtos.PortfolioUser DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetProtos.PortfolioUser();
+    }
+
+    public static com.digitald4.budget.proto.BudgetProtos.PortfolioUser getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<PortfolioUser>
+        PARSER = new com.google.protobuf.AbstractParser<PortfolioUser>() {
+      public PortfolioUser parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new PortfolioUser(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<PortfolioUser> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PortfolioUser> getParserForType() {
+      return PARSER;
+    }
+
+    public com.digitald4.budget.proto.BudgetProtos.PortfolioUser getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface PortfolioOrBuilder extends
       // @@protoc_insertion_point(interface_extends:budget.Portfolio)
       com.google.protobuf.MessageOrBuilder {
@@ -150,27 +745,41 @@ public final class BudgetProtos {
         getNameBytes();
 
     /**
-     * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+     * <code>int32 user_id = 3;</code>
      */
-    java.util.List<com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser> 
+    int getUserId();
+
+    /**
+     * <code>.budget.UserRole role = 4;</code>
+     */
+    int getRoleValue();
+    /**
+     * <code>.budget.UserRole role = 4;</code>
+     */
+    com.digitald4.budget.proto.BudgetProtos.UserRole getRole();
+
+    /**
+     * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
+     */
+    java.util.List<com.digitald4.budget.proto.BudgetProtos.PortfolioUser> 
         getPortfolioUserList();
     /**
-     * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+     * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
      */
-    com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser getPortfolioUser(int index);
+    com.digitald4.budget.proto.BudgetProtos.PortfolioUser getPortfolioUser(int index);
     /**
-     * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+     * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
      */
     int getPortfolioUserCount();
     /**
-     * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+     * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
      */
-    java.util.List<? extends com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUserOrBuilder> 
+    java.util.List<? extends com.digitald4.budget.proto.BudgetProtos.PortfolioUserOrBuilder> 
         getPortfolioUserOrBuilderList();
     /**
-     * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+     * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
      */
-    com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUserOrBuilder getPortfolioUserOrBuilder(
+    com.digitald4.budget.proto.BudgetProtos.PortfolioUserOrBuilder getPortfolioUserOrBuilder(
         int index);
   }
   /**
@@ -187,6 +796,8 @@ public final class BudgetProtos {
     private Portfolio() {
       id_ = 0;
       name_ = "";
+      userId_ = 0;
+      role_ = 0;
       portfolioUser_ = java.util.Collections.emptyList();
     }
 
@@ -226,13 +837,24 @@ public final class BudgetProtos {
               name_ = s;
               break;
             }
-            case 34: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                portfolioUser_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser>();
-                mutable_bitField0_ |= 0x00000004;
+            case 24: {
+
+              userId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+
+              role_ = rawValue;
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                portfolioUser_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetProtos.PortfolioUser>();
+                mutable_bitField0_ |= 0x00000010;
               }
               portfolioUser_.add(
-                  input.readMessage(com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.parser(), extensionRegistry));
+                  input.readMessage(com.digitald4.budget.proto.BudgetProtos.PortfolioUser.parser(), extensionRegistry));
               break;
             }
           }
@@ -243,7 +865,7 @@ public final class BudgetProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           portfolioUser_ = java.util.Collections.unmodifiableList(portfolioUser_);
         }
         makeExtensionsImmutable();
@@ -259,601 +881,6 @@ public final class BudgetProtos {
       return com.digitald4.budget.proto.BudgetProtos.internal_static_budget_Portfolio_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.digitald4.budget.proto.BudgetProtos.Portfolio.class, com.digitald4.budget.proto.BudgetProtos.Portfolio.Builder.class);
-    }
-
-    public interface PortfolioUserOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:budget.Portfolio.PortfolioUser)
-        com.google.protobuf.MessageOrBuilder {
-
-      /**
-       * <code>int32 portfolio_id = 1;</code>
-       */
-      int getPortfolioId();
-
-      /**
-       * <code>int32 user_id = 2;</code>
-       */
-      int getUserId();
-
-      /**
-       * <code>.budget.UserRole role = 3;</code>
-       */
-      int getRoleValue();
-      /**
-       * <code>.budget.UserRole role = 3;</code>
-       */
-      com.digitald4.budget.proto.BudgetProtos.UserRole getRole();
-    }
-    /**
-     * Protobuf type {@code budget.Portfolio.PortfolioUser}
-     */
-    public  static final class PortfolioUser extends
-        com.google.protobuf.GeneratedMessageV3 implements
-        // @@protoc_insertion_point(message_implements:budget.Portfolio.PortfolioUser)
-        PortfolioUserOrBuilder {
-      // Use PortfolioUser.newBuilder() to construct.
-      private PortfolioUser(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-        super(builder);
-      }
-      private PortfolioUser() {
-        portfolioId_ = 0;
-        userId_ = 0;
-        role_ = 0;
-      }
-
-      @java.lang.Override
-      public final com.google.protobuf.UnknownFieldSet
-      getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-      }
-      private PortfolioUser(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        this();
-        int mutable_bitField0_ = 0;
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              default: {
-                if (!input.skipField(tag)) {
-                  done = true;
-                }
-                break;
-              }
-              case 8: {
-
-                portfolioId_ = input.readInt32();
-                break;
-              }
-              case 16: {
-
-                userId_ = input.readInt32();
-                break;
-              }
-              case 24: {
-                int rawValue = input.readEnum();
-
-                role_ = rawValue;
-                break;
-              }
-            }
-          }
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(this);
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(
-              e).setUnfinishedMessage(this);
-        } finally {
-          makeExtensionsImmutable();
-        }
-      }
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.digitald4.budget.proto.BudgetProtos.internal_static_budget_Portfolio_PortfolioUser_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.digitald4.budget.proto.BudgetProtos.internal_static_budget_Portfolio_PortfolioUser_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.class, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder.class);
-      }
-
-      public static final int PORTFOLIO_ID_FIELD_NUMBER = 1;
-      private int portfolioId_;
-      /**
-       * <code>int32 portfolio_id = 1;</code>
-       */
-      public int getPortfolioId() {
-        return portfolioId_;
-      }
-
-      public static final int USER_ID_FIELD_NUMBER = 2;
-      private int userId_;
-      /**
-       * <code>int32 user_id = 2;</code>
-       */
-      public int getUserId() {
-        return userId_;
-      }
-
-      public static final int ROLE_FIELD_NUMBER = 3;
-      private int role_;
-      /**
-       * <code>.budget.UserRole role = 3;</code>
-       */
-      public int getRoleValue() {
-        return role_;
-      }
-      /**
-       * <code>.budget.UserRole role = 3;</code>
-       */
-      public com.digitald4.budget.proto.BudgetProtos.UserRole getRole() {
-        com.digitald4.budget.proto.BudgetProtos.UserRole result = com.digitald4.budget.proto.BudgetProtos.UserRole.valueOf(role_);
-        return result == null ? com.digitald4.budget.proto.BudgetProtos.UserRole.UNRECOGNIZED : result;
-      }
-
-      private byte memoizedIsInitialized = -1;
-      public final boolean isInitialized() {
-        byte isInitialized = memoizedIsInitialized;
-        if (isInitialized == 1) return true;
-        if (isInitialized == 0) return false;
-
-        memoizedIsInitialized = 1;
-        return true;
-      }
-
-      public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
-        if (portfolioId_ != 0) {
-          output.writeInt32(1, portfolioId_);
-        }
-        if (userId_ != 0) {
-          output.writeInt32(2, userId_);
-        }
-        if (role_ != com.digitald4.budget.proto.BudgetProtos.UserRole.UR_UNKNOWN.getNumber()) {
-          output.writeEnum(3, role_);
-        }
-      }
-
-      public int getSerializedSize() {
-        int size = memoizedSize;
-        if (size != -1) return size;
-
-        size = 0;
-        if (portfolioId_ != 0) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(1, portfolioId_);
-        }
-        if (userId_ != 0) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(2, userId_);
-        }
-        if (role_ != com.digitald4.budget.proto.BudgetProtos.UserRole.UR_UNKNOWN.getNumber()) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeEnumSize(3, role_);
-        }
-        memoizedSize = size;
-        return size;
-      }
-
-      private static final long serialVersionUID = 0L;
-      @java.lang.Override
-      public boolean equals(final java.lang.Object obj) {
-        if (obj == this) {
-         return true;
-        }
-        if (!(obj instanceof com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser)) {
-          return super.equals(obj);
-        }
-        com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser other = (com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser) obj;
-
-        boolean result = true;
-        result = result && (getPortfolioId()
-            == other.getPortfolioId());
-        result = result && (getUserId()
-            == other.getUserId());
-        result = result && role_ == other.role_;
-        return result;
-      }
-
-      @java.lang.Override
-      public int hashCode() {
-        if (memoizedHashCode != 0) {
-          return memoizedHashCode;
-        }
-        int hash = 41;
-        hash = (19 * hash) + getDescriptor().hashCode();
-        hash = (37 * hash) + PORTFOLIO_ID_FIELD_NUMBER;
-        hash = (53 * hash) + getPortfolioId();
-        hash = (37 * hash) + USER_ID_FIELD_NUMBER;
-        hash = (53 * hash) + getUserId();
-        hash = (37 * hash) + ROLE_FIELD_NUMBER;
-        hash = (53 * hash) + role_;
-        hash = (29 * hash) + unknownFields.hashCode();
-        memoizedHashCode = hash;
-        return hash;
-      }
-
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseFrom(
-          java.nio.ByteBuffer data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseFrom(
-          java.nio.ByteBuffer data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseFrom(
-          com.google.protobuf.ByteString data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseFrom(
-          com.google.protobuf.ByteString data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseFrom(byte[] data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseFrom(
-          byte[] data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input);
-      }
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input, extensionRegistry);
-      }
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseDelimitedFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseDelimitedWithIOException(PARSER, input);
-      }
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseDelimitedFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-      }
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseFrom(
-          com.google.protobuf.CodedInputStream input)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input);
-      }
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parseFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-            .parseWithIOException(PARSER, input, extensionRegistry);
-      }
-
-      public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder() {
-        return DEFAULT_INSTANCE.toBuilder();
-      }
-      public static Builder newBuilder(com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser prototype) {
-        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-      }
-      public Builder toBuilder() {
-        return this == DEFAULT_INSTANCE
-            ? new Builder() : new Builder().mergeFrom(this);
-      }
-
-      @java.lang.Override
-      protected Builder newBuilderForType(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        Builder builder = new Builder(parent);
-        return builder;
-      }
-      /**
-       * Protobuf type {@code budget.Portfolio.PortfolioUser}
-       */
-      public static final class Builder extends
-          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:budget.Portfolio.PortfolioUser)
-          com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUserOrBuilder {
-        public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
-          return com.digitald4.budget.proto.BudgetProtos.internal_static_budget_Portfolio_PortfolioUser_descriptor;
-        }
-
-        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
-          return com.digitald4.budget.proto.BudgetProtos.internal_static_budget_Portfolio_PortfolioUser_fieldAccessorTable
-              .ensureFieldAccessorsInitialized(
-                  com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.class, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder.class);
-        }
-
-        // Construct using com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.newBuilder()
-        private Builder() {
-          maybeForceBuilderInitialization();
-        }
-
-        private Builder(
-            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-          super(parent);
-          maybeForceBuilderInitialization();
-        }
-        private void maybeForceBuilderInitialization() {
-          if (com.google.protobuf.GeneratedMessageV3
-                  .alwaysUseFieldBuilders) {
-          }
-        }
-        public Builder clear() {
-          super.clear();
-          portfolioId_ = 0;
-
-          userId_ = 0;
-
-          role_ = 0;
-
-          return this;
-        }
-
-        public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
-          return com.digitald4.budget.proto.BudgetProtos.internal_static_budget_Portfolio_PortfolioUser_descriptor;
-        }
-
-        public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser getDefaultInstanceForType() {
-          return com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.getDefaultInstance();
-        }
-
-        public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser build() {
-          com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser result = buildPartial();
-          if (!result.isInitialized()) {
-            throw newUninitializedMessageException(result);
-          }
-          return result;
-        }
-
-        public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser buildPartial() {
-          com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser result = new com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser(this);
-          result.portfolioId_ = portfolioId_;
-          result.userId_ = userId_;
-          result.role_ = role_;
-          onBuilt();
-          return result;
-        }
-
-        public Builder clone() {
-          return (Builder) super.clone();
-        }
-        public Builder setField(
-            com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
-          return (Builder) super.setField(field, value);
-        }
-        public Builder clearField(
-            com.google.protobuf.Descriptors.FieldDescriptor field) {
-          return (Builder) super.clearField(field);
-        }
-        public Builder clearOneof(
-            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-          return (Builder) super.clearOneof(oneof);
-        }
-        public Builder setRepeatedField(
-            com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
-          return (Builder) super.setRepeatedField(field, index, value);
-        }
-        public Builder addRepeatedField(
-            com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
-          return (Builder) super.addRepeatedField(field, value);
-        }
-        public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser) {
-            return mergeFrom((com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser)other);
-          } else {
-            super.mergeFrom(other);
-            return this;
-          }
-        }
-
-        public Builder mergeFrom(com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser other) {
-          if (other == com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.getDefaultInstance()) return this;
-          if (other.getPortfolioId() != 0) {
-            setPortfolioId(other.getPortfolioId());
-          }
-          if (other.getUserId() != 0) {
-            setUserId(other.getUserId());
-          }
-          if (other.role_ != 0) {
-            setRoleValue(other.getRoleValue());
-          }
-          onChanged();
-          return this;
-        }
-
-        public final boolean isInitialized() {
-          return true;
-        }
-
-        public Builder mergeFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser parsedMessage = null;
-          try {
-            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser) e.getUnfinishedMessage();
-            throw e.unwrapIOException();
-          } finally {
-            if (parsedMessage != null) {
-              mergeFrom(parsedMessage);
-            }
-          }
-          return this;
-        }
-
-        private int portfolioId_ ;
-        /**
-         * <code>int32 portfolio_id = 1;</code>
-         */
-        public int getPortfolioId() {
-          return portfolioId_;
-        }
-        /**
-         * <code>int32 portfolio_id = 1;</code>
-         */
-        public Builder setPortfolioId(int value) {
-          
-          portfolioId_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>int32 portfolio_id = 1;</code>
-         */
-        public Builder clearPortfolioId() {
-          
-          portfolioId_ = 0;
-          onChanged();
-          return this;
-        }
-
-        private int userId_ ;
-        /**
-         * <code>int32 user_id = 2;</code>
-         */
-        public int getUserId() {
-          return userId_;
-        }
-        /**
-         * <code>int32 user_id = 2;</code>
-         */
-        public Builder setUserId(int value) {
-          
-          userId_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>int32 user_id = 2;</code>
-         */
-        public Builder clearUserId() {
-          
-          userId_ = 0;
-          onChanged();
-          return this;
-        }
-
-        private int role_ = 0;
-        /**
-         * <code>.budget.UserRole role = 3;</code>
-         */
-        public int getRoleValue() {
-          return role_;
-        }
-        /**
-         * <code>.budget.UserRole role = 3;</code>
-         */
-        public Builder setRoleValue(int value) {
-          role_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>.budget.UserRole role = 3;</code>
-         */
-        public com.digitald4.budget.proto.BudgetProtos.UserRole getRole() {
-          com.digitald4.budget.proto.BudgetProtos.UserRole result = com.digitald4.budget.proto.BudgetProtos.UserRole.valueOf(role_);
-          return result == null ? com.digitald4.budget.proto.BudgetProtos.UserRole.UNRECOGNIZED : result;
-        }
-        /**
-         * <code>.budget.UserRole role = 3;</code>
-         */
-        public Builder setRole(com.digitald4.budget.proto.BudgetProtos.UserRole value) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          
-          role_ = value.getNumber();
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>.budget.UserRole role = 3;</code>
-         */
-        public Builder clearRole() {
-          
-          role_ = 0;
-          onChanged();
-          return this;
-        }
-        public final Builder setUnknownFields(
-            final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
-        }
-
-        public final Builder mergeUnknownFields(
-            final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
-        }
-
-
-        // @@protoc_insertion_point(builder_scope:budget.Portfolio.PortfolioUser)
-      }
-
-      // @@protoc_insertion_point(class_scope:budget.Portfolio.PortfolioUser)
-      private static final com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser DEFAULT_INSTANCE;
-      static {
-        DEFAULT_INSTANCE = new com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser();
-      }
-
-      public static com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser getDefaultInstance() {
-        return DEFAULT_INSTANCE;
-      }
-
-      private static final com.google.protobuf.Parser<PortfolioUser>
-          PARSER = new com.google.protobuf.AbstractParser<PortfolioUser>() {
-        public PortfolioUser parsePartialFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-            return new PortfolioUser(input, extensionRegistry);
-        }
-      };
-
-      public static com.google.protobuf.Parser<PortfolioUser> parser() {
-        return PARSER;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Parser<PortfolioUser> getParserForType() {
-        return PARSER;
-      }
-
-      public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser getDefaultInstanceForType() {
-        return DEFAULT_INSTANCE;
-      }
-
     }
 
     private int bitField0_;
@@ -900,37 +927,62 @@ public final class BudgetProtos {
       }
     }
 
-    public static final int PORTFOLIO_USER_FIELD_NUMBER = 4;
-    private java.util.List<com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser> portfolioUser_;
+    public static final int USER_ID_FIELD_NUMBER = 3;
+    private int userId_;
     /**
-     * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+     * <code>int32 user_id = 3;</code>
      */
-    public java.util.List<com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser> getPortfolioUserList() {
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int ROLE_FIELD_NUMBER = 4;
+    private int role_;
+    /**
+     * <code>.budget.UserRole role = 4;</code>
+     */
+    public int getRoleValue() {
+      return role_;
+    }
+    /**
+     * <code>.budget.UserRole role = 4;</code>
+     */
+    public com.digitald4.budget.proto.BudgetProtos.UserRole getRole() {
+      com.digitald4.budget.proto.BudgetProtos.UserRole result = com.digitald4.budget.proto.BudgetProtos.UserRole.valueOf(role_);
+      return result == null ? com.digitald4.budget.proto.BudgetProtos.UserRole.UNRECOGNIZED : result;
+    }
+
+    public static final int PORTFOLIO_USER_FIELD_NUMBER = 5;
+    private java.util.List<com.digitald4.budget.proto.BudgetProtos.PortfolioUser> portfolioUser_;
+    /**
+     * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
+     */
+    public java.util.List<com.digitald4.budget.proto.BudgetProtos.PortfolioUser> getPortfolioUserList() {
       return portfolioUser_;
     }
     /**
-     * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+     * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
      */
-    public java.util.List<? extends com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUserOrBuilder> 
+    public java.util.List<? extends com.digitald4.budget.proto.BudgetProtos.PortfolioUserOrBuilder> 
         getPortfolioUserOrBuilderList() {
       return portfolioUser_;
     }
     /**
-     * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+     * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
      */
     public int getPortfolioUserCount() {
       return portfolioUser_.size();
     }
     /**
-     * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+     * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
      */
-    public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser getPortfolioUser(int index) {
+    public com.digitald4.budget.proto.BudgetProtos.PortfolioUser getPortfolioUser(int index) {
       return portfolioUser_.get(index);
     }
     /**
-     * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+     * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
      */
-    public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUserOrBuilder getPortfolioUserOrBuilder(
+    public com.digitald4.budget.proto.BudgetProtos.PortfolioUserOrBuilder getPortfolioUserOrBuilder(
         int index) {
       return portfolioUser_.get(index);
     }
@@ -953,8 +1005,14 @@ public final class BudgetProtos {
       if (!getNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
       }
+      if (userId_ != 0) {
+        output.writeInt32(3, userId_);
+      }
+      if (role_ != com.digitald4.budget.proto.BudgetProtos.UserRole.UR_UNKNOWN.getNumber()) {
+        output.writeEnum(4, role_);
+      }
       for (int i = 0; i < portfolioUser_.size(); i++) {
-        output.writeMessage(4, portfolioUser_.get(i));
+        output.writeMessage(5, portfolioUser_.get(i));
       }
     }
 
@@ -970,9 +1028,17 @@ public final class BudgetProtos {
       if (!getNameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
       }
+      if (userId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, userId_);
+      }
+      if (role_ != com.digitald4.budget.proto.BudgetProtos.UserRole.UR_UNKNOWN.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, role_);
+      }
       for (int i = 0; i < portfolioUser_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, portfolioUser_.get(i));
+          .computeMessageSize(5, portfolioUser_.get(i));
       }
       memoizedSize = size;
       return size;
@@ -994,6 +1060,9 @@ public final class BudgetProtos {
           == other.getId());
       result = result && getName()
           .equals(other.getName());
+      result = result && (getUserId()
+          == other.getUserId());
+      result = result && role_ == other.role_;
       result = result && getPortfolioUserList()
           .equals(other.getPortfolioUserList());
       return result;
@@ -1010,6 +1079,10 @@ public final class BudgetProtos {
       hash = (53 * hash) + getId();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + USER_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getUserId();
+      hash = (37 * hash) + ROLE_FIELD_NUMBER;
+      hash = (53 * hash) + role_;
       if (getPortfolioUserCount() > 0) {
         hash = (37 * hash) + PORTFOLIO_USER_FIELD_NUMBER;
         hash = (53 * hash) + getPortfolioUserList().hashCode();
@@ -1148,9 +1221,13 @@ public final class BudgetProtos {
 
         name_ = "";
 
+        userId_ = 0;
+
+        role_ = 0;
+
         if (portfolioUserBuilder_ == null) {
           portfolioUser_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000010);
         } else {
           portfolioUserBuilder_.clear();
         }
@@ -1180,10 +1257,12 @@ public final class BudgetProtos {
         int to_bitField0_ = 0;
         result.id_ = id_;
         result.name_ = name_;
+        result.userId_ = userId_;
+        result.role_ = role_;
         if (portfolioUserBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
             portfolioUser_ = java.util.Collections.unmodifiableList(portfolioUser_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.portfolioUser_ = portfolioUser_;
         } else {
@@ -1238,11 +1317,17 @@ public final class BudgetProtos {
           name_ = other.name_;
           onChanged();
         }
+        if (other.getUserId() != 0) {
+          setUserId(other.getUserId());
+        }
+        if (other.role_ != 0) {
+          setRoleValue(other.getRoleValue());
+        }
         if (portfolioUserBuilder_ == null) {
           if (!other.portfolioUser_.isEmpty()) {
             if (portfolioUser_.isEmpty()) {
               portfolioUser_ = other.portfolioUser_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensurePortfolioUserIsMutable();
               portfolioUser_.addAll(other.portfolioUser_);
@@ -1255,7 +1340,7 @@ public final class BudgetProtos {
               portfolioUserBuilder_.dispose();
               portfolioUserBuilder_ = null;
               portfolioUser_ = other.portfolioUser_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000010);
               portfolioUserBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getPortfolioUserFieldBuilder() : null;
@@ -1386,22 +1471,92 @@ public final class BudgetProtos {
         return this;
       }
 
-      private java.util.List<com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser> portfolioUser_ =
+      private int userId_ ;
+      /**
+       * <code>int32 user_id = 3;</code>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>int32 user_id = 3;</code>
+       */
+      public Builder setUserId(int value) {
+        
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 user_id = 3;</code>
+       */
+      public Builder clearUserId() {
+        
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int role_ = 0;
+      /**
+       * <code>.budget.UserRole role = 4;</code>
+       */
+      public int getRoleValue() {
+        return role_;
+      }
+      /**
+       * <code>.budget.UserRole role = 4;</code>
+       */
+      public Builder setRoleValue(int value) {
+        role_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.budget.UserRole role = 4;</code>
+       */
+      public com.digitald4.budget.proto.BudgetProtos.UserRole getRole() {
+        com.digitald4.budget.proto.BudgetProtos.UserRole result = com.digitald4.budget.proto.BudgetProtos.UserRole.valueOf(role_);
+        return result == null ? com.digitald4.budget.proto.BudgetProtos.UserRole.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.budget.UserRole role = 4;</code>
+       */
+      public Builder setRole(com.digitald4.budget.proto.BudgetProtos.UserRole value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        role_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.budget.UserRole role = 4;</code>
+       */
+      public Builder clearRole() {
+        
+        role_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.digitald4.budget.proto.BudgetProtos.PortfolioUser> portfolioUser_ =
         java.util.Collections.emptyList();
       private void ensurePortfolioUserIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          portfolioUser_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser>(portfolioUser_);
-          bitField0_ |= 0x00000004;
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          portfolioUser_ = new java.util.ArrayList<com.digitald4.budget.proto.BudgetProtos.PortfolioUser>(portfolioUser_);
+          bitField0_ |= 0x00000010;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUserOrBuilder> portfolioUserBuilder_;
+          com.digitald4.budget.proto.BudgetProtos.PortfolioUser, com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder, com.digitald4.budget.proto.BudgetProtos.PortfolioUserOrBuilder> portfolioUserBuilder_;
 
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
-      public java.util.List<com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser> getPortfolioUserList() {
+      public java.util.List<com.digitald4.budget.proto.BudgetProtos.PortfolioUser> getPortfolioUserList() {
         if (portfolioUserBuilder_ == null) {
           return java.util.Collections.unmodifiableList(portfolioUser_);
         } else {
@@ -1409,7 +1564,7 @@ public final class BudgetProtos {
         }
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
       public int getPortfolioUserCount() {
         if (portfolioUserBuilder_ == null) {
@@ -1419,9 +1574,9 @@ public final class BudgetProtos {
         }
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
-      public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser getPortfolioUser(int index) {
+      public com.digitald4.budget.proto.BudgetProtos.PortfolioUser getPortfolioUser(int index) {
         if (portfolioUserBuilder_ == null) {
           return portfolioUser_.get(index);
         } else {
@@ -1429,10 +1584,10 @@ public final class BudgetProtos {
         }
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
       public Builder setPortfolioUser(
-          int index, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser value) {
+          int index, com.digitald4.budget.proto.BudgetProtos.PortfolioUser value) {
         if (portfolioUserBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1446,10 +1601,10 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
       public Builder setPortfolioUser(
-          int index, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder builderForValue) {
+          int index, com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder builderForValue) {
         if (portfolioUserBuilder_ == null) {
           ensurePortfolioUserIsMutable();
           portfolioUser_.set(index, builderForValue.build());
@@ -1460,9 +1615,9 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
-      public Builder addPortfolioUser(com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser value) {
+      public Builder addPortfolioUser(com.digitald4.budget.proto.BudgetProtos.PortfolioUser value) {
         if (portfolioUserBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1476,10 +1631,10 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
       public Builder addPortfolioUser(
-          int index, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser value) {
+          int index, com.digitald4.budget.proto.BudgetProtos.PortfolioUser value) {
         if (portfolioUserBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1493,10 +1648,10 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
       public Builder addPortfolioUser(
-          com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder builderForValue) {
+          com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder builderForValue) {
         if (portfolioUserBuilder_ == null) {
           ensurePortfolioUserIsMutable();
           portfolioUser_.add(builderForValue.build());
@@ -1507,10 +1662,10 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
       public Builder addPortfolioUser(
-          int index, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder builderForValue) {
+          int index, com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder builderForValue) {
         if (portfolioUserBuilder_ == null) {
           ensurePortfolioUserIsMutable();
           portfolioUser_.add(index, builderForValue.build());
@@ -1521,10 +1676,10 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
       public Builder addAllPortfolioUser(
-          java.lang.Iterable<? extends com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser> values) {
+          java.lang.Iterable<? extends com.digitald4.budget.proto.BudgetProtos.PortfolioUser> values) {
         if (portfolioUserBuilder_ == null) {
           ensurePortfolioUserIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -1536,12 +1691,12 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
       public Builder clearPortfolioUser() {
         if (portfolioUserBuilder_ == null) {
           portfolioUser_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           portfolioUserBuilder_.clear();
@@ -1549,7 +1704,7 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
       public Builder removePortfolioUser(int index) {
         if (portfolioUserBuilder_ == null) {
@@ -1562,16 +1717,16 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
-      public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder getPortfolioUserBuilder(
+      public com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder getPortfolioUserBuilder(
           int index) {
         return getPortfolioUserFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
-      public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUserOrBuilder getPortfolioUserOrBuilder(
+      public com.digitald4.budget.proto.BudgetProtos.PortfolioUserOrBuilder getPortfolioUserOrBuilder(
           int index) {
         if (portfolioUserBuilder_ == null) {
           return portfolioUser_.get(index);  } else {
@@ -1579,9 +1734,9 @@ public final class BudgetProtos {
         }
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
-      public java.util.List<? extends com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUserOrBuilder> 
+      public java.util.List<? extends com.digitald4.budget.proto.BudgetProtos.PortfolioUserOrBuilder> 
            getPortfolioUserOrBuilderList() {
         if (portfolioUserBuilder_ != null) {
           return portfolioUserBuilder_.getMessageOrBuilderList();
@@ -1590,35 +1745,35 @@ public final class BudgetProtos {
         }
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
-      public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder addPortfolioUserBuilder() {
+      public com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder addPortfolioUserBuilder() {
         return getPortfolioUserFieldBuilder().addBuilder(
-            com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.getDefaultInstance());
+            com.digitald4.budget.proto.BudgetProtos.PortfolioUser.getDefaultInstance());
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
-      public com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder addPortfolioUserBuilder(
+      public com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder addPortfolioUserBuilder(
           int index) {
         return getPortfolioUserFieldBuilder().addBuilder(
-            index, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.getDefaultInstance());
+            index, com.digitald4.budget.proto.BudgetProtos.PortfolioUser.getDefaultInstance());
       }
       /**
-       * <code>repeated .budget.Portfolio.PortfolioUser portfolio_user = 4;</code>
+       * <code>repeated .budget.PortfolioUser portfolio_user = 5;</code>
        */
-      public java.util.List<com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder> 
+      public java.util.List<com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder> 
            getPortfolioUserBuilderList() {
         return getPortfolioUserFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUserOrBuilder> 
+          com.digitald4.budget.proto.BudgetProtos.PortfolioUser, com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder, com.digitald4.budget.proto.BudgetProtos.PortfolioUserOrBuilder> 
           getPortfolioUserFieldBuilder() {
         if (portfolioUserBuilder_ == null) {
           portfolioUserBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser.Builder, com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUserOrBuilder>(
+              com.digitald4.budget.proto.BudgetProtos.PortfolioUser, com.digitald4.budget.proto.BudgetProtos.PortfolioUser.Builder, com.digitald4.budget.proto.BudgetProtos.PortfolioUserOrBuilder>(
                   portfolioUser_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
           portfolioUser_ = null;
@@ -6885,41 +7040,46 @@ public final class BudgetProtos {
     int getAccountId();
 
     /**
-     * <code>int32 due_day = 4;</code>
+     * <code>int32 portfolio_id = 4;</code>
+     */
+    int getPortfolioId();
+
+    /**
+     * <code>int32 due_day = 5;</code>
      */
     int getDueDay();
 
     /**
-     * <code>string name = 5;</code>
+     * <code>string name = 6;</code>
      */
     java.lang.String getName();
     /**
-     * <code>string name = 5;</code>
+     * <code>string name = 6;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
 
     /**
-     * <code>string account_name = 6;</code>
+     * <code>string account_name = 7;</code>
      */
     java.lang.String getAccountName();
     /**
-     * <code>string account_name = 6;</code>
+     * <code>string account_name = 7;</code>
      */
     com.google.protobuf.ByteString
         getAccountNameBytes();
 
     /**
-     * <code>double amount_due = 7;</code>
+     * <code>double amount_due = 8;</code>
      */
     double getAmountDue();
 
     /**
-     * <code>map&lt;int32, double&gt; transaction = 8;</code>
+     * <code>map&lt;int32, double&gt; transaction = 9;</code>
      */
     int getTransactionCount();
     /**
-     * <code>map&lt;int32, double&gt; transaction = 8;</code>
+     * <code>map&lt;int32, double&gt; transaction = 9;</code>
      */
     boolean containsTransaction(
         int key);
@@ -6930,19 +7090,19 @@ public final class BudgetProtos {
     java.util.Map<java.lang.Integer, java.lang.Double>
     getTransaction();
     /**
-     * <code>map&lt;int32, double&gt; transaction = 8;</code>
+     * <code>map&lt;int32, double&gt; transaction = 9;</code>
      */
     java.util.Map<java.lang.Integer, java.lang.Double>
     getTransactionMap();
     /**
-     * <code>map&lt;int32, double&gt; transaction = 8;</code>
+     * <code>map&lt;int32, double&gt; transaction = 9;</code>
      */
 
     double getTransactionOrDefault(
         int key,
         double defaultValue);
     /**
-     * <code>map&lt;int32, double&gt; transaction = 8;</code>
+     * <code>map&lt;int32, double&gt; transaction = 9;</code>
      */
 
     double getTransactionOrThrow(
@@ -6963,6 +7123,7 @@ public final class BudgetProtos {
       id_ = 0;
       templateId_ = 0;
       accountId_ = 0;
+      portfolioId_ = 0;
       dueDay_ = 0;
       name_ = "";
       accountName_ = "";
@@ -7011,31 +7172,36 @@ public final class BudgetProtos {
             }
             case 32: {
 
-              dueDay_ = input.readInt32();
+              portfolioId_ = input.readInt32();
               break;
             }
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 40: {
 
-              name_ = s;
+              dueDay_ = input.readInt32();
               break;
             }
             case 50: {
               java.lang.String s = input.readStringRequireUtf8();
 
+              name_ = s;
+              break;
+            }
+            case 58: {
+              java.lang.String s = input.readStringRequireUtf8();
+
               accountName_ = s;
               break;
             }
-            case 57: {
+            case 65: {
 
               amountDue_ = input.readDouble();
               break;
             }
-            case 66: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
                 transaction_ = com.google.protobuf.MapField.newMapField(
                     TransactionDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000080;
+                mutable_bitField0_ |= 0x00000100;
               }
               com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Double>
               transaction__ = input.readMessage(
@@ -7064,7 +7230,7 @@ public final class BudgetProtos {
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 8:
+        case 9:
           return internalGetTransaction();
         default:
           throw new RuntimeException(
@@ -7106,19 +7272,28 @@ public final class BudgetProtos {
       return accountId_;
     }
 
-    public static final int DUE_DAY_FIELD_NUMBER = 4;
+    public static final int PORTFOLIO_ID_FIELD_NUMBER = 4;
+    private int portfolioId_;
+    /**
+     * <code>int32 portfolio_id = 4;</code>
+     */
+    public int getPortfolioId() {
+      return portfolioId_;
+    }
+
+    public static final int DUE_DAY_FIELD_NUMBER = 5;
     private int dueDay_;
     /**
-     * <code>int32 due_day = 4;</code>
+     * <code>int32 due_day = 5;</code>
      */
     public int getDueDay() {
       return dueDay_;
     }
 
-    public static final int NAME_FIELD_NUMBER = 5;
+    public static final int NAME_FIELD_NUMBER = 6;
     private volatile java.lang.Object name_;
     /**
-     * <code>string name = 5;</code>
+     * <code>string name = 6;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -7133,7 +7308,7 @@ public final class BudgetProtos {
       }
     }
     /**
-     * <code>string name = 5;</code>
+     * <code>string name = 6;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -7149,10 +7324,10 @@ public final class BudgetProtos {
       }
     }
 
-    public static final int ACCOUNT_NAME_FIELD_NUMBER = 6;
+    public static final int ACCOUNT_NAME_FIELD_NUMBER = 7;
     private volatile java.lang.Object accountName_;
     /**
-     * <code>string account_name = 6;</code>
+     * <code>string account_name = 7;</code>
      */
     public java.lang.String getAccountName() {
       java.lang.Object ref = accountName_;
@@ -7167,7 +7342,7 @@ public final class BudgetProtos {
       }
     }
     /**
-     * <code>string account_name = 6;</code>
+     * <code>string account_name = 7;</code>
      */
     public com.google.protobuf.ByteString
         getAccountNameBytes() {
@@ -7183,16 +7358,16 @@ public final class BudgetProtos {
       }
     }
 
-    public static final int AMOUNT_DUE_FIELD_NUMBER = 7;
+    public static final int AMOUNT_DUE_FIELD_NUMBER = 8;
     private double amountDue_;
     /**
-     * <code>double amount_due = 7;</code>
+     * <code>double amount_due = 8;</code>
      */
     public double getAmountDue() {
       return amountDue_;
     }
 
-    public static final int TRANSACTION_FIELD_NUMBER = 8;
+    public static final int TRANSACTION_FIELD_NUMBER = 9;
     private static final class TransactionDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           java.lang.Integer, java.lang.Double> defaultEntry =
@@ -7219,7 +7394,7 @@ public final class BudgetProtos {
       return internalGetTransaction().getMap().size();
     }
     /**
-     * <code>map&lt;int32, double&gt; transaction = 8;</code>
+     * <code>map&lt;int32, double&gt; transaction = 9;</code>
      */
 
     public boolean containsTransaction(
@@ -7235,14 +7410,14 @@ public final class BudgetProtos {
       return getTransactionMap();
     }
     /**
-     * <code>map&lt;int32, double&gt; transaction = 8;</code>
+     * <code>map&lt;int32, double&gt; transaction = 9;</code>
      */
 
     public java.util.Map<java.lang.Integer, java.lang.Double> getTransactionMap() {
       return internalGetTransaction().getMap();
     }
     /**
-     * <code>map&lt;int32, double&gt; transaction = 8;</code>
+     * <code>map&lt;int32, double&gt; transaction = 9;</code>
      */
 
     public double getTransactionOrDefault(
@@ -7254,7 +7429,7 @@ public final class BudgetProtos {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;int32, double&gt; transaction = 8;</code>
+     * <code>map&lt;int32, double&gt; transaction = 9;</code>
      */
 
     public double getTransactionOrThrow(
@@ -7289,24 +7464,27 @@ public final class BudgetProtos {
       if (accountId_ != 0) {
         output.writeInt32(3, accountId_);
       }
+      if (portfolioId_ != 0) {
+        output.writeInt32(4, portfolioId_);
+      }
       if (dueDay_ != 0) {
-        output.writeInt32(4, dueDay_);
+        output.writeInt32(5, dueDay_);
       }
       if (!getNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, name_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, name_);
       }
       if (!getAccountNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, accountName_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, accountName_);
       }
       if (amountDue_ != 0D) {
-        output.writeDouble(7, amountDue_);
+        output.writeDouble(8, amountDue_);
       }
       com.google.protobuf.GeneratedMessageV3
         .serializeIntegerMapTo(
           output,
           internalGetTransaction(),
           TransactionDefaultEntryHolder.defaultEntry,
-          8);
+          9);
     }
 
     public int getSerializedSize() {
@@ -7326,19 +7504,23 @@ public final class BudgetProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, accountId_);
       }
+      if (portfolioId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, portfolioId_);
+      }
       if (dueDay_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, dueDay_);
+          .computeInt32Size(5, dueDay_);
       }
       if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, name_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, name_);
       }
       if (!getAccountNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, accountName_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, accountName_);
       }
       if (amountDue_ != 0D) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(7, amountDue_);
+          .computeDoubleSize(8, amountDue_);
       }
       for (java.util.Map.Entry<java.lang.Integer, java.lang.Double> entry
            : internalGetTransaction().getMap().entrySet()) {
@@ -7348,7 +7530,7 @@ public final class BudgetProtos {
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(8, transaction__);
+            .computeMessageSize(9, transaction__);
       }
       memoizedSize = size;
       return size;
@@ -7372,6 +7554,8 @@ public final class BudgetProtos {
           == other.getTemplateId());
       result = result && (getAccountId()
           == other.getAccountId());
+      result = result && (getPortfolioId()
+          == other.getPortfolioId());
       result = result && (getDueDay()
           == other.getDueDay());
       result = result && getName()
@@ -7400,6 +7584,8 @@ public final class BudgetProtos {
       hash = (53 * hash) + getTemplateId();
       hash = (37 * hash) + ACCOUNT_ID_FIELD_NUMBER;
       hash = (53 * hash) + getAccountId();
+      hash = (37 * hash) + PORTFOLIO_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getPortfolioId();
       hash = (37 * hash) + DUE_DAY_FIELD_NUMBER;
       hash = (53 * hash) + getDueDay();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
@@ -7522,7 +7708,7 @@ public final class BudgetProtos {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
-          case 8:
+          case 9:
             return internalGetTransaction();
           default:
             throw new RuntimeException(
@@ -7533,7 +7719,7 @@ public final class BudgetProtos {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
-          case 8:
+          case 9:
             return internalGetMutableTransaction();
           default:
             throw new RuntimeException(
@@ -7569,6 +7755,8 @@ public final class BudgetProtos {
         templateId_ = 0;
 
         accountId_ = 0;
+
+        portfolioId_ = 0;
 
         dueDay_ = 0;
 
@@ -7606,6 +7794,7 @@ public final class BudgetProtos {
         result.id_ = id_;
         result.templateId_ = templateId_;
         result.accountId_ = accountId_;
+        result.portfolioId_ = portfolioId_;
         result.dueDay_ = dueDay_;
         result.name_ = name_;
         result.accountName_ = accountName_;
@@ -7662,6 +7851,9 @@ public final class BudgetProtos {
         }
         if (other.getAccountId() != 0) {
           setAccountId(other.getAccountId());
+        }
+        if (other.getPortfolioId() != 0) {
+          setPortfolioId(other.getPortfolioId());
         }
         if (other.getDueDay() != 0) {
           setDueDay(other.getDueDay());
@@ -7784,15 +7976,41 @@ public final class BudgetProtos {
         return this;
       }
 
+      private int portfolioId_ ;
+      /**
+       * <code>int32 portfolio_id = 4;</code>
+       */
+      public int getPortfolioId() {
+        return portfolioId_;
+      }
+      /**
+       * <code>int32 portfolio_id = 4;</code>
+       */
+      public Builder setPortfolioId(int value) {
+        
+        portfolioId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 portfolio_id = 4;</code>
+       */
+      public Builder clearPortfolioId() {
+        
+        portfolioId_ = 0;
+        onChanged();
+        return this;
+      }
+
       private int dueDay_ ;
       /**
-       * <code>int32 due_day = 4;</code>
+       * <code>int32 due_day = 5;</code>
        */
       public int getDueDay() {
         return dueDay_;
       }
       /**
-       * <code>int32 due_day = 4;</code>
+       * <code>int32 due_day = 5;</code>
        */
       public Builder setDueDay(int value) {
         
@@ -7801,7 +8019,7 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>int32 due_day = 4;</code>
+       * <code>int32 due_day = 5;</code>
        */
       public Builder clearDueDay() {
         
@@ -7812,7 +8030,7 @@ public final class BudgetProtos {
 
       private java.lang.Object name_ = "";
       /**
-       * <code>string name = 5;</code>
+       * <code>string name = 6;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -7827,7 +8045,7 @@ public final class BudgetProtos {
         }
       }
       /**
-       * <code>string name = 5;</code>
+       * <code>string name = 6;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -7843,7 +8061,7 @@ public final class BudgetProtos {
         }
       }
       /**
-       * <code>string name = 5;</code>
+       * <code>string name = 6;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -7856,7 +8074,7 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>string name = 5;</code>
+       * <code>string name = 6;</code>
        */
       public Builder clearName() {
         
@@ -7865,7 +8083,7 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>string name = 5;</code>
+       * <code>string name = 6;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -7881,7 +8099,7 @@ public final class BudgetProtos {
 
       private java.lang.Object accountName_ = "";
       /**
-       * <code>string account_name = 6;</code>
+       * <code>string account_name = 7;</code>
        */
       public java.lang.String getAccountName() {
         java.lang.Object ref = accountName_;
@@ -7896,7 +8114,7 @@ public final class BudgetProtos {
         }
       }
       /**
-       * <code>string account_name = 6;</code>
+       * <code>string account_name = 7;</code>
        */
       public com.google.protobuf.ByteString
           getAccountNameBytes() {
@@ -7912,7 +8130,7 @@ public final class BudgetProtos {
         }
       }
       /**
-       * <code>string account_name = 6;</code>
+       * <code>string account_name = 7;</code>
        */
       public Builder setAccountName(
           java.lang.String value) {
@@ -7925,7 +8143,7 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>string account_name = 6;</code>
+       * <code>string account_name = 7;</code>
        */
       public Builder clearAccountName() {
         
@@ -7934,7 +8152,7 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>string account_name = 6;</code>
+       * <code>string account_name = 7;</code>
        */
       public Builder setAccountNameBytes(
           com.google.protobuf.ByteString value) {
@@ -7950,13 +8168,13 @@ public final class BudgetProtos {
 
       private double amountDue_ ;
       /**
-       * <code>double amount_due = 7;</code>
+       * <code>double amount_due = 8;</code>
        */
       public double getAmountDue() {
         return amountDue_;
       }
       /**
-       * <code>double amount_due = 7;</code>
+       * <code>double amount_due = 8;</code>
        */
       public Builder setAmountDue(double value) {
         
@@ -7965,7 +8183,7 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>double amount_due = 7;</code>
+       * <code>double amount_due = 8;</code>
        */
       public Builder clearAmountDue() {
         
@@ -8001,7 +8219,7 @@ public final class BudgetProtos {
         return internalGetTransaction().getMap().size();
       }
       /**
-       * <code>map&lt;int32, double&gt; transaction = 8;</code>
+       * <code>map&lt;int32, double&gt; transaction = 9;</code>
        */
 
       public boolean containsTransaction(
@@ -8017,14 +8235,14 @@ public final class BudgetProtos {
         return getTransactionMap();
       }
       /**
-       * <code>map&lt;int32, double&gt; transaction = 8;</code>
+       * <code>map&lt;int32, double&gt; transaction = 9;</code>
        */
 
       public java.util.Map<java.lang.Integer, java.lang.Double> getTransactionMap() {
         return internalGetTransaction().getMap();
       }
       /**
-       * <code>map&lt;int32, double&gt; transaction = 8;</code>
+       * <code>map&lt;int32, double&gt; transaction = 9;</code>
        */
 
       public double getTransactionOrDefault(
@@ -8036,7 +8254,7 @@ public final class BudgetProtos {
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
-       * <code>map&lt;int32, double&gt; transaction = 8;</code>
+       * <code>map&lt;int32, double&gt; transaction = 9;</code>
        */
 
       public double getTransactionOrThrow(
@@ -8056,7 +8274,7 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>map&lt;int32, double&gt; transaction = 8;</code>
+       * <code>map&lt;int32, double&gt; transaction = 9;</code>
        */
 
       public Builder removeTransaction(
@@ -8075,7 +8293,7 @@ public final class BudgetProtos {
         return internalGetMutableTransaction().getMutableMap();
       }
       /**
-       * <code>map&lt;int32, double&gt; transaction = 8;</code>
+       * <code>map&lt;int32, double&gt; transaction = 9;</code>
        */
       public Builder putTransaction(
           int key,
@@ -8087,7 +8305,7 @@ public final class BudgetProtos {
         return this;
       }
       /**
-       * <code>map&lt;int32, double&gt; transaction = 8;</code>
+       * <code>map&lt;int32, double&gt; transaction = 9;</code>
        */
 
       public Builder putAllTransaction(
@@ -8146,15 +8364,15 @@ public final class BudgetProtos {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_budget_PortfolioUser_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_budget_PortfolioUser_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_budget_Portfolio_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_budget_Portfolio_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_budget_Portfolio_PortfolioUser_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_budget_Portfolio_PortfolioUser_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_budget_Account_descriptor;
   private static final 
@@ -8204,46 +8422,48 @@ public final class BudgetProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014budget.proto\022\006budget\"\266\001\n\tPortfolio\022\n\n\002" +
-      "id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0227\n\016portfolio_user" +
-      "\030\004 \003(\0132\037.budget.Portfolio.PortfolioUser\032" +
-      "V\n\rPortfolioUser\022\024\n\014portfolio_id\030\001 \001(\005\022\017" +
-      "\n\007user_id\030\002 \001(\005\022\036\n\004role\030\003 \001(\0162\020.budget.U" +
-      "serRole\"m\n\007Account\022\n\n\002id\030\001 \001(\005\022\024\n\014portfo" +
-      "lio_id\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\027\n\017payment_ac" +
-      "count\030\004 \001(\010\022\031\n\021parent_account_id\030\005 \001(\005\"\254" +
-      "\001\n\007Balance\022\n\n\002id\030\001 \001(\005\022\022\n\naccount_id\030\002 \001" +
-      "(\005\022\024\n\014account_name\030\003 \001(\t\022\024\n\014portfolio_id",
-      "\030\004 \001(\005\022\014\n\004year\030\005 \001(\005\022\r\n\005month\030\006 \001(\005\022\020\n\010b" +
-      "al_date\030\007 \001(\t\022\017\n\007balance\030\010 \001(\001\022\025\n\rbalanc" +
-      "e_y_t_d\030\t \001(\001\"\222\005\n\004Bill\022\n\n\002id\030\001 \001(\005\022\024\n\014po" +
-      "rtfolio_id\030\002 \001(\005\022\022\n\naccount_id\030\003 \001(\005\022\024\n\014" +
-      "account_name\030\004 \001(\t\022\023\n\013template_id\030\005 \001(\005\022" +
-      "\014\n\004year\030\006 \001(\005\022\r\n\005month\030\007 \001(\005\022\013\n\003day\030\010 \001(" +
-      "\005\022\022\n\namount_due\030\t \001(\001\022\014\n\004name\030\n \001(\t\022\024\n\014p" +
-      "ayment_date\030\013 \001(\003\022*\n\006status\030\014 \001(\0162\032.budg" +
-      "et.Bill.PaymentStatus\022\014\n\004rank\030\r \001(\005\022\021\n\ti" +
-      "n_active\030\016 \001(\010\022\023\n\013description\030\017 \001(\t\0222\n\013t",
-      "ransaction\030\020 \003(\0132\035.budget.Bill.Transacti" +
-      "onEntry\032r\n\013Transaction\022\016\n\006amount\030\001 \001(\001\022\024" +
-      "\n\014payment_date\030\002 \001(\003\022*\n\006status\030\003 \001(\0162\032.b" +
-      "udget.Bill.PaymentStatus\022\021\n\tin_active\030\004 " +
-      "\001(\010\032L\n\020TransactionEntry\022\013\n\003key\030\001 \001(\005\022\'\n\005" +
-      "value\030\002 \001(\0132\030.budget.Bill.Transaction:\0028" +
-      "\001\"o\n\rPaymentStatus\022\016\n\nPS_UNKNOWN\020\000\022\020\n\014PS" +
-      "_ESTIMATED\020\001\022\r\n\tPS_BILLED\020\002\022\020\n\014PS_SCHEDU" +
-      "LED\020\003\022\016\n\nPS_PENDING\020\004\022\013\n\007PS_PAID\020\005\":\n\010Te" +
-      "mplate\022\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id\030\002 \001(\005",
-      "\022\014\n\004name\030\003 \001(\t\"\374\001\n\014TemplateBill\022\n\n\002id\030\001 " +
-      "\001(\005\022\023\n\013template_id\030\002 \001(\005\022\022\n\naccount_id\030\003" +
-      " \001(\005\022\017\n\007due_day\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022\024\n\014a" +
-      "ccount_name\030\006 \001(\t\022\022\n\namount_due\030\007 \001(\001\022:\n" +
-      "\013transaction\030\010 \003(\0132%.budget.TemplateBill" +
-      ".TransactionEntry\0322\n\020TransactionEntry\022\013\n" +
-      "\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\001:\0028\001*J\n\010UserRol" +
-      "e\022\016\n\nUR_UNKNOWN\020\000\022\014\n\010UR_OWNER\020\014\022\017\n\013UR_CA" +
-      "N_EDIT\020\002\022\017\n\013UR_READONLY\020\003B*\n\032com.digital" +
-      "d4.budget.protoB\014BudgetProtosb\006proto3"
+      "\n\014budget.proto\022\006budget\"V\n\rPortfolioUser\022" +
+      "\024\n\014portfolio_id\030\001 \001(\005\022\017\n\007user_id\030\002 \001(\005\022\036" +
+      "\n\004role\030\003 \001(\0162\020.budget.UserRole\"\205\001\n\tPortf" +
+      "olio\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007user_i" +
+      "d\030\003 \001(\005\022\036\n\004role\030\004 \001(\0162\020.budget.UserRole\022" +
+      "-\n\016portfolio_user\030\005 \003(\0132\025.budget.Portfol" +
+      "ioUser\"m\n\007Account\022\n\n\002id\030\001 \001(\005\022\024\n\014portfol" +
+      "io_id\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\027\n\017payment_acc" +
+      "ount\030\004 \001(\010\022\031\n\021parent_account_id\030\005 \001(\005\"\254\001" +
+      "\n\007Balance\022\n\n\002id\030\001 \001(\005\022\022\n\naccount_id\030\002 \001(",
+      "\005\022\024\n\014account_name\030\003 \001(\t\022\024\n\014portfolio_id\030" +
+      "\004 \001(\005\022\014\n\004year\030\005 \001(\005\022\r\n\005month\030\006 \001(\005\022\020\n\010ba" +
+      "l_date\030\007 \001(\t\022\017\n\007balance\030\010 \001(\001\022\025\n\rbalance" +
+      "_y_t_d\030\t \001(\001\"\222\005\n\004Bill\022\n\n\002id\030\001 \001(\005\022\024\n\014por" +
+      "tfolio_id\030\002 \001(\005\022\022\n\naccount_id\030\003 \001(\005\022\024\n\014a" +
+      "ccount_name\030\004 \001(\t\022\023\n\013template_id\030\005 \001(\005\022\014" +
+      "\n\004year\030\006 \001(\005\022\r\n\005month\030\007 \001(\005\022\013\n\003day\030\010 \001(\005" +
+      "\022\022\n\namount_due\030\t \001(\001\022\014\n\004name\030\n \001(\t\022\024\n\014pa" +
+      "yment_date\030\013 \001(\003\022*\n\006status\030\014 \001(\0162\032.budge" +
+      "t.Bill.PaymentStatus\022\014\n\004rank\030\r \001(\005\022\021\n\tin",
+      "_active\030\016 \001(\010\022\023\n\013description\030\017 \001(\t\0222\n\013tr" +
+      "ansaction\030\020 \003(\0132\035.budget.Bill.Transactio" +
+      "nEntry\032r\n\013Transaction\022\016\n\006amount\030\001 \001(\001\022\024\n" +
+      "\014payment_date\030\002 \001(\003\022*\n\006status\030\003 \001(\0162\032.bu" +
+      "dget.Bill.PaymentStatus\022\021\n\tin_active\030\004 \001" +
+      "(\010\032L\n\020TransactionEntry\022\013\n\003key\030\001 \001(\005\022\'\n\005v" +
+      "alue\030\002 \001(\0132\030.budget.Bill.Transaction:\0028\001" +
+      "\"o\n\rPaymentStatus\022\016\n\nPS_UNKNOWN\020\000\022\020\n\014PS_" +
+      "ESTIMATED\020\001\022\r\n\tPS_BILLED\020\002\022\020\n\014PS_SCHEDUL" +
+      "ED\020\003\022\016\n\nPS_PENDING\020\004\022\013\n\007PS_PAID\020\005\":\n\010Tem",
+      "plate\022\n\n\002id\030\001 \001(\005\022\024\n\014portfolio_id\030\002 \001(\005\022" +
+      "\014\n\004name\030\003 \001(\t\"\222\002\n\014TemplateBill\022\n\n\002id\030\001 \001" +
+      "(\005\022\023\n\013template_id\030\002 \001(\005\022\022\n\naccount_id\030\003 " +
+      "\001(\005\022\024\n\014portfolio_id\030\004 \001(\005\022\017\n\007due_day\030\005 \001" +
+      "(\005\022\014\n\004name\030\006 \001(\t\022\024\n\014account_name\030\007 \001(\t\022\022" +
+      "\n\namount_due\030\010 \001(\001\022:\n\013transaction\030\t \003(\0132" +
+      "%.budget.TemplateBill.TransactionEntry\0322" +
+      "\n\020TransactionEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value" +
+      "\030\002 \001(\001:\0028\001*J\n\010UserRole\022\016\n\nUR_UNKNOWN\020\000\022\014" +
+      "\n\010UR_OWNER\020\014\022\017\n\013UR_CAN_EDIT\020\002\022\017\n\013UR_READ",
+      "ONLY\020\003B*\n\032com.digitald4.budget.protoB\014Bu" +
+      "dgetProtosb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8257,32 +8477,32 @@ public final class BudgetProtos {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_budget_Portfolio_descriptor =
+    internal_static_budget_PortfolioUser_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_budget_PortfolioUser_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_budget_PortfolioUser_descriptor,
+        new java.lang.String[] { "PortfolioId", "UserId", "Role", });
+    internal_static_budget_Portfolio_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_budget_Portfolio_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_budget_Portfolio_descriptor,
-        new java.lang.String[] { "Id", "Name", "PortfolioUser", });
-    internal_static_budget_Portfolio_PortfolioUser_descriptor =
-      internal_static_budget_Portfolio_descriptor.getNestedTypes().get(0);
-    internal_static_budget_Portfolio_PortfolioUser_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_budget_Portfolio_PortfolioUser_descriptor,
-        new java.lang.String[] { "PortfolioId", "UserId", "Role", });
+        new java.lang.String[] { "Id", "Name", "UserId", "Role", "PortfolioUser", });
     internal_static_budget_Account_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_budget_Account_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_budget_Account_descriptor,
         new java.lang.String[] { "Id", "PortfolioId", "Name", "PaymentAccount", "ParentAccountId", });
     internal_static_budget_Balance_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_budget_Balance_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_budget_Balance_descriptor,
         new java.lang.String[] { "Id", "AccountId", "AccountName", "PortfolioId", "Year", "Month", "BalDate", "Balance", "BalanceYTD", });
     internal_static_budget_Bill_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_budget_Bill_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_budget_Bill_descriptor,
@@ -8300,17 +8520,17 @@ public final class BudgetProtos {
         internal_static_budget_Bill_TransactionEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_budget_Template_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_budget_Template_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_budget_Template_descriptor,
         new java.lang.String[] { "Id", "PortfolioId", "Name", });
     internal_static_budget_TemplateBill_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_budget_TemplateBill_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_budget_TemplateBill_descriptor,
-        new java.lang.String[] { "Id", "TemplateId", "AccountId", "DueDay", "Name", "AccountName", "AmountDue", "Transaction", });
+        new java.lang.String[] { "Id", "TemplateId", "AccountId", "PortfolioId", "DueDay", "Name", "AccountName", "AmountDue", "Transaction", });
     internal_static_budget_TemplateBill_TransactionEntry_descriptor =
       internal_static_budget_TemplateBill_descriptor.getNestedTypes().get(0);
     internal_static_budget_TemplateBill_TransactionEntry_fieldAccessorTable = new

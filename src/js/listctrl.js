@@ -115,8 +115,8 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
       }
     }.bind(this), notify);
 
-    this.templateService.list(this.sharedData.getSelectedPortfolioId(), function(templates) {
-      this.templates = templates;
+    this.templateService.list(this.sharedData.getSelectedPortfolioId(), function(response) {
+      this.templates = response.result;
     }.bind(this), notify);
   } else if (!this.newBill.dateEdited) {
     this.newBill.dueDate = new Date(baseDate.getFullYear(), baseDate.getMonth(), 15).getTime();
@@ -204,9 +204,10 @@ com.digitald4.budget.ListCtrl.prototype.applyTemplate = function() {
 	this.applyTemplateError = undefined;
 	this.billService.applyTemplate(this.selectedTemplate, this.sharedData.getYear(), this.sharedData.getMonth(),
 	    function(response) {
+	  var bills = resposne.result;
     var sortedBills = [];
     for (var b = 0; b < bills.length; b++) {
-      com.digitald4.budget.ListCtrl.insertBill(sortedBills, response.result[b]);
+      com.digitald4.budget.ListCtrl.insertBill(sortedBills, bills[b]);
     }
     this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, sortedBills, this.balances);
   }.bind(this), notify);

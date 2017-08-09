@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
-import com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser;
+import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
 import com.digitald4.budget.proto.BudgetProtos.UserRole;
 import com.digitald4.common.jdbc.DBConnector;
 import com.digitald4.common.storage.DAOProtoSQLImpl;

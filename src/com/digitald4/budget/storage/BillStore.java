@@ -86,7 +86,6 @@ public class BillStore extends GenericStore<Bill> {
 				.forEach(tempBill -> {
 					DateTime date = refDate.plusDays(tempBill.getDueDay() - 1);
 					create(Bill.newBuilder()
-							.setPortfolioId(template.getPortfolioId())
 							.setAccountId(tempBill.getAccountId())
 							.setTemplateId(template.getId())
 							.setYear(date.getYear())

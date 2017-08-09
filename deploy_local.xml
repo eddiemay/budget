@@ -136,7 +136,7 @@
                 <include name="*.js"/>
             </fileset>
         </concat>
-		<concat destfile="webapps/${app.name}/js/budget.js">
+		<concat destfile="webapps/${app.name}/js/${app.name}.js">
 			<filelist dir="src/js" files="_bootstrap.js"/>
             <fileset dir="src-gen/js">
                 <include name="*.js"/>

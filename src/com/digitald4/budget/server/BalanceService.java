@@ -4,16 +4,24 @@ import com.digitald4.budget.proto.BudgetProtos.Balance;
 import com.digitald4.budget.proto.BudgetUIProtos.BalanceGetRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.BalanceListRequest;
 import com.digitald4.budget.storage.BalanceStore;
-import com.digitald4.common.server.SingleProtoService;
+import com.digitald4.budget.storage.SecurityManager;
+import com.digitald4.common.util.Provider;
 import java.util.stream.Collectors;
 import org.json.JSONObject;
 
-public class BalanceService extends SingleProtoService<Balance> {
+public class BalanceService extends BudgetService<Balance> {
 	private final BalanceStore store;
+	private final Provider<SecurityManager> securityManagerProvider;
 
-	BalanceService(BalanceStore store) {
-		super(store);
+	BalanceService(BalanceStore store, Provider<SecurityManager> securityManagerProvider) {
+		super(store, securityManagerProvider);
 		this.store = store;
+		this.securityManagerProvider = securityManagerProvider;
+	}
+
+	@Override
+	public JSONObject create(JSONObject request) {
+		throw new UnsupportedOperationException("Unimplemented");
 	}
 
 	@Override
@@ -22,7 +30,9 @@ public class BalanceService extends SingleProtoService<Balance> {
 	}
 
 	private Balance get(BalanceGetRequest request) {
-		return store.get(request.getAccountId(), request.getYear(), request.getMonth());
+		Balance balance = store.get(request.getAccountId(), request.getYear(), request.getMonth());
+		securityManagerProvider.get().checkReadAccess(balance.getPortfolioId());
+		return balance;
 	}
 
 	@Override
@@ -31,6 +41,7 @@ public class BalanceService extends SingleProtoService<Balance> {
 	}
 
 	private JSONObject list(BalanceListRequest request) {
+		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
 		if (request.getYear() == 0) {
 			throw new IllegalArgumentException("Year is required");
 		}
@@ -49,5 +60,15 @@ public class BalanceService extends SingleProtoService<Balance> {
 					});
 			return months;
 		}
+	}
+
+	@Override
+	public JSONObject update(JSONObject request) {
+		throw new UnsupportedOperationException("Unimplemented");
+	}
+
+	@Override
+	public JSONObject delete(JSONObject request) {
+		throw new UnsupportedOperationException("Unimplemented");
 	}
 }

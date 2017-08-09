@@ -9781,36 +9781,49 @@ public final class DD4UIProtos {
   static {
     java.lang.String[] descriptorData = {
       "\n\017common_ui.proto\022\006common\032\031google/protob" +
-      "uf/any.proto\032 google/protobuf/field_mask" +
-      ".proto\"P\n\nGPSAddress\022\017\n\007address\030\001 \001(\t\022\020\n" +
-      "\010latitude\030\002 \001(\001\022\021\n\tlongitude\030\003 \001(\001\022\014\n\004un" +
-      "it\030\004 \001(\t\"@\n\010DataFile\022\n\n\002id\030\001 \001(\005\022\014\n\004name" +
-      "\030\002 \001(\t\022\014\n\004type\030\003 \001(\t\022\014\n\004size\030\004 \001(\005\"4\n\rCr" +
-      "eateRequest\022#\n\005proto\030\001 \001(\0132\024.google.prot" +
-      "obuf.Any\"\030\n\nGetRequest\022\n\n\002id\030\001 \001(\005\"\361\001\n\013L" +
-      "istRequest\022\021\n\tpage_size\030\001 \001(\005\022\022\n\npage_to" +
-      "ken\030\002 \001(\005\022*\n\006filter\030\003 \003(\0132\032.common.ListR",
-      "equest.Filter\022-\n\010order_by\030\004 \003(\0132\033.common" +
-      ".ListRequest.OrderBy\0327\n\006Filter\022\016\n\006column" +
-      "\030\001 \001(\t\022\016\n\006operan\030\002 \001(\t\022\r\n\005value\030\003 \001(\t\032\'\n" +
-      "\007OrderBy\022\016\n\006column\030\001 \001(\t\022\014\n\004desc\030\002 \001(\010\"H" +
-      "\n\014ListResponse\022$\n\006result\030\001 \003(\0132\024.google." +
-      "protobuf.Any\022\022\n\ntotal_size\030\002 \001(\005\"q\n\rUpda" +
-      "teRequest\022\n\n\002id\030\001 \001(\005\022#\n\005proto\030\002 \001(\0132\024.g" +
-      "oogle.protobuf.Any\022/\n\013update_mask\030\003 \001(\0132" +
-      "\032.google.protobuf.FieldMask\"\033\n\rDeleteReq" +
-      "uest\022\n\n\002id\030\001 \001(\005\"2\n\014LoginRequest\022\020\n\010user",
-      "name\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\221\002\n\004User\022\n\n" +
-      "\002id\030\001 \001(\005\022#\n\004type\030\002 \001(\0162\025.common.User.Us" +
-      "erType\022\021\n\tuser_name\030\003 \001(\t\022\r\n\005email\030\004 \001(\t" +
-      "\022\022\n\nfirst_name\030\005 \001(\t\022\021\n\tlast_name\030\006 \001(\t\022" +
-      "\021\n\tfull_name\030\007 \001(\t\022\020\n\010disabled\030\010 \001(\010\022\021\n\t" +
-      "read_only\030\t \001(\010\022\r\n\005notes\030\n \001(\t\022\022\n\nlast_l" +
-      "ogin\030\013 \001(\003\"4\n\010UserType\022\017\n\013UNSPECIFIED\020\000\022" +
-      "\t\n\005ADMIN\020\001\022\014\n\010STANDARD\020\002*S\n\tDateRange\022\017\n" +
-      "\013UNSPECIFIED\020\000\022\007\n\003DAY\020\001\022\010\n\004WEEK\020\002\022\t\n\005MON" +
-      "TH\020\003\022\r\n\tCAL_MONTH\020\004\022\010\n\004YEAR\020\005B)\n\032com.dig",
-      "itald4.common.protoB\013DD4UIProtosb\006proto3"
+      "uf/any.proto\032\033google/protobuf/empty.prot" +
+      "o\032 google/protobuf/field_mask.proto\"P\n\nG" +
+      "PSAddress\022\017\n\007address\030\001 \001(\t\022\020\n\010latitude\030\002" +
+      " \001(\001\022\021\n\tlongitude\030\003 \001(\001\022\014\n\004unit\030\004 \001(\t\"@\n" +
+      "\010DataFile\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\014\n\004t" +
+      "ype\030\003 \001(\t\022\014\n\004size\030\004 \001(\005\"4\n\rCreateRequest" +
+      "\022#\n\005proto\030\001 \001(\0132\024.google.protobuf.Any\"\030\n" +
+      "\nGetRequest\022\n\n\002id\030\001 \001(\005\"\361\001\n\013ListRequest\022" +
+      "\021\n\tpage_size\030\001 \001(\005\022\022\n\npage_token\030\002 \001(\005\022*",
+      "\n\006filter\030\003 \003(\0132\032.common.ListRequest.Filt" +
+      "er\022-\n\010order_by\030\004 \003(\0132\033.common.ListReques" +
+      "t.OrderBy\0327\n\006Filter\022\016\n\006column\030\001 \001(\t\022\016\n\006o" +
+      "peran\030\002 \001(\t\022\r\n\005value\030\003 \001(\t\032\'\n\007OrderBy\022\016\n" +
+      "\006column\030\001 \001(\t\022\014\n\004desc\030\002 \001(\010\"H\n\014ListRespo" +
+      "nse\022$\n\006result\030\001 \003(\0132\024.google.protobuf.An" +
+      "y\022\022\n\ntotal_size\030\002 \001(\005\"q\n\rUpdateRequest\022\n" +
+      "\n\002id\030\001 \001(\005\022#\n\005proto\030\002 \001(\0132\024.google.proto" +
+      "buf.Any\022/\n\013update_mask\030\003 \001(\0132\032.google.pr" +
+      "otobuf.FieldMask\"\033\n\rDeleteRequest\022\n\n\002id\030",
+      "\001 \001(\005\"2\n\014LoginRequest\022\020\n\010username\030\001 \001(\t\022" +
+      "\020\n\010password\030\002 \001(\t\"\221\002\n\004User\022\n\n\002id\030\001 \001(\005\022#" +
+      "\n\004type\030\002 \001(\0162\025.common.User.UserType\022\021\n\tu" +
+      "ser_name\030\003 \001(\t\022\r\n\005email\030\004 \001(\t\022\022\n\nfirst_n" +
+      "ame\030\005 \001(\t\022\021\n\tlast_name\030\006 \001(\t\022\021\n\tfull_nam" +
+      "e\030\007 \001(\t\022\020\n\010disabled\030\010 \001(\010\022\021\n\tread_only\030\t" +
+      " \001(\010\022\r\n\005notes\030\n \001(\t\022\022\n\nlast_login\030\013 \001(\003\"" +
+      "4\n\010UserType\022\017\n\013UNSPECIFIED\020\000\022\t\n\005ADMIN\020\001\022" +
+      "\014\n\010STANDARD\020\002*S\n\tDateRange\022\017\n\013UNSPECIFIE" +
+      "D\020\000\022\007\n\003DAY\020\001\022\010\n\004WEEK\020\002\022\t\n\005MONTH\020\003\022\r\n\tCAL",
+      "_MONTH\020\004\022\010\n\004YEAR\020\0052\245\002\n\016GenericService\0227\n" +
+      "\006Create\022\025.common.CreateRequest\032\024.google." +
+      "protobuf.Any\"\000\0221\n\003Get\022\022.common.GetReques" +
+      "t\032\024.google.protobuf.Any\"\000\0223\n\004List\022\023.comm" +
+      "on.ListRequest\032\024.common.ListResponse\"\000\0227" +
+      "\n\006Update\022\025.common.UpdateRequest\032\024.google" +
+      ".protobuf.Any\"\000\0229\n\006Delete\022\025.common.Delet" +
+      "eRequest\032\026.google.protobuf.Empty\"\0002\267\001\n\013U" +
+      "serService\0227\n\005Login\022\024.common.LoginReques" +
+      "t\032\026.google.protobuf.Empty\"\000\0223\n\tGetActive",
+      "\022\026.google.protobuf.Empty\032\014.common.User\"\000" +
+      "\022:\n\006Logout\022\026.google.protobuf.Empty\032\026.goo" +
+      "gle.protobuf.Empty\"\000B)\n\032com.digitald4.co" +
+      "mmon.protoB\013DD4UIProtosb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9824,6 +9837,7 @@ public final class DD4UIProtos {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.AnyProto.getDescriptor(),
+          com.google.protobuf.EmptyProto.getDescriptor(),
           com.google.protobuf.FieldMaskProto.getDescriptor(),
         }, assigner);
     internal_static_common_GPSAddress_descriptor =
@@ -9899,6 +9913,7 @@ public final class DD4UIProtos {
         internal_static_common_User_descriptor,
         new java.lang.String[] { "Id", "Type", "UserName", "Email", "FirstName", "LastName", "FullName", "Disabled", "ReadOnly", "Notes", "LastLogin", });
     com.google.protobuf.AnyProto.getDescriptor();
+    com.google.protobuf.EmptyProto.getDescriptor();
     com.google.protobuf.FieldMaskProto.getDescriptor();
   }
 

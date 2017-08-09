@@ -1,29 +1,35 @@
 package com.digitald4.budget.server;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
+import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4UIProtos.GetRequest;
 import com.digitald4.budget.proto.BudgetProtos.Account;
-import com.digitald4.budget.proto.BudgetUIProtos.AccountListRequest;
+import com.digitald4.budget.proto.BudgetUIProtos.BudgetListRequest;
 import com.digitald4.budget.test.TestCase;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.storage.DAOProtoSQLImpl;
 import com.digitald4.common.storage.GenericStore;
+import com.digitald4.common.util.Provider;
 import com.google.protobuf.Any;
 import com.google.protobuf.util.JsonFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.json.JSONObject;
 import org.junit.Test;
+import org.mockito.Mock;
 
 public class AccountServiceTest extends TestCase {
+	@Mock private SecurityManager securityManager = mock(SecurityManager.class);
+	private Provider<SecurityManager> securityManagerProvider = () -> securityManager;
 	private AccountService service =
-			new AccountService(new GenericStore<>(new DAOProtoSQLImpl<>(Account.class, dbConnector)));
+			new AccountService(new GenericStore<>(new DAOProtoSQLImpl<>(Account.class, dbConnector)), securityManagerProvider);
 
 	@Test
 	public void testListAccounts() throws Exception {
 		List<Account> accounts = service
-				.list(AccountListRequest.newBuilder()
+				.list(BudgetListRequest.newBuilder()
 						.setPortfolioId(3)
 						.build())
 				.getResultList()

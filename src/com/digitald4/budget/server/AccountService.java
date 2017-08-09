@@ -1,28 +1,26 @@
 package com.digitald4.budget.server;
 
 import com.digitald4.budget.proto.BudgetProtos.Account;
-import com.digitald4.budget.proto.BudgetUIProtos.AccountListRequest;
-import com.digitald4.common.exception.DD4StorageException;
+import com.digitald4.budget.proto.BudgetUIProtos.BudgetListRequest;
+import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.OrderBy;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
-import com.digitald4.common.server.SingleProtoService;
 import com.digitald4.common.storage.Store;
-import org.json.JSONObject;
+import com.digitald4.common.util.Provider;
 
-public class AccountService extends SingleProtoService<Account> {
+public class AccountService extends BudgetService<Account> {
+
+	private final Provider<SecurityManager> securityManagerProvider;
 	
-	AccountService(Store<Account> store) {
-		super(store);
+	AccountService(Store<Account> store, Provider<SecurityManager> securityManagerProvider) {
+		super(store, securityManagerProvider);
+		this.securityManagerProvider = securityManagerProvider;
 	}
 
-	@Override
-	public JSONObject list(JSONObject request) throws DD4StorageException {
-		return convertToJSON(list(transformJSONRequest(AccountListRequest.getDefaultInstance(), request)));
-	}
-
-	public ListResponse list(AccountListRequest request) {
+	public ListResponse list(BudgetListRequest request) {
+		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
 		return list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder()
 						.setColumn("portfolio_id")

@@ -1,23 +1,17 @@
 package com.digitald4.budget.storage;
 
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
-import com.digitald4.budget.proto.BudgetProtos.Portfolio.PortfolioUser;
-import com.digitald4.budget.proto.BudgetProtos.UserRole;
-import com.digitald4.common.exception.DD4StorageException;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
+import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
-
-import com.digitald4.common.storage.Store;
-import com.digitald4.common.util.Pair;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PortfolioStore extends GenericStore<Portfolio> {
 
-	private final Store<PortfolioUser> portfolioUserStore;
-	public PortfolioStore(DAO<Portfolio> dao, Store<PortfolioUser> portfolioUserStore) {
+	private final PortfolioUserStore portfolioUserStore;
+
+	public PortfolioStore(DAO<Portfolio> dao, PortfolioUserStore portfolioUserStore) {
 		super(dao);
 		this.portfolioUserStore = portfolioUserStore;
 	}
