@@ -1,6 +1,0 @@
-
-	<context-param>
-		<param-name>dburl</param-name>
-		<param-value>jdbc:mysql://198.38.82.101/iisosnet_main?autoReconnect=true</param-value>
-	</context-param>
-</web-app>

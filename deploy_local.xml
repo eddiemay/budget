@@ -147,7 +147,7 @@
             </fileset>
 		</concat>
 		<concat destfile="webapps/${app.name}/WEB-INF/web.xml">
-			<filelist dir="src/conf" files="web.xml,dev_web.xml"/>
+			<filelist dir="src/sql" files="web.xml,dev_web.xml"/>
 		</concat>
 		<javac destdir="webapps/${app.name}/WEB-INF/classes" 
 				includes="com/digitald4/${app.name}/server/ApiServiceServlet.java"
