@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
-import com.digitald4.budget.storage.PortfolioSQLDao;
+import com.digitald4.budget.proto.BudgetProtos.UserRole;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.budget.test.TestCase;
@@ -12,6 +12,7 @@ import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
+import com.digitald4.common.storage.DAOProtoSQLImpl;
 import com.digitald4.common.util.Provider;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -24,13 +25,13 @@ public class PortfolioServiceTest extends TestCase {
 
 	@Test
 	public void testGetPortfolios() throws DD4StorageException {
-		PortfolioStore store = new PortfolioStore(new PortfolioSQLDao(dbConnector), null);
+		PortfolioStore store = new PortfolioStore(new DAOProtoSQLImpl<>(Portfolio.class, dbConnector, "V_PORTFOLIO"), null);
 		PortfolioService service = new PortfolioService(store, securityManagerProvider, userProvider);
 
 		ListResponse response = service.list(ListRequest.newBuilder().build());
 		assertTrue(response.getResultList().size() > 0);
 		Portfolio portfolio = response.getResultList().get(0).unpack(Portfolio.class);
-		assertTrue(portfolio.getPortfolioUserCount() > 0);
-		assertTrue(portfolio.getPortfolioUser(0).getUserId() == 1);
+		assertTrue(portfolio.getUserId() == 1);
+		assertTrue(portfolio.getRole() == UserRole.UR_OWNER);
 	}
 }

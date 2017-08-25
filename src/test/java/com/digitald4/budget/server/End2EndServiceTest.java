@@ -15,7 +15,6 @@ import com.digitald4.budget.proto.BudgetUIProtos.ApplyTemplateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.BudgetListRequest;
 import com.digitald4.budget.storage.BalanceStore;
 import com.digitald4.budget.storage.BillStore;
-import com.digitald4.budget.storage.PortfolioSQLDao;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.PortfolioUserStore;
 import com.digitald4.budget.storage.SecurityManager;
@@ -48,7 +47,8 @@ public class End2EndServiceTest extends TestCase {
 		Provider<SecurityManager> securityManagerProvider = () -> securityManager;
 		PortfolioUserStore portfolioUserStore = new PortfolioUserStore(
 				new DAOProtoSQLImpl<>(PortfolioUser.class, dbConnector), securityManagerProvider);
-		PortfolioStore portfolioStore = new PortfolioStore(new PortfolioSQLDao(dbConnector), portfolioUserStore);
+		PortfolioStore portfolioStore =
+				new PortfolioStore(new DAOProtoSQLImpl<>(Portfolio.class, dbConnector, "V_Portfolio"), portfolioUserStore);
 		PortfolioService portfolioService = new PortfolioService(portfolioStore, securityManagerProvider, userProvider);
 		
 		Store<Account> accountStore = new GenericStore<>(new DAOProtoSQLImpl<>(Account.class, dbConnector));
