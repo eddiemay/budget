@@ -93,11 +93,7 @@
     <outputDirectory>target/${project.artifactId}/WEB-INF/classes</outputDirectory>
     <resources>
       <resource>
-        <directory>src/main/js</directory>
-        <filtering>true</filtering>
-      </resource>
-      <resource>
-        <directory>${basedir}/../common/target/generated-sources/js</directory>
+        <directory>../common/target/generated-sources/js</directory>
         <filtering>true</filtering>
       </resource>
     </resources>
