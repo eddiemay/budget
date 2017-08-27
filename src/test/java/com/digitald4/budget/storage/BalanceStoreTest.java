@@ -3,12 +3,11 @@ package com.digitald4.budget.storage;
 import static org.junit.Assert.*;
 
 import com.digitald4.budget.proto.BudgetProtos.Balance;
-import com.digitald4.budget.test.TestCase;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
-public class BalanceStoreTest extends TestCase {
+public class BalanceStoreTest {
 	
 	@Test
 	public void testBalanceUpdater() {
