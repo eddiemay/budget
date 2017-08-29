@@ -9,14 +9,10 @@ import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
 import com.digitald4.budget.storage.*;
 import com.digitald4.budget.storage.SecurityManager;
-import com.digitald4.common.proto.DD4Protos.User.UserType;
 import com.digitald4.common.storage.DAOConnectorImpl;
-import com.digitald4.common.storage.DataConnector;
 import com.digitald4.common.storage.DataConnectorSQLImpl;
 import com.digitald4.common.storage.GenericStore;
-import com.digitald4.common.util.Provider;
 import com.digitald4.common.util.ProviderThreadLocalImpl;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,17 +44,16 @@ public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceSer
 		addService("templateBill", new TemplateBillService(templateBillStore, securityManagerProvider, templateStore));
 
 		BalanceStore balanceStore = new BalanceStore(new DAOConnectorImpl<>(Balance.class, dataConnectorProvider));
-		addService("balance", new BalanceService(balanceStore, securityManagerProvider));
-		
+
 		BillStore billStore = new BillStore(
 				new DAOConnectorImpl<>(Bill.class, dataConnectorProvider), balanceStore, templateBillStore);
 		addService("bill", new BillService(billStore, securityManagerProvider, templateStore, accountStore));
+		addService("balance", new BalanceService(balanceStore, securityManagerProvider, portfolioStore, billStore));
 	}
 
 	@Override
 	public void init() {
 		super.init();
-		ServletContext sc = getServletContext();
 		if (serverType == ServerType.TOMCAT) {
 			((DataConnectorSQLImpl) dataConnectorProvider.get())
 					.setView(Balance.class, "V_Balance")
@@ -68,8 +63,7 @@ public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceSer
 		}
 	}
 
-
-	public boolean checkLogin(HttpServletRequest request, HttpServletResponse response, UserType level) throws Exception {
+	public boolean checkLogin(HttpServletRequest request, HttpServletResponse response, int level) throws Exception {
 		if (super.checkLogin(request, response, level)) {
 			HttpSession session = request.getSession(true);
 			SecurityManager securityManager = (SecurityManager) session.getAttribute("securityManager");

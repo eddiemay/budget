@@ -4,19 +4,30 @@ import com.digitald4.budget.proto.BudgetProtos.Balance;
 import com.digitald4.budget.proto.BudgetUIProtos.BalanceGetRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.BalanceListRequest;
 import com.digitald4.budget.storage.BalanceStore;
+import com.digitald4.budget.storage.BillStore;
+import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.SecurityManager;
+import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.util.Provider;
+import com.google.protobuf.Empty;
 import java.util.stream.Collectors;
 import org.json.JSONObject;
 
 public class BalanceService extends BudgetService<Balance> {
-	private final BalanceStore store;
+	private final BalanceStore balanceStore;
 	private final Provider<SecurityManager> securityManagerProvider;
+	private final PortfolioStore portfolioStore;
+	private final BillStore billStore;
 
-	BalanceService(BalanceStore store, Provider<SecurityManager> securityManagerProvider) {
-		super(store, securityManagerProvider);
-		this.store = store;
+	public BalanceService(BalanceStore balanceStore,
+								 Provider<SecurityManager> securityManagerProvider,
+								 PortfolioStore portfolioStore,
+								 BillStore billStore) {
+		super(balanceStore, securityManagerProvider);
+		this.balanceStore = balanceStore;
 		this.securityManagerProvider = securityManagerProvider;
+		this.portfolioStore = portfolioStore;
+		this.billStore = billStore;
 	}
 
 	@Override
@@ -30,7 +41,7 @@ public class BalanceService extends BudgetService<Balance> {
 	}
 
 	private Balance get(BalanceGetRequest request) {
-		Balance balance = store.get(request.getAccountId(), request.getYear(), request.getMonth());
+		Balance balance = balanceStore.get(request.getAccountId(), request.getYear(), request.getMonth());
 		securityManagerProvider.get().checkReadAccess(balance.getPortfolioId());
 		return balance;
 	}
@@ -47,10 +58,10 @@ public class BalanceService extends BudgetService<Balance> {
 		}
 		if (request.getMonth() != 0) {
 			return convertToJSON(
-					toListResponse(store.list(request.getPortfolioId(), request.getYear(), request.getMonth())));
+					toListResponse(balanceStore.list(request.getPortfolioId(), request.getYear(), request.getMonth())));
 		} else {
 			JSONObject months = new JSONObject();
-			store.list(request.getPortfolioId(), request.getYear()).getResultList()
+			balanceStore.list(request.getPortfolioId(), request.getYear()).getResultList()
 					.stream()
 					.collect(Collectors.groupingBy(Balance::getMonth))
 					.forEach((month, balances) -> {
@@ -70,5 +81,23 @@ public class BalanceService extends BudgetService<Balance> {
 	@Override
 	public JSONObject delete(JSONObject request) {
 		throw new UnsupportedOperationException("Unimplemented");
+	}
+
+	private JSONObject recalculate(JSONObject request) {
+		return convertToJSON(recalculate());
+	}
+
+	public Empty recalculate() {
+		portfolioStore.list(ListRequest.getDefaultInstance()).getResultList()
+				.forEach(portfolio -> balanceStore.recalculateBalance(portfolio.getId(), billStore));
+		return Empty.getDefaultInstance();
+	}
+
+	@Override
+	public JSONObject performAction(String action, JSONObject jsonRequest) {
+		if ("recalculate".equals(action)) {
+			return recalculate(jsonRequest);
+		}
+		return super.performAction(action, jsonRequest);
 	}
 }

@@ -3,6 +3,7 @@ package com.digitald4.budget.job;
 import com.digitald4.budget.proto.BudgetProtos.Balance;
 import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
+import com.digitald4.budget.server.BalanceService;
 import com.digitald4.budget.storage.BalanceStore;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
@@ -18,12 +19,10 @@ public class BalanceRecalculator {
 				"org.gjt.mm.mysql.Driver",
 				"jdbc:mysql://localhost/budget?autoReconnect=true",
 				"dd4_user", "getSchooled85");
-		final BalanceStore balanceStore = new BalanceStore(
-				new DAOProtoSQLImpl<>(Balance.class, dbConnector, "V_Balance"));
-		final BillStore billStore = new BillStore(
-				new DAOProtoSQLImpl<>(Bill.class, dbConnector, "V_BILL"), balanceStore, null);
-		PortfolioStore portfolioStore = new PortfolioStore(new DAOProtoSQLImpl<>(Portfolio.class, dbConnector), null);
-		portfolioStore.list(ListRequest.getDefaultInstance()).getResultList()
-				.forEach(portfolio -> balanceStore.recalculateBalance(portfolio.getId(), billStore));
+		BalanceStore balanceStore = new BalanceStore(new DAOProtoSQLImpl<>(Balance.class, dbConnector, "V_Balance"));
+		new BalanceService(balanceStore, null,
+				new PortfolioStore(new DAOProtoSQLImpl<>(Portfolio.class, dbConnector), null),
+				new BillStore(new DAOProtoSQLImpl<>(Bill.class, dbConnector, "V_BILL"), balanceStore, null))
+				.recalculate();
 	}
 }

@@ -39,12 +39,12 @@
       <div class="block-content">
         <h1>Login</h1>
         <div class="block-header">Please login</div>
-
+        <a href="#signup" data-ng-click="loginCtrl.showSignUpDialog()">Sign Up</a>
         <p class="message error no-margin" data-ng-show="loginCtrl.errorMessage">{{loginCtrl.errorMessage}}</p>
         <div class="form with-margin">
           <p class="inline-small-label">
-            <label for="username"><span class="big">Username or Email</span></label>
-            <input type="text" id="username" class="full-width" data-ng-model="loginCtrl.username"/>
+            <label for="email"><span class="big">Email Address</span></label>
+            <input type="text" id="email" class="full-width" data-ng-model="loginCtrl.email"/>
           </p>
           <p class="inline-small-label">
             <label for="password"><span class="big">Password</span></label>
@@ -63,6 +63,60 @@
             </p>
           </fieldset>
         </div>
+      </div>
+    </div>
+
+    <div data-ng-show="loginCtrl.signUpDialogShown" id="modal" style="display: block;">
+      <div class="modal-window block-border" style="display: block; left: 388px; top: 250px;">
+        <ul class="action-tabs right">
+          <li><a data-ng-click="loginCtrl.closeSignUpDialog()" title="Close window">
+            <img src="images/icons/fugue/cross-circle.png" width="16" height="16">
+          </a></li>
+        </ul>
+        <div class="block-content form">
+          <h1>Sign Up</h1>
+          <div class="modal-content modal-scroll" style="min-width:200px; min-height:40px; height:150px; width:450px; max-width:500px;">
+            <fieldset class="white-bg">
+              <div class="error-block" data-ng-show="loginCtrl.signUpError">
+                <p class="message error no-margin">{{loginCtrl.signUpError}}</p>
+              </div>
+              <div>
+                <label>Email Address</label>
+                <input type="text" data-ng-model="loginCtrl.email" class="full-width">
+              </div>
+              <div class="columns">
+                <div class="colx2-left">
+                  <label>First Name</label>
+                  <input type="text" data-ng-model="loginCtrl.firstName"/>
+                </div>
+                <div class="colx2-right">
+                  <label>Last Name</label>
+                  <input type="text" data-ng-model="loginCtrl.lastName"/>
+                </div>
+                <div class="colx2-left">
+                  <label>Password</label>
+                  <input type="password" data-ng-model="loginCtrl.password"/>
+                </div>
+                <div class="colx2-right">
+                  <label>Retype Password</label>
+                  <input type="password" data-ng-model="loginCtrl.retypePassword"/>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="block-footer align-right">
+            <button type="button" data-ng-click="loginCtrl.processSignUp()">Ok</button>
+            <button type="button" data-ng-click="loginCtrl.closeSignUpDialog()">Cancel</button>
+          </div>
+        </div>
+        <div class="modal-resize-tl"></div>
+        <div class="modal-resize-t"></div>
+        <div class="modal-resize-tr"></div>
+        <div class="modal-resize-r"></div>
+        <div class="modal-resize-br"></div>
+        <div class="modal-resize-b"></div>
+        <div class="modal-resize-bl"></div>
+        <div class="modal-resize-l"></div>
       </div>
     </div>
   </section>
