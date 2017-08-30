@@ -10,7 +10,6 @@ import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
 import com.digitald4.budget.storage.*;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.storage.DAOConnectorImpl;
-import com.digitald4.common.storage.DataConnectorSQLImpl;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.util.ProviderThreadLocalImpl;
 import javax.servlet.ServletException;
@@ -49,18 +48,6 @@ public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceSer
 				new DAOConnectorImpl<>(Bill.class, dataConnectorProvider), balanceStore, templateBillStore);
 		addService("bill", new BillService(billStore, securityManagerProvider, templateStore, accountStore));
 		addService("balance", new BalanceService(balanceStore, securityManagerProvider, portfolioStore, billStore));
-	}
-
-	@Override
-	public void init() {
-		super.init();
-		if (serverType == ServerType.TOMCAT) {
-			((DataConnectorSQLImpl) dataConnectorProvider.get())
-					.setView(Balance.class, "V_Balance")
-					.setView(Bill.class, "V_Bill")
-					.setView(Portfolio.class, "V_Portfolio")
-					.setView(TemplateBill.class, "V_Template_Bill");
-		}
 	}
 
 	public boolean checkLogin(HttpServletRequest request, HttpServletResponse response, int level) throws Exception {

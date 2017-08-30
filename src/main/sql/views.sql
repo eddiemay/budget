@@ -1,20 +1,44 @@
-CREATE OR REPLACE VIEW V_PORTFOLIO AS
-		SELECT Portfolio.*, PortfolioUser.user_id, PortfolioUser.role
-		FROM Portfolio
-		LEFT JOIN PortfolioUser ON Portfolio.ID = PortfolioUser.PORTFOLIO_ID;
+CREATE OR REPLACE VIEW AccountView AS
+    SELECT Account.*
+    FROM Account;
 
-CREATE OR REPLACE VIEW V_BILL AS
-    SELECT Bill.*, Account.portfolio_id, Account.name AS account_name
-    FROM Bill, Account
-    WHERE Bill.ACCOUNT_ID = ACCOUNT.ID;
-
-CREATE OR REPLACE VIEW V_TemplateBill AS
-    SELECT TemplateBill.*, ACCOUNT.NAME AS ACCOUNT_NAME, Template.portfolio_id portfolio_id
-    FROM TemplateBill, ACCOUNT, Template
-    WHERE TemplateBill.ACCOUNT_ID = ACCOUNT.ID AND TemplateBill.template_id = Template.id;
-
-CREATE OR REPLACE VIEW V_Balance AS
+CREATE OR REPLACE VIEW BalanceView AS
     SELECT Balance.*, CONCAT(Balance.year, '-', LPAD(Balance.month, 2, '0')) AS bal_date,
         Account.portfolio_id, Account.name AS account_name
     FROM Balance, Account
     WHERE Balance.account_id = Account.id;
+
+CREATE OR REPLACE VIEW BillView AS
+    SELECT Bill.*, Account.portfolio_id, Account.name AS account_name
+    FROM Bill, Account
+    WHERE Bill.account_id = Account.id;
+
+CREATE OR REPLACE VIEW GeneralDataView AS
+    SELECT GeneralData.*
+    FROM GeneralData;
+
+CREATE OR REPLACE VIEW PortfolioView AS
+		SELECT Portfolio.*, PortfolioUser.user_id, PortfolioUser.role
+		FROM Portfolio
+		LEFT JOIN PortfolioUser ON Portfolio.ID = PortfolioUser.portfolio_id;
+
+CREATE OR REPLACE VIEW PortfolioUserView AS
+    SELECT PortfolioUser.*
+    FROM PortfolioUser;
+
+CREATE OR REPLACE VIEW TemplateView AS
+    SELECT Template.*
+    FROM Template;
+
+CREATE OR REPLACE VIEW TemplateBillView AS
+    SELECT TemplateBill.*, Account.name AS account_name, Template.portfolio_id portfolio_id
+    FROM TemplateBill, Account, Template
+    WHERE TemplateBill.account_id = Account.id AND TemplateBill.template_id = Template.id;
+
+CREATE OR REPLACE VIEW TransHistView AS
+    SELECT TransHist.*
+    FROM TransHist;
+
+CREATE OR REPLACE VIEW UserView AS
+    SELECT User.*
+    FROM User;

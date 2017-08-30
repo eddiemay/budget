@@ -19,10 +19,10 @@ public class BalanceRecalculator {
 				"org.gjt.mm.mysql.Driver",
 				"jdbc:mysql://localhost/budget?autoReconnect=true",
 				"dd4_user", "getSchooled85");
-		BalanceStore balanceStore = new BalanceStore(new DAOProtoSQLImpl<>(Balance.class, dbConnector, "V_Balance"));
+		BalanceStore balanceStore = new BalanceStore(new DAOProtoSQLImpl<>(Balance.class, dbConnector));
 		new BalanceService(balanceStore, null,
 				new PortfolioStore(new DAOProtoSQLImpl<>(Portfolio.class, dbConnector), null),
-				new BillStore(new DAOProtoSQLImpl<>(Bill.class, dbConnector, "V_BILL"), balanceStore, null))
+				new BillStore(new DAOProtoSQLImpl<>(Bill.class, dbConnector), balanceStore, null))
 				.recalculate();
 	}
 }
