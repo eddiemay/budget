@@ -50,98 +50,101 @@
 	<script src="js/ledger.js"></script>
 </head>
 
-<body data-ng-app="budget" data-ng-controller="BudgetCtrl as budgetCtrl">
+<body data-ng-app="budget" data-ng-controller="DD4AppCtrl as appCtrl">
+  <dd4-login data-ng-if="!appCtrl.globalData.idToken" data-label="Ledger" data-allow-signup="true"></dd4-login>
+  <div data-ng-if="appCtrl.globalData.idToken" data-ng-controller="BudgetCtrl as budgetCtrl">
 	
-	<!-- Header -->
-	
-	<!-- Server status -->
-	<header><div class="container_12">
-		
-		<p id="skin-name"><small>Budget</small> <strong>0.5</strong></p>
-		<div class="server-info">Server: <strong>Tomcat</strong></div>
-		<div class="server-info">Java: <strong>1.8</strong></div>
-		
-	</div></header>
-	<!-- End server status -->
-	
-	<!-- Sub nav -->
-	<div id="sub-nav"><div class="container_12">
-		<a href="#" title="Help" class="nav-button"><b>Help</b></a>
-		<form id="search-form" name="search-form" method="post" action="search.html">
-			<input type="text" name="s" id="s" value="" title="Search admin..." autocomplete="off">
-		</form>
-	</div></div>
-	<!-- End sub nav -->
-	
-	<!-- Status bar -->
-	<div id="status-bar"><div class="container_12">
-	
-		<ul id="status-infos">
-			<li class="spaced">Logged as: <strong>{{budgetCtrl.sharedData.user.email}}</strong></li>
-			<li><a ng-click="budgetCtrl.logout()" class="button red" title="Logout"><span class="smaller">LOGOUT</span></a></li>
-		</ul>
-		
-	</div></div>
-	<!-- End status bar -->
-	
-	<div id="header-shadow"></div>
-	<!-- End header -->
-	
-	<!-- Always visible control bar -->
-	<div id="control-bar" class="grey-bg clearfix"><div class="container_12">
-		<a href="#"><button>Default View</button></a>
-		<a href="#settings"><button>Settings</button></a>
-		<a href="#list"><button>List View</button></a>
-		<a href="#accounting"><button>Accounting View</button></a>
-		<a href="#cal"><button>Calendar</button></a>
-		<a href="#summary"><button>Summary</button></a>
-		<a href="#templates"><button>Templates</button></a>
-		<div class="block-controls">
-			<ul class="controls-buttons">
-				<li>
-					<label>Portfolio</label>
-					<select data-ng-model="budgetCtrl.sharedData.activePortfolioId" data-ng-change="budgetCtrl.sharedData.refresh()"
-							data-ng-options="portfolio.id as portfolio.name for portfolio in budgetCtrl.sharedData.portfolios | orderBy:'name'">
-					</select>
-				</li>
-        <span data-ng-show="budgetCtrl.sharedData.controlType != budgetCtrl.sharedData.CONTROL_TYPE.NONE">
+    <!-- Header -->
+
+    <!-- Server status -->
+    <header><div class="container_12">
+
+      <p id="skin-name"><small>Budget</small> <strong>0.5</strong></p>
+      <div class="server-info">Server: <strong>Tomcat</strong></div>
+      <div class="server-info">Java: <strong>1.8</strong></div>
+
+    </div></header>
+    <!-- End server status -->
+
+    <!-- Sub nav -->
+    <div id="sub-nav"><div class="container_12">
+      <a href="#" title="Help" class="nav-button"><b>Help</b></a>
+      <form id="search-form" name="search-form" method="post" action="search.html">
+        <input type="text" name="s" id="s" value="" title="Search admin..." autocomplete="off">
+      </form>
+    </div></div>
+    <!-- End sub nav -->
+
+    <!-- Status bar -->
+    <div id="status-bar"><div class="container_12">
+
+      <ul id="status-infos">
+        <li class="spaced">Logged as: <strong>{{budgetCtrl.sharedData.user.email}}</strong></li>
+        <li><a ng-click="appCtrl.logout()" class="button red" title="Logout"><span class="smaller">LOGOUT</span></a></li>
+      </ul>
+
+    </div></div>
+    <!-- End status bar -->
+
+    <div id="header-shadow"></div>
+    <!-- End header -->
+
+    <!-- Always visible control bar -->
+    <div id="control-bar" class="grey-bg clearfix"><div class="container_12">
+      <a href="#"><button>Default View</button></a>
+      <a href="#settings"><button>Settings</button></a>
+      <a href="#list"><button>List View</button></a>
+      <a href="#accounting"><button>Accounting View</button></a>
+      <a href="#cal"><button>Calendar</button></a>
+      <a href="#summary"><button>Summary</button></a>
+      <a href="#templates"><button>Templates</button></a>
+      <div class="block-controls">
+        <ul class="controls-buttons">
           <li>
-            <a data-ng-click="budgetCtrl.sharedData.prev()" title="Previous">
-              <img src="images/icons/fugue/navigation-180.png" width="16" height="16">
-            </a>
+            <label>Portfolio</label>
+            <select data-ng-model="budgetCtrl.sharedData.activePortfolioId" data-ng-change="budgetCtrl.sharedData.refresh()"
+                data-ng-options="portfolio.id as portfolio.name for portfolio in budgetCtrl.sharedData.portfolios | orderBy:'name'">
+            </select>
           </li>
-          <li class="sep"></li>
-          <li class="controls-block">
-            <strong data-ng-show="budgetCtrl.sharedData.controlType == budgetCtrl.sharedData.CONTROL_TYPE.MONTH">
-              {{budgetCtrl.sharedData.getStartDate() | date:'MMM yyyy'}}
-            </strong>
-            <strong data-ng-show="budgetCtrl.sharedData.controlType == budgetCtrl.sharedData.CONTROL_TYPE.YEAR">
-              {{budgetCtrl.sharedData.getYear()}}
-            </strong>
-          </li>
-          <li class="sep"></li>
-          <li>
-            <a data-ng-click="budgetCtrl.sharedData.next()" title="Next">
-              <img src="images/icons/fugue/navigation.png" width="16" height="16">
-            </a>
-          </li>
-        </span>
-			</ul>
-		</div>
-	</div></div>
-	<!-- End control bar -->
-	
-	<!-- Content -->
-	<article class="container_12">
-		<div data-ng-view></div>
-	</article>
-	<!-- End content -->
-	
-	<footer>
-		<div class="float-right">
-			<a href="#top" class="button"><img src="images/icons/fugue/navigation-090.png" width="16" height="16">Page top</a>
-		</div>
-	</footer>
+          <span data-ng-show="budgetCtrl.sharedData.controlType != budgetCtrl.sharedData.CONTROL_TYPE.NONE">
+            <li>
+              <a data-ng-click="budgetCtrl.sharedData.prev()" title="Previous">
+                <img src="images/icons/fugue/navigation-180.png" width="16" height="16">
+              </a>
+            </li>
+            <li class="sep"></li>
+            <li class="controls-block">
+              <strong data-ng-show="budgetCtrl.sharedData.controlType == budgetCtrl.sharedData.CONTROL_TYPE.MONTH">
+                {{budgetCtrl.sharedData.getStartDate() | date:'MMM yyyy'}}
+              </strong>
+              <strong data-ng-show="budgetCtrl.sharedData.controlType == budgetCtrl.sharedData.CONTROL_TYPE.YEAR">
+                {{budgetCtrl.sharedData.getYear()}}
+              </strong>
+            </li>
+            <li class="sep"></li>
+            <li>
+              <a data-ng-click="budgetCtrl.sharedData.next()" title="Next">
+                <img src="images/icons/fugue/navigation.png" width="16" height="16">
+              </a>
+            </li>
+          </span>
+        </ul>
+      </div>
+    </div></div>
+    <!-- End control bar -->
+
+    <!-- Content -->
+    <article class="container_12">
+      <div data-ng-view></div>
+    </article>
+    <!-- End content -->
+
+    <footer>
+      <div class="float-right">
+        <a href="#top" class="button"><img src="images/icons/fugue/navigation-090.png" width="16" height="16">Page top</a>
+      </div>
+    </footer>
+  </div>
 	
 	<!--
 	

@@ -1,6 +1,5 @@
 com.digitald4.budget.BudgetCtrl = function(sharedData, userService, portfolioService) {
 	this.sharedData = sharedData;
-	this.userService = userService;
 
 	userService.getActive(function(user) {
 	  sharedData.setUser(user);
@@ -9,8 +8,4 @@ com.digitald4.budget.BudgetCtrl = function(sharedData, userService, portfolioSer
 	portfolioService.list({}, function(response) {
 		sharedData.setPortfolioData(response.result);
 	}, notify);
-};
-
-com.digitald4.budget.BudgetCtrl.prototype.logout = function() {
-  this.userService.logout();
 };
