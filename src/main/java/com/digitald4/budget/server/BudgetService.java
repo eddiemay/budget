@@ -53,11 +53,8 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 	public ListResponse list(BudgetListRequest request) {
 		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
 		return list(ListRequest.newBuilder()
-				.addFilter(Filter.newBuilder()
-						.setColumn("portfolio_id")
-						.setOperan("=")
-						.setValue(String.valueOf(request.getPortfolioId())))
-				.addOrderBy(OrderBy.newBuilder().setColumn("Name"))
+				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(request.getPortfolioId())))
+				// .addOrderBy(OrderBy.newBuilder().setColumn("Name"))
 				.build());
 	}
 
