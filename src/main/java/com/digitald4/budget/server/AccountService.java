@@ -26,7 +26,7 @@ public class AccountService extends BudgetService<Account> {
 						.setColumn("portfolio_id")
 						.setOperan("=")
 						.setValue(String.valueOf(request.getPortfolioId())))
-				.addOrderBy(OrderBy.newBuilder().setColumn("Name"))
+				// .addOrderBy(OrderBy.newBuilder().setColumn("Name"))
 				.build());
 	}
 }
