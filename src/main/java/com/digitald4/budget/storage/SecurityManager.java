@@ -34,7 +34,7 @@ public class SecurityManager {
 
 	public void checkReadAccess(long portfolioId) {
 		if (!portfolios.containsKey(portfolioId)) {
-			throw new DD4StorageException("Not found Portfolio_id: " + portfolioId);
+			throw new DD4StorageException("Not found Portfolio_id: " + portfolioId + " portfolio ids: " + portfolios);
 		}
 	}
 
