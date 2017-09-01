@@ -23,7 +23,7 @@ import org.mockito.Mock;
 public class PortfolioServiceTest {
 	@Mock private DataConnector dataConnector = mock(DataConnector.class);
 	private Provider<DataConnector> dataConnectorProvider = () -> dataConnector;
-	private final User user = User.newBuilder().setId(1).build();
+	private final User user = User.newBuilder().setId(1L).build();
 	private final Provider<User> userProvider = () -> user;
 	@Mock private SecurityManager securityManager = mock(SecurityManager.class);
 	private Provider<SecurityManager> securityManagerProvider = () -> securityManager;

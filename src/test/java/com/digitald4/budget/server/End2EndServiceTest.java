@@ -49,7 +49,7 @@ public class End2EndServiceTest extends TestCase {
 		PortfolioUserStore portfolioUserStore = new PortfolioUserStore(
 				new DAOProtoSQLImpl<>(PortfolioUser.class, dbConnector), securityManagerProvider);
 		PortfolioStore portfolioStore =
-				new PortfolioStore(new DAOProtoSQLImpl<>(Portfolio.class, dbConnector, "V_Portfolio"), portfolioUserStore);
+				new PortfolioStore(new DAOProtoSQLImpl<>(Portfolio.class, dbConnector), portfolioUserStore);
 		PortfolioService portfolioService = new PortfolioService(portfolioStore, securityManagerProvider, userProvider);
 		
 		Store<Account> accountStore = new GenericStore<>(new DAOProtoSQLImpl<>(Account.class, dbConnector));
@@ -62,7 +62,7 @@ public class End2EndServiceTest extends TestCase {
 
 		Store<TemplateBill> templateBillStore = new GenericStore<>(new DAOProtoSQLImpl<>(TemplateBill.class, dbConnector));
 		
-		BillStore billStore = new BillStore(new DAOProtoSQLImpl<>(Bill.class, dbConnector, "V_BILL"), balanceStore, templateBillStore);
+		BillStore billStore = new BillStore(new DAOProtoSQLImpl<>(Bill.class, dbConnector), balanceStore, templateBillStore);
 		BillService billService = new BillService(billStore, securityManagerProvider, templateStore, accountStore);
 		
 		Portfolio portfolio = portfolioService.create(CreateRequest.newBuilder()

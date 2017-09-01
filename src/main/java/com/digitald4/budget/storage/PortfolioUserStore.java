@@ -24,7 +24,7 @@ public class PortfolioUserStore extends GenericStore<PortfolioUser> {
 	}
 
 	@Override
-	public PortfolioUser update(int id, UnaryOperator<PortfolioUser> updater) {
+	public PortfolioUser update(long id, UnaryOperator<PortfolioUser> updater) {
 		PortfolioUser portfolioUser = super.update(id, updater);
 		if (securityManagerProvider != null && securityManagerProvider.get() != null) {
 			securityManagerProvider.get().refresh();
@@ -33,7 +33,7 @@ public class PortfolioUserStore extends GenericStore<PortfolioUser> {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(long id) {
 		super.delete(id);
 		if (securityManagerProvider != null && securityManagerProvider.get() != null) {
 			securityManagerProvider.get().refresh();

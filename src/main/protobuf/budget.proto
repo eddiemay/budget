@@ -15,32 +15,32 @@ enum UserRole {
 }
 
 message PortfolioUser {
-  int32 portfolio_id = 1;
-  int32 user_id = 2;
+  int64 portfolio_id = 1;
+  int64 user_id = 2;
   UserRole role = 3;
 }
 
 message Portfolio {
-	int32 id = 1;
+	int64 id = 1;
 	string name = 2;
-  int32 user_id = 3;
+  int64 user_id = 3;
   UserRole role = 4;
 	repeated PortfolioUser portfolio_user = 5;
 }
 
 message Account {
-  int32 id = 1;
-  int32 portfolio_id = 2;
+  int64 id = 1;
+  int64 portfolio_id = 2;
   string name = 3;
   bool payment_account = 4;
-  int32 parent_account_id = 5;
+  int64 parent_account_id = 5;
 }
 
 message Balance {
-  int32 id = 1;
-  int32 account_id = 2;
+  int64 id = 1;
+  int64 account_id = 2;
   string account_name = 3;
-  int32 portfolio_id = 4;
+  int64 portfolio_id = 4;
   int32 year = 5;
   int32 month = 6;
   string bal_date = 7;
@@ -49,11 +49,11 @@ message Balance {
 }
 
 message Bill {
-	int32 id = 1;
-  int32 portfolio_id = 2;
-	int32 account_id = 3;
+	int64 id = 1;
+  int64 portfolio_id = 2;
+	int64 account_id = 3;
   string account_name = 4;
-	int32 template_id = 5;
+	int64 template_id = 5;
   int32 year = 6;
   int32 month = 7;
   int32 day = 8;
@@ -80,23 +80,23 @@ message Bill {
 		PaymentStatus status = 3;
     bool in_active = 4;
 	}
-  map<int32, Transaction> transaction = 16;
+  map<int64, Transaction> transaction = 16;
 }
 
 message Template {
-  int32 id = 1;
-  int32 portfolio_id = 2;
+  int64 id = 1;
+  int64 portfolio_id = 2;
   string name = 3;
 }
 
 message TemplateBill {
-  int32 id = 1;
-  int32 template_id = 2;
-  int32 account_id = 3;
-  int32 portfolio_id = 4;
+  int64 id = 1;
+  int64 template_id = 2;
+  int64 account_id = 3;
+  int64 portfolio_id = 4;
   int32 due_day = 5;
   string name = 6;
   string account_name = 7;
   double amount_due = 8;
-  map<int32, double> transaction = 9;
+  map<int64, double> transaction = 9;
 }

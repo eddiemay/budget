@@ -81,11 +81,11 @@ public class AccountServiceTest {
 	
 	@Test
 	public void testGetAccount() {
-		when(dataConnector.get(Account.class, 71))
-				.thenReturn(Account.newBuilder().setId(71).setName("Account 71").build());
+		when(dataConnector.get(Account.class, 71L))
+				.thenReturn(Account.newBuilder().setId(71L).setName("Account 71").build());
 		Account account = service.get(GetRequest.newBuilder()
-				.setId(71)
+				.setId(71L)
 				.build());
-		assertEquals(71, account.getId());
+		assertEquals(71L, account.getId());
 	}
 }

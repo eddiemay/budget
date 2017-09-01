@@ -33,7 +33,7 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 
 	@Override
 	public T create(CreateRequest request) {
-		securityManagerProvider.get().checkWriteAccess((Integer) request.getProto().unpack(store.getType().getClass())
+		securityManagerProvider.get().checkWriteAccess((Long) request.getProto().unpack(store.getType().getClass())
 				.getField(portfolioIdDescriptor));
 		return super.create(request);
 	}
@@ -41,7 +41,7 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 	@Override
 	public T get(GetRequest request) {
 		T t = super.get(request);
-		securityManagerProvider.get().checkReadAccess((Integer) t.getField(portfolioIdDescriptor));
+		securityManagerProvider.get().checkReadAccess((Long) t.getField(portfolioIdDescriptor));
 		return t;
 	}
 
@@ -67,7 +67,7 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 		if (t == null) {
 			throw new DD4StorageException("Not Found");
 		}
-		securityManagerProvider.get().checkWriteAccess((Integer) t.getField(portfolioIdDescriptor));
+		securityManagerProvider.get().checkWriteAccess((Long) t.getField(portfolioIdDescriptor));
 		return super.update(request);
 	}
 
@@ -77,7 +77,7 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 		if (t == null) {
 			throw new DD4StorageException("Not Found");
 		}
-		securityManagerProvider.get().checkWriteAccess((Integer) t.getField(portfolioIdDescriptor));
+		securityManagerProvider.get().checkWriteAccess((Long) t.getField(portfolioIdDescriptor));
 		return super.delete(request);
 	}
 }

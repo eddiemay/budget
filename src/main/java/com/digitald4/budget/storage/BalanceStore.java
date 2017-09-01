@@ -24,14 +24,14 @@ public class BalanceStore extends GenericStore<Balance> {
 		super(dao);
 	}
 
-	public ListResponse<Balance> list(int portfolioId, int year) {
+	public ListResponse<Balance> list(long portfolioId, int year) {
 		return list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setOperan("=").setValue(String.valueOf(portfolioId)))
 				.addFilter(Filter.newBuilder().setColumn("year").setOperan("=").setValue(String.valueOf(year)))
 				.build());
 	}
 
-	public ListResponse<Balance> list(int portfolioId, int year, int month) {
+	public ListResponse<Balance> list(long portfolioId, int year, int month) {
 		ListResponse.Builder<Balance> result = ListResponse.newBuilder();
 		list(
 				ListRequest.newBuilder()
@@ -50,7 +50,7 @@ public class BalanceStore extends GenericStore<Balance> {
 		return result.build();
 	}
 
-	public Balance get(int accountId, int year, int month) {
+	public Balance get(long accountId, int year, int month) {
 		List<Balance> balances = list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder().setColumn("account_id").setOperan("=").setValue(String.valueOf(accountId)))
 				.addFilter(Filter.newBuilder().setColumn("year").setOperan("=").setValue(String.valueOf(year)))
@@ -85,7 +85,7 @@ public class BalanceStore extends GenericStore<Balance> {
 		return balances.get(0);
 	}
 
-	void applyUpdate(int accountId, int year, int month, double delta) {
+	void applyUpdate(long accountId, int year, int month, double delta) {
 		int nextMonth = month < 12 ? month + 1 : 1;
 		int nextYear = month < 12 ? year : year + 1;
 		AtomicBoolean nextMonthFound = new AtomicBoolean(false);
@@ -116,8 +116,8 @@ public class BalanceStore extends GenericStore<Balance> {
 		}
 	}
 
-	public void recalculateBalance(int portfolioId, BillStore billStore) {
-		Map<Integer, List<Balance>> accountHash = list(
+	public void recalculateBalance(long portfolioId, BillStore billStore) {
+		Map<Long, List<Balance>> accountHash = list(
 				ListRequest.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("portfolio_id").setOperan("=").setValue("" + portfolioId))
 						.build())
@@ -153,13 +153,13 @@ public class BalanceStore extends GenericStore<Balance> {
 	}
 
 	@VisibleForTesting static class BalanceUpdater implements UnaryOperator<List<Balance>> {
-		private final int accountId;
+		private final long accountId;
 		private final double delta;
 		private final int year;
 		private final int nextMonth;
 		private final int nextYear;
 
-		BalanceUpdater(int accountId, int year, int month, double delta) {
+		BalanceUpdater(long accountId, int year, int month, double delta) {
 			this.accountId = accountId;
 			this.year = year;
 			this.delta = delta;

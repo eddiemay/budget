@@ -33,15 +33,15 @@ public class TemplateServiceTest {
 
 		when(dataConnector.list(eq(Template.class), any(ListRequest.class)))
 				.thenReturn(ListResponse.<Template>newBuilder()
-						.addResult(Template.newBuilder().setPortfolioId(3).build())
-						.addResult(Template.newBuilder().setPortfolioId(3).build())
-						.addResult(Template.newBuilder().setPortfolioId(3).build())
+						.addResult(Template.newBuilder().setPortfolioId(3L).build())
+						.addResult(Template.newBuilder().setPortfolioId(3L).build())
+						.addResult(Template.newBuilder().setPortfolioId(3L).build())
 						.setTotalSize(3)
 						.build());
 		
-		JSONObject templates = service.list(new JSONObject().put("portfolio_id", 3));
+		JSONObject templates = service.list(new JSONObject().put("portfolio_id", 3L));
 		assertEquals(3, templates.getJSONArray("result").length());
 		assertEquals(3, templates.getInt("totalSize"));
-		assertEquals(3, templates.getJSONArray("result").getJSONObject(0).getInt("portfolioId"));
+		assertEquals(3L, templates.getJSONArray("result").getJSONObject(0).getInt("portfolioId"));
 	}
 }

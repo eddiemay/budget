@@ -15,11 +15,11 @@ enum UserRoleUI {
 }
 
 message BudgetListRequest {
-	int32 portfolio_id = 1;
+	int64 portfolio_id = 1;
 }
 
 message BalanceListRequest {
-  int32 portfolio_id = 1;
+  int64 portfolio_id = 1;
   int32 year = 2;
   int32 month = 3;
 }
@@ -30,29 +30,29 @@ message BalanceListResponse {
     double balance_y_t_d = 2;
   }
   message ByAccount {
-    map<int32, Balance> balance = 1;
+    map<int64, Balance> balance = 1;
   }
   map<int32, ByAccount> byMonth = 1;
 }
 
 message BalanceGetRequest {
-  int32 account_id = 1;
+  int64 account_id = 1;
   int32 year = 2;
   int32 month = 3;
 }
 
 message BillListRequest {
-	int32 portfolio_id = 1;
+	int64 portfolio_id = 1;
   int32 year = 2;
   int32 month = 3;
 }
 
 message TemplateBillListRequest {
-  int32 template_id = 1;
+  int64 template_id = 1;
 }
 
 message ApplyTemplateRequest {
-	int32 template_id = 1;
+	int64 template_id = 1;
   int32 year = 2;
   int32 month = 3;
 }

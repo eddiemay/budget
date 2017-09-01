@@ -38,7 +38,7 @@ public class BillStore extends GenericStore<Bill> {
 	}
 	
 	@Override
-	public Bill update(int id, final UnaryOperator<Bill> updater) {
+	public Bill update(long id, final UnaryOperator<Bill> updater) {
 		Bill orig = get(id);
 		Bill bill = super.update(id, latest -> {
 			Bill updated = updater.apply(latest);
@@ -69,7 +69,7 @@ public class BillStore extends GenericStore<Bill> {
 	}
 	
 	@Override
-	public void delete(int id) {
+	public void delete(long id) {
 		Bill bill = get(id);
 		super.delete(id);
 		balanceStore.applyUpdate(bill.getAccountId(), bill.getYear(), bill.getMonth(), -bill.getAmountDue());

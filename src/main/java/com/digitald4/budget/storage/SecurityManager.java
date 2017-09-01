@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class SecurityManager {
 	private final User user;
 	private final Store<PortfolioUser> portfolioUserStore;
-	private Map<Integer, PortfolioUser> portfolios;
+	private Map<Long, PortfolioUser> portfolios;
 
 	public SecurityManager(User user, PortfolioUserStore portfolioUserStore) {
 		this.user = user;
@@ -33,13 +33,13 @@ public class SecurityManager {
 		return this;
 	}
 
-	public void checkReadAccess(int portfolioId) {
+	public void checkReadAccess(long portfolioId) {
 		if (!portfolios.containsKey(portfolioId)) {
 			throw new DD4StorageException("Not found");
 		}
 	}
 
-	public void checkWriteAccess(int portfolioId) {
+	public void checkWriteAccess(long portfolioId) {
 		PortfolioUser portfolioUser = portfolios.get(portfolioId);
 		if (portfolioUser == null) {
 			throw new DD4StorageException("Not found");
@@ -48,7 +48,7 @@ public class SecurityManager {
 		}
 	}
 
-	public void checkDeleteAccess(int portfolioId) {
+	public void checkDeleteAccess(long portfolioId) {
 		PortfolioUser portfolioUser = portfolios.get(portfolioId);
 		if (portfolioUser == null) {
 			throw new DD4StorageException("Not found");

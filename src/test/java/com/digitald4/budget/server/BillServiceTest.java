@@ -153,10 +153,10 @@ public class BillServiceTest {
 				.build();
 		bill.getTransactionMap().forEach((acctId, trans) -> System.out.println(acctId + " " + trans));
 
-		Map<Integer, Transaction> map = new HashMap<>();
-		map.put(1, Transaction.newBuilder().setAmount(10).build());
-		map.put(2, Transaction.newBuilder().setAmount(20).build());
-		map.put(3, Transaction.newBuilder().setAmount(30).build());
+		Map<Long, Transaction> map = new HashMap<>();
+		map.put(1L, Transaction.newBuilder().setAmount(10).build());
+		map.put(2L, Transaction.newBuilder().setAmount(20).build());
+		map.put(3L, Transaction.newBuilder().setAmount(30).build());
 		bill = bill.toBuilder()
 				.putAllTransaction(map)
 				.build();
@@ -169,7 +169,7 @@ public class BillServiceTest {
 		bill = builder.build();
 		bill.getTransactionMap();
 		bill.getTransactionMap().entrySet();
-		for (Map.Entry<Integer, Transaction> entry : bill.getTransactionMap().entrySet()) {
+		for (Map.Entry<Long, Transaction> entry : bill.getTransactionMap().entrySet()) {
 			// System.out.println(entry.getKey() * 2);
 			System.out.println(entry.getKey() + " " + entry.getValue());
 		}

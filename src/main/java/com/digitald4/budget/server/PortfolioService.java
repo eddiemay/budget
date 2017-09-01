@@ -35,7 +35,7 @@ public class PortfolioService extends SingleProtoService<Portfolio> {
 
 	@Override
 	public ListResponse list(ListRequest request) {
-	 	int userId = userProvider.get().getId();
+	 	long userId = userProvider.get().getId();
 		return super.list(request.toBuilder()
 				.addFilter(Filter.newBuilder().setColumn("user_id").setOperan("=").setValue(String.valueOf(userId)))
 				.build());
