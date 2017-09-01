@@ -52,13 +52,7 @@ public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceSer
 
 	public boolean checkLogin(HttpServletRequest request, HttpServletResponse response, int level) throws Exception {
 		if (super.checkLogin(request, response, level)) {
-			HttpSession session = request.getSession(true);
-			SecurityManager securityManager = (SecurityManager) session.getAttribute("securityManager");
-			if (securityManager == null) {
-				securityManager = new SecurityManager(userProvider.get(), portfolioUserStore);
-				session.setAttribute("securityManager", securityManager);
-			}
-			securityManagerProvider.set(securityManager);
+			securityManagerProvider.set(new SecurityManager(userProvider.get(), portfolioUserStore));
 			return true;
 		}
 		return false;
