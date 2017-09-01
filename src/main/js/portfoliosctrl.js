@@ -20,8 +20,8 @@ com.digitald4.budget.PortfoliosCtrl.prototype.refresh = function() {
 };
 
 com.digitald4.budget.PortfoliosCtrl.prototype.addPortfolio = function() {
-  var userId = this.sharedData.user.id;
-  this.newPortfolio.portfolioUser = [{userId: userId, role: 12}];
+  this.newPortfolio.user = {};
+  this.newPortfolio.user[this.sharedData.user.id] = 'UR_OWNER';
 	this.portfolioService.create(this.newPortfolio, function(portfolio) {
 		this.sharedData.portfolios.push(portfolio);
 		this.newPortfolio = {};

@@ -12,10 +12,14 @@ import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.server.SingleProtoService;
 import com.digitald4.common.util.Provider;
+import com.google.protobuf.Any;
 import com.google.protobuf.Empty;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PortfolioService extends SingleProtoService<Portfolio> {
 
+	private final PortfolioStore portfolioStore;
 	private final Provider<User> userProvider;
 	private final Provider<SecurityManager> securityManagerProvider;
 	
@@ -23,7 +27,8 @@ public class PortfolioService extends SingleProtoService<Portfolio> {
 										Provider<SecurityManager> securityManagerProvider,
 										Provider<User> userProvider) {
 		super(portfolioStore);
-		 this.securityManagerProvider = securityManagerProvider;
+		this.portfolioStore = portfolioStore;
+		this.securityManagerProvider = securityManagerProvider;
 		this.userProvider = userProvider;
 	}
 
@@ -35,10 +40,13 @@ public class PortfolioService extends SingleProtoService<Portfolio> {
 
 	@Override
 	public ListResponse list(ListRequest request) {
-	 	long userId = userProvider.get().getId();
-		return super.list(request.toBuilder()
-				.addFilter(Filter.newBuilder().setColumn("user_id").setOperan("=").setValue(String.valueOf(userId)))
-				.build());
+		List<Portfolio> portfolios = portfolioStore.listBy(userProvider.get().getId());
+		return ListResponse.newBuilder()
+				.addAllResult(portfolios.stream()
+						.map(portfolio -> Any.pack(portfolio))
+						.collect(Collectors.toList()))
+				.setTotalSize(portfolios.size())
+				.build();
 	}
 
 	@Override

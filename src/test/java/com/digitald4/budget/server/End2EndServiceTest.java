@@ -43,7 +43,8 @@ public class End2EndServiceTest extends TestCase {
 
 	@Test @Ignore // TODO(eddiemay) Implement an in memory testing datastore.
 	public void testEnd2End() throws Exception {
-		SecurityManager securityManager = new SecurityManager(user, new PortfolioUserStore(
+		SecurityManager securityManager = null;
+		new SecurityManager(user, new PortfolioUserStore(
 				new DAOProtoSQLImpl<>(PortfolioUser.class, dbConnector), null));
 		Provider<SecurityManager> securityManagerProvider = () -> securityManager;
 		PortfolioUserStore portfolioUserStore = new PortfolioUserStore(
@@ -68,9 +69,7 @@ public class End2EndServiceTest extends TestCase {
 		Portfolio portfolio = portfolioService.create(CreateRequest.newBuilder()
 				.setProto(Any.pack(Portfolio.newBuilder()
 						.setName("Test Portfolio")
-						.addPortfolioUser(PortfolioUser.newBuilder()
-								.setUserId(user.getId())
-								.setRole(UserRole.UR_OWNER))
+						.putUser(user.getId(), UserRole.UR_OWNER)
 						.build()))
 				.build());
 		assertTrue(portfolio.getId() > 0);

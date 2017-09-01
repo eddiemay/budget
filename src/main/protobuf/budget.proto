@@ -23,9 +23,7 @@ message PortfolioUser {
 message Portfolio {
 	int64 id = 1;
 	string name = 2;
-  int64 user_id = 3;
-  UserRole role = 4;
-	repeated PortfolioUser portfolio_user = 5;
+  map<int64, UserRole> user = 3;
 }
 
 message Account {

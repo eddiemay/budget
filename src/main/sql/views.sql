@@ -18,9 +18,8 @@ CREATE OR REPLACE VIEW GeneralDataView AS
     FROM GeneralData;
 
 CREATE OR REPLACE VIEW PortfolioView AS
-		SELECT Portfolio.*, PortfolioUser.user_id, PortfolioUser.role
-		FROM Portfolio
-		LEFT JOIN PortfolioUser ON Portfolio.ID = PortfolioUser.portfolio_id;
+		SELECT Portfolio.*
+		FROM Portfolio;
 
 CREATE OR REPLACE VIEW PortfolioUserView AS
     SELECT PortfolioUser.*
