@@ -25,8 +25,7 @@ public class SecurityManager {
 	public SecurityManager refresh() {
 		portfolios = portfolioUserStore
 				.list(ListRequest.newBuilder()
-						.addFilter(Filter.newBuilder().setColumn("user_id").setValue(String.valueOf(user.getId())))
-						.build())
+						.addFilter(Filter.newBuilder().setColumn("user_id").setValue(String.valueOf(user.getId()))).build())
 				.getResultList()
 				.stream()
 				.collect(Collectors.toMap(PortfolioUser::getPortfolioId, Function.identity()));
@@ -35,7 +34,7 @@ public class SecurityManager {
 
 	public void checkReadAccess(long portfolioId) {
 		if (!portfolios.containsKey(portfolioId)) {
-			throw new DD4StorageException("Not found");
+			throw new DD4StorageException("Not found Portfolio_id: " + portfolioId);
 		}
 	}
 
