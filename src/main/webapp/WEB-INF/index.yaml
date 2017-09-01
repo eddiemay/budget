@@ -1,0 +1,6 @@
+indexes:
+- kind: Account
+  properties:
+  - name: portfolio_id
+  - name: Name
+    direction: asc
