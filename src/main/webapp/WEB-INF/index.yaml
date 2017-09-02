@@ -11,6 +11,13 @@ indexes:
     direction: desc
   - name: month
     direction: desc
+- kind: Balance
+  properties:
+  - name: account_id
+  - name: year
+    direction: desc
+  - name: month
+    direction: desc
 - kind: Bill
   properties:
   - name: portfolio_id
