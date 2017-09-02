@@ -9,8 +9,8 @@
 				<td class="th table-check-cell">
 					<input type="checkbox" data-ng-model="portfolio.selected">
 				</td>
-				<td><input type="text" data-ng-model="portfolio.name" data-on-change="updatePortfolio(portfolio, 'name')"></td>
-				<td>{{portfoliosCtrl.UserRoleName[portfolio.portfolioUser[0].role]}}</td>
+				<td><input type="text" data-ng-model="portfolio.name" data-on-change="portfoliosCtrl.updatePortfolio(portfolio, 'name')"></td>
+				<td>{{portfoliosCtrl.UserRoleName[portfolio.user[portfoliosCtrl.sharedData.user.id]]}}</td>
 			</tr>
 			<tr>
 				<td class="th">
