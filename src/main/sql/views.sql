@@ -3,15 +3,12 @@ CREATE OR REPLACE VIEW AccountView AS
     FROM Account;
 
 CREATE OR REPLACE VIEW BalanceView AS
-    SELECT Balance.*, CONCAT(Balance.year, '-', LPAD(Balance.month, 2, '0')) AS bal_date,
-        Account.portfolio_id, Account.name AS account_name
-    FROM Balance, Account
-    WHERE Balance.account_id = Account.id;
+    SELECT Balance.*, CONCAT(Balance.year, '-', LPAD(Balance.month, 2, '0')) AS bal_date
+    FROM Balance;
 
 CREATE OR REPLACE VIEW BillView AS
-    SELECT Bill.*, Account.name AS account_name
-    FROM Bill, Account
-    WHERE Bill.account_id = Account.id;
+    SELECT Bill.*
+    FROM Bill;
 
 CREATE OR REPLACE VIEW GeneralDataView AS
     SELECT GeneralData.*
@@ -30,9 +27,8 @@ CREATE OR REPLACE VIEW TemplateView AS
     FROM Template;
 
 CREATE OR REPLACE VIEW TemplateBillView AS
-    SELECT TemplateBill.*, Account.name AS account_name
-    FROM TemplateBill, Account
-    WHERE TemplateBill.account_id = Account.id;
+    SELECT TemplateBill.*
+    FROM TemplateBill;
 
 CREATE OR REPLACE VIEW TransHistView AS
     SELECT TransHist.*

@@ -41,8 +41,9 @@ public class BalanceService extends BudgetService<Balance> {
 	}
 
 	private Balance get(BalanceGetRequest request) {
-		Balance balance = balanceStore.get(request.getAccountId(), request.getYear(), request.getMonth());
-		securityManagerProvider.get().checkReadAccess(balance.getPortfolioId());
+		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
+		Balance balance =
+				balanceStore.get(request.getPortfolioId(), request.getAccountId(), request.getYear(), request.getMonth());
 		return balance;
 	}
 

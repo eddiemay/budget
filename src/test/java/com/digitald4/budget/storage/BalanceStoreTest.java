@@ -12,15 +12,16 @@ public class BalanceStoreTest {
 	@Test
 	public void testBalanceUpdater() {
 		List<Balance> balances = new ArrayList<>();
-		balances = new BalanceStore.BalanceUpdater(1L, 2016,6, 100)
+		balances = new BalanceStore.BalanceUpdater(52L, 1L, 2016,6, 100)
 				.apply(balances);
 		assertEquals(1, balances.size());
+		assertEquals(52L, balances.get(0).getPortfolioId());
 		assertEquals(2016, balances.get(0).getYear());
 		assertEquals(7, balances.get(0).getMonth());
 		assertEquals(100, balances.get(0).getBalance(), .001);
 		assertEquals(100, balances.get(0).getBalanceYTD(), .001);
 		
-		balances = new BalanceStore.BalanceUpdater(1L, 2016, 6, 25.42)
+		balances = new BalanceStore.BalanceUpdater(52L,1L, 2016, 6, 25.42)
 				.apply(balances);
 		assertEquals(1, balances.size());
 		assertEquals(2016, balances.get(0).getYear());
@@ -28,7 +29,7 @@ public class BalanceStoreTest {
 		assertEquals(125.42, balances.get(0).getBalance(), .001);
 		assertEquals(125.42, balances.get(0).getBalanceYTD(), .001);
 		
-		balances = new BalanceStore.BalanceUpdater(1L, 2016, 7, 50).apply(balances);
+		balances = new BalanceStore.BalanceUpdater(52L,1L, 2016, 7, 50).apply(balances);
 		assertEquals(2, balances.size());
 		assertEquals(2016, balances.get(0).getYear());
 		assertEquals(8, balances.get(0).getMonth());
@@ -39,7 +40,7 @@ public class BalanceStoreTest {
 		assertEquals(125.42, balances.get(1).getBalance(), .001);
 		assertEquals(125.42, balances.get(1).getBalanceYTD(), .001);
 		
-		balances = new BalanceStore.BalanceUpdater(1L, 2016, 4, 20)
+		balances = new BalanceStore.BalanceUpdater(52L,1L, 2016, 4, 20)
 				.apply(balances);
 		assertEquals(3, balances.size());
 		assertEquals(2016, balances.get(0).getYear());

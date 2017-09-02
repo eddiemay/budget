@@ -31,9 +31,11 @@ public class BillStore extends GenericStore<Bill> {
 	@Override
 	public Bill create(Bill bill_) {
 		Bill bill = super.create(bill_);
-		balanceStore.applyUpdate(bill.getAccountId(), bill.getYear(), bill.getMonth(), bill.getAmountDue());
+		balanceStore
+				.applyUpdate(bill.getPortfolioId(), bill.getAccountId(), bill.getYear(), bill.getMonth(), bill.getAmountDue());
 		bill.getTransactionMap()
-				.forEach((acctId, trans) -> balanceStore.applyUpdate(acctId, bill.getYear(), bill.getMonth(), -trans.getAmount()));
+				.forEach((acctId, trans) -> balanceStore
+						.applyUpdate(bill.getPortfolioId(), acctId, bill.getYear(), bill.getMonth(), -trans.getAmount()));
 		return bill;
 	}
 	
@@ -57,14 +59,18 @@ public class BillStore extends GenericStore<Bill> {
 			return updated;
 		});
 		// The best way to keep everything synced is to minus off the transaction from the balance...
-		balanceStore.applyUpdate(orig.getAccountId(), orig.getYear(), orig.getMonth(), -orig.getAmountDue());
+		balanceStore
+				.applyUpdate(orig.getPortfolioId(), orig.getAccountId(), orig.getYear(), orig.getMonth(), -orig.getAmountDue());
 		orig.getTransactionMap()
-				.forEach((acctId, trans) -> balanceStore.applyUpdate(acctId, orig.getYear(), orig.getMonth(), trans.getAmount()));
+				.forEach((acctId, trans) -> balanceStore.applyUpdate(
+						orig.getPortfolioId(), acctId, orig.getYear(), orig.getMonth(), trans.getAmount()));
 
 		// and then add it back to the balance. This approch handles amount due, date and account changes.
-		balanceStore.applyUpdate(bill.getAccountId(), bill.getYear(), bill.getMonth(), bill.getAmountDue());
+		balanceStore.applyUpdate(
+				bill.getPortfolioId(), bill.getAccountId(), bill.getYear(), bill.getMonth(), bill.getAmountDue());
 		bill.getTransactionMap()
-				.forEach((acctId, trans) -> balanceStore.applyUpdate(acctId, bill.getYear(), bill.getMonth(), -trans.getAmount()));
+				.forEach((acctId, trans) -> balanceStore.applyUpdate(
+						bill.getPortfolioId(), acctId, bill.getYear(), bill.getMonth(), -trans.getAmount()));
 		return bill;
 	}
 	
@@ -72,9 +78,11 @@ public class BillStore extends GenericStore<Bill> {
 	public void delete(long id) {
 		Bill bill = get(id);
 		super.delete(id);
-		balanceStore.applyUpdate(bill.getAccountId(), bill.getYear(), bill.getMonth(), -bill.getAmountDue());
+		balanceStore.applyUpdate(
+				bill.getPortfolioId(), bill.getAccountId(), bill.getYear(), bill.getMonth(), -bill.getAmountDue());
 		bill.getTransactionMap()
-				.forEach((acctId, trans) -> balanceStore.applyUpdate(acctId, bill.getYear(), bill.getMonth(), trans.getAmount()));
+				.forEach((acctId, trans) -> balanceStore.applyUpdate(
+						bill.getPortfolioId(), acctId, bill.getYear(), bill.getMonth(), trans.getAmount()));
 	}
 	
 	public ListResponse<Bill> applyTemplate(Template template, DateTime refDate) {

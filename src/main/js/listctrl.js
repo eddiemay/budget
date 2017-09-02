@@ -27,10 +27,13 @@ com.digitald4.budget.ListCtrl.calcBalances = function(accounts, bills, balances)
 		};
 	}
 
+  var accountMap = {};
 	var paymentAccountIds = [];
   for (var a = 0; a < accounts.length; a++) {
-    if (accounts[a].paymentAccount) {
-      paymentAccountIds.push(accounts[a].id);
+    var account = accounts[a];
+    accountMap[account.id] = account;
+    if (account.paymentAccount) {
+      paymentAccountIds.push(account.id);
     }
   }
 
@@ -38,7 +41,8 @@ com.digitald4.budget.ListCtrl.calcBalances = function(accounts, bills, balances)
 		var bill = bills[b];
 		rollingBalances[bill.accountId] = rollingBalances[bill.accountId] || {balance: 0, balanceYTD: 0};
 		var rollingBalance = rollingBalances[bill.accountId];
-    bill.name = bill.name || bill.accountName;
+		var account = accountMap[bill.accountId] || {name: 'Unknown Acccount'};
+    bill.name = bill.name || account.name;
     rollingBalance.balance += bill.amountDue;
     rollingBalance.balanceYTD += bill.amountDue;
     bill.balancePost = rollingBalance.balanceYTD;
@@ -208,7 +212,7 @@ com.digitald4.budget.ListCtrl.prototype.applyTemplate = function() {
 	this.applyTemplateError = undefined;
 	this.billService.applyTemplate(this.selectedTemplate, this.sharedData.getYear(), this.sharedData.getMonth(),
 	    function(response) {
-	  var bills = resposne.result;
+	  var bills = response.result;
     var sortedBills = [];
     for (var b = 0; b < bills.length; b++) {
       com.digitald4.budget.ListCtrl.insertBill(sortedBills, bills[b]);
