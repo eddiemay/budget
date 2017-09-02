@@ -3,7 +3,7 @@ CREATE OR REPLACE VIEW AccountView AS
     FROM Account;
 
 CREATE OR REPLACE VIEW BalanceView AS
-    SELECT Balance.*, CONCAT(Balance.year, '-', LPAD(Balance.month, 2, '0')) AS bal_date
+    SELECT Balance.*
     FROM Balance;
 
 CREATE OR REPLACE VIEW BillView AS

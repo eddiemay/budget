@@ -17,7 +17,6 @@ import org.json.JSONObject;
 
 public class TemplateBillService extends BudgetService<TemplateBill> {
 
-	private final Store<TemplateBill> templateBillStore;
 	private final Store<Template> templateStore;
 	private final Provider<SecurityManager> securityManagerProvider;
 
@@ -25,19 +24,8 @@ public class TemplateBillService extends BudgetService<TemplateBill> {
 											Provider<SecurityManager> securityManagerProvider,
 											Store<Template> templateStore) {
 		super(templateBillStore, securityManagerProvider);
-		this.templateBillStore = templateBillStore;
 		this.securityManagerProvider = securityManagerProvider;
 		this.templateStore = templateStore;
-	}
-
-	@Override
-	public TemplateBill create(CreateRequest request) {
-		Template template = templateStore.get(request.getProto().unpack(TemplateBill.class).getTemplateId());
-		if (template == null) {
-			throw new DD4StorageException("Not Found");
-		}
-		securityManagerProvider.get().checkWriteAccess(template.getPortfolioId());
-		return super.create(request);
 	}
 
 	@Override
@@ -54,20 +42,5 @@ public class TemplateBillService extends BudgetService<TemplateBill> {
 		return super.list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder().setColumn("template_id").setValue(String.valueOf(request.getTemplateId())))
 				.build());
-	}
-
-	@Override
-	public Empty delete(DeleteRequest request) {
-		TemplateBill templateBill = templateBillStore.get(request.getId());
-		if (templateBill == null) {
-			throw new DD4StorageException("Not Found");
-		}
-		Template template = templateStore.get(templateBill.getTemplateId());
-		if (template == null) {
-			throw new DD4StorageException("Not Found");
-		}
-		securityManagerProvider.get().checkWriteAccess(template.getPortfolioId());
-		templateBillStore.delete(request.getId());
-		return Empty.getDefaultInstance();
 	}
 }

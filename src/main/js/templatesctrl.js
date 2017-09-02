@@ -42,6 +42,7 @@ com.digitald4.budget.TemplatesCtrl.prototype.addTemplate = function() {
 
 com.digitald4.budget.TemplatesCtrl.prototype.addBill = function() {
 	this.newTemplateBill.templateId = this.selectedTemplate.id;
+	this.newTemplateBill.portfolioId = this.selectedTemplate.portfolioId;
 	this.templateBillService.create(this.newTemplateBill, function(bill) {
 		com.digitald4.budget.ListCtrl.insertBill(this.bills, bill);
 		com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills, []);
