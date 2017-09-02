@@ -9,7 +9,7 @@ CREATE OR REPLACE VIEW BalanceView AS
     WHERE Balance.account_id = Account.id;
 
 CREATE OR REPLACE VIEW BillView AS
-    SELECT Bill.*, Account.portfolio_id, Account.name AS account_name
+    SELECT Bill.*, Account.name AS account_name
     FROM Bill, Account
     WHERE Bill.account_id = Account.id;
 
@@ -30,9 +30,9 @@ CREATE OR REPLACE VIEW TemplateView AS
     FROM Template;
 
 CREATE OR REPLACE VIEW TemplateBillView AS
-    SELECT TemplateBill.*, Account.name AS account_name, Template.portfolio_id portfolio_id
-    FROM TemplateBill, Account, Template
-    WHERE TemplateBill.account_id = Account.id AND TemplateBill.template_id = Template.id;
+    SELECT TemplateBill.*, Account.name AS account_name
+    FROM TemplateBill, Account
+    WHERE TemplateBill.account_id = Account.id;
 
 CREATE OR REPLACE VIEW TransHistView AS
     SELECT TransHist.*

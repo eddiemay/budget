@@ -46,9 +46,9 @@ public class TemplateBillService extends BudgetService<TemplateBill> {
 		if (template == null) {
 			throw new DD4StorageException("Not Found");
 		}
-		securityManagerProvider.get().checkWriteAccess(template.getPortfolioId());
+		securityManagerProvider.get().checkReadAccess(template.getPortfolioId());
 		return super.list(ListRequest.newBuilder()
-				.addFilter(Filter.newBuilder().setColumn("TEMPLATE_ID").setValue(String.valueOf(request.getTemplateId())))
+				.addFilter(Filter.newBuilder().setColumn("template_id").setValue(String.valueOf(request.getTemplateId())))
 				.build());
 	}
 }

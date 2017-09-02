@@ -29,7 +29,7 @@ public class AccountServiceTest {
 	private Provider<DataConnector> dataConnectorProvider = () -> dataConnector;
 	@Mock private SecurityManager securityManager = mock(SecurityManager.class);
 	private Provider<SecurityManager> securityManagerProvider = () -> securityManager;
-	private AccountService service = new AccountService(
+	private BudgetService<Account> service = new BudgetService<>(
 			new GenericStore<>(new DAOConnectorImpl<>(Account.class, dataConnectorProvider)), securityManagerProvider);
 
 	@Test

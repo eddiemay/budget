@@ -104,9 +104,9 @@ public class BillStore extends GenericStore<Bill> {
 							.build());
 				});
 		return list(ListRequest.newBuilder()
-				.addFilter(Filter.newBuilder().setColumn("PORTFOLIO_ID").setOperan("=").setValue(String.valueOf(template.getPortfolioId())))
-				.addFilter(Filter.newBuilder().setColumn("YEAR").setOperan("=").setValue(String.valueOf(refDate.getYear())))
-				.addFilter(Filter.newBuilder().setColumn("MONTH").setOperan("=").setValue(String.valueOf(refDate.getMonthOfYear())))
+				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(template.getPortfolioId())))
+				.addFilter(Filter.newBuilder().setColumn("year").setValue(String.valueOf(refDate.getYear())))
+				.addFilter(Filter.newBuilder().setColumn("month").setValue(String.valueOf(refDate.getMonthOfYear())))
 				.build());
 	}
 }

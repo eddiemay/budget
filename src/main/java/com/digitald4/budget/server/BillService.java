@@ -36,16 +36,6 @@ public class BillService extends BudgetService<Bill> {
 	}
 
 	@Override
-	public Bill create(CreateRequest request) {
-		Bill bill = request.getProto().unpack(Bill.class);
-		Account account = accountStore.get(bill.getAccountId());
-		if (account == null) {
-			throw new DD4StorageException("Not found");
-		}
-		securityManagerProvider.get().checkWriteAccess(account.getPortfolioId());
-		return store.create(bill);
-	}
-
 	public JSONObject list(JSONObject request) {
 		return convertToJSON(list(transformJSONRequest(BillListRequest.getDefaultInstance(), request)));
 	}
@@ -53,9 +43,9 @@ public class BillService extends BudgetService<Bill> {
 	public ListResponse list(BillListRequest request) {
 		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
 		return super.list(ListRequest.newBuilder()
-				.addFilter(Filter.newBuilder().setColumn("PORTFOLIO_ID").setOperan("=").setValue(String.valueOf(request.getPortfolioId())))
-				.addFilter(Filter.newBuilder().setColumn("YEAR").setOperan("=").setValue(String.valueOf(request.getYear())))
-				.addFilter(Filter.newBuilder().setColumn("MONTH").setOperan("=").setValue(String.valueOf(request.getMonth())))
+				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(request.getPortfolioId())))
+				.addFilter(Filter.newBuilder().setColumn("year").setValue(String.valueOf(request.getYear())))
+				.addFilter(Filter.newBuilder().setColumn("month").setValue(String.valueOf(request.getMonth())))
 				.build());
 	}
 

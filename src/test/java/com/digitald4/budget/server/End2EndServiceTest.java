@@ -43,8 +43,7 @@ public class End2EndServiceTest extends TestCase {
 
 	@Test @Ignore // TODO(eddiemay) Implement an in memory testing datastore.
 	public void testEnd2End() throws Exception {
-		SecurityManager securityManager = null;
-		new SecurityManager(user, new PortfolioUserStore(
+		SecurityManager securityManager = new SecurityManager(user, new PortfolioUserStore(
 				new DAOProtoSQLImpl<>(PortfolioUser.class, dbConnector), null));
 		Provider<SecurityManager> securityManagerProvider = () -> securityManager;
 		PortfolioUserStore portfolioUserStore = new PortfolioUserStore(
@@ -54,7 +53,7 @@ public class End2EndServiceTest extends TestCase {
 		PortfolioService portfolioService = new PortfolioService(portfolioStore, securityManagerProvider, userProvider);
 		
 		Store<Account> accountStore = new GenericStore<>(new DAOProtoSQLImpl<>(Account.class, dbConnector));
-		AccountService accountService = new AccountService(accountStore, securityManagerProvider);
+		BudgetService<Account> accountService = new BudgetService<>(accountStore, securityManagerProvider);
 
 		BalanceStore balanceStore = new BalanceStore(new DAOProtoSQLImpl<>(Balance.class, dbConnector));
 		

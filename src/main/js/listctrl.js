@@ -107,10 +107,13 @@ com.digitald4.budget.ListCtrl.prototype.refresh = function() {
       if (this.balances && this.bills) {
         this.bills = com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills, this.balances);
       }
+      this.accountMap = {};
       this.paymentAccounts = [];
       for (var a = 0; a < this.accounts.length; a++) {
-        if (this.accounts[a].paymentAccount) {
-          this.paymentAccounts.push(this.accounts[a]);
+        var account = this.accounts[a];
+        this.accountMap[account.id] = account;
+        if (account.paymentAccount) {
+          this.paymentAccounts.push(account);
         }
       }
     }.bind(this), notify);
@@ -168,6 +171,7 @@ com.digitald4.budget.ListCtrl.prototype.addBill = function() {
   this.newBill.month = date.getMonth() + 1;
   this.newBill.day = date.getDate();
   this.newBill.dueDate = undefined;
+  this.newBill.portfolioId = this.accountMap[this.newBill.accountId].portfolioId;
 	this.billService.create(this.newBill, function(bill) {
 		com.digitald4.budget.ListCtrl.insertBill(this.bills, bill);
 		com.digitald4.budget.ListCtrl.calcBalances(this.accounts, this.bills, this.balances);

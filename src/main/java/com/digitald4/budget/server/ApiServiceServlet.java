@@ -15,7 +15,6 @@ import com.digitald4.common.util.ProviderThreadLocalImpl;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceServlet {
 	private final ProviderThreadLocalImpl<SecurityManager> securityManagerProvider = new ProviderThreadLocalImpl<>();
@@ -32,7 +31,7 @@ public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceSer
 
 		GenericStore<Account> accountStore =
 				new GenericStore<>(new DAOConnectorImpl<>(Account.class, dataConnectorProvider));
-		addService("account", new AccountService(accountStore, securityManagerProvider));
+		addService("account", new BudgetService<>(accountStore, securityManagerProvider));
 		
 		GenericStore<Template> templateStore =
 				new GenericStore<>(new DAOConnectorImpl<>(Template.class, dataConnectorProvider));
