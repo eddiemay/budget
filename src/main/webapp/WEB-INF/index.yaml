@@ -2,5 +2,24 @@ indexes:
 - kind: Account
   properties:
   - name: portfolio_id
-  - name: Name
+  - name: name
+    direction: asc
+- kind: Balance
+  properties:
+  - name: portfolio_id
+  - name: year
+    direction: desc
+  - name: month
+    direction: asc
+- kind: Bill
+  properties:
+  - name: portfolio_id
+  - name: year
+    direction: desc
+  - name: month
+    direction: desc
+- kind: Template
+  properties:
+  - name: portfolio_id
+  - name: name
     direction: asc

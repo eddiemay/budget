@@ -14,16 +14,16 @@ enum UserRole {
 	UR_READONLY = 3;
 }
 
+message Portfolio {
+  int64 id = 1;
+  string name = 2;
+  map<int64, UserRole> user = 3;
+}
+
 message PortfolioUser {
   int64 portfolio_id = 1;
   int64 user_id = 2;
   UserRole role = 3;
-}
-
-message Portfolio {
-	int64 id = 1;
-	string name = 2;
-  map<int64, UserRole> user = 3;
 }
 
 message Account {
