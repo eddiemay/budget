@@ -62,7 +62,7 @@
 				<td><input type="text" data-ng-model="templatesCtrl.newTemplateBill.name"></td>
 				<td><input type="text" data-ng-model="templatesCtrl.newTemplateBill.amountDue" size="8"></td>
 				<td data-ng-repeat="paymentAccount in templatesCtrl.paymentAccounts">
-					<input type="text" data-ng-model="bill.transaction[paymentAccount.id]" size="8">
+					<input type="text" data-ng-model="templatesCtrl.newTemplateBill.transaction[paymentAccount.id]" size="8">
 				</td>
 			</tr>
 		</tbody>
