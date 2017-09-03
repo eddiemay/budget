@@ -54,7 +54,7 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
 		return list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(request.getPortfolioId())))
-				// .addOrderBy(OrderBy.newBuilder().setColumn("Name"))
+				.addOrderBy(OrderBy.newBuilder().setColumn("name"))
 				.build());
 	}
 
