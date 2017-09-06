@@ -51,8 +51,8 @@
 </head>
 
 <body data-ng-app="budget" data-ng-controller="DD4AppCtrl as appCtrl">
-  <dd4-login data-ng-if="!appCtrl.globalData.idToken" data-label="Ledger" data-allow-signup="true"></dd4-login>
-  <div data-ng-if="appCtrl.globalData.idToken" data-ng-controller="BudgetCtrl as budgetCtrl">
+  <dd4-login data-ng-if="!appCtrl.globalData.user" data-label="Ledger" data-allow-signup="true"></dd4-login>
+  <div data-ng-if="appCtrl.globalData.user" data-ng-controller="BudgetCtrl as budgetCtrl">
 	
     <!-- Header -->
 
