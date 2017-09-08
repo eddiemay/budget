@@ -1,6 +1,5 @@
-com.digitald4.budget.BudgetCtrl = function(sharedData, userService, portfolioService, sessionWatcher) {
+com.digitald4.budget.BudgetCtrl = function(sharedData, userService, portfolioService) {
 	this.sharedData = sharedData;
-	sessionWatcher.startTimer();
 
 	userService.getActive(function(user) {
 	  sharedData.setUser(user);
