@@ -2,17 +2,8 @@ syntax = "proto3";
 
 package budget;
 
-// import "../../../common/src/conf/common_ui.proto";
-
 option java_package = "com.digitald4.budget.proto";
 option java_outer_classname = "BudgetUIProtos";
-
-enum UserRoleUI {
-  UR_UNKNOWN = 0;
-	UR_OWNER = 12;
-  UR_CAN_EDIT = 2;
-	UR_READONLY = 3;
-}
 
 message BudgetListRequest {
 	int64 portfolio_id = 1;
