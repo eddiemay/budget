@@ -39,6 +39,9 @@ public class SecurityManager {
 	}
 
 	public void checkWriteAccess(long portfolioId) {
+		if (user.getTypeId() == 5) {
+			return;
+		}
 		PortfolioUser portfolioUser = portfolios.get(portfolioId);
 		if (portfolioUser == null) {
 			throw new DD4StorageException("Not found");
