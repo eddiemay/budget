@@ -39,7 +39,7 @@ public class SecurityManager {
 	}
 
 	public void checkWriteAccess(long portfolioId) {
-		if (user.getTypeId() == 5) {
+		if (user.getTypeId() == 2L) {
 			return;
 		}
 		PortfolioUser portfolioUser = portfolios.get(portfolioId);
