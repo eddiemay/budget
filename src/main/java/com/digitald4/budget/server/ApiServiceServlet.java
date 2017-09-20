@@ -21,6 +21,7 @@ public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceSer
 	private final PortfolioUserStore portfolioUserStore;
 
 	public ApiServiceServlet() throws ServletException {
+		super(false);
 		portfolioUserStore = new PortfolioUserStore(
 				new DAOConnectorImpl<>(PortfolioUser.class, dataConnectorProvider), securityManagerProvider);
 		addService("portfolioUser", new PortfolioUserService(portfolioUserStore, securityManagerProvider));

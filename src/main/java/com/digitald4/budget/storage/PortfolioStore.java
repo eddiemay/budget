@@ -2,13 +2,12 @@ package com.digitald4.budget.storage;
 
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
 import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
-import com.digitald4.budget.proto.BudgetProtos.UserRole;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class PortfolioStore extends GenericStore<Portfolio> {
@@ -39,6 +38,7 @@ public class PortfolioStore extends GenericStore<Portfolio> {
 				.getResultList()
 				.stream()
 				.map(portfolioUser -> get(portfolioUser.getPortfolioId()))
+				.filter(Objects::nonNull)
 				.collect(Collectors.toList());
 
 	}

@@ -7,7 +7,6 @@ import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.proto.DD4UIProtos.DeleteRequest;
 import com.digitald4.common.proto.DD4UIProtos.GetRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.server.SingleProtoService;
@@ -43,7 +42,7 @@ public class PortfolioService extends SingleProtoService<Portfolio> {
 		List<Portfolio> portfolios = portfolioStore.listBy(userProvider.get().getId());
 		return ListResponse.newBuilder()
 				.addAllResult(portfolios.stream()
-						.map(portfolio -> Any.pack(portfolio))
+						.map(Any::pack)
 						.collect(Collectors.toList()))
 				.setTotalSize(portfolios.size())
 				.build();

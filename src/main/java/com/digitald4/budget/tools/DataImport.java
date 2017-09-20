@@ -1,9 +1,13 @@
 package com.digitald4.budget.tools;
 
 import com.digitald4.budget.proto.BudgetProtos.Account;
+import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
 import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
+import com.digitald4.budget.proto.BudgetProtos.Template;
+import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
 import com.digitald4.common.jdbc.DBConnectorThreadPoolImpl;
+import com.digitald4.common.proto.DD4Protos.GeneralData;
 import com.digitald4.common.storage.DataConnectorSQLImpl;
 import com.digitald4.common.tools.DataImporter;
 
@@ -15,7 +19,11 @@ public class DataImport {
 						"dd4_user", "getSchooled85")),
 				"https://ledger-178106.appspot.com/api");
 		importer.login();
-		importer.runFor(Portfolio.class);
-		importer.runFor(Account.class);
+		// importer.runFor(GeneralData.class);
+		// importer.runFor(Portfolio.class);
+		// importer.runFor(Account.class);
+		// importer.runFor(Template.class);
+		// importer.runFor(TemplateBill.class);
+		importer.runFor(Bill.class);
 	}
 }
