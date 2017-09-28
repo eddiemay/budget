@@ -7,14 +7,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.digitald4.budget.storage.SecurityManager;
+import com.digitald4.common.proto.DD4Protos.Query;
 import com.digitald4.common.proto.DD4UIProtos.GetRequest;
 import com.digitald4.budget.proto.BudgetProtos.Account;
 import com.digitald4.budget.proto.BudgetUIProtos.BudgetListRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
-import com.digitald4.common.storage.DAOConnectorImpl;
-import com.digitald4.common.storage.DataConnector;
+import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
+import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.util.Provider;
 import com.google.protobuf.Any;
 import com.google.protobuf.util.JsonFormat;
@@ -25,17 +25,17 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 public class AccountServiceTest {
-	@Mock private DataConnector dataConnector = mock(DataConnector.class);
-	private Provider<DataConnector> dataConnectorProvider = () -> dataConnector;
+	@Mock private DAO dao = mock(DAO.class);
+	private Provider<DAO> daoProvider = () -> dao;
 	@Mock private SecurityManager securityManager = mock(SecurityManager.class);
 	private Provider<SecurityManager> securityManagerProvider = () -> securityManager;
 	private BudgetService<Account> service = new BudgetService<>(
-			new GenericStore<>(new DAOConnectorImpl<>(Account.class, dataConnectorProvider)), securityManagerProvider);
+			new GenericStore<>(Account.class, daoProvider), securityManagerProvider);
 
 	@Test
 	public void testListAccounts() throws Exception {
-		when(dataConnector.list(eq(Account.class), any(ListRequest.class)))
-				.thenReturn(com.digitald4.common.storage.ListResponse.<Account>newBuilder()
+		when(dao.list(eq(Account.class), any(Query.class)))
+				.thenReturn(QueryResult.<Account>newBuilder()
 						.addResult(Account.newBuilder().setPortfolioId(3).setName("Account A").build())
 						.addResult(Account.newBuilder().setPortfolioId(3).setName("Account B").build())
 						.addResult(Account.newBuilder().setPortfolioId(3).setName("Account C").build())
@@ -81,7 +81,7 @@ public class AccountServiceTest {
 	
 	@Test
 	public void testGetAccount() {
-		when(dataConnector.get(Account.class, 71L))
+		when(dao.get(Account.class, 71L))
 				.thenReturn(Account.newBuilder().setId(71L).setName("Account 71").build());
 		Account account = service.get(GetRequest.newBuilder()
 				.setId(71L)

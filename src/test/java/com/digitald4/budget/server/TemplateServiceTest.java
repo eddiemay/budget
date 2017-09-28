@@ -9,11 +9,10 @@ import static org.mockito.Mockito.when;
 import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.exception.DD4StorageException;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.storage.DAOConnectorImpl;
-import com.digitald4.common.storage.DataConnector;
+import com.digitald4.common.proto.DD4Protos.Query;
+import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
-import com.digitald4.common.storage.ListResponse;
+import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.Provider;
 import org.json.JSONObject;
@@ -21,18 +20,18 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 public class TemplateServiceTest {
-	@Mock private DataConnector dataConnector = mock(DataConnector.class);
-	private Provider<DataConnector> dataConnectorProvider = () -> dataConnector;
+	@Mock private DAO dao = mock(DAO.class);
+	private Provider<DAO> daoProvider = () -> dao;
 	@Mock private SecurityManager securityManager = mock(SecurityManager.class);
 	private Provider<SecurityManager> securityManagerProvider = () -> securityManager;
 
 	@Test
 	public void testGetTemplates() throws DD4StorageException {
-		Store<Template> store = new GenericStore<>(new DAOConnectorImpl<>(Template.class, dataConnectorProvider));
+		Store<Template> store = new GenericStore<>(Template.class, daoProvider);
 		BudgetService<Template> service = new BudgetService<>(store, securityManagerProvider);
 
-		when(dataConnector.list(eq(Template.class), any(ListRequest.class)))
-				.thenReturn(ListResponse.<Template>newBuilder()
+		when(dao.list(eq(Template.class), any(Query.class)))
+				.thenReturn(QueryResult.<Template>newBuilder()
 						.addResult(Template.newBuilder().setPortfolioId(3L).build())
 						.addResult(Template.newBuilder().setPortfolioId(3L).build())
 						.addResult(Template.newBuilder().setPortfolioId(3L).build())

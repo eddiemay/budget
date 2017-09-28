@@ -3,12 +3,13 @@ package com.digitald4.budget.storage;
 import com.digitald4.budget.proto.BudgetProtos.Balance;
 import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.common.exception.DD4StorageException;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest.OrderBy;
+import com.digitald4.common.proto.DD4Protos.Query;
+import com.digitald4.common.proto.DD4Protos.Query.Filter;
+import com.digitald4.common.proto.DD4Protos.Query.OrderBy;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
-import com.digitald4.common.storage.ListResponse;
+import com.digitald4.common.storage.QueryResult;
+import com.digitald4.common.util.Provider;
 import com.google.annotations.VisibleForTesting;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -20,24 +21,29 @@ import java.util.stream.Collectors;
 
 public class BalanceStore extends GenericStore<Balance> {
 
-	public BalanceStore(DAO<Balance> dao) {
-		super(dao);
+	public BalanceStore(Provider<DAO> daoProvider) {
+		super(Balance.class, daoProvider);
 	}
 
-	public ListResponse<Balance> list(long portfolioId, int year) {
-		return list(ListRequest.newBuilder()
-				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setOperan("=").setValue(String.valueOf(portfolioId)))
-				.addFilter(Filter.newBuilder().setColumn("year").setOperan("=").setValue(String.valueOf(year)))
+	public QueryResult<Balance> list(long portfolioId, int year) {
+		return list(Query.newBuilder()
+				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setOperator("=").setValue(String.valueOf(portfolioId)))
+				.addFilter(Filter.newBuilder().setColumn("year").setOperator("=").setValue(String.valueOf(year)))
 				.build());
 	}
 
-	public ListResponse<Balance> list(long portfolioId, int year, int month) {
-		ListResponse.Builder<Balance> result = ListResponse.newBuilder();
+	@Override
+	public QueryResult<Balance> list(Query query) throws DD4StorageException {
+		return super.list(query);
+	}
+
+	public QueryResult<Balance> list(long portfolioId, int year, int month) {
+		QueryResult.Builder<Balance> result = QueryResult.newBuilder();
 		list(
-				ListRequest.newBuilder()
-						.addFilter(Filter.newBuilder().setColumn("portfolio_id").setOperan("=").setValue(String.valueOf(portfolioId)))
-						.addFilter(Filter.newBuilder().setColumn("year").setOperan("=").setValue(String.valueOf(year)))
-						.addFilter(Filter.newBuilder().setColumn("month").setOperan("<=").setValue(String.valueOf(month)))
+				Query.newBuilder()
+						.addFilter(Filter.newBuilder().setColumn("portfolio_id").setOperator("=").setValue(String.valueOf(portfolioId)))
+						.addFilter(Filter.newBuilder().setColumn("year").setOperator("=").setValue(String.valueOf(year)))
+						.addFilter(Filter.newBuilder().setColumn("month").setOperator("<=").setValue(String.valueOf(month)))
 						.build())
 				.getResultList()
 				.stream()
@@ -51,20 +57,20 @@ public class BalanceStore extends GenericStore<Balance> {
 	}
 
 	public Balance get(long portfolioId, long accountId, int year, int month) {
-		List<Balance> balances = list(ListRequest.newBuilder()
-				.addFilter(Filter.newBuilder().setColumn("account_id").setOperan("=").setValue(String.valueOf(accountId)))
-				.addFilter(Filter.newBuilder().setColumn("year").setOperan("=").setValue(String.valueOf(year)))
-				.addFilter(Filter.newBuilder().setColumn("month").setOperan("<=").setValue(String.valueOf(month)))
+		List<Balance> balances = list(Query.newBuilder()
+				.addFilter(Filter.newBuilder().setColumn("account_id").setOperator("=").setValue(String.valueOf(accountId)))
+				.addFilter(Filter.newBuilder().setColumn("year").setOperator("=").setValue(String.valueOf(year)))
+				.addFilter(Filter.newBuilder().setColumn("month").setOperator("<=").setValue(String.valueOf(month)))
 				.addOrderBy(OrderBy.newBuilder().setColumn("month").setDesc(true))
-				.setPageSize(1)
+				.setLimit(1)
 				.build()).getResultList();
 		if (balances.isEmpty()) {
-			balances = list(ListRequest.newBuilder()
-					.addFilter(Filter.newBuilder().setColumn("account_id").setOperan("=").setValue(String.valueOf(accountId)))
-					.addFilter(Filter.newBuilder().setColumn("year").setOperan("<").setValue(String.valueOf(year)))
+			balances = list(Query.newBuilder()
+					.addFilter(Filter.newBuilder().setColumn("account_id").setOperator("=").setValue(String.valueOf(accountId)))
+					.addFilter(Filter.newBuilder().setColumn("year").setOperator("<").setValue(String.valueOf(year)))
 					.addOrderBy(OrderBy.newBuilder().setColumn("year").setDesc(true))
 					.addOrderBy(OrderBy.newBuilder().setColumn("month").setDesc(true))
-					.setPageSize(1)
+					.setLimit(1)
 					.build()).getResultList();
 		}
 		if (balances.isEmpty()) {
@@ -92,9 +98,9 @@ public class BalanceStore extends GenericStore<Balance> {
 		int nextYear = month < 12 ? year : year + 1;
 		AtomicBoolean nextMonthFound = new AtomicBoolean(false);
 		list(
-				ListRequest.newBuilder()
-						.addFilter(Filter.newBuilder().setColumn("account_id").setOperan("=").setValue(String.valueOf(accountId)))
-						.addFilter(Filter.newBuilder().setColumn("year").setOperan(">=").setValue(String.valueOf(year)))
+				Query.newBuilder()
+						.addFilter(Filter.newBuilder().setColumn("account_id").setOperator("=").setValue(String.valueOf(accountId)))
+						.addFilter(Filter.newBuilder().setColumn("year").setOperator(">=").setValue(String.valueOf(year)))
 						.build())
 				.getResultList()
 				.stream()
@@ -120,7 +126,7 @@ public class BalanceStore extends GenericStore<Balance> {
 
 	public void recalculateBalance(long portfolioId, BillStore billStore) {
 		Map<Long, List<Balance>> accountHash = list(
-				ListRequest.newBuilder()
+				Query.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(portfolioId))).build())
 				.getResultList()
 				.stream()
@@ -129,7 +135,7 @@ public class BalanceStore extends GenericStore<Balance> {
 				.collect(Collectors.groupingBy(Balance::getAccountId));
 
 		List<Bill> bills = billStore.list(
-				ListRequest.newBuilder()
+				Query.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(portfolioId))).build())
 				.getResultList();
 		for (Bill bill : bills) {

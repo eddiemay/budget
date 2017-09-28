@@ -7,6 +7,7 @@ import com.digitald4.budget.storage.BalanceStore;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.SecurityManager;
+import com.digitald4.common.proto.DD4Protos.Query;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.util.Provider;
 import com.google.protobuf.Empty;
@@ -89,7 +90,7 @@ public class BalanceService extends BudgetService<Balance> {
 	}
 
 	public Empty recalculate() {
-		portfolioStore.list(ListRequest.getDefaultInstance()).getResultList()
+		portfolioStore.list(Query.getDefaultInstance()).getResultList()
 				.forEach(portfolio -> balanceStore.recalculateBalance(portfolio.getId(), billStore));
 		return Empty.getDefaultInstance();
 	}

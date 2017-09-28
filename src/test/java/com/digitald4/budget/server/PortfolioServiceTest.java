@@ -13,18 +13,19 @@ import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.PortfolioUserStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.exception.DD4StorageException;
+import com.digitald4.common.proto.DD4Protos.Query;
 import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
-import com.digitald4.common.storage.DAOConnectorImpl;
-import com.digitald4.common.storage.DataConnector;
+import com.digitald4.common.storage.DAO;
+import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.util.Provider;
 import org.junit.Test;
 import org.mockito.Mock;
 
 public class PortfolioServiceTest {
-	@Mock private DataConnector dataConnector = mock(DataConnector.class);
-	private Provider<DataConnector> dataConnectorProvider = () -> dataConnector;
+	@Mock private DAO dao = mock(DAO.class);
+	private Provider<DAO> daoProvider = () -> dao;
 	private static final long USER_ID = 859239L;
 	private final User user = User.newBuilder().setId(USER_ID).build();
 	private final Provider<User> userProvider = () -> user;
@@ -33,17 +34,15 @@ public class PortfolioServiceTest {
 	private static final long PORTFOLIO_ID3 = 32L;
 	@Mock private SecurityManager securityManager = mock(SecurityManager.class);
 	private Provider<SecurityManager> securityManagerProvider = () -> securityManager;
-	@Mock private PortfolioUserStore portfolioUserStore = mock(PortfolioUserStore.class);
 
 	@Test
 	public void testGetPortfolios() throws DD4StorageException {
-		PortfolioStore store = new PortfolioStore(
-				new DAOConnectorImpl<>(Portfolio.class, dataConnectorProvider),
-				new PortfolioUserStore(new DAOConnectorImpl<>(PortfolioUser.class, dataConnectorProvider), securityManagerProvider));
+		PortfolioStore store = new PortfolioStore(daoProvider,
+				new PortfolioUserStore(daoProvider, securityManagerProvider));
 		PortfolioService service = new PortfolioService(store, securityManagerProvider, userProvider);
 
-		when(dataConnector.list(eq(PortfolioUser.class), any(ListRequest.class)))
-				.thenReturn(com.digitald4.common.storage.ListResponse.<PortfolioUser>newBuilder()
+		when(dao.list(eq(PortfolioUser.class), any(Query.class)))
+				.thenReturn(QueryResult.<PortfolioUser>newBuilder()
 						.addResult(PortfolioUser
 								.newBuilder().setUserId(USER_ID).setRole(UserRole.UR_OWNER).setPortfolioId(PORTFOLIO_ID1).build())
 						.addResult(PortfolioUser
@@ -52,11 +51,11 @@ public class PortfolioServiceTest {
 								.newBuilder().setUserId(USER_ID).setRole(UserRole.UR_READONLY).setPortfolioId(PORTFOLIO_ID3).build())
 						.setTotalSize(3)
 						.build());
-		when(dataConnector.get(Portfolio.class, PORTFOLIO_ID1))
+		when(dao.get(Portfolio.class, PORTFOLIO_ID1))
 				.thenReturn(Portfolio.newBuilder().setId(PORTFOLIO_ID1).putUser(USER_ID, UserRole.UR_OWNER).build());
-		when(dataConnector.get(Portfolio.class, PORTFOLIO_ID2))
+		when(dao.get(Portfolio.class, PORTFOLIO_ID2))
 				.thenReturn(Portfolio.newBuilder().setId(PORTFOLIO_ID2).putUser(USER_ID, UserRole.UR_CAN_EDIT).build());
-		when(dataConnector.get(Portfolio.class, PORTFOLIO_ID3))
+		when(dao.get(Portfolio.class, PORTFOLIO_ID3))
 				.thenReturn(Portfolio.newBuilder().setId(PORTFOLIO_ID3).putUser(USER_ID, UserRole.UR_READONLY).build());
 
 		ListResponse response = service.list(ListRequest.newBuilder().build());

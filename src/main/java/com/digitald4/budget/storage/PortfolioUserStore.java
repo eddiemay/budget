@@ -9,8 +9,8 @@ import java.util.function.UnaryOperator;
 public class PortfolioUserStore extends GenericStore<PortfolioUser> {
 	private final Provider<SecurityManager> securityManagerProvider;
 
-	public PortfolioUserStore(DAO<PortfolioUser> dao, Provider<SecurityManager> securityManagerProvider) {
-		super(dao);
+	public PortfolioUserStore(Provider<DAO> daoProvider, Provider<SecurityManager> securityManagerProvider) {
+		super(PortfolioUser.class, daoProvider);
 		this.securityManagerProvider = securityManagerProvider;
 	}
 

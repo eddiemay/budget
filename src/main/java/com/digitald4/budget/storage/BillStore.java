@@ -5,13 +5,14 @@ import com.digitald4.budget.proto.BudgetProtos.Bill.PaymentStatus;
 import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
 import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
+import com.digitald4.common.proto.DD4Protos.Query;
+import com.digitald4.common.proto.DD4Protos.Query.Filter;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
-import com.digitald4.common.storage.ListResponse;
+import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.Pair;
+import com.digitald4.common.util.Provider;
 import java.util.function.UnaryOperator;
 
 import java.util.stream.Collectors;
@@ -22,8 +23,8 @@ public class BillStore extends GenericStore<Bill> {
 	private final BalanceStore balanceStore;
 	private final Store<TemplateBill> templateBillStore;
 
-	public BillStore(DAO<Bill> dao, BalanceStore balanceStore, Store<TemplateBill> templateBillStore) {
-		super(dao);
+	public BillStore(Provider<DAO> daoProvider, BalanceStore balanceStore, Store<TemplateBill> templateBillStore) {
+		super(Bill.class, daoProvider);
 		this.balanceStore = balanceStore;
 		this.templateBillStore = templateBillStore;
 	}
@@ -85,10 +86,10 @@ public class BillStore extends GenericStore<Bill> {
 						bill.getPortfolioId(), acctId, bill.getYear(), bill.getMonth(), trans.getAmount()));
 	}
 	
-	public ListResponse<Bill> applyTemplate(Template template, DateTime refDate) {
+	public QueryResult<Bill> applyTemplate(Template template, DateTime refDate) {
 		templateBillStore
-				.list(ListRequest.newBuilder()
-						.addFilter(Filter.newBuilder().setColumn("template_id").setOperan("=").setValue("" + template.getId()))
+				.list(Query.newBuilder()
+						.addFilter(Filter.newBuilder().setColumn("template_id").setOperator("=").setValue("" + template.getId()))
 						.build())
 				.getResultList()
 				.forEach(tempBill -> {
@@ -112,7 +113,7 @@ public class BillStore extends GenericStore<Bill> {
 									.collect(Collectors.toMap(Pair::getLeft, Pair::getRight)))
 							.build());
 				});
-		return list(ListRequest.newBuilder()
+		return list(Query.newBuilder()
 				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(template.getPortfolioId())))
 				.addFilter(Filter.newBuilder().setColumn("year").setValue(String.valueOf(refDate.getYear())))
 				.addFilter(Filter.newBuilder().setColumn("month").setValue(String.valueOf(refDate.getMonthOfYear())))

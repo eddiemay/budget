@@ -2,10 +2,11 @@ package com.digitald4.budget.storage;
 
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
 import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
+import com.digitald4.common.proto.DD4Protos.Query;
+import com.digitald4.common.proto.DD4Protos.Query.Filter;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
+import com.digitald4.common.util.Provider;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -14,8 +15,8 @@ public class PortfolioStore extends GenericStore<Portfolio> {
 
 	private final PortfolioUserStore portfolioUserStore;
 
-	public PortfolioStore(DAO<Portfolio> dao, PortfolioUserStore portfolioUserStore) {
-		super(dao);
+	public PortfolioStore(Provider<DAO> daoProvider, PortfolioUserStore portfolioUserStore) {
+		super(Portfolio.class, daoProvider);
 		this.portfolioUserStore = portfolioUserStore;
 	}
 
@@ -33,7 +34,7 @@ public class PortfolioStore extends GenericStore<Portfolio> {
 
 	public List<Portfolio> listBy(long userId) {
 		return portfolioUserStore
-				.list(ListRequest.newBuilder()
+				.list(Query.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("user_id").setValue(String.valueOf(userId))).build())
 				.getResultList()
 				.stream()

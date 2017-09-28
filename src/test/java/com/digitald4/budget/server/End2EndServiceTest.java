@@ -3,11 +3,9 @@ package com.digitald4.budget.server;
 import static org.junit.Assert.*;
 
 import com.digitald4.budget.proto.BudgetProtos.Account;
-import com.digitald4.budget.proto.BudgetProtos.Balance;
 import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
-import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
 import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
 import com.digitald4.budget.proto.BudgetProtos.UserRole;
@@ -19,11 +17,12 @@ import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.PortfolioUserStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.budget.test.TestCase;
-import com.digitald4.common.storage.DAOProtoSQLImpl;
+import com.digitald4.common.storage.DAO;
 import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
 import com.digitald4.common.proto.DD4UIProtos.DeleteRequest;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
+import com.digitald4.common.storage.testing.DAOTestingImpl;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.Provider;
@@ -34,35 +33,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.json.JSONObject;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class End2EndServiceTest extends TestCase {
 	private final User user = User.newBuilder().setId(962).build();
 	private final Provider<User> userProvider = () -> user;
+	private final DAO dao = new DAOTestingImpl();
+	private final Provider<DAO> daoProvider = () -> dao;
+	private SecurityManager securityManager = null;
+	private final Provider<SecurityManager> securityManagerProvider = () -> securityManager;
 
-	@Test @Ignore // TODO(eddiemay) Implement an in memory testing datastore.
+	@Test
 	public void testEnd2End() throws Exception {
-		SecurityManager securityManager = new SecurityManager(user, new PortfolioUserStore(
-				new DAOProtoSQLImpl<>(PortfolioUser.class, dbConnector), null));
-		Provider<SecurityManager> securityManagerProvider = () -> securityManager;
-		PortfolioUserStore portfolioUserStore = new PortfolioUserStore(
-				new DAOProtoSQLImpl<>(PortfolioUser.class, dbConnector), securityManagerProvider);
-		PortfolioStore portfolioStore =
-				new PortfolioStore(new DAOProtoSQLImpl<>(Portfolio.class, dbConnector), portfolioUserStore);
+		PortfolioUserStore portfolioUserStore = new PortfolioUserStore(daoProvider, securityManagerProvider);
+		securityManager = new SecurityManager(user, portfolioUserStore);
+		PortfolioStore portfolioStore = new PortfolioStore(daoProvider, portfolioUserStore);
 		PortfolioService portfolioService = new PortfolioService(portfolioStore, securityManagerProvider, userProvider);
-		
-		Store<Account> accountStore = new GenericStore<>(new DAOProtoSQLImpl<>(Account.class, dbConnector));
+
+		Store<Account> accountStore = new GenericStore<>(Account.class, daoProvider);
 		BudgetService<Account> accountService = new BudgetService<>(accountStore, securityManagerProvider);
 
-		BalanceStore balanceStore = new BalanceStore(new DAOProtoSQLImpl<>(Balance.class, dbConnector));
+		BalanceStore balanceStore = new BalanceStore(daoProvider);
 		
-		Store<Template> templateStore = new GenericStore<>(new DAOProtoSQLImpl<>(Template.class, dbConnector));
+		Store<Template> templateStore = new GenericStore<>(Template.class, daoProvider);
 		BudgetService<Template> templateService = new BudgetService<>(templateStore, securityManagerProvider);
 
-		Store<TemplateBill> templateBillStore = new GenericStore<>(new DAOProtoSQLImpl<>(TemplateBill.class, dbConnector));
+		Store<TemplateBill> templateBillStore = new GenericStore<>(TemplateBill.class, daoProvider);
 		
-		BillStore billStore = new BillStore(new DAOProtoSQLImpl<>(Bill.class, dbConnector), balanceStore, templateBillStore);
+		BillStore billStore = new BillStore(daoProvider, balanceStore, templateBillStore);
 		BillService billService = new BillService(billStore, securityManagerProvider, templateStore, accountStore);
 		
 		Portfolio portfolio = portfolioService.create(CreateRequest.newBuilder()
@@ -171,6 +169,7 @@ public class End2EndServiceTest extends TestCase {
 			Bill payCreditCard = billService.create(CreateRequest.newBuilder()
 					.setProto(Any.pack(Bill.newBuilder()
 							.setAccountId(creditCard.getId())
+							.setPortfolioId(creditCard.getPortfolioId())
 							.setYear(2016)
 							.setMonth(7)
 							.setDay(20)

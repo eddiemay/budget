@@ -7,7 +7,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.digitald4.budget.proto.BudgetProtos.Account;
-import com.digitald4.budget.proto.BudgetProtos.Balance;
 import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
 import com.digitald4.budget.proto.BudgetProtos.Template;
@@ -17,13 +16,12 @@ import com.digitald4.budget.proto.BudgetUIProtos.BillListRequest;
 import com.digitald4.budget.storage.BalanceStore;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.SecurityManager;
+import com.digitald4.common.proto.DD4Protos.Query;
 import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.storage.DAOConnectorImpl;
+import com.digitald4.common.storage.DAO;
 import com.digitald4.common.exception.DD4StorageException;
-import com.digitald4.common.storage.DataConnector;
 import com.digitald4.common.storage.GenericStore;
-import com.digitald4.common.storage.ListResponse;
+import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.Provider;
 import com.google.protobuf.Any;
@@ -38,10 +36,10 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 public class BillServiceTest {
-	@Mock private DataConnector dataConnector = mock(DataConnector.class);
-	private Provider<DataConnector> dataConnectorProvider = () -> dataConnector;
+	@Mock private DAO dao = mock(DAO.class);
+	private Provider<DAO> daoProvider = () -> dao;
 	@Mock private BillStore mockStore = mock(BillStore.class);
-	@Mock private Store<Account> accountStore = mock(Store.class);
+	@Mock private Store<Account> accountStore = new GenericStore<>(Account.class, daoProvider);
 	@Mock private SecurityManager securityManager = mock(SecurityManager.class);
 	private Provider<SecurityManager> securityManagerProvider = () -> securityManager;
 
@@ -49,7 +47,7 @@ public class BillServiceTest {
 	public void testCreateBill() throws Exception {
 		when(mockStore.getType()).thenReturn(Bill.getDefaultInstance());
 		when(mockStore.create(any(Bill.class))).thenAnswer(i -> i.getArguments()[0]);
-		when(accountStore.get(any(Integer.class))).thenReturn(Account.newBuilder().setPortfolioId(3).build());
+		when(dao.get(eq(Account.class), any(Integer.class))).thenReturn(Account.newBuilder().setPortfolioId(3).build());
 		BillService service = new BillService(mockStore, securityManagerProvider, null, accountStore);
 
 		service.create(CreateRequest.newBuilder()
@@ -81,11 +79,11 @@ public class BillServiceTest {
 
 	@Test
 	public void testGetBills() throws DD4StorageException {
-		BillStore store = new BillStore(new DAOConnectorImpl<>(Bill.class, dataConnectorProvider), null,null);
+		BillStore store = new BillStore(daoProvider, null, null);
 		BillService service = new BillService(store, securityManagerProvider, null, null);
 
-		when(dataConnector.list(eq(Bill.class), any(ListRequest.class)))
-				.thenReturn(ListResponse.<Bill>newBuilder()
+		when(dao.list(eq(Bill.class), any(Query.class)))
+				.thenReturn(QueryResult.<Bill>newBuilder()
 						.addResult(Bill.newBuilder()
 								.setPortfolioId(3)
 								.setName("Account A")
@@ -113,10 +111,10 @@ public class BillServiceTest {
 	
 	@Test @Ignore
 	public void applyTemplate() throws DD4StorageException {
-		BalanceStore balanceStore = new BalanceStore(new DAOConnectorImpl<>(Balance.class, dataConnectorProvider));
-		Store<TemplateBill> templateBillStore = new GenericStore<>(new DAOConnectorImpl<>(TemplateBill.class, dataConnectorProvider));
-		BillStore store = new BillStore(new DAOConnectorImpl<>(Bill.class, dataConnectorProvider), balanceStore, templateBillStore);
-		Store<Template> templateStore = new GenericStore<>(new DAOConnectorImpl<>(Template.class, dataConnectorProvider));
+		BalanceStore balanceStore = new BalanceStore(daoProvider);
+		Store<TemplateBill> templateBillStore = new GenericStore<>(TemplateBill.class, daoProvider);
+		BillStore store = new BillStore(daoProvider, balanceStore, templateBillStore);
+		Store<Template> templateStore = new GenericStore<>(Template.class, daoProvider);
 		BillService service = new BillService(store, securityManagerProvider, templateStore, null);
 		
 		List<Bill> bills = service
