@@ -51,7 +51,7 @@ public class BillServiceTest {
 		BillService service = new BillService(mockStore, securityManagerProvider, null, accountStore);
 
 		service.create(CreateRequest.newBuilder()
-				.setProto(Any.pack(Bill.newBuilder()
+				.setEntity(Any.pack(Bill.newBuilder()
 						.setName("Test")
 						.setAccountId(5)
 						.setAmountDue(500)
@@ -65,15 +65,15 @@ public class BillServiceTest {
 				.build());
 
 		service.create(new JSONObject()
-				.put("proto",
+				.put("entity",
 						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
 
 		service.create(new JSONObject()
-				.put("proto",
+				.put("entity",
 						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
 
 		service.create(new JSONObject()
-				.put("proto",
+				.put("entity",
 						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2016,\"month\":1,\"day\":1,\"account_id\":185,\"amount_due\":1,\"status\":1,\"transaction\":{}}")));
 	}
 

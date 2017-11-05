@@ -21,7 +21,7 @@ public class PortfolioUserService extends BudgetService<PortfolioUser> {
 
 	@Override
 	public PortfolioUser create(CreateRequest request) {
-		securityManagerProvider.get().checkDeleteAccess(request.getProto().unpack(PortfolioUser.class).getPortfolioId());
+		securityManagerProvider.get().checkDeleteAccess(request.getEntity().unpack(PortfolioUser.class).getPortfolioId());
 		return super.create(request);
 	}
 

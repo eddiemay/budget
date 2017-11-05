@@ -64,7 +64,7 @@ public class End2EndServiceTest extends TestCase {
 		BillService billService = new BillService(billStore, securityManagerProvider, templateStore, accountStore);
 		
 		Portfolio portfolio = portfolioService.create(CreateRequest.newBuilder()
-				.setProto(Any.pack(Portfolio.newBuilder()
+				.setEntity(Any.pack(Portfolio.newBuilder()
 						.setName("Test Portfolio")
 						.putUser(user.getId(), UserRole.UR_OWNER)
 						.build()))
@@ -78,7 +78,7 @@ public class End2EndServiceTest extends TestCase {
 
 		try {
 			Account job = accountService.create(CreateRequest.newBuilder()
-					.setProto(Any.pack(Account.newBuilder()
+					.setEntity(Any.pack(Account.newBuilder()
 							.setPortfolioId(portfolio.getId())
 							.setName("Job")
 							.build()))
@@ -87,7 +87,7 @@ public class End2EndServiceTest extends TestCase {
 			assertTrue(job.getId() > 0);
 
 			Account bankAccount = accountService.create(CreateRequest.newBuilder()
-					.setProto(Any.pack(Account.newBuilder()
+					.setEntity(Any.pack(Account.newBuilder()
 							.setPortfolioId(portfolio.getId())
 							.setName("Bank Account")
 							.setPaymentAccount(true)
@@ -98,7 +98,7 @@ public class End2EndServiceTest extends TestCase {
 
 
 			Account rent = accountService.create(CreateRequest.newBuilder()
-					.setProto(Any.pack(Account.newBuilder()
+					.setEntity(Any.pack(Account.newBuilder()
 							.setPortfolioId(portfolio.getId())
 							.setName("Rent")
 							.build()))
@@ -106,10 +106,9 @@ public class End2EndServiceTest extends TestCase {
 			accounts.add(rent);
 			assertTrue(rent.getId() > 0);
 
-
-			// type.googleapis.com/budget.Account
 			JSONObject jsonCreditCard = accountService.create(new JSONObject()
-					.put("proto", new JSONObject()
+					.put("entity", new JSONObject()
+							.put("@type", "type.googleapis.com/budget.Account")
 							.put("portfolioId", portfolio.getId())
 							.put("name", "Bank Account")
 							.put("paymentAccount", true)));
@@ -137,7 +136,7 @@ public class End2EndServiceTest extends TestCase {
 
 
 			template = templateService.create(CreateRequest.newBuilder()
-					.setProto(Any.pack(Template.newBuilder()
+					.setEntity(Any.pack(Template.newBuilder()
 							.setPortfolioId(portfolio.getId())
 							.setName("Standard Month")
 							.build()))
@@ -167,7 +166,7 @@ public class End2EndServiceTest extends TestCase {
 					.build()));
 
 			Bill payCreditCard = billService.create(CreateRequest.newBuilder()
-					.setProto(Any.pack(Bill.newBuilder()
+					.setEntity(Any.pack(Bill.newBuilder()
 							.setAccountId(creditCard.getId())
 							.setPortfolioId(creditCard.getPortfolioId())
 							.setYear(2016)
@@ -197,14 +196,14 @@ public class End2EndServiceTest extends TestCase {
 
 			portfolio = portfolioService.update(UpdateRequest.newBuilder()
 					.setId(portfolio.getId())
-					.setProto(Any.pack(Portfolio.newBuilder().setName("Delete me").build()))
+					.setEntity(Any.pack(Portfolio.newBuilder().setName("Delete me").build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("name"))
 					.build());
 			assertEquals("Delete me", portfolio.getName());
 
 			creditCard = accountService.update(UpdateRequest.newBuilder()
 					.setId(creditCard.getId())
-					.setProto(Any.pack(Account.newBuilder().setName("HOH").build()))
+					.setEntity(Any.pack(Account.newBuilder().setName("HOH").build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("name"))
 					.build());
 			assertEquals("HOH", creditCard.getName());
@@ -212,7 +211,7 @@ public class End2EndServiceTest extends TestCase {
 
 			creditCard = accountService.update(UpdateRequest.newBuilder()
 					.setId(creditCard.getId())
-					.setProto(Any.pack(Account.newBuilder().setParentAccountId(rent.getId()).build()))
+					.setEntity(Any.pack(Account.newBuilder().setParentAccountId(rent.getId()).build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("parent_account_id"))
 					.build());
 			assertEquals("HOH", creditCard.getName());
@@ -221,7 +220,7 @@ public class End2EndServiceTest extends TestCase {
 
 			creditCard = accountService.update(UpdateRequest.newBuilder()
 					.setId(creditCard.getId())
-					.setProto(Any.pack(Account.newBuilder().setPaymentAccount(true).build()))
+					.setEntity(Any.pack(Account.newBuilder().setPaymentAccount(true).build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("payment_account"))
 					.build());
 			assertEquals("HOH", creditCard.getName());
@@ -230,28 +229,28 @@ public class End2EndServiceTest extends TestCase {
 
 			template = templateService.update(UpdateRequest.newBuilder()
 					.setId(template.getId())
-					.setProto(Any.pack(Template.newBuilder().setName("Normal Monthly Flow").build()))
+					.setEntity(Any.pack(Template.newBuilder().setName("Normal Monthly Flow").build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("name"))
 					.build());
 			assertEquals("Normal Monthly Flow", template.getName());
 
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
-					.setProto(Any.pack(Bill.newBuilder().setName("July Payment").build()))
+					.setEntity(Any.pack(Bill.newBuilder().setName("July Payment").build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("name"))
 					.build());
 			assertEquals("July Payment", payCreditCard.getName());
 
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
-					.setProto(Any.pack(Bill.newBuilder().setAmountDue(520.25).build()))
+					.setEntity(Any.pack(Bill.newBuilder().setAmountDue(520.25).build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("amount_due"))
 					.build());
 			assertEquals(520.25, payCreditCard.getAmountDue(), .001);
 
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
-					.setProto(Any.pack(Bill.newBuilder().setDay(22).build()))
+					.setEntity(Any.pack(Bill.newBuilder().setDay(22).build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("day"))
 					.build());
 			assertEquals(2016, payCreditCard.getYear());
@@ -260,7 +259,7 @@ public class End2EndServiceTest extends TestCase {
 
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
-					.setProto(Any.pack(Bill.newBuilder()
+					.setEntity(Any.pack(Bill.newBuilder()
 							.putTransaction(bankAccount.getId(), Transaction.newBuilder().setAmount(520.25).build()).build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("transaction"))
 					.build());
@@ -268,7 +267,7 @@ public class End2EndServiceTest extends TestCase {
 
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
-					.setProto(Any.pack(Bill.newBuilder()
+					.setEntity(Any.pack(Bill.newBuilder()
 							.putTransaction(bankAccount.getId(), Transaction.newBuilder().setAmount(102).build()).build()))
 					.setUpdateMask(FieldMask.newBuilder().addPaths("transaction"))
 					.build());

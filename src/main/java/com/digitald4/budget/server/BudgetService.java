@@ -33,7 +33,7 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 
 	@Override
 	public T create(CreateRequest request) {
-		securityManagerProvider.get().checkWriteAccess((Long) request.getProto().unpack(store.getType().getClass())
+		securityManagerProvider.get().checkWriteAccess((Long) request.getEntity().unpack(store.getType().getClass())
 				.getField(portfolioIdDescriptor));
 		return super.create(request);
 	}
