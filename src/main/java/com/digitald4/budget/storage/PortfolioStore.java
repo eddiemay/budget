@@ -36,7 +36,6 @@ public class PortfolioStore extends GenericStore<Portfolio> {
 		return portfolioUserStore
 				.list(Query.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("user_id").setValue(String.valueOf(userId))).build())
-				.getResultList()
 				.stream()
 				.map(portfolioUser -> get(portfolioUser.getPortfolioId()))
 				.filter(Objects::nonNull)

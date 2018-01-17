@@ -91,7 +91,6 @@ public class BillStore extends GenericStore<Bill> {
 				.list(Query.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("template_id").setOperator("=").setValue("" + template.getId()))
 						.build())
-				.getResultList()
 				.forEach(tempBill -> {
 					DateTime date = refDate.plusDays(tempBill.getDueDay() - 1);
 					create(Bill.newBuilder()

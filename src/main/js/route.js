@@ -1,8 +1,6 @@
 com.digitald4.budget.router = function($routeProvider) {
 	$routeProvider
 		.when('/', {
-				controller: com.digitald4.budget.DefaultViewCtrl,
-				controllerAs: 'defaultViewCtrl',
 				templateUrl: 'js/html/defview.html'
 		}).when('/accounts', {
 				controller: com.digitald4.budget.AccountsCtrl,

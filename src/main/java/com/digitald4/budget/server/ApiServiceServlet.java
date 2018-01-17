@@ -19,24 +19,24 @@ public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceSer
 	private final PortfolioUserStore portfolioUserStore;
 
 	public ApiServiceServlet() throws ServletException {
-		portfolioUserStore = new PortfolioUserStore(dataAccessObjectProvider, securityManagerProvider);
+		portfolioUserStore = new PortfolioUserStore(daoProvider, securityManagerProvider);
 		addService("portfolioUser", new PortfolioUserService(portfolioUserStore, securityManagerProvider));
 
-		PortfolioStore portfolioStore = new PortfolioStore(dataAccessObjectProvider, portfolioUserStore);
+		PortfolioStore portfolioStore = new PortfolioStore(daoProvider, portfolioUserStore);
 		addService("portfolio", new PortfolioService(portfolioStore, securityManagerProvider, userProvider));
 
-		GenericStore<Account> accountStore = new GenericStore<>(Account.class, dataAccessObjectProvider);
+		GenericStore<Account> accountStore = new GenericStore<>(Account.class, daoProvider);
 		addService("account", new BudgetService<>(accountStore, securityManagerProvider));
 		
-		GenericStore<Template> templateStore = new GenericStore<>(Template.class, dataAccessObjectProvider);
+		GenericStore<Template> templateStore = new GenericStore<>(Template.class, daoProvider);
 		addService("template", new BudgetService<>(templateStore, securityManagerProvider));
 
-		GenericStore<TemplateBill> templateBillStore = new GenericStore<>(TemplateBill.class, dataAccessObjectProvider);
+		GenericStore<TemplateBill> templateBillStore = new GenericStore<>(TemplateBill.class, daoProvider);
 		addService("templateBill", new TemplateBillService(templateBillStore, securityManagerProvider, templateStore));
 
-		BalanceStore balanceStore = new BalanceStore(dataAccessObjectProvider);
+		BalanceStore balanceStore = new BalanceStore(daoProvider);
 
-		BillStore billStore = new BillStore(dataAccessObjectProvider, balanceStore, templateBillStore);
+		BillStore billStore = new BillStore(daoProvider, balanceStore, templateBillStore);
 		addService("bill", new BillService(billStore, securityManagerProvider, templateStore, accountStore));
 		addService("balance", new BalanceService(balanceStore, securityManagerProvider, portfolioStore, billStore));
 	}

@@ -45,14 +45,12 @@ com.digitald4.budget.module = angular.module('budget', ['DD4Common', 'ngRoute', 
     .factory('sharedData', function() {
       return new com.digitald4.budget.SharedData();
     })
-    .controller('AccountsCtrl', com.digitald4.budget.AccountsCtrl)
     .controller('BudgetCtrl', com.digitald4.budget.BudgetCtrl)
-    .controller('PortfoliosCtrl', com.digitald4.budget.PortfoliosCtrl)
     .directive('portfolios', function() {
       return {
         restrict: 'A',
         replace: true,
-        controller: 'PortfoliosCtrl',
+        controller: com.digitald4.budget.PortfoliosCtrl,
         controllerAs: 'portfoliosCtrl',
         templateUrl: 'js/html/portfolios.html'
       };
@@ -61,7 +59,7 @@ com.digitald4.budget.module = angular.module('budget', ['DD4Common', 'ngRoute', 
       return {
         restrict: 'A',
         replace: true,
-        controller: 'AccountsCtrl',
+        controller: com.digitald4.budget.AccountsCtrl,
         controllerAs: 'accountsCtrl',
         templateUrl: 'js/html/accounts.html'
       };

@@ -8,7 +8,6 @@ import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4Protos.Query;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.util.Provider;
 import com.google.protobuf.Empty;
 import java.util.stream.Collectors;
@@ -43,9 +42,7 @@ public class BalanceService extends BudgetService<Balance> {
 
 	private Balance get(BalanceGetRequest request) {
 		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
-		Balance balance =
-				balanceStore.get(request.getPortfolioId(), request.getAccountId(), request.getYear(), request.getMonth());
-		return balance;
+		return balanceStore.get(request.getPortfolioId(), request.getAccountId(), request.getYear(), request.getMonth());
 	}
 
 	@Override
@@ -63,7 +60,7 @@ public class BalanceService extends BudgetService<Balance> {
 					toListResponse(balanceStore.list(request.getPortfolioId(), request.getYear(), request.getMonth())));
 		} else {
 			JSONObject months = new JSONObject();
-			balanceStore.list(request.getPortfolioId(), request.getYear()).getResultList()
+			balanceStore.list(request.getPortfolioId(), request.getYear())
 					.stream()
 					.collect(Collectors.groupingBy(Balance::getMonth))
 					.forEach((month, balances) -> {
@@ -90,7 +87,7 @@ public class BalanceService extends BudgetService<Balance> {
 	}
 
 	public Empty recalculate() {
-		portfolioStore.list(Query.getDefaultInstance()).getResultList()
+		portfolioStore.list(Query.getDefaultInstance())
 				.forEach(portfolio -> balanceStore.recalculateBalance(portfolio.getId(), billStore));
 		return Empty.getDefaultInstance();
 	}
