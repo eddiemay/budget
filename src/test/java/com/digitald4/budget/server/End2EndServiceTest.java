@@ -16,7 +16,6 @@ import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.PortfolioUserStore;
 import com.digitald4.budget.storage.SecurityManager;
-import com.digitald4.budget.test.TestCase;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
@@ -25,6 +24,7 @@ import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.storage.testing.DAOTestingImpl;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.Store;
+import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.Provider;
 import com.google.protobuf.Any;
 import com.google.protobuf.FieldMask;
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 import org.json.JSONObject;
 import org.junit.Test;
 
-public class End2EndServiceTest extends TestCase {
+public class End2EndServiceTest {
 	private final User user = User.newBuilder().setId(962).build();
 	private final Provider<User> userProvider = () -> user;
 	private final DAO dao = new DAOTestingImpl();
@@ -61,7 +61,7 @@ public class End2EndServiceTest extends TestCase {
 		Store<TemplateBill> templateBillStore = new GenericStore<>(TemplateBill.class, daoProvider);
 		
 		BillStore billStore = new BillStore(daoProvider, balanceStore, templateBillStore);
-		BillService billService = new BillService(billStore, securityManagerProvider, templateStore, accountStore);
+		BillService billService = new BillService(billStore, securityManagerProvider, templateStore);
 		
 		Portfolio portfolio = portfolioService.create(CreateRequest.newBuilder()
 				.setEntity(Any.pack(Portfolio.newBuilder()
@@ -106,7 +106,7 @@ public class End2EndServiceTest extends TestCase {
 			accounts.add(rent);
 			assertTrue(rent.getId() > 0);
 
-			JSONObject jsonCreditCard = accountService.create(new JSONObject()
+			JSONObject jsonCreditCard = accountService.performAction("create", new JSONObject()
 					.put("entity", new JSONObject()
 							.put("@type", "type.googleapis.com/budget.Account")
 							.put("portfolioId", portfolio.getId())
@@ -125,12 +125,12 @@ public class End2EndServiceTest extends TestCase {
 							.build())
 					.getResultList()
 					.stream()
-					.map(any -> any.unpack(Account.class))
+					.map(any -> ProtoUtil.unpack(Account.class, any))
 					.collect(Collectors.toList());
 
 			assertEquals(4, accounts.size());
 
-			JSONObject json = accountService.list(new JSONObject()
+			JSONObject json = accountService.performAction("list", new JSONObject()
 					.put("portfolio_id", portfolio.getId()));
 			assertEquals(4, json.getJSONArray("result").length());
 
@@ -189,7 +189,7 @@ public class End2EndServiceTest extends TestCase {
 							.build())
 					.getResultList()
 					.stream()
-					.map(any -> any.unpack(Bill.class))
+					.map(any -> ProtoUtil.unpack(Bill.class, any))
 					.collect(Collectors.toList());
 			// Should return the 3 bills from the template and the 1 I created.
 			assertEquals(4, bills.size());

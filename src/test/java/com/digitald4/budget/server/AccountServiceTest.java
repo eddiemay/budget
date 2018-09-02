@@ -15,7 +15,9 @@ import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.QueryResult;
+import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.Provider;
+import com.google.common.collect.ImmutableList;
 import com.google.protobuf.Any;
 import com.google.protobuf.util.JsonFormat;
 import java.util.List;
@@ -35,12 +37,12 @@ public class AccountServiceTest {
 	@Test
 	public void testListAccounts() throws Exception {
 		when(dao.list(eq(Account.class), any(Query.class)))
-				.thenReturn(QueryResult.<Account>newBuilder()
-						.addResult(Account.newBuilder().setPortfolioId(3).setName("Account A").build())
-						.addResult(Account.newBuilder().setPortfolioId(3).setName("Account B").build())
-						.addResult(Account.newBuilder().setPortfolioId(3).setName("Account C").build())
-						.setTotalSize(3)
-						.build());
+				.thenReturn(new QueryResult<>(
+						ImmutableList.of(
+								Account.newBuilder().setPortfolioId(3).setName("Account A").build(),
+								Account.newBuilder().setPortfolioId(3).setName("Account B").build(),
+								Account.newBuilder().setPortfolioId(3).setName("Account C").build())
+						, 3));
 
 		List<Account> accounts = service
 				.list(BudgetListRequest.newBuilder()
@@ -48,7 +50,7 @@ public class AccountServiceTest {
 						.build())
 				.getResultList()
 				.stream()
-				.map(any -> any.unpack(Account.class))
+				.map(any -> ProtoUtil.unpack(Account.class, any))
 				.collect(Collectors.toList());
 		assertTrue(accounts.size() > 0);
 		assertEquals(3, accounts.get(0).getPortfolioId());
@@ -59,7 +61,7 @@ public class AccountServiceTest {
 			last = account;
 		}
 
-		JSONObject response = service.list(new JSONObject().put("portfolio_id", 3));
+		JSONObject response = service.performAction("list", new JSONObject().put("portfolio_id", 3));
 		assertEquals(accounts.size(), response.getJSONArray("result").length());
 
 		ListResponse listResponse = ListResponse.newBuilder()

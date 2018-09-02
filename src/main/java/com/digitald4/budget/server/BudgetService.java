@@ -8,15 +8,16 @@ import com.digitald4.common.proto.DD4UIProtos.DeleteRequest;
 import com.digitald4.common.proto.DD4UIProtos.GetRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest.OrderBy;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.server.SingleProtoService;
 import com.digitald4.common.storage.Store;
+import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.Provider;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Empty;
 import com.google.protobuf.GeneratedMessageV3;
+import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoService<T> {
@@ -33,8 +34,8 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 
 	@Override
 	public T create(CreateRequest request) {
-		securityManagerProvider.get().checkWriteAccess((Long) request.getEntity().unpack(store.getType().getClass())
-				.getField(portfolioIdDescriptor));
+		securityManagerProvider.get().checkWriteAccess(
+				(Long) ProtoUtil.unpack(store.getType().getClass(), request.getEntity()).getField(portfolioIdDescriptor));
 		return super.create(request);
 	}
 
@@ -45,16 +46,11 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 		return t;
 	}
 
-	@Override
-	public JSONObject list(JSONObject request) throws DD4StorageException {
-		return convertToJSON(list(transformJSONRequest(BudgetListRequest.getDefaultInstance(), request)));
-	}
-
 	public ListResponse list(BudgetListRequest request) {
 		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
 		return list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(request.getPortfolioId())))
-				.addOrderBy(OrderBy.newBuilder().setColumn("name"))
+				.setOrderBy("name")
 				.build());
 	}
 
@@ -62,7 +58,7 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 	public T update(UpdateRequest request) {
 		T t = store.get(request.getId());
 		if (t == null) {
-			throw new DD4StorageException("Not Found");
+			throw new DD4StorageException("Not Found", HttpServletResponse.SC_NOT_FOUND);
 		}
 		securityManagerProvider.get().checkWriteAccess((Long) t.getField(portfolioIdDescriptor));
 		return super.update(request);
@@ -72,9 +68,18 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 	public Empty delete(DeleteRequest request) {
 		T t = store.get(request.getId());
 		if (t == null) {
-			throw new DD4StorageException("Not Found");
+			throw new DD4StorageException("Not Found", HttpServletResponse.SC_NOT_FOUND);
 		}
 		securityManagerProvider.get().checkWriteAccess((Long) t.getField(portfolioIdDescriptor));
 		return super.delete(request);
 	}
+
+	@Override
+	public JSONObject performAction(String action, JSONObject request) {
+		if (action.equals("list")) {
+			return toJSON(list(toProto(BudgetListRequest.getDefaultInstance(), request)));
+		}
+		return super.performAction(action, request);
+	}
+
 }

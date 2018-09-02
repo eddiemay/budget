@@ -5,14 +5,11 @@ import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
 import com.digitald4.budget.proto.BudgetUIProtos.TemplateBillListRequest;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.exception.DD4StorageException;
-import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
-import com.digitald4.common.proto.DD4UIProtos.DeleteRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.Provider;
-import com.google.protobuf.Empty;
 import org.json.JSONObject;
 
 public class TemplateBillService extends BudgetService<TemplateBill> {
@@ -28,11 +25,6 @@ public class TemplateBillService extends BudgetService<TemplateBill> {
 		this.templateStore = templateStore;
 	}
 
-	@Override
-	public JSONObject list(JSONObject request) {
-		return convertToJSON(list(transformJSONRequest(TemplateBillListRequest.getDefaultInstance(), request)));
-	}
-
 	public ListResponse list(TemplateBillListRequest request) {
 		Template template = templateStore.get(request.getTemplateId());
 		if (template == null) {
@@ -42,5 +34,13 @@ public class TemplateBillService extends BudgetService<TemplateBill> {
 		return super.list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder().setColumn("template_id").setValue(String.valueOf(request.getTemplateId())))
 				.build());
+	}
+
+	@Override
+	public JSONObject performAction(String action, JSONObject request) {
+		if ("list".equals(action)) {
+			return toJSON(list(toProto(TemplateBillListRequest.getDefaultInstance(), request)));
+		}
+		return super.performAction(action, request);
 	}
 }

@@ -6,6 +6,7 @@ import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
 import com.digitald4.common.proto.DD4UIProtos.DeleteRequest;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
+import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.Provider;
 import com.google.protobuf.Empty;
 
@@ -21,7 +22,8 @@ public class PortfolioUserService extends BudgetService<PortfolioUser> {
 
 	@Override
 	public PortfolioUser create(CreateRequest request) {
-		securityManagerProvider.get().checkDeleteAccess(request.getEntity().unpack(PortfolioUser.class).getPortfolioId());
+		securityManagerProvider.get()
+				.checkDeleteAccess(ProtoUtil.unpack(PortfolioUser.class, request.getEntity()).getPortfolioId());
 		return super.create(request);
 	}
 

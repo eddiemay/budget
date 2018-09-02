@@ -15,6 +15,7 @@ import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.Provider;
+import com.google.common.collect.ImmutableList;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -31,14 +32,13 @@ public class TemplateServiceTest {
 		BudgetService<Template> service = new BudgetService<>(store, securityManagerProvider);
 
 		when(dao.list(eq(Template.class), any(Query.class)))
-				.thenReturn(QueryResult.<Template>newBuilder()
-						.addResult(Template.newBuilder().setPortfolioId(3L).build())
-						.addResult(Template.newBuilder().setPortfolioId(3L).build())
-						.addResult(Template.newBuilder().setPortfolioId(3L).build())
-						.setTotalSize(3)
-						.build());
-		
-		JSONObject templates = service.list(new JSONObject().put("portfolio_id", 3L));
+				.thenReturn(new QueryResult<>(
+						ImmutableList.of(
+								Template.newBuilder().setPortfolioId(3L).build(),
+								Template.newBuilder().setPortfolioId(3L).build(),
+								Template.newBuilder().setPortfolioId(3L).build()), 3));
+
+		JSONObject templates = service.performAction("list", new JSONObject().put("portfolio_id", 3L));
 		assertEquals(3, templates.getJSONArray("result").length());
 		assertEquals(3, templates.getInt("totalSize"));
 		assertEquals(3L, templates.getJSONArray("result").getJSONObject(0).getInt("portfolioId"));

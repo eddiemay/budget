@@ -7,13 +7,20 @@ import com.digitald4.budget.storage.BalanceStore;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.SecurityManager;
+import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4Protos.Query;
+import com.digitald4.common.proto.DD4UIProtos.ListResponse;
+import com.digitald4.common.server.DualProtoService;
+import com.digitald4.common.server.JSONService;
+import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.util.Provider;
+import com.google.protobuf.Any;
 import com.google.protobuf.Empty;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
-public class BalanceService extends BudgetService<Balance> {
+public class BalanceService implements JSONService {
 	private final BalanceStore balanceStore;
 	private final Provider<SecurityManager> securityManagerProvider;
 	private final PortfolioStore portfolioStore;
@@ -23,31 +30,15 @@ public class BalanceService extends BudgetService<Balance> {
 								 Provider<SecurityManager> securityManagerProvider,
 								 PortfolioStore portfolioStore,
 								 BillStore billStore) {
-		super(balanceStore, securityManagerProvider);
 		this.balanceStore = balanceStore;
 		this.securityManagerProvider = securityManagerProvider;
 		this.portfolioStore = portfolioStore;
 		this.billStore = billStore;
 	}
 
-	@Override
-	public JSONObject create(JSONObject request) {
-		throw new UnsupportedOperationException("Unimplemented");
-	}
-
-	@Override
-	public JSONObject get(JSONObject request) {
-		return convertToJSON(get(transformJSONRequest(BalanceGetRequest.getDefaultInstance(), request)));
-	}
-
 	private Balance get(BalanceGetRequest request) {
 		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
 		return balanceStore.get(request.getPortfolioId(), request.getAccountId(), request.getYear(), request.getMonth());
-	}
-
-	@Override
-	public JSONObject list(JSONObject request) {
-		return list(transformJSONRequest(BalanceListRequest.getDefaultInstance(), request));
 	}
 
 	private JSONObject list(BalanceListRequest request) {
@@ -56,7 +47,7 @@ public class BalanceService extends BudgetService<Balance> {
 			throw new IllegalArgumentException("Year is required");
 		}
 		if (request.getMonth() != 0) {
-			return convertToJSON(
+			return DualProtoService.toJSON(
 					toListResponse(balanceStore.list(request.getPortfolioId(), request.getYear(), request.getMonth())));
 		} else {
 			JSONObject months = new JSONObject();
@@ -65,25 +56,20 @@ public class BalanceService extends BudgetService<Balance> {
 					.collect(Collectors.groupingBy(Balance::getMonth))
 					.forEach((month, balances) -> {
 						JSONObject json = new JSONObject();
-						balances.forEach(balance -> json.put("" + balance.getAccountId(), convertToJSON(balance)));
+						balances.forEach(balance -> json.put("" + balance.getAccountId(), DualProtoService.toJSON(balance)));
 						months.put("" + month, json);
 					});
 			return months;
 		}
 	}
 
-	@Override
-	public JSONObject update(JSONObject request) {
-		throw new UnsupportedOperationException("Unimplemented");
-	}
-
-	@Override
-	public JSONObject delete(JSONObject request) {
-		throw new UnsupportedOperationException("Unimplemented");
-	}
-
-	private JSONObject recalculate(JSONObject request) {
-		return convertToJSON(recalculate());
+	private ListResponse toListResponse(QueryResult<Balance> queryResult) {
+		return ListResponse.newBuilder()
+				.addAllResult(queryResult.stream()
+						.map(Any::pack)
+						.collect(Collectors.toList()))
+				.setTotalSize(queryResult.getTotalSize())
+				.build();
 	}
 
 	public Empty recalculate() {
@@ -92,11 +78,17 @@ public class BalanceService extends BudgetService<Balance> {
 		return Empty.getDefaultInstance();
 	}
 
+	public boolean requiresLogin(String action) {
+		return true;
+	}
+
 	@Override
-	public JSONObject performAction(String action, JSONObject jsonRequest) {
-		if ("recalculate".equals(action)) {
-			return recalculate(jsonRequest);
+	public JSONObject performAction(String action, JSONObject request) {
+		switch (action) {
+			case "get": return DualProtoService.toJSON(get(JSONService.toProto(BalanceGetRequest.getDefaultInstance(), request)));
+			case "list": return list(JSONService.toProto(BalanceListRequest.getDefaultInstance(), request));
+			case "recalculate": return DualProtoService.toJSON(recalculate());
+			default: throw new DD4StorageException("Invalid action: " + action, HttpServletResponse.SC_BAD_REQUEST);
 		}
-		return super.performAction(action, jsonRequest);
 	}
 }

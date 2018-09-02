@@ -19,7 +19,9 @@ import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.QueryResult;
+import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.Provider;
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -42,15 +44,15 @@ public class PortfolioServiceTest {
 		PortfolioService service = new PortfolioService(store, securityManagerProvider, userProvider);
 
 		when(dao.list(eq(PortfolioUser.class), any(Query.class)))
-				.thenReturn(QueryResult.<PortfolioUser>newBuilder()
-						.addResult(PortfolioUser
-								.newBuilder().setUserId(USER_ID).setRole(UserRole.UR_OWNER).setPortfolioId(PORTFOLIO_ID1).build())
-						.addResult(PortfolioUser
-								.newBuilder().setUserId(USER_ID).setRole(UserRole.UR_CAN_EDIT).setPortfolioId(PORTFOLIO_ID2).build())
-						.addResult(PortfolioUser
-								.newBuilder().setUserId(USER_ID).setRole(UserRole.UR_READONLY).setPortfolioId(PORTFOLIO_ID3).build())
-						.setTotalSize(3)
-						.build());
+				.thenReturn(new QueryResult<>(
+						ImmutableList.of(
+								PortfolioUser.newBuilder()
+										.setUserId(USER_ID).setRole(UserRole.UR_OWNER).setPortfolioId(PORTFOLIO_ID1).build(),
+								PortfolioUser.newBuilder()
+										.setUserId(USER_ID).setRole(UserRole.UR_CAN_EDIT).setPortfolioId(PORTFOLIO_ID2).build(),
+								PortfolioUser.newBuilder()
+										.setUserId(USER_ID).setRole(UserRole.UR_READONLY).setPortfolioId(PORTFOLIO_ID3).build()),
+						3));
 		when(dao.get(Portfolio.class, PORTFOLIO_ID1))
 				.thenReturn(Portfolio.newBuilder().setId(PORTFOLIO_ID1).putUser(USER_ID, UserRole.UR_OWNER).build());
 		when(dao.get(Portfolio.class, PORTFOLIO_ID2))
@@ -60,7 +62,7 @@ public class PortfolioServiceTest {
 
 		ListResponse response = service.list(ListRequest.newBuilder().build());
 		assertTrue(response.getResultList().size() > 0);
-		Portfolio portfolio = response.getResultList().get(0).unpack(Portfolio.class);
+		Portfolio portfolio = ProtoUtil.unpack(Portfolio.class, response.getResultList().get(0));
 		assertEquals(UserRole.UR_OWNER, portfolio.getUserOrThrow(user.getId()));
 	}
 }

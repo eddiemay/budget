@@ -23,7 +23,9 @@ import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
+import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.Provider;
+import com.google.common.collect.ImmutableList;
 import com.google.protobuf.Any;
 import com.google.protobuf.util.JsonFormat;
 import java.util.HashMap;
@@ -39,16 +41,15 @@ public class BillServiceTest {
 	@Mock private DAO dao = mock(DAO.class);
 	private Provider<DAO> daoProvider = () -> dao;
 	@Mock private BillStore mockStore = mock(BillStore.class);
-	@Mock private Store<Account> accountStore = new GenericStore<>(Account.class, daoProvider);
 	@Mock private SecurityManager securityManager = mock(SecurityManager.class);
 	private Provider<SecurityManager> securityManagerProvider = () -> securityManager;
 
 	@Test
-	public void testCreateBill() throws Exception {
+	public void testCreateBill() {
 		when(mockStore.getType()).thenReturn(Bill.getDefaultInstance());
 		when(mockStore.create(any(Bill.class))).thenAnswer(i -> i.getArguments()[0]);
 		when(dao.get(eq(Account.class), any(Integer.class))).thenReturn(Account.newBuilder().setPortfolioId(3).build());
-		BillService service = new BillService(mockStore, securityManagerProvider, null, accountStore);
+		BillService service = new BillService(mockStore, securityManagerProvider, null);
 
 		service.create(CreateRequest.newBuilder()
 				.setEntity(Any.pack(Bill.newBuilder()
@@ -64,15 +65,15 @@ public class BillServiceTest {
 						.build()))
 				.build());
 
-		service.create(new JSONObject()
+		service.performAction("create", new JSONObject()
 				.put("entity",
 						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
 
-		service.create(new JSONObject()
+		service.performAction("create", new JSONObject()
 				.put("entity",
 						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
 
-		service.create(new JSONObject()
+		service.performAction("create", new JSONObject()
 				.put("entity",
 						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2016,\"month\":1,\"day\":1,\"account_id\":185,\"amount_due\":1,\"status\":1,\"transaction\":{}}")));
 	}
@@ -80,20 +81,20 @@ public class BillServiceTest {
 	@Test
 	public void testGetBills() throws DD4StorageException {
 		BillStore store = new BillStore(daoProvider, null, null);
-		BillService service = new BillService(store, securityManagerProvider, null, null);
+		BillService service = new BillService(store, securityManagerProvider, null);
 
 		when(dao.list(eq(Bill.class), any(Query.class)))
-				.thenReturn(QueryResult.<Bill>newBuilder()
-						.addResult(Bill.newBuilder()
-								.setPortfolioId(3)
-								.setName("Account A")
-								.putTransaction(5, Transaction.newBuilder().setAmount(19.95).build())
-								.build())
-						.addResult(Bill.newBuilder().setPortfolioId(3).setName("Account B").build())
-						.addResult(Bill.newBuilder().setPortfolioId(3).setName("Account C").build())
-						.setTotalSize(3)
-						.build());
-		
+				.thenReturn(new QueryResult<>(
+						ImmutableList.of(
+								Bill.newBuilder()
+										.setPortfolioId(3)
+										.setName("Account A")
+										.putTransaction(5, Transaction.newBuilder().setAmount(19.95).build())
+										.build(),
+								Bill.newBuilder().setPortfolioId(3).setName("Account B").build(),
+								Bill.newBuilder().setPortfolioId(3).setName("Account C").build()),
+						3));
+
 		List<Bill> bills = service
 				.list(BillListRequest.newBuilder()
 						.setPortfolioId(3)
@@ -102,7 +103,7 @@ public class BillServiceTest {
 						.build())
 				.getResultList()
 				.stream()
-				.map(any -> any.unpack(Bill.class))
+				.map(any -> ProtoUtil.unpack(Bill.class, any))
 				.collect(Collectors.toList());
 		assertEquals(3, bills.size());
 		assertEquals(1, bills.get(0).getTransactionMap().size());
@@ -115,7 +116,7 @@ public class BillServiceTest {
 		Store<TemplateBill> templateBillStore = new GenericStore<>(TemplateBill.class, daoProvider);
 		BillStore store = new BillStore(daoProvider, balanceStore, templateBillStore);
 		Store<Template> templateStore = new GenericStore<>(Template.class, daoProvider);
-		BillService service = new BillService(store, securityManagerProvider, templateStore, null);
+		BillService service = new BillService(store, securityManagerProvider, templateStore);
 		
 		List<Bill> bills = service
 				.list(BillListRequest.newBuilder()
@@ -125,7 +126,7 @@ public class BillServiceTest {
 					.build())
 				.getResultList()
 				.stream()
-				.map(any -> any.unpack(Bill.class))
+				.map(any -> ProtoUtil.unpack(Bill.class, any))
 				.collect(Collectors.toList());
 		assertTrue(bills.isEmpty());
 		
@@ -137,7 +138,7 @@ public class BillServiceTest {
 					.build())
 				.getResultList()
 				.stream()
-				.map(any -> any.unpack(Bill.class))
+				.map(any -> ProtoUtil.unpack(Bill.class, any))
 				.collect(Collectors.toList());
 		assertTrue(bills.size() > 0);
 		assertTrue(bills.get(0).getTransactionMap().size() > 0);
@@ -166,7 +167,6 @@ public class BillServiceTest {
 		JsonFormat.parser().merge(json, builder);
 		bill = builder.build();
 		bill.getTransactionMap();
-		bill.getTransactionMap().entrySet();
 		for (Map.Entry<Long, Transaction> entry : bill.getTransactionMap().entrySet()) {
 			// System.out.println(entry.getKey() * 2);
 			System.out.println(entry.getKey() + " " + entry.getValue());

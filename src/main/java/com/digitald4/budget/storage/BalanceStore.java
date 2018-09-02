@@ -10,7 +10,6 @@ import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.util.Provider;
-import com.google.annotations.VisibleForTesting;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -155,7 +154,7 @@ public class BalanceStore extends GenericStore<Balance> {
 		}));
 	}
 
-	@VisibleForTesting static class BalanceUpdater implements UnaryOperator<List<Balance>> {
+	static class BalanceUpdater implements UnaryOperator<List<Balance>> {
 		private final long portfolioId;
 		private final long accountId;
 		private final double delta;
