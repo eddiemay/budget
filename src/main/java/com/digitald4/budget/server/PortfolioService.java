@@ -4,8 +4,6 @@ import com.digitald4.budget.proto.BudgetProtos.Portfolio;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4Protos.User;
-import com.digitald4.common.proto.DD4UIProtos.DeleteRequest;
-import com.digitald4.common.proto.DD4UIProtos.GetRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
@@ -32,9 +30,9 @@ public class PortfolioService extends SingleProtoService<Portfolio> {
 	}
 
 	@Override
-	public Portfolio get(GetRequest request) {
-		securityManagerProvider.get().checkReadAccess(request.getId());
-	 	return super.get(request);
+	public Portfolio get(long id) {
+		securityManagerProvider.get().checkReadAccess(id);
+	 	return super.get(id);
 	}
 
 	@Override
@@ -55,8 +53,8 @@ public class PortfolioService extends SingleProtoService<Portfolio> {
 	}
 
 	@Override
-	public Empty delete(DeleteRequest request) {
-		securityManagerProvider.get().checkDeleteAccess(request.getId());
-		return super.delete(request);
+	public Empty delete(long id) {
+		securityManagerProvider.get().checkDeleteAccess(id);
+		return super.delete(id);
 	}
 }

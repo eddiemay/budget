@@ -3,11 +3,9 @@ package com.digitald4.budget.server;
 import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
 import com.digitald4.budget.storage.PortfolioUserStore;
 import com.digitald4.budget.storage.SecurityManager;
-import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
-import com.digitald4.common.proto.DD4UIProtos.DeleteRequest;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
-import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.Provider;
+import com.google.api.server.spi.config.Named;
 import com.google.protobuf.Empty;
 
 public class PortfolioUserService extends BudgetService<PortfolioUser> {
@@ -21,10 +19,9 @@ public class PortfolioUserService extends BudgetService<PortfolioUser> {
 	}
 
 	@Override
-	public PortfolioUser create(CreateRequest request) {
-		securityManagerProvider.get()
-				.checkDeleteAccess(ProtoUtil.unpack(PortfolioUser.class, request.getEntity()).getPortfolioId());
-		return super.create(request);
+	public PortfolioUser create(PortfolioUser portfolioUser) {
+		securityManagerProvider.get().checkDeleteAccess(portfolioUser.getPortfolioId());
+		return super.create(portfolioUser);
 	}
 
 	@Override
@@ -35,9 +32,9 @@ public class PortfolioUserService extends BudgetService<PortfolioUser> {
 	}
 
 	@Override
-	public Empty delete(DeleteRequest request) {
-		PortfolioUser portfolioUser = portfolioUserStore.get(request.getId());
+	public Empty delete(@Named("id") long id) {
+		PortfolioUser portfolioUser = portfolioUserStore.get(id);
 		securityManagerProvider.get().checkDeleteAccess(portfolioUser.getPortfolioId());
-		return super.delete(request);
+		return super.delete(id);
 	}
 }

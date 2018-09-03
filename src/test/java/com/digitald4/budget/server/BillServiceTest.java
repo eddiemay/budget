@@ -6,6 +6,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.digitald4.budget.TestCase;
 import com.digitald4.budget.proto.BudgetProtos.Account;
 import com.digitald4.budget.proto.BudgetProtos.Bill;
 import com.digitald4.budget.proto.BudgetProtos.Bill.Transaction;
@@ -13,11 +14,11 @@ import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
 import com.digitald4.budget.proto.BudgetUIProtos.ApplyTemplateRequest;
 import com.digitald4.budget.proto.BudgetUIProtos.BillListRequest;
+import com.digitald4.budget.server.BillService.BillJSONService;
 import com.digitald4.budget.storage.BalanceStore;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4Protos.Query;
-import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.storage.GenericStore;
@@ -26,7 +27,6 @@ import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.Provider;
 import com.google.common.collect.ImmutableList;
-import com.google.protobuf.Any;
 import com.google.protobuf.util.JsonFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +37,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 
-public class BillServiceTest {
+public class BillServiceTest extends TestCase {
 	@Mock private DAO dao = mock(DAO.class);
 	private Provider<DAO> daoProvider = () -> dao;
 	@Mock private BillStore mockStore = mock(BillStore.class);
@@ -50,32 +50,28 @@ public class BillServiceTest {
 		when(mockStore.create(any(Bill.class))).thenAnswer(i -> i.getArguments()[0]);
 		when(dao.get(eq(Account.class), any(Integer.class))).thenReturn(Account.newBuilder().setPortfolioId(3).build());
 		BillService service = new BillService(mockStore, securityManagerProvider, null);
+		BillJSONService jsonService = new BillJSONService(service);
 
-		service.create(CreateRequest.newBuilder()
-				.setEntity(Any.pack(Bill.newBuilder()
-						.setName("Test")
-						.setAccountId(5)
-						.setAmountDue(500)
-						.setYear(2015)
-						.setMonth(12)
-						.setDay(15)
-						//.putAllTransaction(BillUI.TransactionUI.newBuilder()
-							//	.setDebitAccountId(71)
-								//.setAmount(500))
-						.build()))
+		service.create(Bill.newBuilder()
+				.setName("Test")
+				.setAccountId(5)
+				.setAmountDue(500)
+				.setYear(2015)
+				.setMonth(12)
+				.setDay(15)
+				//.putAllTransaction(BillUI.TransactionUI.newBuilder()
+					//	.setDebitAccountId(71)
+						//.setAmount(500))
 				.build());
 
-		service.performAction("create", new JSONObject()
-				.put("entity",
-						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
+		jsonService.performAction("create",
+				new JSONObject("{\"year\":2015,\"month\":12,\"day\":15,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}"));
 
-		service.performAction("create", new JSONObject()
-				.put("entity",
-						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2015,\"month\":12,\"day\":15,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}")));
+		jsonService.performAction("create",
+				new JSONObject("{\"year\":2015,\"month\":12,\"day\":15,\"account_id\":91,\"name\":\"Loan to Mother\",\"amount_due\":500,\"transaction\":{71:{\"amount\":500}}}"));
 
-		service.performAction("create", new JSONObject()
-				.put("entity",
-						new JSONObject("{@type: \"type.googleapis.com/budget.Bill\", \"year\":2016,\"month\":1,\"day\":1,\"account_id\":185,\"amount_due\":1,\"status\":1,\"transaction\":{}}")));
+		jsonService.performAction("create",
+				new JSONObject("{\"year\":2016,\"month\":1,\"day\":1,\"account_id\":185,\"amount_due\":1,\"status\":1,\"transaction\":{}}"));
 	}
 
 	@Test

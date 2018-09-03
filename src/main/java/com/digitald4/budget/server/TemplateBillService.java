@@ -9,6 +9,7 @@ import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.storage.Store;
+import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.Provider;
 import org.json.JSONObject;
 
@@ -36,11 +37,20 @@ public class TemplateBillService extends BudgetService<TemplateBill> {
 				.build());
 	}
 
-	@Override
-	public JSONObject performAction(String action, JSONObject request) {
-		if ("list".equals(action)) {
-			return toJSON(list(toProto(TemplateBillListRequest.getDefaultInstance(), request)));
+	static class TemplateJSONService extends BudgetJSONService<TemplateBill> {
+
+		private final TemplateBillService templateBillService;
+		public TemplateJSONService(TemplateBillService templateBillService) {
+			super(TemplateBill.class, templateBillService);
+			this.templateBillService = templateBillService;
 		}
-		return super.performAction(action, request);
+
+		@Override
+		public JSONObject performAction(String action, JSONObject request) {
+			if ("list".equals(action)) {
+				return ProtoUtil.toJSON(templateBillService.list(ProtoUtil.toProto(TemplateBillListRequest.getDefaultInstance(), request)));
+			}
+			return super.performAction(action, request);
+		}
 	}
 }

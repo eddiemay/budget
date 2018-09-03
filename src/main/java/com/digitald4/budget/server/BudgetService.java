@@ -3,13 +3,11 @@ package com.digitald4.budget.server;
 import com.digitald4.budget.proto.BudgetUIProtos.BudgetListRequest;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.exception.DD4StorageException;
-import com.digitald4.common.proto.DD4UIProtos.CreateRequest;
-import com.digitald4.common.proto.DD4UIProtos.DeleteRequest;
-import com.digitald4.common.proto.DD4UIProtos.GetRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
+import com.digitald4.common.server.JSONServiceImpl;
 import com.digitald4.common.server.SingleProtoService;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.ProtoUtil;
@@ -33,15 +31,14 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 	}
 
 	@Override
-	public T create(CreateRequest request) {
-		securityManagerProvider.get().checkWriteAccess(
-				(Long) ProtoUtil.unpack(store.getType().getClass(), request.getEntity()).getField(portfolioIdDescriptor));
-		return super.create(request);
+	public T create(T t) {
+		securityManagerProvider.get().checkWriteAccess((Long) t.getField(portfolioIdDescriptor));
+		return super.create(t);
 	}
 
 	@Override
-	public T get(GetRequest request) {
-		T t = super.get(request);
+	public T get(long id) {
+		T t = super.get(id);
 		securityManagerProvider.get().checkReadAccess((Long) t.getField(portfolioIdDescriptor));
 		return t;
 	}
@@ -65,21 +62,28 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 	}
 
 	@Override
-	public Empty delete(DeleteRequest request) {
-		T t = store.get(request.getId());
+	public Empty delete(long id) {
+		T t = store.get(id);
 		if (t == null) {
 			throw new DD4StorageException("Not Found", HttpServletResponse.SC_NOT_FOUND);
 		}
 		securityManagerProvider.get().checkWriteAccess((Long) t.getField(portfolioIdDescriptor));
-		return super.delete(request);
+		return super.delete(id);
 	}
 
-	@Override
-	public JSONObject performAction(String action, JSONObject request) {
-		if (action.equals("list")) {
-			return toJSON(list(toProto(BudgetListRequest.getDefaultInstance(), request)));
+	static class BudgetJSONService<T extends GeneratedMessageV3> extends JSONServiceImpl<T> {
+		private final BudgetService budgetService;
+		BudgetJSONService(Class<T> cls, BudgetService<T> budgetService) {
+			super(cls, budgetService, true);
+			this.budgetService = budgetService;
 		}
-		return super.performAction(action, request);
-	}
 
+		@Override
+		public JSONObject performAction(String action, JSONObject request){
+			if (action.equals("list")) {
+				return ProtoUtil.toJSON(budgetService.list(ProtoUtil.toProto(BudgetListRequest.getDefaultInstance(), request)));
+			}
+			return super.performAction(action, request);
+		}
+	}
 }

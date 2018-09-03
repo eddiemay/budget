@@ -10,6 +10,7 @@ import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.storage.Store;
+import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.Provider;
 import org.joda.time.DateTime;
 import org.json.JSONObject;
@@ -45,13 +46,22 @@ public class BillService extends BudgetService<Bill> {
 				DateTime.parse(request.getYear() + "-" + request.getMonth() + "-01")));
 	}
 
-	@Override
-	public JSONObject performAction(String action, JSONObject request) {
-		if ("applyTemplate".equals(action)) {
-			return toJSON(applyTemplate(toProto(ApplyTemplateRequest.getDefaultInstance(), request)));
-		} else if ("list".equals(action)) {
-			return toJSON(list(toProto(BillListRequest.getDefaultInstance(), request)));
+	static class BillJSONService extends BudgetJSONService<Bill> {
+
+		private final BillService billService;
+		public BillJSONService(BillService billService) {
+			super(Bill.class, billService);
+			this.billService = billService;
 		}
-		return super.performAction(action, request);
+
+		@Override
+		public JSONObject performAction(String action, JSONObject request){
+			if ("applyTemplate".equals(action)) {
+				return ProtoUtil.toJSON(billService.applyTemplate(ProtoUtil.toProto(ApplyTemplateRequest.getDefaultInstance(), request)));
+			} else if ("list".equals(action)) {
+				return ProtoUtil.toJSON(billService.list(ProtoUtil.toProto(BillListRequest.getDefaultInstance(), request)));
+			}
+			return super.performAction(action, request);
+		}
 	}
 }

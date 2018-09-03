@@ -6,10 +6,12 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.digitald4.budget.TestCase;
 import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4Protos.Query;
+import com.digitald4.common.server.JSONService;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.QueryResult;
@@ -20,7 +22,7 @@ import org.json.JSONObject;
 import org.junit.Test;
 import org.mockito.Mock;
 
-public class TemplateServiceTest {
+public class TemplateServiceTest extends TestCase {
 	@Mock private DAO dao = mock(DAO.class);
 	private Provider<DAO> daoProvider = () -> dao;
 	@Mock private SecurityManager securityManager = mock(SecurityManager.class);
@@ -29,7 +31,8 @@ public class TemplateServiceTest {
 	@Test
 	public void testGetTemplates() throws DD4StorageException {
 		Store<Template> store = new GenericStore<>(Template.class, daoProvider);
-		BudgetService<Template> service = new BudgetService<>(store, securityManagerProvider);
+		JSONService service = new BudgetService.BudgetJSONService<Template>(
+				Template.class, new BudgetService<>(store, securityManagerProvider));
 
 		when(dao.list(eq(Template.class), any(Query.class)))
 				.thenReturn(new QueryResult<>(

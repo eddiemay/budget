@@ -6,6 +6,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.digitald4.budget.TestCase;
 import com.digitald4.budget.proto.BudgetProtos.Portfolio;
 import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
 import com.digitald4.budget.proto.BudgetProtos.UserRole;
@@ -25,7 +26,7 @@ import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.mockito.Mock;
 
-public class PortfolioServiceTest {
+public class PortfolioServiceTest extends TestCase {
 	@Mock private DAO dao = mock(DAO.class);
 	private Provider<DAO> daoProvider = () -> dao;
 	private static final long USER_ID = 859239L;

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package budget;
+package budgetApi;
 
 option java_package = "com.digitald4.budget.proto";
 option java_outer_classname = "BudgetUIProtos";

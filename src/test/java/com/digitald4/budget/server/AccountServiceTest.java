@@ -6,9 +6,9 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.digitald4.budget.TestCase;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4Protos.Query;
-import com.digitald4.common.proto.DD4UIProtos.GetRequest;
 import com.digitald4.budget.proto.BudgetProtos.Account;
 import com.digitald4.budget.proto.BudgetUIProtos.BudgetListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import org.junit.Test;
 import org.mockito.Mock;
 
-public class AccountServiceTest {
+public class AccountServiceTest extends TestCase {
 	@Mock private DAO dao = mock(DAO.class);
 	private Provider<DAO> daoProvider = () -> dao;
 	@Mock private SecurityManager securityManager = mock(SecurityManager.class);
@@ -61,7 +61,8 @@ public class AccountServiceTest {
 			last = account;
 		}
 
-		JSONObject response = service.performAction("list", new JSONObject().put("portfolio_id", 3));
+		JSONObject response = new BudgetService.BudgetJSONService<>(Account.class, service)
+				.performAction("list", new JSONObject().put("portfolio_id", 3));
 		assertEquals(accounts.size(), response.getJSONArray("result").length());
 
 		ListResponse listResponse = ListResponse.newBuilder()
@@ -85,9 +86,7 @@ public class AccountServiceTest {
 	public void testGetAccount() {
 		when(dao.get(Account.class, 71L))
 				.thenReturn(Account.newBuilder().setId(71L).setName("Account 71").build());
-		Account account = service.get(GetRequest.newBuilder()
-				.setId(71L)
-				.build());
+		Account account = service.get(71L);
 		assertEquals(71L, account.getId());
 	}
 }

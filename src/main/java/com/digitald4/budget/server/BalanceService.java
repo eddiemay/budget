@@ -10,9 +10,9 @@ import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4Protos.Query;
 import com.digitald4.common.proto.DD4UIProtos.ListResponse;
-import com.digitald4.common.server.DualProtoService;
 import com.digitald4.common.server.JSONService;
 import com.digitald4.common.storage.QueryResult;
+import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.Provider;
 import com.google.protobuf.Any;
 import com.google.protobuf.Empty;
@@ -47,7 +47,7 @@ public class BalanceService implements JSONService {
 			throw new IllegalArgumentException("Year is required");
 		}
 		if (request.getMonth() != 0) {
-			return DualProtoService.toJSON(
+			return ProtoUtil.toJSON(
 					toListResponse(balanceStore.list(request.getPortfolioId(), request.getYear(), request.getMonth())));
 		} else {
 			JSONObject months = new JSONObject();
@@ -56,7 +56,7 @@ public class BalanceService implements JSONService {
 					.collect(Collectors.groupingBy(Balance::getMonth))
 					.forEach((month, balances) -> {
 						JSONObject json = new JSONObject();
-						balances.forEach(balance -> json.put("" + balance.getAccountId(), DualProtoService.toJSON(balance)));
+						balances.forEach(balance -> json.put("" + balance.getAccountId(), ProtoUtil.toJSON(balance)));
 						months.put("" + month, json);
 					});
 			return months;
@@ -85,9 +85,9 @@ public class BalanceService implements JSONService {
 	@Override
 	public JSONObject performAction(String action, JSONObject request) {
 		switch (action) {
-			case "get": return DualProtoService.toJSON(get(JSONService.toProto(BalanceGetRequest.getDefaultInstance(), request)));
-			case "list": return list(JSONService.toProto(BalanceListRequest.getDefaultInstance(), request));
-			case "recalculate": return DualProtoService.toJSON(recalculate());
+			case "get": return ProtoUtil.toJSON(get(ProtoUtil.toProto(BalanceGetRequest.getDefaultInstance(), request)));
+			case "list": return list(ProtoUtil.toProto(BalanceListRequest.getDefaultInstance(), request));
+			case "recalculate": return ProtoUtil.toJSON(recalculate());
 			default: throw new DD4StorageException("Invalid action: " + action, HttpServletResponse.SC_BAD_REQUEST);
 		}
 	}
