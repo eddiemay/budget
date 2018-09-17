@@ -12,10 +12,10 @@ import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.Pair;
-import com.digitald4.common.util.Provider;
 import java.util.function.UnaryOperator;
 
 import java.util.stream.Collectors;
+import javax.inject.Provider;
 import org.joda.time.DateTime;
 
 public class BillStore extends GenericStore<Bill> {
@@ -91,6 +91,7 @@ public class BillStore extends GenericStore<Bill> {
 				.list(Query.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("template_id").setOperator("=").setValue("" + template.getId()))
 						.build())
+				.getResults()
 				.forEach(tempBill -> {
 					DateTime date = refDate.plusDays(tempBill.getDueDay() - 1);
 					create(Bill.newBuilder()

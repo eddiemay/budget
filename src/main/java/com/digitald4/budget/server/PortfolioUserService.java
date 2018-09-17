@@ -4,9 +4,9 @@ import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
 import com.digitald4.budget.storage.PortfolioUserStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
-import com.digitald4.common.util.Provider;
 import com.google.api.server.spi.config.Named;
 import com.google.protobuf.Empty;
+import javax.inject.Provider;
 
 public class PortfolioUserService extends BudgetService<PortfolioUser> {
 	private final PortfolioUserStore portfolioUserStore;

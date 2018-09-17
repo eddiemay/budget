@@ -17,12 +17,10 @@ import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4Protos.Query;
 import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.QueryResult;
-import com.digitald4.common.util.ProtoUtil;
-import com.digitald4.common.util.Provider;
 import com.google.common.collect.ImmutableList;
+import javax.inject.Provider;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -61,9 +59,9 @@ public class PortfolioServiceTest extends TestCase {
 		when(dao.get(Portfolio.class, PORTFOLIO_ID3))
 				.thenReturn(Portfolio.newBuilder().setId(PORTFOLIO_ID3).putUser(USER_ID, UserRole.UR_READONLY).build());
 
-		ListResponse response = service.list(ListRequest.newBuilder().build());
-		assertTrue(response.getResultList().size() > 0);
-		Portfolio portfolio = ProtoUtil.unpack(Portfolio.class, response.getResultList().get(0));
+		QueryResult<Portfolio> response = service.list(ListRequest.newBuilder().build());
+		assertTrue(response.getResults().size() > 0);
+		Portfolio portfolio = response.getResults().get(0);
 		assertEquals(UserRole.UR_OWNER, portfolio.getUserOrThrow(user.getId()));
 	}
 }

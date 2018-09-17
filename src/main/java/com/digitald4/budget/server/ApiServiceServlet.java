@@ -12,10 +12,8 @@ import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.PortfolioUserStore;
 import com.digitald4.budget.storage.SecurityManager;
-import com.digitald4.common.proto.DD4Protos.GeneralData;
 import com.digitald4.common.server.JSONServiceImpl;
 import com.digitald4.common.storage.GenericStore;
-import com.digitald4.common.util.ProtoUtil;
 import com.digitald4.common.util.ProviderThreadLocalImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,10 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceServlet {
 	private final ProviderThreadLocalImpl<SecurityManager> securityManagerProvider = new ProviderThreadLocalImpl<>();
 	private final PortfolioUserStore portfolioUserStore;
-
-	static {
-		ProtoUtil.init(GeneralData.getDescriptor(), Account.getDescriptor());
-	}
 
 	public ApiServiceServlet() {
 		portfolioUserStore = new PortfolioUserStore(daoProvider, securityManagerProvider);

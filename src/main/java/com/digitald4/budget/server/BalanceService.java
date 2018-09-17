@@ -9,14 +9,11 @@ import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4Protos.Query;
-import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.server.JSONService;
-import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.util.ProtoUtil;
-import com.digitald4.common.util.Provider;
-import com.google.protobuf.Any;
 import com.google.protobuf.Empty;
 import java.util.stream.Collectors;
+import javax.inject.Provider;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
@@ -47,11 +44,11 @@ public class BalanceService implements JSONService {
 			throw new IllegalArgumentException("Year is required");
 		}
 		if (request.getMonth() != 0) {
-			return ProtoUtil.toJSON(
-					toListResponse(balanceStore.list(request.getPortfolioId(), request.getYear(), request.getMonth())));
+			return ProtoUtil.toJSON(balanceStore.list(request.getPortfolioId(), request.getYear(), request.getMonth()));
 		} else {
 			JSONObject months = new JSONObject();
 			balanceStore.list(request.getPortfolioId(), request.getYear())
+					.getResults()
 					.stream()
 					.collect(Collectors.groupingBy(Balance::getMonth))
 					.forEach((month, balances) -> {
@@ -62,18 +59,9 @@ public class BalanceService implements JSONService {
 			return months;
 		}
 	}
-
-	private ListResponse toListResponse(QueryResult<Balance> queryResult) {
-		return ListResponse.newBuilder()
-				.addAllResult(queryResult.stream()
-						.map(Any::pack)
-						.collect(Collectors.toList()))
-				.setTotalSize(queryResult.getTotalSize())
-				.build();
-	}
-
 	public Empty recalculate() {
 		portfolioStore.list(Query.getDefaultInstance())
+				.getResults()
 				.forEach(portfolio -> balanceStore.recalculateBalance(portfolio.getId(), billStore));
 		return Empty.getDefaultInstance();
 	}

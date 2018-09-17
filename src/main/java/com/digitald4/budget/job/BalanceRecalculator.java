@@ -7,7 +7,7 @@ import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.DAOSQLImpl;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.common.jdbc.DBConnectorThreadPoolImpl;
-import com.digitald4.common.util.Provider;
+import javax.inject.Provider;
 
 public class BalanceRecalculator {
 

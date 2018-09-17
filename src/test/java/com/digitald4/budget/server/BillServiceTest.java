@@ -24,14 +24,12 @@ import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
-import com.digitald4.common.util.ProtoUtil;
-import com.digitald4.common.util.Provider;
 import com.google.common.collect.ImmutableList;
 import com.google.protobuf.util.JsonFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import javax.inject.Provider;
 import org.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -97,10 +95,7 @@ public class BillServiceTest extends TestCase {
 						.setYear(2016)
 						.setMonth(6)
 						.build())
-				.getResultList()
-				.stream()
-				.map(any -> ProtoUtil.unpack(Bill.class, any))
-				.collect(Collectors.toList());
+				.getResults();
 		assertEquals(3, bills.size());
 		assertEquals(1, bills.get(0).getTransactionMap().size());
 		assertEquals(19.95, bills.get(0).getTransactionMap().values().iterator().next().getAmount(), .001);
@@ -120,10 +115,7 @@ public class BillServiceTest extends TestCase {
 					.setYear(2017)
 					.setMonth(7)
 					.build())
-				.getResultList()
-				.stream()
-				.map(any -> ProtoUtil.unpack(Bill.class, any))
-				.collect(Collectors.toList());
+				.getResults();
 		assertTrue(bills.isEmpty());
 		
 		bills = service
@@ -132,10 +124,7 @@ public class BillServiceTest extends TestCase {
 					.setYear(2017)
 					.setMonth(6)
 					.build())
-				.getResultList()
-				.stream()
-				.map(any -> ProtoUtil.unpack(Bill.class, any))
-				.collect(Collectors.toList());
+				.getResults();
 		assertTrue(bills.size() > 0);
 		assertTrue(bills.get(0).getTransactionMap().size() > 0);
 		assertTrue(bills.get(0).getTransactionMap().values().iterator().next().getAmount() != 0);

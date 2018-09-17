@@ -17,21 +17,19 @@ import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.PortfolioUserStore;
 import com.digitald4.budget.storage.SecurityManager;
+import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.server.JSONService;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.proto.DD4Protos.User;
-import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.storage.testing.DAOTestingImpl;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.Store;
-import com.digitald4.common.util.ProtoUtil;
-import com.digitald4.common.util.Provider;
 import com.google.protobuf.Any;
 import com.google.protobuf.FieldMask;
 import com.google.protobuf.util.JsonFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import javax.inject.Provider;
 import org.json.JSONObject;
 import org.junit.Test;
 
@@ -115,10 +113,7 @@ public class End2EndServiceTest extends TestCase {
 					.list(BudgetListRequest.newBuilder()
 							.setPortfolioId(portfolio.getId())
 							.build())
-					.getResultList()
-					.stream()
-					.map(any -> ProtoUtil.unpack(Account.class, any))
-					.collect(Collectors.toList());
+					.getResults();
 
 			assertEquals(4, accounts.size());
 
@@ -175,24 +170,21 @@ public class End2EndServiceTest extends TestCase {
 							.setYear(2016)
 							.setMonth(7)
 							.build())
-					.getResultList()
-					.stream()
-					.map(any -> ProtoUtil.unpack(Bill.class, any))
-					.collect(Collectors.toList());
+					.getResults();
 			// Should return the 3 bills from the template and the 1 I created.
 			assertEquals(4, bills.size());
 
 			portfolio = portfolioService.update(UpdateRequest.newBuilder()
 					.setId(portfolio.getId())
 					.setEntity(Any.pack(Portfolio.newBuilder().setName("Delete me").build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("name"))
+					.setUpdateMask(FieldMask.newBuilder().addPaths("name").build())
 					.build());
 			assertEquals("Delete me", portfolio.getName());
 
 			creditCard = accountService.update(UpdateRequest.newBuilder()
 					.setId(creditCard.getId())
 					.setEntity(Any.pack(Account.newBuilder().setName("HOH").build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("name"))
+					.setUpdateMask(FieldMask.newBuilder().addPaths("name").build())
 					.build());
 			assertEquals("HOH", creditCard.getName());
 			assertEquals(0, creditCard.getParentAccountId());
@@ -200,7 +192,7 @@ public class End2EndServiceTest extends TestCase {
 			creditCard = accountService.update(UpdateRequest.newBuilder()
 					.setId(creditCard.getId())
 					.setEntity(Any.pack(Account.newBuilder().setParentAccountId(rent.getId()).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("parent_account_id"))
+					.setUpdateMask(FieldMask.newBuilder().addPaths("parent_account_id").build())
 					.build());
 			assertEquals("HOH", creditCard.getName());
 			assertEquals(rent.getId(), creditCard.getParentAccountId());
@@ -209,7 +201,7 @@ public class End2EndServiceTest extends TestCase {
 			creditCard = accountService.update(UpdateRequest.newBuilder()
 					.setId(creditCard.getId())
 					.setEntity(Any.pack(Account.newBuilder().setPaymentAccount(true).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("payment_account"))
+					.setUpdateMask(FieldMask.newBuilder().addPaths("payment_account").build())
 					.build());
 			assertEquals("HOH", creditCard.getName());
 			assertEquals(rent.getId(), creditCard.getParentAccountId());
@@ -218,28 +210,28 @@ public class End2EndServiceTest extends TestCase {
 			template = templateService.update(UpdateRequest.newBuilder()
 					.setId(template.getId())
 					.setEntity(Any.pack(Template.newBuilder().setName("Normal Monthly Flow").build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("name"))
+					.setUpdateMask(FieldMask.newBuilder().addPaths("name").build())
 					.build());
 			assertEquals("Normal Monthly Flow", template.getName());
 
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
 					.setEntity(Any.pack(Bill.newBuilder().setName("July Payment").build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("name"))
+					.setUpdateMask(FieldMask.newBuilder().addPaths("name").build())
 					.build());
 			assertEquals("July Payment", payCreditCard.getName());
 
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
 					.setEntity(Any.pack(Bill.newBuilder().setAmountDue(520.25).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("amount_due"))
+					.setUpdateMask(FieldMask.newBuilder().addPaths("amount_due").build())
 					.build());
 			assertEquals(520.25, payCreditCard.getAmountDue(), .001);
 
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
 					.setEntity(Any.pack(Bill.newBuilder().setDay(22).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("day"))
+					.setUpdateMask(FieldMask.newBuilder().addPaths("day").build())
 					.build());
 			assertEquals(2016, payCreditCard.getYear());
 			assertEquals(7, payCreditCard.getMonth());
@@ -247,17 +239,15 @@ public class End2EndServiceTest extends TestCase {
 
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
-					.setEntity(Any.pack(Bill.newBuilder()
-							.putTransaction(bankAccount.getId(), Transaction.newBuilder().setAmount(520.25).build()).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("transaction"))
+					.setEntity(Any.pack(Bill.newBuilder().putTransaction(bankAccount.getId(), Transaction.newBuilder().setAmount(520.25).build()).build()))
+					.setUpdateMask(FieldMask.newBuilder().addPaths("transaction").build())
 					.build());
 			assertEquals(520.25, payCreditCard.getTransactionMap().values().iterator().next().getAmount(), .001);
 
 			payCreditCard = billService.update(UpdateRequest.newBuilder()
 					.setId(payCreditCard.getId())
-					.setEntity(Any.pack(Bill.newBuilder()
-							.putTransaction(bankAccount.getId(), Transaction.newBuilder().setAmount(102).build()).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("transaction"))
+					.setEntity(Any.pack(Bill.newBuilder().putTransaction(bankAccount.getId(), Transaction.newBuilder().setAmount(102).build()).build()))
+					.setUpdateMask(FieldMask.newBuilder().addPaths("transaction").build())
 					.build());
 			assertEquals(102, payCreditCard.getTransactionMap().values().iterator().next().getAmount(), .001);
 		} finally {

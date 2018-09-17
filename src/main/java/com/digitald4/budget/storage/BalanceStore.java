@@ -9,7 +9,6 @@ import com.digitald4.common.proto.DD4Protos.Query.OrderBy;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.QueryResult;
-import com.digitald4.common.util.Provider;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -17,6 +16,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
+import javax.inject.Provider;
 
 public class BalanceStore extends GenericStore<Balance> {
 
@@ -37,21 +37,22 @@ public class BalanceStore extends GenericStore<Balance> {
 	}
 
 	public QueryResult<Balance> list(long portfolioId, int year, int month) {
-		QueryResult<Balance> result = new QueryResult<>();
+		List<Balance> results = new ArrayList<>();
 		list(
 				Query.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("portfolio_id").setOperator("=").setValue(String.valueOf(portfolioId)))
 						.addFilter(Filter.newBuilder().setColumn("year").setOperator("=").setValue(String.valueOf(year)))
 						.addFilter(Filter.newBuilder().setColumn("month").setOperator("<=").setValue(String.valueOf(month)))
 						.build())
+				.getResults()
 				.stream()
 				.collect(Collectors.groupingBy(Balance::getAccountId))
-				.forEach((accountId, balances) -> result.add(balances
+				.forEach((accountId, balances) -> results.add(balances
 						.stream()
 						.sorted(Comparator.comparing(Balance::getYear).thenComparing(Balance::getMonth).reversed())
 						.collect(Collectors.toList())
 						.get(0)));
-		return result;
+		return new QueryResult<>(results, results.size());
 	}
 
 	public Balance get(long portfolioId, long accountId, int year, int month) {
@@ -61,7 +62,7 @@ public class BalanceStore extends GenericStore<Balance> {
 				.addFilter(Filter.newBuilder().setColumn("month").setOperator("<=").setValue(String.valueOf(month)))
 				.addOrderBy(OrderBy.newBuilder().setColumn("month").setDesc(true))
 				.setLimit(1)
-				.build());
+				.build()).getResults();
 		if (balances.isEmpty()) {
 			balances = list(Query.newBuilder()
 					.addFilter(Filter.newBuilder().setColumn("account_id").setOperator("=").setValue(String.valueOf(accountId)))
@@ -69,7 +70,7 @@ public class BalanceStore extends GenericStore<Balance> {
 					.addOrderBy(OrderBy.newBuilder().setColumn("year").setDesc(true))
 					.addOrderBy(OrderBy.newBuilder().setColumn("month").setDesc(true))
 					.setLimit(1)
-					.build());
+					.build()).getResults();
 		}
 		if (balances.isEmpty()) {
 			return Balance.newBuilder()
@@ -100,6 +101,7 @@ public class BalanceStore extends GenericStore<Balance> {
 						.addFilter(Filter.newBuilder().setColumn("account_id").setOperator("=").setValue(String.valueOf(accountId)))
 						.addFilter(Filter.newBuilder().setColumn("year").setOperator(">=").setValue(String.valueOf(year)))
 						.build())
+				.getResults()
 				.stream()
 				.filter(balance -> balance.getYear() > year || balance.getMonth() >= nextMonth)
 				.forEach(balance -> {
@@ -125,13 +127,16 @@ public class BalanceStore extends GenericStore<Balance> {
 		Map<Long, List<Balance>> accountHash = list(
 				Query.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(portfolioId))).build())
+				.getResults()
 				.stream()
 				.map(balance -> balance.toBuilder().setBalance(0).setBalanceYTD(0).build())
 				.sorted(Comparator.comparing(Balance::getYear).thenComparing(Balance::getMonth).reversed())
 				.collect(Collectors.groupingBy(Balance::getAccountId));
 
-		List<Bill> bills = billStore.list(Query.newBuilder()
-				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(portfolioId))).build());
+		List<Bill> bills = billStore
+				.list(Query.newBuilder()
+						.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(portfolioId))).build())
+				.getResults();
 		for (Bill bill : bills) {
 			accountHash.put(bill.getAccountId(),
 					new BalanceUpdater(portfolioId, bill.getAccountId(), bill.getYear(), bill.getMonth(), bill.getAmountDue())

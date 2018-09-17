@@ -3,8 +3,8 @@ package com.digitald4.budget.storage;
 import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
-import com.digitald4.common.util.Provider;
 import java.util.function.UnaryOperator;
+import javax.inject.Provider;
 
 public class PortfolioUserStore extends GenericStore<PortfolioUser> {
 	private final Provider<SecurityManager> securityManagerProvider;

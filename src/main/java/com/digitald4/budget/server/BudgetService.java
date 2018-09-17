@@ -5,27 +5,25 @@ import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
-import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.server.JSONServiceImpl;
 import com.digitald4.common.server.SingleProtoService;
+import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.ProtoUtil;
-import com.digitald4.common.util.Provider;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Empty;
 import com.google.protobuf.GeneratedMessageV3;
+import javax.inject.Provider;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoService<T> {
-	private final Store<T> store;
 	private final Provider<SecurityManager> securityManagerProvider;
 	private final FieldDescriptor portfolioIdDescriptor;
 
 	BudgetService(Store<T> store, Provider<SecurityManager> securityManagerProvider) {
 		super(store);
-		this.store = store;
 		this.securityManagerProvider = securityManagerProvider;
 		portfolioIdDescriptor = store.getType().getDescriptorForType().findFieldByName("portfolio_id");
 	}
@@ -39,11 +37,14 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 	@Override
 	public T get(long id) {
 		T t = super.get(id);
+		if (t == null) {
+			throw new DD4StorageException("Not Found", HttpServletResponse.SC_NOT_FOUND);
+		}
 		securityManagerProvider.get().checkReadAccess((Long) t.getField(portfolioIdDescriptor));
 		return t;
 	}
 
-	public ListResponse list(BudgetListRequest request) {
+	public QueryResult<T> list(BudgetListRequest request) {
 		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
 		return list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(request.getPortfolioId())))
@@ -53,20 +54,14 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 
 	@Override
 	public T update(UpdateRequest request) {
-		T t = store.get(request.getId());
-		if (t == null) {
-			throw new DD4StorageException("Not Found", HttpServletResponse.SC_NOT_FOUND);
-		}
+		T t = get(request.getId());
 		securityManagerProvider.get().checkWriteAccess((Long) t.getField(portfolioIdDescriptor));
 		return super.update(request);
 	}
 
 	@Override
 	public Empty delete(long id) {
-		T t = store.get(id);
-		if (t == null) {
-			throw new DD4StorageException("Not Found", HttpServletResponse.SC_NOT_FOUND);
-		}
+		T t = get(id);
 		securityManagerProvider.get().checkWriteAccess((Long) t.getField(portfolioIdDescriptor));
 		return super.delete(id);
 	}

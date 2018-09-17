@@ -5,14 +5,16 @@ import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListResponse;
 import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.server.SingleProtoService;
-import com.digitald4.common.util.Provider;
+import com.digitald4.common.storage.QueryResult;
+import com.google.api.server.spi.config.Named;
 import com.google.protobuf.Any;
 import com.google.protobuf.Empty;
+import com.google.protobuf.FieldMask;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.inject.Provider;
 
 public class PortfolioService extends SingleProtoService<Portfolio> {
 
@@ -36,14 +38,9 @@ public class PortfolioService extends SingleProtoService<Portfolio> {
 	}
 
 	@Override
-	public ListResponse list(ListRequest request) {
+	public QueryResult<Portfolio> list(ListRequest request) {
 		List<Portfolio> portfolios = portfolioStore.listBy(userProvider.get().getId());
-		return ListResponse.newBuilder()
-				.addAllResult(portfolios.stream()
-						.map(Any::pack)
-						.collect(Collectors.toList()))
-				.setTotalSize(portfolios.size())
-				.build();
+		return new QueryResult<>(portfolios, portfolios.size());
 	}
 
 	@Override

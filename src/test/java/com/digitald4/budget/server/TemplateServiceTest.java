@@ -16,8 +16,8 @@ import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
-import com.digitald4.common.util.Provider;
 import com.google.common.collect.ImmutableList;
+import javax.inject.Provider;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -31,7 +31,7 @@ public class TemplateServiceTest extends TestCase {
 	@Test
 	public void testGetTemplates() throws DD4StorageException {
 		Store<Template> store = new GenericStore<>(Template.class, daoProvider);
-		JSONService service = new BudgetService.BudgetJSONService<Template>(
+		JSONService service = new BudgetService.BudgetJSONService<>(
 				Template.class, new BudgetService<>(store, securityManagerProvider));
 
 		when(dao.list(eq(Template.class), any(Query.class)))

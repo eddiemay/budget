@@ -6,10 +6,10 @@ import com.digitald4.common.proto.DD4Protos.Query;
 import com.digitald4.common.proto.DD4Protos.Query.Filter;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.storage.GenericStore;
-import com.digitald4.common.util.Provider;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import javax.inject.Provider;
 
 public class PortfolioStore extends GenericStore<Portfolio> {
 
@@ -36,6 +36,7 @@ public class PortfolioStore extends GenericStore<Portfolio> {
 		return portfolioUserStore
 				.list(Query.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("user_id").setValue(String.valueOf(userId))).build())
+				.getResults()
 				.stream()
 				.map(portfolioUser -> get(portfolioUser.getPortfolioId()))
 				.filter(Objects::nonNull)

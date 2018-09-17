@@ -26,6 +26,7 @@ public class SecurityManager {
 		portfolios = portfolioUserStore
 				.list(Query.newBuilder()
 						.addFilter(Filter.newBuilder().setColumn("user_id").setValue(String.valueOf(user.getId()))).build())
+				.getResults()
 				.stream()
 				.collect(Collectors.toMap(PortfolioUser::getPortfolioId, Function.identity()));
 		return this;

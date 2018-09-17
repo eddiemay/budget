@@ -8,10 +8,10 @@ import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
-import com.digitald4.common.proto.DD4UIProtos.ListResponse;
+import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.ProtoUtil;
-import com.digitald4.common.util.Provider;
+import javax.inject.Provider;
 import org.joda.time.DateTime;
 import org.json.JSONObject;
 
@@ -30,7 +30,7 @@ public class BillService extends BudgetService<Bill> {
 		this.templateStore = templateStore;
 	}
 
-	public ListResponse list(BillListRequest request) {
+	public QueryResult<Bill> list(BillListRequest request) {
 		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
 		return super.list(ListRequest.newBuilder()
 				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(request.getPortfolioId())))
@@ -39,7 +39,7 @@ public class BillService extends BudgetService<Bill> {
 				.build());
 	}
 	
-	ListResponse applyTemplate(ApplyTemplateRequest request) {
+	QueryResult<Bill> applyTemplate(ApplyTemplateRequest request) {
 		Template template = templateStore.get(request.getTemplateId());
 		securityManagerProvider.get().checkWriteAccess(template.getPortfolioId());
 		return toListResponse(store.applyTemplate(template,
