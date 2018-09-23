@@ -5,15 +5,13 @@ import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.server.SingleProtoService;
+import com.digitald4.common.server.UpdateRequest;
 import com.digitald4.common.storage.QueryResult;
+import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.Named;
-import com.google.protobuf.Any;
 import com.google.protobuf.Empty;
-import com.google.protobuf.FieldMask;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.inject.Provider;
 
 public class PortfolioService extends SingleProtoService<Portfolio> {
@@ -44,9 +42,10 @@ public class PortfolioService extends SingleProtoService<Portfolio> {
 	}
 
 	@Override
-	public Portfolio update(UpdateRequest request) {
-		securityManagerProvider.get().checkWriteAccess(request.getId());
-		return super.update(request);
+	@ApiMethod(httpMethod = ApiMethod.HttpMethod.PUT, path = "{id}")
+	public Portfolio update(@Named("id") long id, UpdateRequest<Portfolio> request) {
+		securityManagerProvider.get().checkWriteAccess(id);
+		return super.update(id, request);
 	}
 
 	@Override

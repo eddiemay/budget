@@ -54,7 +54,7 @@ public class AccountServiceTest extends TestCase {
 			last = account;
 		}
 
-		JSONObject response = new BudgetService.BudgetJSONService<>(Account.class, service)
+		JSONObject response = new BudgetService.BudgetJSONService<>(service)
 				.performAction("list", new JSONObject().put("portfolio_id", 3));
 		assertEquals(accounts.size(), response.getJSONArray("result").length());
 

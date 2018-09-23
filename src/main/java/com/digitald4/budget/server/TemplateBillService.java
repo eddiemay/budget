@@ -6,7 +6,6 @@ import com.digitald4.budget.proto.BudgetUIProtos.TemplateBillListRequest;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.ProtoUtil;
@@ -33,7 +32,7 @@ public class TemplateBillService extends BudgetService<TemplateBill> {
 		}
 		securityManagerProvider.get().checkReadAccess(template.getPortfolioId());
 		return super.list(ListRequest.newBuilder()
-				.addFilter(Filter.newBuilder().setColumn("template_id").setValue(String.valueOf(request.getTemplateId())))
+				.setFilter("template_id = " + request.getTemplateId())
 				.build());
 	}
 
@@ -41,7 +40,7 @@ public class TemplateBillService extends BudgetService<TemplateBill> {
 
 		private final TemplateBillService templateBillService;
 		public TemplateJSONService(TemplateBillService templateBillService) {
-			super(TemplateBill.class, templateBillService);
+			super(templateBillService);
 			this.templateBillService = templateBillService;
 		}
 

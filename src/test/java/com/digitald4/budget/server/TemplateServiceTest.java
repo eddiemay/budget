@@ -32,7 +32,7 @@ public class TemplateServiceTest extends TestCase {
 	public void testGetTemplates() throws DD4StorageException {
 		Store<Template> store = new GenericStore<>(Template.class, daoProvider);
 		JSONService service = new BudgetService.BudgetJSONService<>(
-				Template.class, new BudgetService<>(store, securityManagerProvider));
+				new BudgetService<>(store, securityManagerProvider));
 
 		when(dao.list(eq(Template.class), any(Query.class)))
 				.thenReturn(new QueryResult<>(

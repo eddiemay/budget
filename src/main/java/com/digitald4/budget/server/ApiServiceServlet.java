@@ -1,8 +1,6 @@
 package com.digitald4.budget.server;
 
 import com.digitald4.budget.proto.BudgetProtos.Account;
-import com.digitald4.budget.proto.BudgetProtos.Portfolio;
-import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
 import com.digitald4.budget.proto.BudgetProtos.Template;
 import com.digitald4.budget.proto.BudgetProtos.TemplateBill;
 import com.digitald4.budget.server.BillService.BillJSONService;
@@ -25,19 +23,17 @@ public class ApiServiceServlet extends com.digitald4.common.server.ApiServiceSer
 	public ApiServiceServlet() {
 		portfolioUserStore = new PortfolioUserStore(daoProvider, securityManagerProvider);
 		addService("portfolioUser", new BudgetJSONService<>(
-				PortfolioUser.class, new PortfolioUserService(portfolioUserStore, securityManagerProvider)));
+				new PortfolioUserService(portfolioUserStore, securityManagerProvider)));
 
 		PortfolioStore portfolioStore = new PortfolioStore(daoProvider, portfolioUserStore);
 		addService("portfolio", new JSONServiceImpl<>(
-				Portfolio.class, new PortfolioService(portfolioStore, securityManagerProvider, userProvider), true));
+				new PortfolioService(portfolioStore, securityManagerProvider, userProvider), true));
 
 		GenericStore<Account> accountStore = new GenericStore<>(Account.class, daoProvider);
-		addService("account", new BudgetJSONService<>(
-				Account.class, new BudgetService<>(accountStore, securityManagerProvider)));
+		addService("account", new BudgetJSONService<>(new BudgetService<>(accountStore, securityManagerProvider)));
 		
 		GenericStore<Template> templateStore = new GenericStore<>(Template.class, daoProvider);
-		addService("template", new BudgetJSONService<>(
-				Template.class, new BudgetService<>(templateStore, securityManagerProvider)));
+		addService("template", new BudgetJSONService<>(new BudgetService<>(templateStore, securityManagerProvider)));
 
 		GenericStore<TemplateBill> templateBillStore = new GenericStore<>(TemplateBill.class, daoProvider);
 		addService("templateBill", new TemplateBillService.TemplateJSONService(

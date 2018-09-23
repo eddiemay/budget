@@ -17,14 +17,13 @@ import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.PortfolioUserStore;
 import com.digitald4.budget.storage.SecurityManager;
-import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.server.JSONService;
+import com.digitald4.common.server.UpdateRequest;
 import com.digitald4.common.storage.DAO;
 import com.digitald4.common.proto.DD4Protos.User;
 import com.digitald4.common.storage.testing.DAOTestingImpl;
 import com.digitald4.common.storage.GenericStore;
 import com.digitald4.common.storage.Store;
-import com.google.protobuf.Any;
 import com.google.protobuf.FieldMask;
 import com.google.protobuf.util.JsonFormat;
 import java.util.ArrayList;
@@ -96,7 +95,7 @@ public class End2EndServiceTest extends TestCase {
 			accounts.add(rent);
 			assertTrue(rent.getId() > 0);
 
-			JSONService jsonService = new BudgetService.BudgetJSONService<>(Account.class, accountService);
+			JSONService jsonService = new BudgetService.BudgetJSONService<>(accountService);
 
 			JSONObject jsonCreditCard = jsonService.performAction("create", new JSONObject()
 							.put("portfolioId", portfolio.getId())
@@ -174,81 +173,81 @@ public class End2EndServiceTest extends TestCase {
 			// Should return the 3 bills from the template and the 1 I created.
 			assertEquals(4, bills.size());
 
-			portfolio = portfolioService.update(UpdateRequest.newBuilder()
-					.setId(portfolio.getId())
-					.setEntity(Any.pack(Portfolio.newBuilder().setName("Delete me").build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("name").build())
-					.build());
+			portfolio = portfolioService.update(
+					portfolio.getId(),
+					new UpdateRequest<>(
+							Portfolio.newBuilder().setName("Delete me").build(),
+							FieldMask.newBuilder().addPaths("name").build()));
 			assertEquals("Delete me", portfolio.getName());
 
-			creditCard = accountService.update(UpdateRequest.newBuilder()
-					.setId(creditCard.getId())
-					.setEntity(Any.pack(Account.newBuilder().setName("HOH").build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("name").build())
-					.build());
+			creditCard = accountService.update(
+					creditCard.getId(),
+					new UpdateRequest<>(
+							Account.newBuilder().setName("HOH").build(),
+							FieldMask.newBuilder().addPaths("name").build()));
 			assertEquals("HOH", creditCard.getName());
 			assertEquals(0, creditCard.getParentAccountId());
 
-			creditCard = accountService.update(UpdateRequest.newBuilder()
-					.setId(creditCard.getId())
-					.setEntity(Any.pack(Account.newBuilder().setParentAccountId(rent.getId()).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("parent_account_id").build())
-					.build());
+			creditCard = accountService.update(
+					creditCard.getId(),
+					new UpdateRequest<>(
+							Account.newBuilder().setParentAccountId(rent.getId()).build(),
+							FieldMask.newBuilder().addPaths("parent_account_id").build()));
 			assertEquals("HOH", creditCard.getName());
 			assertEquals(rent.getId(), creditCard.getParentAccountId());
 			assertFalse(rent.getPaymentAccount());
 
-			creditCard = accountService.update(UpdateRequest.newBuilder()
-					.setId(creditCard.getId())
-					.setEntity(Any.pack(Account.newBuilder().setPaymentAccount(true).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("payment_account").build())
-					.build());
+			creditCard = accountService.update(
+					creditCard.getId(),
+					new UpdateRequest<>(
+							Account.newBuilder().setPaymentAccount(true).build(),
+							FieldMask.newBuilder().addPaths("payment_account").build()));
 			assertEquals("HOH", creditCard.getName());
 			assertEquals(rent.getId(), creditCard.getParentAccountId());
 			assertTrue(creditCard.getPaymentAccount());
 
-			template = templateService.update(UpdateRequest.newBuilder()
-					.setId(template.getId())
-					.setEntity(Any.pack(Template.newBuilder().setName("Normal Monthly Flow").build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("name").build())
-					.build());
+			template = templateService.update(
+					template.getId(),
+					new UpdateRequest<>(
+							Template.newBuilder().setName("Normal Monthly Flow").build(),
+							FieldMask.newBuilder().addPaths("name").build()));
 			assertEquals("Normal Monthly Flow", template.getName());
 
-			payCreditCard = billService.update(UpdateRequest.newBuilder()
-					.setId(payCreditCard.getId())
-					.setEntity(Any.pack(Bill.newBuilder().setName("July Payment").build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("name").build())
-					.build());
+			payCreditCard = billService.update(
+					payCreditCard.getId(),
+					new UpdateRequest<>(
+							Bill.newBuilder().setName("July Payment").build(),
+							FieldMask.newBuilder().addPaths("name").build()));
 			assertEquals("July Payment", payCreditCard.getName());
 
-			payCreditCard = billService.update(UpdateRequest.newBuilder()
-					.setId(payCreditCard.getId())
-					.setEntity(Any.pack(Bill.newBuilder().setAmountDue(520.25).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("amount_due").build())
-					.build());
+			payCreditCard = billService.update(
+					payCreditCard.getId(),
+					new UpdateRequest<>(
+							Bill.newBuilder().setAmountDue(520.25).build(),
+							FieldMask.newBuilder().addPaths("amount_due").build()));
 			assertEquals(520.25, payCreditCard.getAmountDue(), .001);
 
-			payCreditCard = billService.update(UpdateRequest.newBuilder()
-					.setId(payCreditCard.getId())
-					.setEntity(Any.pack(Bill.newBuilder().setDay(22).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("day").build())
-					.build());
+			payCreditCard = billService.update(
+					payCreditCard.getId(),
+					new UpdateRequest<>(
+							Bill.newBuilder().setDay(22).build(),
+							FieldMask.newBuilder().addPaths("day").build()));
 			assertEquals(2016, payCreditCard.getYear());
 			assertEquals(7, payCreditCard.getMonth());
 			assertEquals(22, payCreditCard.getDay());
 
-			payCreditCard = billService.update(UpdateRequest.newBuilder()
-					.setId(payCreditCard.getId())
-					.setEntity(Any.pack(Bill.newBuilder().putTransaction(bankAccount.getId(), Transaction.newBuilder().setAmount(520.25).build()).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("transaction").build())
-					.build());
+			payCreditCard = billService.update(
+					payCreditCard.getId(),
+					new UpdateRequest<>(
+							Bill.newBuilder().putTransaction(bankAccount.getId(), Transaction.newBuilder().setAmount(520.25).build()).build(),
+							FieldMask.newBuilder().addPaths("transaction").build()));
 			assertEquals(520.25, payCreditCard.getTransactionMap().values().iterator().next().getAmount(), .001);
 
-			payCreditCard = billService.update(UpdateRequest.newBuilder()
-					.setId(payCreditCard.getId())
-					.setEntity(Any.pack(Bill.newBuilder().putTransaction(bankAccount.getId(), Transaction.newBuilder().setAmount(102).build()).build()))
-					.setUpdateMask(FieldMask.newBuilder().addPaths("transaction").build())
-					.build());
+			payCreditCard = billService.update(
+					payCreditCard.getId(),
+					new UpdateRequest<>(
+							Bill.newBuilder().putTransaction(bankAccount.getId(), Transaction.newBuilder().setAmount(102).build()).build(),
+							FieldMask.newBuilder().addPaths("transaction").build()));
 			assertEquals(102, payCreditCard.getTransactionMap().values().iterator().next().getAmount(), .001);
 		} finally {
 			bills.forEach(bill -> billService.delete(bill.getId()));

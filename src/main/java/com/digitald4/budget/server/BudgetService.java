@@ -4,16 +4,17 @@ import com.digitald4.budget.proto.BudgetUIProtos.BudgetListRequest;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
-import com.digitald4.common.proto.DD4UIProtos.UpdateRequest;
 import com.digitald4.common.server.JSONServiceImpl;
 import com.digitald4.common.server.SingleProtoService;
+import com.digitald4.common.server.UpdateRequest;
 import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.ProtoUtil;
+import com.google.api.server.spi.config.ApiMethod;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Empty;
 import com.google.protobuf.GeneratedMessageV3;
+import javax.inject.Named;
 import javax.inject.Provider;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
@@ -47,16 +48,17 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 	public QueryResult<T> list(BudgetListRequest request) {
 		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
 		return list(ListRequest.newBuilder()
-				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(request.getPortfolioId())))
+				.setFilter("portfolio_id = " + request.getPortfolioId())
 				.setOrderBy("name")
 				.build());
 	}
 
 	@Override
-	public T update(UpdateRequest request) {
-		T t = get(request.getId());
+	@ApiMethod(httpMethod = ApiMethod.HttpMethod.PUT, path = "{id}")
+	public T update(@Named("id") long id, UpdateRequest<T> request) {
+		T t = get(id);
 		securityManagerProvider.get().checkWriteAccess((Long) t.getField(portfolioIdDescriptor));
-		return super.update(request);
+		return super.update(id, request);
 	}
 
 	@Override
@@ -68,8 +70,8 @@ public class BudgetService<T extends GeneratedMessageV3> extends SingleProtoServ
 
 	static class BudgetJSONService<T extends GeneratedMessageV3> extends JSONServiceImpl<T> {
 		private final BudgetService budgetService;
-		BudgetJSONService(Class<T> cls, BudgetService<T> budgetService) {
-			super(cls, budgetService, true);
+		BudgetJSONService(BudgetService<T> budgetService) {
+			super(budgetService, true);
 			this.budgetService = budgetService;
 		}
 

@@ -7,7 +7,6 @@ import com.digitald4.budget.proto.BudgetUIProtos.BillListRequest;
 import com.digitald4.budget.storage.BillStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.proto.DD4UIProtos.ListRequest;
-import com.digitald4.common.proto.DD4UIProtos.ListRequest.Filter;
 import com.digitald4.common.storage.QueryResult;
 import com.digitald4.common.storage.Store;
 import com.digitald4.common.util.ProtoUtil;
@@ -16,6 +15,7 @@ import org.joda.time.DateTime;
 import org.json.JSONObject;
 
 public class BillService extends BudgetService<Bill> {
+	private static final String BILL_FILTER = "portfolio_id = %d, year = %d, month = %d";
 	
 	private final BillStore store;
 	private final Store<Template> templateStore;
@@ -33,9 +33,7 @@ public class BillService extends BudgetService<Bill> {
 	public QueryResult<Bill> list(BillListRequest request) {
 		securityManagerProvider.get().checkReadAccess(request.getPortfolioId());
 		return super.list(ListRequest.newBuilder()
-				.addFilter(Filter.newBuilder().setColumn("portfolio_id").setValue(String.valueOf(request.getPortfolioId())))
-				.addFilter(Filter.newBuilder().setColumn("year").setValue(String.valueOf(request.getYear())))
-				.addFilter(Filter.newBuilder().setColumn("month").setValue(String.valueOf(request.getMonth())))
+				.setFilter(String.format(BILL_FILTER, request.getPortfolioId(), request.getYear(), request.getMonth()))
 				.build());
 	}
 	
@@ -50,7 +48,7 @@ public class BillService extends BudgetService<Bill> {
 
 		private final BillService billService;
 		public BillJSONService(BillService billService) {
-			super(Bill.class, billService);
+			super(billService);
 			this.billService = billService;
 		}
 
