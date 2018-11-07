@@ -1,6 +1,7 @@
 *.swp
-
-/bin
+.DS_Store
+bin/
+.idea/
 
 webapps/budget/WEB-INF
 webapps/budget/js/common
