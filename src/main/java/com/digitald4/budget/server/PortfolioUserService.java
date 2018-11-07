@@ -4,7 +4,7 @@ import com.digitald4.budget.proto.BudgetProtos.Portfolio;
 import com.digitald4.budget.proto.BudgetProtos.PortfolioUser;
 import com.digitald4.budget.storage.PortfolioUserStore;
 import com.digitald4.budget.storage.SecurityManager;
-import com.digitald4.common.server.UpdateRequest;
+import com.digitald4.common.model.UpdateRequest;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.Named;
 import com.google.protobuf.Empty;

@@ -9,7 +9,7 @@ import com.digitald4.budget.storage.PortfolioStore;
 import com.digitald4.budget.storage.SecurityManager;
 import com.digitald4.common.exception.DD4StorageException;
 import com.digitald4.common.proto.DD4Protos.Query;
-import com.digitald4.common.server.JSONService;
+import com.digitald4.common.server.service.JSONService;
 import com.digitald4.common.util.ProtoUtil;
 import com.google.protobuf.Empty;
 import java.util.stream.Collectors;
